@@ -3,10 +3,12 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Gauge, SlidersHorizontal, Swords, Trophy } from "lucide-react";
 import { PLAYERS, filterPlayers, ranked } from "@/lib/data";
+import { rankedTeams } from "@/lib/teams";
 import { REGIONS, ROLES } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { PlayerAvatar } from "@/components/player-avatar";
 import { RegionBadge, RoleBadge } from "@/components/badges";
+import { TrophyIcon } from "@/components/trophy-icon";
 import { formatNumber } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n/provider";
 
@@ -144,6 +146,40 @@ export default function Home() {
               className="rounded-full border border-border bg-surface px-4 py-2 text-sm text-fg-muted shadow-card transition-colors hover:border-border-strong hover:text-fg"
             >
               {t(`role.${role}`)}
+            </Link>
+          ))}
+        </div>
+
+        <h2 className="mt-12 text-lg font-semibold tracking-tight">{t("home.teamsTitle")}</h2>
+        <p className="mt-1 text-sm text-fg-muted">{t("home.teamsDesc")}</p>
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          {rankedTeams().map(({ team, honor }) => (
+            <Link
+              key={team.id}
+              href={`/lol/teams/${team.id}`}
+              className="group rounded-2xl border border-border bg-surface p-5 shadow-card transition-colors hover:border-border-strong"
+            >
+              <div className="flex items-baseline justify-between gap-2">
+                <span className="text-base font-semibold leading-snug tracking-tight group-hover:text-accent">
+                  {team.name}
+                </span>
+                <span className="tnum shrink-0 text-xs text-fg-subtle">{formatNumber(honor)}</span>
+              </div>
+              <div className="mt-1 text-xs text-fg-subtle">{team.region}</div>
+              <div className="mt-3 flex items-center gap-3 text-fg-muted">
+                {team.worlds.length > 0 && (
+                  <span className="inline-flex items-center gap-1">
+                    <TrophyIcon type="worlds_title" size={15} className="text-[color:var(--medal-gold)]" />
+                    <span className="tnum text-xs">{team.worlds.length}</span>
+                  </span>
+                )}
+                {team.msi.length > 0 && (
+                  <span className="inline-flex items-center gap-1">
+                    <TrophyIcon type="msi_title" size={15} className="text-[color:var(--medal-gold)]" />
+                    <span className="tnum text-xs">{team.msi.length}</span>
+                  </span>
+                )}
+              </div>
             </Link>
           ))}
         </div>

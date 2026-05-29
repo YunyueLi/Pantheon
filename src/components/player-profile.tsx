@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowLeft, Clock, GitCompareArrows } from "lucide-react";
 import { PLAYERS, filterPlayers, getPlayer, percentile, ranked } from "@/lib/data";
+import { teamIdFromName } from "@/lib/teams";
 import { ACHIEVEMENT_META, achievementPoints, honorScore, titleCounts } from "@/lib/honor";
 import { PlayerAvatar } from "@/components/player-avatar";
 import { RegionBadge, RoleBadge } from "@/components/badges";
@@ -21,6 +22,7 @@ export function PlayerProfile({ id }: { id: string }) {
   const player = getPlayer(id);
   if (!player) return null;
 
+  const teamId = teamIdFromName(player.team);
   const score = honorScore(player);
   const overall = ranked(PLAYERS).find((r) => r.player.id === player.id)!;
   const roleRank = ranked(filterPlayers({ role: player.role })).find((r) => r.player.id === player.id)!;
@@ -58,7 +60,14 @@ export function PlayerProfile({ id }: { id: string }) {
               </div>
               {player.realName && <p className="mt-0.5 text-sm text-fg-subtle">{player.realName}</p>}
               <p className="mt-2 text-sm text-fg-muted">
-                {player.team} · {t(`regionCountry.${player.region}`)} · {t("common.debut", { y: player.debutYear })}
+                {teamId ? (
+                  <Link href={`/lol/teams/${teamId}`} className="transition-colors hover:text-fg">
+                    {player.team}
+                  </Link>
+                ) : (
+                  player.team
+                )}{" "}
+                · {t(`regionCountry.${player.region}`)} · {t("common.debut", { y: player.debutYear })}
               </p>
               {locale === "en" && player.blurb && (
                 <p className="mt-3 max-w-md text-sm leading-relaxed text-fg-muted">{player.blurb}</p>

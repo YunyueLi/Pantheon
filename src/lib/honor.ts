@@ -10,17 +10,17 @@ export const ACHIEVEMENT_META: Record<
   { label: string; short: string; bucket: Bucket; tier: "S" | "A" | "B"; base: number }
 > = {
   worlds_title: { label: "World Champion", short: "Worlds", bucket: "team", tier: "S", base: 1000 },
-  msi_title: { label: "MSI Champion", short: "MSI", bucket: "team", tier: "S", base: 520 },
-  regional_title: { label: "Regional Champion", short: "League", bucket: "team", tier: "A", base: 280 },
-  worlds_mvp: { label: "Worlds Finals MVP", short: "Worlds MVP", bucket: "individual", tier: "S", base: 360 },
-  msi_mvp: { label: "MSI MVP", short: "MSI MVP", bucket: "individual", tier: "S", base: 230 },
-  season_mvp: { label: "Regular Season MVP", short: "MVP", bucket: "individual", tier: "A", base: 180 },
-  finals_mvp: { label: "Regional Finals MVP", short: "Finals MVP", bucket: "individual", tier: "A", base: 150 },
-  all_pro_1: { label: "All-Pro First Team", short: "1st Team", bucket: "individual", tier: "A", base: 120 },
-  all_pro_2: { label: "All-Pro Second Team", short: "2nd Team", bucket: "individual", tier: "B", base: 70 },
-  all_pro_3: { label: "All-Pro Third Team", short: "3rd Team", bucket: "individual", tier: "B", base: 40 },
-  worlds_runnerup: { label: "Worlds Finalist", short: "Finalist", bucket: "placement", tier: "S", base: 340 },
-  regional_runnerup: { label: "Regional Finalist", short: "Finalist", bucket: "placement", tier: "A", base: 90 },
+  msi_title: { label: "MSI Champion", short: "MSI", bucket: "team", tier: "S", base: 300 },
+  worlds_runnerup: { label: "Worlds Finalist", short: "Finalist", bucket: "placement", tier: "S", base: 300 },
+  worlds_mvp: { label: "Worlds Finals MVP", short: "Worlds MVP", bucket: "individual", tier: "S", base: 220 },
+  regional_title: { label: "Regional Champion", short: "League", bucket: "team", tier: "A", base: 130 },
+  msi_mvp: { label: "MSI MVP", short: "MSI MVP", bucket: "individual", tier: "S", base: 120 },
+  regional_runnerup: { label: "Regional Finalist", short: "Finalist", bucket: "placement", tier: "A", base: 45 },
+  all_pro_1: { label: "All-Pro First Team", short: "1st Team", bucket: "individual", tier: "A", base: 40 },
+  season_mvp: { label: "Regular Season MVP", short: "MVP", bucket: "individual", tier: "A", base: 38 },
+  finals_mvp: { label: "Regional Finals MVP", short: "Finals MVP", bucket: "individual", tier: "A", base: 35 },
+  all_pro_2: { label: "All-Pro Second Team", short: "2nd Team", bucket: "individual", tier: "B", base: 18 },
+  all_pro_3: { label: "All-Pro Third Team", short: "3rd Team", bucket: "individual", tier: "B", base: 8 },
 };
 
 export const BUCKET_META: Record<Bucket, { label: string; description: string }> = {
