@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Gauge, SlidersHorizontal, Swords, Trophy } from "lucide-react";
 import { PLAYERS, filterPlayers, ranked } from "@/lib/data";
 import { REGIONS, ROLES } from "@/lib/types";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,15 @@ import { PlayerAvatar } from "@/components/player-avatar";
 import { RegionBadge, RoleBadge } from "@/components/badges";
 import { formatNumber } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n/provider";
+
+const GITHUB_URL = "https://github.com/YunyueLi/Pantheon";
+
+const FEATURES = [
+  { icon: Gauge, t: "home.f1t", d: "home.f1d" },
+  { icon: SlidersHorizontal, t: "home.f2t", d: "home.f2d" },
+  { icon: Trophy, t: "home.f3t", d: "home.f3d" },
+  { icon: Swords, t: "home.f4t", d: "home.f4d" },
+] as const;
 
 export default function Home() {
   const { t } = useI18n();
@@ -39,6 +48,19 @@ export default function Home() {
               <Link href="/compare">{t("home.compareCta")}</Link>
             </Button>
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 pt-16">
+        <h2 className="text-lg font-semibold tracking-tight">{t("home.whyTitle")}</h2>
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {FEATURES.map((f) => (
+            <div key={f.t} className="rounded-2xl border border-border bg-surface p-5 shadow-card">
+              <f.icon className="h-5 w-5 text-accent" />
+              <h3 className="mt-3 text-sm font-semibold text-fg">{t(f.t)}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{t(f.d)}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -126,6 +148,27 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-6xl px-5 py-16 text-center">
+          <h2 className="text-2xl font-semibold tracking-tight">{t("home.ctaTitle")}</h2>
+          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-fg-muted">
+            {t("home.ctaDesc")}
+          </p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <Button asChild variant="primary" size="lg">
+              <Link href="/lol/leaderboard">
+                {t("home.exploreCta")} <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+                {t("home.github")} <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

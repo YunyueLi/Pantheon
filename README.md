@@ -1,5 +1,7 @@
 # Pantheon
 
+**English** · [简体中文](./README.zh-CN.md)
+
 A visual hall of fame for competitive play. Pantheon turns scattered championships, MVPs, and
 All-Pro selections into a single, transparent **Honor Index** — sliced by region and role, and
 built to settle the GOAT debate with numbers you can audit.
