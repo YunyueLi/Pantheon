@@ -1,7 +1,7 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
-import { DEFAULT_LOCALE, type Locale } from "./config";
+import { createContext, useContext, useEffect, useState } from "react";
+import { DEFAULT_LOCALE, isLocale, type Locale } from "./config";
 import { dictionaries } from "./dictionaries";
 
 type Vars = Record<string, string | number>;
@@ -28,6 +28,17 @@ export function I18nProvider({
   children: React.ReactNode;
 }) {
   const [locale, setLocaleState] = useState<Locale>(initialLocale);
+
+  // Static export can't read the locale cookie server-side, so restore the
+  // saved choice on the client (brief first-paint flash for returning users).
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("pantheon-locale");
+      if (isLocale(stored)) setLocaleState(stored);
+    } catch {
+      // ignore
+    }
+  }, []);
 
   const setLocale = (l: Locale) => {
     setLocaleState(l);

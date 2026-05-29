@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { PLAYERS, getPlayer } from "@/lib/data";
 import { AXES, honorScore, normalizedAxes, titleCounts } from "@/lib/honor";
@@ -12,10 +13,11 @@ import { CompareRadar } from "@/components/compare-radar";
 import { Card } from "@/components/ui/card";
 import { useI18n } from "@/lib/i18n/provider";
 
-export function CompareView({ initialA, initialB }: { initialA: string; initialB: string }) {
+export function CompareView() {
   const { t } = useI18n();
-  const [aId, setAId] = useState(initialA);
-  const [bId, setBId] = useState(initialB);
+  const sp = useSearchParams();
+  const [aId, setAId] = useState(() => (getPlayer(sp.get("a") ?? "") ? (sp.get("a") as string) : "faker"));
+  const [bId, setBId] = useState(() => (getPlayer(sp.get("b") ?? "") ? (sp.get("b") as string) : "chovy"));
   const a = getPlayer(aId)!;
   const b = getPlayer(bId)!;
 

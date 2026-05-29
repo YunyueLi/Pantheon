@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   type ColumnDef,
   type SortingState,
@@ -23,16 +24,17 @@ import { useI18n } from "@/lib/i18n/provider";
 
 type Row = { player: Player; score: number };
 
-export function Leaderboard({
-  initialRole = "ALL" as Role | "ALL",
-  initialRegion = "ALL" as Region | "ALL",
-}: {
-  initialRole?: Role | "ALL";
-  initialRegion?: Region | "ALL";
-}) {
+export function Leaderboard() {
   const { t, locale } = useI18n();
-  const [region, setRegion] = useState<Region | "ALL">(initialRegion);
-  const [role, setRole] = useState<Role | "ALL">(initialRole);
+  const sp = useSearchParams();
+  const spRegion = sp.get("region");
+  const spRole = sp.get("role");
+  const [region, setRegion] = useState<Region | "ALL">(
+    REGIONS.includes(spRegion as Region) ? (spRegion as Region) : "ALL"
+  );
+  const [role, setRole] = useState<Role | "ALL">(
+    ROLES.includes(spRole as Role) ? (spRole as Role) : "ALL"
+  );
   const [presetKey, setPresetKey] = useState(PRESETS[0].key);
   const [sorting, setSorting] = useState<SortingState>([{ id: "score", desc: true }]);
 
