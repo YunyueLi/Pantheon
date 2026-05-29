@@ -110,6 +110,7 @@ const en = {
   honorType: {
     worlds_title: "World Champion",
     msi_title: "MSI Champion",
+    first_stand_title: "First Stand Champion",
     regional_title: "Regional Champion",
     worlds_mvp: "Worlds Finals MVP",
     msi_mvp: "MSI MVP",
@@ -257,6 +258,7 @@ const zh: Dict = {
   honorType: {
     worlds_title: "世界冠军",
     msi_title: "MSI 冠军",
+    first_stand_title: "First Stand 冠军",
     regional_title: "赛区冠军",
     worlds_mvp: "世界赛决赛 MVP",
     msi_mvp: "MSI MVP",
@@ -397,6 +399,7 @@ const ko: Dict = {
   honorType: {
     worlds_title: "월드 챔피언",
     msi_title: "MSI 챔피언",
+    first_stand_title: "퍼스트 스탠드 우승",
     regional_title: "지역 우승",
     worlds_mvp: "월즈 결승 MVP",
     msi_mvp: "MSI MVP",
@@ -537,6 +540,7 @@ const ja: Dict = {
   honorType: {
     worlds_title: "世界王者",
     msi_title: "MSI 王者",
+    first_stand_title: "First Stand 王者",
     regional_title: "地域王者",
     worlds_mvp: "ワールドズ決勝 MVP",
     msi_mvp: "MSI MVP",
@@ -677,6 +681,7 @@ const de: Dict = {
   honorType: {
     worlds_title: "Weltmeister",
     msi_title: "MSI-Champion",
+    first_stand_title: "First Stand Champion",
     regional_title: "Regionaler Champion",
     worlds_mvp: "Worlds-Finale-MVP",
     msi_mvp: "MSI-MVP",
@@ -823,6 +828,7 @@ const fr: Dict = {
   honorType: {
     worlds_title: "Champion du monde",
     msi_title: "Champion MSI",
+    first_stand_title: "Champion First Stand",
     regional_title: "Champion régional",
     worlds_mvp: "MVP de la finale des Worlds",
     msi_mvp: "MVP du MSI",
@@ -963,6 +969,7 @@ const es: Dict = {
   honorType: {
     worlds_title: "Campeón del mundo",
     msi_title: "Campeón de MSI",
+    first_stand_title: "Campeón de First Stand",
     regional_title: "Campeón regional",
     worlds_mvp: "MVP de la final de Worlds",
     msi_mvp: "MVP del MSI",

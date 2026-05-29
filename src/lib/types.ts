@@ -22,6 +22,7 @@ export const ROLE_META: Record<Role, { label: string; abbr: string }> = {
 export type AchievementType =
   | "worlds_title"
   | "msi_title"
+  | "first_stand_title"
   | "regional_title"
   | "worlds_mvp"
   | "msi_mvp"

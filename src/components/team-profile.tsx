@@ -22,6 +22,7 @@ export function TeamProfile({ id }: { id: string }) {
   const allGroups: { type: AchievementType; years: number[] }[] = [
     { type: "worlds_title", years: team.worlds },
     { type: "msi_title", years: team.msi },
+    { type: "first_stand_title", years: team.firstStand ?? [] },
     { type: "worlds_runnerup", years: team.worldsRunnerup ?? [] },
   ];
   const titleGroups = allGroups.filter((g) => g.years.length > 0);

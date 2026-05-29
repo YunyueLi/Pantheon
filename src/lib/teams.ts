@@ -10,6 +10,7 @@ export type Team = {
   aka?: string[];
   worlds: number[]; // years won the World Championship
   msi: number[]; // years won MSI
+  firstStand?: number[]; // years won the First Stand tournament
   worldsRunnerup?: number[]; // years as Worlds finalist
 };
 
@@ -19,18 +20,24 @@ export const TEAMS: Team[] = [
   { id: "geng", name: "Gen.G", region: "LCK", aka: ["Samsung", "Samsung White", "Samsung Galaxy", "KSV"], worlds: [2014, 2017], msi: [2024, 2025], worldsRunnerup: [2016] },
   { id: "dk", name: "Dplus KIA", region: "LCK", aka: ["DAMWON", "DAMWON Gaming", "DWG KIA", "DWG", "DK"], worlds: [2020], msi: [], worldsRunnerup: [2021] },
   { id: "drx", name: "DRX", region: "LCK", worlds: [2022], msi: [] },
+  { id: "hle", name: "Hanwha Life Esports", region: "LCK", aka: ["HLE", "Hanwha Life"], worlds: [], msi: [], firstStand: [2025] },
   { id: "ig", name: "Invictus Gaming", region: "LPL", aka: ["IG"], worlds: [2018], msi: [] },
   { id: "fpx", name: "FunPlus Phoenix", region: "LPL", aka: ["FPX"], worlds: [2019], msi: [] },
   { id: "edg", name: "EDward Gaming", region: "LPL", aka: ["EDG"], worlds: [2021], msi: [2015] },
   { id: "rng", name: "Royal Never Give Up", region: "LPL", aka: ["RNG", "Royal Club"], worlds: [], msi: [2018, 2021, 2022], worldsRunnerup: [2013] },
   { id: "jdg", name: "JD Gaming", region: "LPL", aka: ["JDG"], worlds: [], msi: [2023] },
-  { id: "blg", name: "Bilibili Gaming", region: "LPL", aka: ["BLG"], worlds: [], msi: [], worldsRunnerup: [2024] },
+  { id: "blg", name: "Bilibili Gaming", region: "LPL", aka: ["BLG"], worlds: [], msi: [], firstStand: [2026], worldsRunnerup: [2024] },
   { id: "g2", name: "G2 Esports", region: "LEC", aka: ["G2"], worlds: [], msi: [2019], worldsRunnerup: [2019] },
   { id: "fnatic", name: "Fnatic", region: "LEC", aka: ["FNC"], worlds: [2011], msi: [], worldsRunnerup: [2018] },
 ];
 
 export function teamHonor(t: Team): number {
-  return t.worlds.length * 1000 + t.msi.length * 300 + (t.worldsRunnerup?.length ?? 0) * 300;
+  return (
+    t.worlds.length * 1000 +
+    t.msi.length * 300 +
+    (t.firstStand?.length ?? 0) * 200 +
+    (t.worldsRunnerup?.length ?? 0) * 300
+  );
 }
 
 export function getTeam(id: string): Team | undefined {

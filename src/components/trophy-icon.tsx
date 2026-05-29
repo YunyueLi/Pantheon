@@ -7,6 +7,7 @@ const ICON: Record<AchievementType, { kind: Kind; ghost?: boolean }> = {
   worlds_title: { kind: "worlds" },
   worlds_runnerup: { kind: "worlds", ghost: true },
   msi_title: { kind: "msi" },
+  first_stand_title: { kind: "msi" },
   regional_title: { kind: "regional" },
   regional_runnerup: { kind: "regional", ghost: true },
   worlds_mvp: { kind: "medal" },

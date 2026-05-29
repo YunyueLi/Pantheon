@@ -12,6 +12,7 @@ export const ACHIEVEMENT_META: Record<
   worlds_title: { label: "World Champion", short: "Worlds", bucket: "team", tier: "S", base: 1000 },
   msi_title: { label: "MSI Champion", short: "MSI", bucket: "team", tier: "S", base: 300 },
   worlds_runnerup: { label: "Worlds Finalist", short: "Finalist", bucket: "placement", tier: "S", base: 300 },
+  first_stand_title: { label: "First Stand Champion", short: "First Stand", bucket: "team", tier: "A", base: 200 },
   worlds_mvp: { label: "Worlds Finals MVP", short: "Worlds MVP", bucket: "individual", tier: "S", base: 220 },
   regional_title: { label: "Regional Champion", short: "League", bucket: "team", tier: "A", base: 130 },
   msi_mvp: { label: "MSI MVP", short: "MSI MVP", bucket: "individual", tier: "S", base: 120 },
@@ -71,6 +72,7 @@ export function cabinet(p: Player) {
   const order: AchievementType[] = [
     "worlds_title",
     "msi_title",
+    "first_stand_title",
     "regional_title",
     "worlds_mvp",
     "msi_mvp",
