@@ -1,0 +1,28 @@
+import { ROLE_META, type Region, type Role } from "@/lib/types";
+import { cn } from "@/lib/utils";
+
+export function RegionBadge({ region, className }: { region: Region; className?: string }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center rounded-md bg-surface-2 px-1.5 py-0.5 text-[11px] font-medium text-fg-muted",
+        className
+      )}
+    >
+      {region}
+    </span>
+  );
+}
+
+export function RoleBadge({ role, className }: { role: Role; className?: string }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center rounded-md border border-border px-1.5 py-0.5 font-mono text-[10px] font-medium tracking-wider text-fg-subtle",
+        className
+      )}
+    >
+      {ROLE_META[role].abbr}
+    </span>
+  );
+}

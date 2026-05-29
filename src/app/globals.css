@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* light — warm neutral (Notion-ish) */
+  --bg: #fbfbfa;
+  --surface: #ffffff;
+  --surface-2: #f5f5f4;
+  --raised: #ffffff;
+  --border: #eae9e6;
+  --border-strong: #dcdbd7;
+  --fg: #1a1a1e;
+  --fg-2: #5d5d66;
+  --fg-3: #91919a;
+
+  --medal-gold: #b08a32;
+  --medal-silver: #8b8d95;
+  --medal-bronze: #a8764a;
+
+  --chart-2: #3f3f46;
+  --chart-3: #a1a1aa;
+  --chart-4: #d6d6da;
+  --grid: #ededeb;
+
+  --shadow-color: 240deg 6% 50%;
+
+  /* default accent = gold (light) */
+  --accent: #92722a;
+  --accent-strong: #7c601f;
+  --accent-contrast: #ffffff;
+
+  /* derived — re-resolve against cascaded --bg / --accent / --medal-gold */
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+  --bg-glass: color-mix(in srgb, var(--bg) 72%, transparent);
+  --gold-soft: color-mix(in srgb, var(--medal-gold) 13%, transparent);
+  --gold-line: color-mix(in srgb, var(--medal-gold) 40%, transparent);
+}
+
+.dark {
+  --bg: #0a0a0b;
+  --surface: #121214;
+  --surface-2: #161619;
+  --raised: #1b1b1f;
+  --border: #232327;
+  --border-strong: #2f2f35;
+  --fg: #f4f4f5;
+  --fg-2: #a1a1aa;
+  --fg-3: #6e6e77;
+
+  --medal-gold: #d9be7a;
+  --medal-silver: #c8cad0;
+  --medal-bronze: #cd9b6a;
+
+  --chart-2: #d4d4d8;
+  --chart-3: #71717a;
+  --chart-4: #3a3a40;
+  --grid: #232327;
+
+  --shadow-color: 240deg 10% 2%;
+
+  /* default accent = gold (dark) */
+  --accent: #d9be7a;
+  --accent-strong: #e8d49d;
+  --accent-contrast: #15140d;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-feature-settings: "cv01", "cv03", "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--accent-soft);
+  }
+  /* refined scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 9999px;
+    border: 3px solid var(--bg);
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@layer utilities {
+  .tnum {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .grid-bg {
+    background-image: radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
+    background-size: 28px 28px;
+  }
+}
