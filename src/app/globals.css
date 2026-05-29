@@ -25,9 +25,9 @@
 
   --shadow-color: 240deg 6% 50%;
 
-  /* default accent = gold (light) */
-  --accent: #92722a;
-  --accent-strong: #7c601f;
+  /* accent = monochrome (minimal, sport-agnostic) — light */
+  --accent: #18181b;
+  --accent-strong: #34343a;
   --accent-contrast: #ffffff;
 
   /* derived — re-resolve against cascaded --bg / --accent / --medal-gold */
@@ -59,10 +59,10 @@
 
   --shadow-color: 240deg 10% 2%;
 
-  /* default accent = gold (dark) */
-  --accent: #d9be7a;
-  --accent-strong: #e8d49d;
-  --accent-contrast: #15140d;
+  /* accent = monochrome (minimal, sport-agnostic) — dark */
+  --accent: #fafafa;
+  --accent-strong: #e4e4e7;
+  --accent-contrast: #18181b;
 }
 
 @layer base {
