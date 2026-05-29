@@ -2,7 +2,15 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { ChevronDown } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { PLAYERS, getPlayer } from "@/lib/data";
 import { AXES, honorScore, normalizedAxes, titleCounts } from "@/lib/honor";
 import { REGIONS } from "@/lib/types";
@@ -114,23 +122,24 @@ function PlayerCard({
           </div>
         </div>
       </div>
-      <div className="relative mt-3">
-        <select
-          value={selectValue}
-          onChange={(e) => onSelect(e.target.value)}
-          className="w-full appearance-none rounded-lg border border-border bg-surface-2 px-3 py-2 pr-9 text-sm text-fg focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg"
-        >
-          {REGIONS.map((r) => (
-            <optgroup key={r} label={r}>
-              {PLAYERS.filter((p) => p.region === r).map((p) => (
-                <option key={p.id} value={p.id} disabled={p.id === exclude}>
-                  {p.name} · {p.team}
-                </option>
-              ))}
-            </optgroup>
-          ))}
-        </select>
-        <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-fg-subtle" />
+      <div className="mt-3">
+        <Select value={selectValue} onValueChange={onSelect}>
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {REGIONS.map((r) => (
+              <SelectGroup key={r}>
+                <SelectLabel>{r}</SelectLabel>
+                {PLAYERS.filter((p) => p.region === r).map((p) => (
+                  <SelectItem key={p.id} value={p.id} disabled={p.id === exclude}>
+                    {p.name} · {p.team}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
     </Card>
   );

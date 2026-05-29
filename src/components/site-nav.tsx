@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeControls } from "@/components/theme-controls";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { PlayerSearch } from "@/components/player-search";
 import { useI18n } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 
@@ -46,6 +47,7 @@ export function SiteNav() {
           </nav>
         </div>
         <div className="flex items-center gap-2">
+          <PlayerSearch />
           <LanguageSwitcher />
           <ThemeControls />
         </div>
