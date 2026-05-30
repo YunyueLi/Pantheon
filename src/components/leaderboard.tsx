@@ -5,13 +5,10 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   type ColumnDef,
-  type SortingState,
   flexRender,
   getCoreRowModel,
-  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
 import { PLAYERS } from "@/lib/data";
 import { PRESETS, honorScore, titleCounts } from "@/lib/honor";
 import { REGIONS, ROLES, type Player, type Region, type Role } from "@/lib/types";
@@ -36,7 +33,6 @@ export function Leaderboard() {
     ROLES.includes(spRole as Role) ? (spRole as Role) : "ALL"
   );
   const [presetKey, setPresetKey] = useState(PRESETS[0].key);
-  const [sorting, setSorting] = useState<SortingState>([{ id: "score", desc: true }]);
 
   const weights = PRESETS.find((p) => p.key === presetKey)!.weights;
 
@@ -48,7 +44,9 @@ export function Leaderboard() {
     () =>
       PLAYERS.filter(
         (p) => (region === "ALL" || p.region === region) && (role === "ALL" || p.role === role)
-      ).map((player) => ({ player, score: honorScore(player, weights) })),
+      )
+        .map((player) => ({ player, score: honorScore(player, weights) }))
+        .sort((a, b) => b.score - a.score),
     [region, role, weights]
   );
 
@@ -120,21 +118,10 @@ export function Leaderboard() {
   const table = useReactTable({
     data,
     columns,
-    state: { sorting },
-    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
   });
 
   const rows = table.getRowModel().rows;
-  const sortId = (sorting[0]?.id as string) ?? "score";
-  const sortOpts = [
-    { value: "score", label: t("leaderboard.colHonor") },
-    { value: "region", label: t("leaderboard.colRegion") },
-    { value: "role", label: t("leaderboard.colRole") },
-    { value: "player", label: t("leaderboard.colPlayer") },
-  ];
-  const setSort = (id: string) => setSorting([{ id, desc: id === "score" }]);
 
   return (
     <div>
@@ -156,12 +143,8 @@ export function Leaderboard() {
           </div>
         </div>
 
-        {/* Mobile: the 6-column table overflows, so render a compact sortable list instead. */}
+        {/* Mobile: the 6-column table overflows, so render a compact ranked list instead. */}
         <div className="md:hidden">
-          <div className="mb-3 flex items-center gap-2">
-            <ChevronsUpDown className="h-3.5 w-3.5 shrink-0 text-fg-subtle" />
-            <Pills options={sortOpts} value={sortId} onChange={setSort} size="sm" />
-          </div>
           <div className="space-y-2">
             {rows.map((row, i) => {
               const p = row.original.player;
@@ -201,38 +184,18 @@ export function Leaderboard() {
             <thead>
               {table.getHeaderGroups().map((hg) => (
                 <tr key={hg.id} className="border-b border-border">
-                  {hg.headers.map((header) => {
-                    const sortable = header.column.getCanSort();
-                    const sorted = header.column.getIsSorted();
-                    return (
-                      <th
-                        key={header.id}
-                        className={cn(
-                          "px-4 py-2.5 text-left text-[11px] font-medium uppercase tracking-wide text-fg-subtle",
-                          header.id === "score" && "w-[180px]",
-                          header.id === "rank" && "w-[64px]"
-                        )}
-                      >
-                        {sortable ? (
-                          <button
-                            onClick={header.column.getToggleSortingHandler()}
-                            className="inline-flex items-center gap-1 transition-colors hover:text-fg"
-                          >
-                            {flexRender(header.column.columnDef.header, header.getContext())}
-                            {sorted === "asc" ? (
-                              <ArrowUp className="h-3 w-3" />
-                            ) : sorted === "desc" ? (
-                              <ArrowDown className="h-3 w-3" />
-                            ) : (
-                              <ChevronsUpDown className="h-3 w-3 opacity-40" />
-                            )}
-                          </button>
-                        ) : (
-                          flexRender(header.column.columnDef.header, header.getContext())
-                        )}
-                      </th>
-                    );
-                  })}
+                  {hg.headers.map((header) => (
+                    <th
+                      key={header.id}
+                      className={cn(
+                        "px-4 py-2.5 text-left text-[11px] font-medium uppercase tracking-wide text-fg-subtle",
+                        header.id === "score" && "w-[180px]",
+                        header.id === "rank" && "w-[64px]"
+                      )}
+                    >
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                    </th>
+                  ))}
                 </tr>
               ))}
             </thead>
