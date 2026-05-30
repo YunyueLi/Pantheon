@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import type { AchievementType } from "@/lib/types";
 import { getTeam, teamHonor, teamPlayers } from "@/lib/teams";
+import { BackButton } from "@/components/back-button";
 import { TrophyIcon, trophyTone } from "@/components/trophy-icon";
 import { PlayerAvatar } from "@/components/player-avatar";
 import { RegionBadge, RoleBadge } from "@/components/badges";
@@ -30,18 +30,13 @@ export function TeamProfile({ id }: { id: string }) {
 
   return (
     <div className="mx-auto max-w-5xl px-5 py-8">
-      <Link
-        href="/"
-        className="mb-5 inline-flex items-center gap-1.5 text-sm text-fg-subtle transition-colors hover:text-fg"
-      >
-        <ArrowLeft className="h-3.5 w-3.5" /> {t("nav.explore")}
-      </Link>
+      <BackButton fallback="/lol/teams" />
 
       <Card className="p-6">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-surface-2 font-mono text-xl font-semibold text-fg-muted">
-              {team.name.replace(/[^a-zA-Z0-9]/g, "").slice(0, 2).toUpperCase()}
+              {team.code}
             </span>
             <div>
               <div className="flex flex-wrap items-center gap-2.5">

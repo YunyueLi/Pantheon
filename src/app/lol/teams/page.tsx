@@ -35,7 +35,7 @@ export default function TeamsPage() {
               <div className="flex items-center gap-3">
                 <span className="tnum w-5 shrink-0 text-right text-sm text-fg-subtle">{rank}</span>
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-surface-2 font-mono text-sm font-semibold text-fg-muted">
-                  {team.name.replace(/[^a-zA-Z0-9]/g, "").slice(0, 2).toUpperCase()}
+                  {team.code}
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="truncate font-semibold tracking-tight group-hover:text-accent">{team.name}</div>

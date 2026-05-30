@@ -155,7 +155,7 @@ export function PlayerSearch() {
                     ) : (
                       <>
                         <span className="grid h-[30px] w-[30px] shrink-0 place-items-center rounded-lg bg-surface-2 font-mono text-[11px] font-semibold text-fg-muted">
-                          {hit.team.name.replace(/[^a-zA-Z0-9]/g, "").slice(0, 2).toUpperCase()}
+                          {hit.team.code}
                         </span>
                         <div className="min-w-0 flex-1">
                           <div className="truncate text-sm font-medium text-fg">{hit.team.name}</div>

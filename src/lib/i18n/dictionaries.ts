@@ -12,6 +12,7 @@ const en = {
     index: "Index",
     share: "share",
     entries: "{n} entries",
+    back: "Back",
   },
   home: {
     eyebrow: "League of Legends",
@@ -164,6 +165,7 @@ const zh: Dict = {
     index: "指数",
     share: "得票率",
     entries: "{n} 项",
+    back: "返回",
   },
   home: {
     eyebrow: "英雄联盟",
@@ -307,6 +309,7 @@ const ko: Dict = {
     index: "지수",
     share: "득표율",
     entries: "{n}개",
+    back: "뒤로",
   },
   home: {
     eyebrow: "리그 오브 레전드",
@@ -451,6 +454,7 @@ const ja: Dict = {
     index: "指数",
     share: "得票率",
     entries: "{n}件",
+    back: "戻る",
   },
   home: {
     eyebrow: "リーグ・オブ・レジェンド",
@@ -595,6 +599,7 @@ const de: Dict = {
     index: "Index",
     share: "Stimmenanteil",
     entries: "{n} Einträge",
+    back: "Zurück",
   },
   home: {
     eyebrow: "League of Legends",
@@ -745,6 +750,7 @@ const fr: Dict = {
     index: "Indice",
     share: "part des votes",
     entries: "{n} entrées",
+    back: "Retour",
   },
   home: {
     eyebrow: "League of Legends",
@@ -889,6 +895,7 @@ const es: Dict = {
     index: "Índice",
     share: "porcentaje de votos",
     entries: "{n} entradas",
+    back: "Volver",
   },
   home: {
     eyebrow: "League of Legends",

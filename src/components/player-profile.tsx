@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ArrowLeft, Clock, GitCompareArrows } from "lucide-react";
+import { Clock, GitCompareArrows } from "lucide-react";
 import { PLAYERS, filterPlayers, getPlayer, percentile, ranked } from "@/lib/data";
+import { BackButton } from "@/components/back-button";
 import { teamIdFromName } from "@/lib/teams";
 import { ACHIEVEMENT_META, achievementPoints, honorScore, titleCounts } from "@/lib/honor";
 import { PlayerAvatar } from "@/components/player-avatar";
@@ -38,12 +39,7 @@ export function PlayerProfile({ id }: { id: string }) {
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-8">
-      <Link
-        href="/lol/leaderboard"
-        className="mb-5 inline-flex items-center gap-1.5 text-sm text-fg-subtle transition-colors hover:text-fg"
-      >
-        <ArrowLeft className="h-3.5 w-3.5" /> {t("player.back")}
-      </Link>
+      <BackButton fallback="/lol/leaderboard" />
 
       <Card className="overflow-hidden">
         <div className="flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between">

@@ -5,6 +5,8 @@ import { honorScore } from "./honor";
 export type Team = {
   id: string;
   name: string;
+  /** Short display code shown on the team chip/avatar (2–3 letters), e.g. "JDG", "FNC". */
+  code: string;
   region: Region;
   /** Former names / aliases used to resolve the messy team strings on player honors. */
   aka?: string[];
@@ -17,20 +19,20 @@ export type Team = {
 
 // International hardware per org (Worlds + MSI title years), verified via Wikipedia/Liquipedia.
 export const TEAMS: Team[] = [
-  { id: "t1", name: "T1", region: "LCK", aka: ["SKT", "SKT T1", "SK Telecom T1"], worlds: [2013, 2015, 2016, 2023, 2024, 2025], msi: [2016, 2017], ewc: [2024], worldsRunnerup: [2017, 2022] },
-  { id: "geng", name: "Gen.G", region: "LCK", aka: ["Samsung", "Samsung White", "Samsung Galaxy", "KSV"], worlds: [2014, 2017], msi: [2024, 2025], ewc: [2025], worldsRunnerup: [2016] },
-  { id: "dk", name: "Dplus KIA", region: "LCK", aka: ["DAMWON", "DAMWON Gaming", "DWG KIA", "DWG", "DK"], worlds: [2020], msi: [], worldsRunnerup: [2021] },
-  { id: "drx", name: "DRX", region: "LCK", worlds: [2022], msi: [] },
-  { id: "hle", name: "Hanwha Life Esports", region: "LCK", aka: ["HLE", "Hanwha Life"], worlds: [], msi: [], firstStand: [2025] },
-  { id: "ig", name: "Invictus Gaming", region: "LPL", aka: ["IG"], worlds: [2018], msi: [] },
-  { id: "fpx", name: "FunPlus Phoenix", region: "LPL", aka: ["FPX"], worlds: [2019], msi: [] },
-  { id: "edg", name: "EDward Gaming", region: "LPL", aka: ["EDG"], worlds: [2021], msi: [2015] },
-  { id: "rng", name: "Royal Never Give Up", region: "LPL", aka: ["RNG", "Royal Club"], worlds: [], msi: [2018, 2021, 2022], worldsRunnerup: [2013] },
-  { id: "jdg", name: "JD Gaming", region: "LPL", aka: ["JDG"], worlds: [], msi: [2023] },
-  { id: "blg", name: "Bilibili Gaming", region: "LPL", aka: ["BLG"], worlds: [], msi: [], firstStand: [2026], worldsRunnerup: [2024] },
-  { id: "g2", name: "G2 Esports", region: "LEC", aka: ["G2"], worlds: [], msi: [2019], worldsRunnerup: [2019] },
-  { id: "fnatic", name: "Fnatic", region: "LEC", aka: ["FNC"], worlds: [2011], msi: [], worldsRunnerup: [2018] },
-  { id: "tpa", name: "Taipei Assassins", region: "PCS", aka: ["TPA"], worlds: [2012], msi: [] },
+  { id: "t1", name: "T1", code: "T1", region: "LCK", aka: ["SKT", "SKT T1", "SK Telecom T1"], worlds: [2013, 2015, 2016, 2023, 2024, 2025], msi: [2016, 2017], ewc: [2024], worldsRunnerup: [2017, 2022] },
+  { id: "geng", name: "Gen.G", code: "GEN", region: "LCK", aka: ["Samsung", "Samsung White", "Samsung Galaxy", "KSV"], worlds: [2014, 2017], msi: [2024, 2025], ewc: [2025], worldsRunnerup: [2016] },
+  { id: "dk", name: "Dplus KIA", code: "DK", region: "LCK", aka: ["DAMWON", "DAMWON Gaming", "DWG KIA", "DWG", "DK"], worlds: [2020], msi: [], worldsRunnerup: [2021] },
+  { id: "drx", name: "DRX", code: "DRX", region: "LCK", worlds: [2022], msi: [] },
+  { id: "hle", name: "Hanwha Life Esports", code: "HLE", region: "LCK", aka: ["HLE", "Hanwha Life"], worlds: [], msi: [], firstStand: [2025] },
+  { id: "ig", name: "Invictus Gaming", code: "IG", region: "LPL", aka: ["IG"], worlds: [2018], msi: [] },
+  { id: "fpx", name: "FunPlus Phoenix", code: "FPX", region: "LPL", aka: ["FPX"], worlds: [2019], msi: [] },
+  { id: "edg", name: "EDward Gaming", code: "EDG", region: "LPL", aka: ["EDG"], worlds: [2021], msi: [2015] },
+  { id: "rng", name: "Royal Never Give Up", code: "RNG", region: "LPL", aka: ["RNG", "Royal Club"], worlds: [], msi: [2018, 2021, 2022], worldsRunnerup: [2013] },
+  { id: "jdg", name: "JD Gaming", code: "JDG", region: "LPL", aka: ["JDG"], worlds: [], msi: [2023] },
+  { id: "blg", name: "Bilibili Gaming", code: "BLG", region: "LPL", aka: ["BLG"], worlds: [], msi: [], firstStand: [2026], worldsRunnerup: [2024] },
+  { id: "g2", name: "G2 Esports", code: "G2", region: "LEC", aka: ["G2"], worlds: [], msi: [2019], worldsRunnerup: [2019] },
+  { id: "fnatic", name: "Fnatic", code: "FNC", region: "LEC", aka: ["FNC"], worlds: [2011], msi: [], worldsRunnerup: [2018] },
+  { id: "tpa", name: "Taipei Assassins", code: "TPA", region: "PCS", aka: ["TPA"], worlds: [2012], msi: [] },
 ];
 
 export function teamHonor(t: Team): number {
