@@ -53,19 +53,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 pt-16">
-        <h2 className="text-lg font-semibold tracking-tight">{t("home.whyTitle")}</h2>
-        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {FEATURES.map((f) => (
-            <div key={f.t} className="rounded-2xl border border-border bg-surface p-5 shadow-card">
-              <f.icon className="h-5 w-5 text-accent" />
-              <h3 className="mt-3 text-sm font-semibold text-fg">{t(f.t)}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{t(f.d)}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <div className="mx-auto max-w-6xl px-5 py-14">
         <div className="flex items-end justify-between">
           <div>
@@ -150,10 +137,20 @@ export default function Home() {
           ))}
         </div>
 
-        <h2 className="mt-12 text-lg font-semibold tracking-tight">{t("home.teamsTitle")}</h2>
-        <p className="mt-1 text-sm text-fg-muted">{t("home.teamsDesc")}</p>
+        <div className="mt-12 flex items-end justify-between">
+          <div>
+            <h2 className="text-lg font-semibold tracking-tight">{t("home.teamsTitle")}</h2>
+            <p className="mt-1 text-sm text-fg-muted">{t("home.teamsDesc")}</p>
+          </div>
+          <Link
+            href="/lol/teams"
+            className="inline-flex items-center gap-1 text-sm text-fg-subtle transition-colors hover:text-fg"
+          >
+            {t("common.viewAll")} <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          {rankedTeams().map(({ team, honor }) => (
+          {rankedTeams().slice(0, 8).map(({ team, honor }) => (
             <Link
               key={team.id}
               href={`/lol/teams/${team.id}`}
@@ -184,6 +181,21 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      <section className="border-t border-border bg-surface/40">
+        <div className="mx-auto max-w-6xl px-5 py-16">
+          <h2 className="text-lg font-semibold tracking-tight">{t("home.whyTitle")}</h2>
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {FEATURES.map((f) => (
+              <div key={f.t} className="rounded-2xl border border-border bg-surface p-5 shadow-card">
+                <f.icon className="h-5 w-5 text-accent" />
+                <h3 className="mt-3 text-sm font-semibold text-fg">{t(f.t)}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{t(f.d)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-16 text-center">

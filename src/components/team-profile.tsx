@@ -22,6 +22,7 @@ export function TeamProfile({ id }: { id: string }) {
   const allGroups: { type: AchievementType; years: number[] }[] = [
     { type: "worlds_title", years: team.worlds },
     { type: "msi_title", years: team.msi },
+    { type: "ewc_title", years: team.ewc ?? [] },
     { type: "first_stand_title", years: team.firstStand ?? [] },
     { type: "worlds_runnerup", years: team.worldsRunnerup ?? [] },
   ];
@@ -114,7 +115,11 @@ export function TeamProfile({ id }: { id: string }) {
                 className="flex items-center gap-3 rounded-xl border border-border bg-surface-2 px-3 py-2 transition-colors hover:border-border-strong"
               >
                 <PlayerAvatar id={p.id} name={p.name} size={32} />
-                <span className="flex-1 truncate text-sm font-medium text-fg">{p.name}</span>
+                <span className="truncate text-sm font-medium text-fg">{p.name}</span>
+                {!p.active && (
+                  <span className="text-[10px] uppercase tracking-wide text-fg-subtle">{t("common.retired")}</span>
+                )}
+                <span className="flex-1" />
                 <RoleBadge role={p.role} />
               </Link>
             ))}

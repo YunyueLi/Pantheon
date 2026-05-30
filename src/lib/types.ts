@@ -1,4 +1,4 @@
-export const REGIONS = ["LCK", "LPL", "LEC", "LCS"] as const;
+export const REGIONS = ["LCK", "LPL", "LEC", "LCS", "PCS", "VCS", "LJL", "CBLOL", "LLA"] as const;
 export type Region = (typeof REGIONS)[number];
 
 export const ROLES = ["Top", "Jungle", "Mid", "Bot", "Support"] as const;
@@ -9,6 +9,11 @@ export const REGION_META: Record<Region, { label: string; country: string; flag:
   LPL: { label: "LPL", country: "China", flag: "🇨🇳" },
   LEC: { label: "LEC", country: "EMEA", flag: "🇪🇺" },
   LCS: { label: "LCS", country: "N. America", flag: "🇺🇸" },
+  PCS: { label: "PCS", country: "Pacific", flag: "🇹🇼" },
+  VCS: { label: "VCS", country: "Vietnam", flag: "🇻🇳" },
+  LJL: { label: "LJL", country: "Japan", flag: "🇯🇵" },
+  CBLOL: { label: "CBLOL", country: "Brazil", flag: "🇧🇷" },
+  LLA: { label: "LLA", country: "Latin America", flag: "🌎" },
 };
 
 export const ROLE_META: Record<Role, { label: string; abbr: string }> = {
@@ -23,6 +28,9 @@ export type AchievementType =
   | "worlds_title"
   | "msi_title"
   | "first_stand_title"
+  | "ewc_title"
+  | "asian_games_gold"
+  | "msc_title"
   | "regional_title"
   | "worlds_mvp"
   | "msi_mvp"

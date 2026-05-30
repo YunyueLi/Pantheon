@@ -11,13 +11,14 @@ export type Team = {
   worlds: number[]; // years won the World Championship
   msi: number[]; // years won MSI
   firstStand?: number[]; // years won the First Stand tournament
+  ewc?: number[]; // years won the Esports World Cup (LoL)
   worldsRunnerup?: number[]; // years as Worlds finalist
 };
 
 // International hardware per org (Worlds + MSI title years), verified via Wikipedia/Liquipedia.
 export const TEAMS: Team[] = [
-  { id: "t1", name: "T1", region: "LCK", aka: ["SKT", "SKT T1", "SK Telecom T1"], worlds: [2013, 2015, 2016, 2023, 2024, 2025], msi: [2016, 2017], worldsRunnerup: [2017, 2022] },
-  { id: "geng", name: "Gen.G", region: "LCK", aka: ["Samsung", "Samsung White", "Samsung Galaxy", "KSV"], worlds: [2014, 2017], msi: [2024, 2025], worldsRunnerup: [2016] },
+  { id: "t1", name: "T1", region: "LCK", aka: ["SKT", "SKT T1", "SK Telecom T1"], worlds: [2013, 2015, 2016, 2023, 2024, 2025], msi: [2016, 2017], ewc: [2024], worldsRunnerup: [2017, 2022] },
+  { id: "geng", name: "Gen.G", region: "LCK", aka: ["Samsung", "Samsung White", "Samsung Galaxy", "KSV"], worlds: [2014, 2017], msi: [2024, 2025], ewc: [2025], worldsRunnerup: [2016] },
   { id: "dk", name: "Dplus KIA", region: "LCK", aka: ["DAMWON", "DAMWON Gaming", "DWG KIA", "DWG", "DK"], worlds: [2020], msi: [], worldsRunnerup: [2021] },
   { id: "drx", name: "DRX", region: "LCK", worlds: [2022], msi: [] },
   { id: "hle", name: "Hanwha Life Esports", region: "LCK", aka: ["HLE", "Hanwha Life"], worlds: [], msi: [], firstStand: [2025] },
@@ -29,6 +30,7 @@ export const TEAMS: Team[] = [
   { id: "blg", name: "Bilibili Gaming", region: "LPL", aka: ["BLG"], worlds: [], msi: [], firstStand: [2026], worldsRunnerup: [2024] },
   { id: "g2", name: "G2 Esports", region: "LEC", aka: ["G2"], worlds: [], msi: [2019], worldsRunnerup: [2019] },
   { id: "fnatic", name: "Fnatic", region: "LEC", aka: ["FNC"], worlds: [2011], msi: [], worldsRunnerup: [2018] },
+  { id: "tpa", name: "Taipei Assassins", region: "PCS", aka: ["TPA"], worlds: [2012], msi: [] },
 ];
 
 export function teamHonor(t: Team): number {
@@ -36,6 +38,7 @@ export function teamHonor(t: Team): number {
     t.worlds.length * 1000 +
     t.msi.length * 300 +
     (t.firstStand?.length ?? 0) * 200 +
+    (t.ewc?.length ?? 0) * 250 +
     (t.worldsRunnerup?.length ?? 0) * 300
   );
 }
@@ -65,9 +68,15 @@ export function teamIdFromName(name?: string): string | undefined {
   return undefined;
 }
 
-/** Players who earned at least one honor with this org, strongest first. */
+/**
+ * Players associated with this org, strongest first.
+ * Retired players appear ONLY under their last team; active players also surface
+ * on the orgs where they earned honors (an alumni view).
+ */
 export function teamPlayers(team: Team): Player[] {
   return PLAYERS.filter((p) =>
-    p.achievements.some((a) => teamIdFromName(a.team) === team.id) || teamIdFromName(p.team) === team.id
+    p.active
+      ? p.achievements.some((a) => teamIdFromName(a.team) === team.id) || teamIdFromName(p.team) === team.id
+      : teamIdFromName(p.team) === team.id
   ).sort((a, b) => honorScore(b) - honorScore(a));
 }

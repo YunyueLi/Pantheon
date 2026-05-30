@@ -1,4 +1,5 @@
 import type { AchievementType } from "@/lib/types";
+import { ACHIEVEMENT_META } from "@/lib/honor";
 import { cn } from "@/lib/utils";
 
 type Kind = "worlds" | "msi" | "regional" | "medal" | "star";
@@ -8,6 +9,9 @@ const ICON: Record<AchievementType, { kind: Kind; ghost?: boolean }> = {
   worlds_runnerup: { kind: "worlds", ghost: true },
   msi_title: { kind: "msi" },
   first_stand_title: { kind: "msi" },
+  ewc_title: { kind: "msi" },
+  asian_games_gold: { kind: "medal" },
+  msc_title: { kind: "regional" },
   regional_title: { kind: "regional" },
   regional_runnerup: { kind: "regional", ghost: true },
   worlds_mvp: { kind: "medal" },
@@ -112,7 +116,8 @@ export function TrophyIcon({
 
 /** Cups & finals use the gold tone; personal awards stay neutral to preserve hierarchy. */
 export function trophyTone(type: AchievementType): string {
-  return ICON[type].kind === "medal" || ICON[type].kind === "star"
+  // Team/placement honors render gold; personal awards (MVP, All-Pro) stay neutral.
+  return ACHIEVEMENT_META[type].bucket === "individual"
     ? "text-fg-muted"
     : "text-[color:var(--medal-gold)]";
 }

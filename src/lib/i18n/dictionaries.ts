@@ -1,7 +1,7 @@
 import type { Locale } from "./config";
 
 const en = {
-  nav: { explore: "Explore", leaderboard: "Leaderboard", compare: "Compare", methodology: "Methodology" },
+  nav: { explore: "Explore", leaderboard: "Leaderboard", teams: "Teams", compare: "Compare", methodology: "Methodology" },
   search: { label: "Search players", placeholder: "Search players, teams…", empty: "No players found" },
   theme: { gold: "Gold", indigo: "Indigo" },
   common: {
@@ -111,6 +111,9 @@ const en = {
     worlds_title: "World Champion",
     msi_title: "MSI Champion",
     first_stand_title: "First Stand Champion",
+    ewc_title: "EWC Champion",
+    asian_games_gold: "Asian Games Gold",
+    msc_title: "Mid-Season Cup",
     regional_title: "Regional Champion",
     worlds_mvp: "Worlds Finals MVP",
     msi_mvp: "MSI MVP",
@@ -143,14 +146,14 @@ const en = {
     Longevity: "Career span and the number of decorated seasons.",
   },
   role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support" },
-  regionCountry: { LCK: "Korea", LPL: "China", LEC: "EMEA", LCS: "N. America" },
+  regionCountry: { LCK: "Korea", LPL: "China", LEC: "EMEA", LCS: "N. America", PCS: "Pacific", VCS: "Vietnam", LJL: "Japan", CBLOL: "Brazil", LLA: "Latin America" },
   preset: { balanced: "Balanced", titles: "Titles purist", individual: "Individual brilliance" },
 };
 
 export type Dict = typeof en;
 
 const zh: Dict = {
-  nav: { explore: "探索", leaderboard: "排行榜", compare: "对比", methodology: "算法说明" },
+  nav: { explore: "探索", leaderboard: "排行榜", teams: "战队", compare: "对比", methodology: "算法说明" },
   search: { label: "搜索选手", placeholder: "搜索选手、战队…", empty: "未找到选手" },
   theme: { gold: "金色", indigo: "靛蓝" },
   common: {
@@ -259,6 +262,9 @@ const zh: Dict = {
     worlds_title: "世界冠军",
     msi_title: "MSI 冠军",
     first_stand_title: "First Stand 冠军",
+    ewc_title: "EWC 冠军",
+    asian_games_gold: "亚运会金牌",
+    msc_title: "季中杯",
     regional_title: "赛区冠军",
     worlds_mvp: "世界赛决赛 MVP",
     msi_mvp: "MSI MVP",
@@ -285,12 +291,12 @@ const zh: Dict = {
     Longevity: "生涯跨度与有荣誉入账的赛季数。",
   },
   role: { Top: "上单", Jungle: "打野", Mid: "中单", Bot: "下路", Support: "辅助" },
-  regionCountry: { LCK: "韩国", LPL: "中国", LEC: "欧洲", LCS: "北美" },
+  regionCountry: { LCK: "韩国", LPL: "中国", LEC: "欧洲", LCS: "北美", PCS: "太平洋", VCS: "越南", LJL: "日本", CBLOL: "巴西", LLA: "拉丁美洲" },
   preset: { balanced: "均衡", titles: "唯冠军论", individual: "个人光环" },
 };
 
 const ko: Dict = {
-  nav: { explore: "둘러보기", leaderboard: "리더보드", compare: "비교", methodology: "산정 방식" },
+  nav: { explore: "둘러보기", leaderboard: "리더보드", teams: "팀", compare: "비교", methodology: "산정 방식" },
   search: { label: "선수 검색", placeholder: "선수·팀 검색…", empty: "선수를 찾을 수 없습니다" },
   theme: { gold: "골드", indigo: "인디고" },
   common: {
@@ -400,6 +406,9 @@ const ko: Dict = {
     worlds_title: "월드 챔피언",
     msi_title: "MSI 챔피언",
     first_stand_title: "퍼스트 스탠드 우승",
+    ewc_title: "EWC 우승",
+    asian_games_gold: "아시안게임 금메달",
+    msc_title: "미드시즌 컵",
     regional_title: "지역 우승",
     worlds_mvp: "월즈 결승 MVP",
     msi_mvp: "MSI MVP",
@@ -426,12 +435,12 @@ const ko: Dict = {
     Longevity: "커리어 기간과 수상 시즌 수.",
   },
   role: { Top: "탑", Jungle: "정글", Mid: "미드", Bot: "바텀", Support: "서포터" },
-  regionCountry: { LCK: "한국", LPL: "중국", LEC: "유럽", LCS: "북미" },
+  regionCountry: { LCK: "한국", LPL: "중국", LEC: "유럽", LCS: "북미", PCS: "퍼시픽", VCS: "베트남", LJL: "일본", CBLOL: "브라질", LLA: "라틴 아메리카" },
   preset: { balanced: "균형", titles: "우승 중심", individual: "개인 기량" },
 };
 
 const ja: Dict = {
-  nav: { explore: "ホーム", leaderboard: "ランキング", compare: "比較", methodology: "算出方法" },
+  nav: { explore: "ホーム", leaderboard: "ランキング", teams: "チーム", compare: "比較", methodology: "算出方法" },
   search: { label: "選手を検索", placeholder: "選手・チームを検索…", empty: "選手が見つかりません" },
   theme: { gold: "ゴールド", indigo: "インディゴ" },
   common: {
@@ -541,6 +550,9 @@ const ja: Dict = {
     worlds_title: "世界王者",
     msi_title: "MSI 王者",
     first_stand_title: "First Stand 王者",
+    ewc_title: "EWC 王者",
+    asian_games_gold: "アジア大会 金",
+    msc_title: "ミッドシーズン・カップ",
     regional_title: "地域王者",
     worlds_mvp: "ワールドズ決勝 MVP",
     msi_mvp: "MSI MVP",
@@ -567,12 +579,12 @@ const ja: Dict = {
     Longevity: "キャリアの長さと栄誉を得たシーズン数。",
   },
   role: { Top: "トップ", Jungle: "ジャングル", Mid: "ミッド", Bot: "ボット", Support: "サポート" },
-  regionCountry: { LCK: "韓国", LPL: "中国", LEC: "EMEA", LCS: "北米" },
+  regionCountry: { LCK: "韓国", LPL: "中国", LEC: "EMEA", LCS: "北米", PCS: "太平洋", VCS: "ベトナム", LJL: "日本", CBLOL: "ブラジル", LLA: "ラテンアメリカ" },
   preset: { balanced: "バランス", titles: "優勝重視", individual: "個人技重視" },
 };
 
 const de: Dict = {
-  nav: { explore: "Entdecken", leaderboard: "Rangliste", compare: "Vergleich", methodology: "Methodik" },
+  nav: { explore: "Entdecken", leaderboard: "Rangliste", teams: "Teams", compare: "Vergleich", methodology: "Methodik" },
   search: { label: "Spieler suchen", placeholder: "Spieler, Teams suchen…", empty: "Keine Spieler gefunden" },
   theme: { gold: "Gold", indigo: "Indigo" },
   common: {
@@ -682,6 +694,9 @@ const de: Dict = {
     worlds_title: "Weltmeister",
     msi_title: "MSI-Champion",
     first_stand_title: "First Stand Champion",
+    ewc_title: "EWC-Champion",
+    asian_games_gold: "Asienspiele-Gold",
+    msc_title: "Mid-Season Cup",
     regional_title: "Regionaler Champion",
     worlds_mvp: "Worlds-Finale-MVP",
     msi_mvp: "MSI-MVP",
@@ -714,12 +729,12 @@ const de: Dict = {
     Longevity: "Karrieredauer und Anzahl ausgezeichneter Saisons.",
   },
   role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support" },
-  regionCountry: { LCK: "Korea", LPL: "China", LEC: "EMEA", LCS: "Nordamerika" },
+  regionCountry: { LCK: "Korea", LPL: "China", LEC: "EMEA", LCS: "Nordamerika", PCS: "Pazifik", VCS: "Vietnam", LJL: "Japan", CBLOL: "Brasilien", LLA: "Lateinamerika" },
   preset: { balanced: "Ausgewogen", titles: "Titel-Purist", individual: "Individuelle Klasse" },
 };
 
 const fr: Dict = {
-  nav: { explore: "Explorer", leaderboard: "Classement", compare: "Comparer", methodology: "Méthodologie" },
+  nav: { explore: "Explorer", leaderboard: "Classement", teams: "Équipes", compare: "Comparer", methodology: "Méthodologie" },
   search: { label: "Rechercher des joueurs", placeholder: "Rechercher joueurs, équipes…", empty: "Aucun joueur trouvé" },
   theme: { gold: "Or", indigo: "Indigo" },
   common: {
@@ -829,6 +844,9 @@ const fr: Dict = {
     worlds_title: "Champion du monde",
     msi_title: "Champion MSI",
     first_stand_title: "Champion First Stand",
+    ewc_title: "Champion EWC",
+    asian_games_gold: "Or aux Jeux asiatiques",
+    msc_title: "Mid-Season Cup",
     regional_title: "Champion régional",
     worlds_mvp: "MVP de la finale des Worlds",
     msi_mvp: "MVP du MSI",
@@ -855,12 +873,12 @@ const fr: Dict = {
     Longevity: "Durée de carrière et nombre de saisons primées.",
   },
   role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support" },
-  regionCountry: { LCK: "Corée", LPL: "Chine", LEC: "EMEA", LCS: "Am. du Nord" },
+  regionCountry: { LCK: "Corée", LPL: "Chine", LEC: "EMEA", LCS: "Am. du Nord", PCS: "Pacifique", VCS: "Vietnam", LJL: "Japon", CBLOL: "Brésil", LLA: "Amérique latine" },
   preset: { balanced: "Équilibré", titles: "Puriste des titres", individual: "Brio individuel" },
 };
 
 const es: Dict = {
-  nav: { explore: "Explorar", leaderboard: "Clasificación", compare: "Comparar", methodology: "Metodología" },
+  nav: { explore: "Explorar", leaderboard: "Clasificación", teams: "Equipos", compare: "Comparar", methodology: "Metodología" },
   search: { label: "Buscar jugadores", placeholder: "Buscar jugadores, equipos…", empty: "No se encontraron jugadores" },
   theme: { gold: "Oro", indigo: "Índigo" },
   common: {
@@ -970,6 +988,9 @@ const es: Dict = {
     worlds_title: "Campeón del mundo",
     msi_title: "Campeón de MSI",
     first_stand_title: "Campeón de First Stand",
+    ewc_title: "Campeón de EWC",
+    asian_games_gold: "Oro en Juegos Asiáticos",
+    msc_title: "Mid-Season Cup",
     regional_title: "Campeón regional",
     worlds_mvp: "MVP de la final de Worlds",
     msi_mvp: "MVP del MSI",
@@ -996,7 +1017,7 @@ const es: Dict = {
     Longevity: "Duración de la carrera y número de temporadas premiadas.",
   },
   role: { Top: "Top", Jungle: "Jungla", Mid: "Mid", Bot: "Bot", Support: "Support" },
-  regionCountry: { LCK: "Corea", LPL: "China", LEC: "EMEA", LCS: "Norteamérica" },
+  regionCountry: { LCK: "Corea", LPL: "China", LEC: "EMEA", LCS: "Norteamérica", PCS: "Pacífico", VCS: "Vietnam", LJL: "Japón", CBLOL: "Brasil", LLA: "Latinoamérica" },
   preset: { balanced: "Equilibrado", titles: "Purista de títulos", individual: "Brillo individual" },
 };
 

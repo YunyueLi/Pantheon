@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 const LINKS = [
   { href: "/", key: "nav.explore" },
   { href: "/lol/leaderboard", key: "nav.leaderboard" },
+  { href: "/lol/teams", key: "nav.teams" },
   { href: "/compare", key: "nav.compare" },
   { href: "/methodology", key: "nav.methodology" },
 ];
