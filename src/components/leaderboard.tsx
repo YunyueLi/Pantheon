@@ -126,6 +126,16 @@ export function Leaderboard() {
     getSortedRowModel: getSortedRowModel(),
   });
 
+  const rows = table.getRowModel().rows;
+  const sortId = (sorting[0]?.id as string) ?? "score";
+  const sortOpts = [
+    { value: "score", label: t("leaderboard.colHonor") },
+    { value: "region", label: t("leaderboard.colRegion") },
+    { value: "role", label: t("leaderboard.colRole") },
+    { value: "player", label: t("leaderboard.colPlayer") },
+  ];
+  const setSort = (id: string) => setSorting([{ id, desc: id === "score" }]);
+
   return (
     <div>
       <header className="mb-7">
@@ -146,7 +156,47 @@ export function Leaderboard() {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
+        {/* Mobile: the 6-column table overflows, so render a compact sortable list instead. */}
+        <div className="md:hidden">
+          <div className="mb-3 flex items-center gap-2">
+            <ChevronsUpDown className="h-3.5 w-3.5 shrink-0 text-fg-subtle" />
+            <Pills options={sortOpts} value={sortId} onChange={setSort} size="sm" />
+          </div>
+          <div className="space-y-2">
+            {rows.map((row, i) => {
+              const p = row.original.player;
+              return (
+                <Link
+                  key={row.id}
+                  href={`/lol/players/${p.id}`}
+                  className="flex items-center gap-3 rounded-xl border border-border bg-surface px-3 py-2.5 shadow-card transition-colors hover:border-border-strong"
+                >
+                  <span className="tnum w-5 shrink-0 text-right text-sm text-fg-subtle">{i + 1}</span>
+                  <PlayerAvatar id={p.id} name={p.name} photo={p.photo} size={34} />
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-1.5">
+                      <span className="truncate text-sm font-medium text-fg">{p.name}</span>
+                      {!p.active && (
+                        <span className="shrink-0 text-[9px] uppercase tracking-wide text-fg-subtle">
+                          {t("common.retired")}
+                        </span>
+                      )}
+                    </div>
+                    <div className="mt-1 flex items-center gap-1.5">
+                      <RegionBadge region={p.region} />
+                      <RoleBadge role={p.role} />
+                    </div>
+                  </div>
+                  <div className="tnum shrink-0 text-right text-sm font-semibold text-fg">
+                    {formatNumber(row.original.score)}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="hidden overflow-hidden rounded-2xl border border-border bg-surface shadow-card md:block">
           <table className="w-full">
             <thead>
               {table.getHeaderGroups().map((hg) => (

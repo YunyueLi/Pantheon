@@ -2,20 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { PLAYERS, getPlayer } from "@/lib/data";
 import { AXES, honorScore, normalizedAxes, titleCounts } from "@/lib/honor";
-import { REGIONS } from "@/lib/types";
 import { cn, formatNumber } from "@/lib/utils";
 import { PlayerAvatar } from "@/components/player-avatar";
+import { PlayerPicker } from "@/components/player-picker";
 import { RegionBadge, RoleBadge } from "@/components/badges";
 import { CompareRadar } from "@/components/compare-radar";
 import { Card } from "@/components/ui/card";
@@ -123,23 +114,7 @@ function PlayerCard({
         </div>
       </div>
       <div className="mt-3">
-        <Select value={selectValue} onValueChange={onSelect}>
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {REGIONS.map((r) => (
-              <SelectGroup key={r}>
-                <SelectLabel>{r}</SelectLabel>
-                {PLAYERS.filter((p) => p.region === r).map((p) => (
-                  <SelectItem key={p.id} value={p.id} disabled={p.id === exclude}>
-                    {p.name} · {p.team}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            ))}
-          </SelectContent>
-        </Select>
+        <PlayerPicker value={selectValue} onSelect={onSelect} exclude={exclude} />
       </div>
     </Card>
   );
