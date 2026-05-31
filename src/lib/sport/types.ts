@@ -73,6 +73,13 @@ export type HonorModel = {
   axes: Axis[];
   /** Order in which to render the trophy cabinet. */
   cabinetOrder: string[];
+  /**
+   * Optional diminishing returns for repeated wins of the same achievement type.
+   * The k-th win of a listed type (k = 0, 1, 2 …) is scaled by factor^k, so a flood
+   * of the same club trophy can't out-weigh peak/individual greatness. Sports that
+   * omit this are scored purely linearly (no behavior change).
+   */
+  repeatDecay?: { factor: number; types: string[] };
 };
 
 /** Chip metadata for the primary grouping (league / region). */

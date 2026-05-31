@@ -17,14 +17,40 @@ export function achievementPoints(a: Achievement, model: HonorModel, w: Weights 
 }
 
 export function honorScore(p: Player, model: HonorModel, w: Weights = DEFAULT_WEIGHTS): number {
-  return p.achievements.reduce((sum, a) => sum + achievementPoints(a, model, w), 0);
+  const decay = model.repeatDecay;
+  if (!decay) {
+    return p.achievements.reduce((sum, a) => sum + achievementPoints(a, model, w), 0);
+  }
+  const decayTypes = new Set(decay.types);
+  const seen = new Map<string, number>();
+  let sum = 0;
+  for (const a of p.achievements) {
+    let pts = achievementPoints(a, model, w);
+    if (decayTypes.has(a.type)) {
+      const k = seen.get(a.type) ?? 0;
+      pts *= Math.pow(decay.factor, k);
+      seen.set(a.type, k + 1);
+    }
+    sum += pts;
+  }
+  return sum;
 }
 
 export function bucketTotals(p: Player, model: HonorModel, w: Weights = DEFAULT_WEIGHTS): Record<Bucket, number> {
   const totals: Record<Bucket, number> = { team: 0, individual: 0, placement: 0 };
+  const decay = model.repeatDecay;
+  const decayTypes = decay ? new Set(decay.types) : null;
+  const seen = new Map<string, number>();
   for (const a of p.achievements) {
     const meta = model.achievementMeta[a.type];
-    if (meta) totals[meta.bucket] += achievementPoints(a, model, w);
+    if (!meta) continue;
+    let pts = achievementPoints(a, model, w);
+    if (decayTypes && decayTypes.has(a.type)) {
+      const k = seen.get(a.type) ?? 0;
+      pts *= Math.pow(decay!.factor, k);
+      seen.set(a.type, k + 1);
+    }
+    totals[meta.bucket] += pts;
   }
   return totals;
 }

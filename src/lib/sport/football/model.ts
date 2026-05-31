@@ -112,11 +112,22 @@ const CABINET_ORDER = [
   "jsl_title", "jsl_best_player", "jsl_golden_boot", "jsl_best_gk", "jsl_runnerup",
 ];
 
+// Repeated CLUB trophies see diminishing returns (the k-th win scaled by 0.7^k),
+// so serial winners at dominant clubs can't out-tally peak/individual greatness.
+// National-team honors (World Cup, continental titles) and individual awards
+// (Ballon d'Or, etc.) are deliberately excluded — they keep full value.
+const REPEAT_DECAY_TYPES = [
+  "champions_league", "league_title", "club_world_cup", "domestic_cup",
+  "europa_league", "copa_libertadores", "copa_sudamericana", "continental_club",
+  "super_cup", "recopa",
+];
+
 export const FOOTBALL_MODEL = {
   achievementMeta: ACHIEVEMENTS,
   presets: PRESETS,
   axes: AXES,
   cabinetOrder: CABINET_ORDER,
+  repeatDecay: { factor: 0.7, types: REPEAT_DECAY_TYPES },
 };
 
 export const FOOTBALL_LEAGUES: LeagueMeta[] = [
