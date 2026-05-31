@@ -128,6 +128,7 @@ export const FOOTBALL_LEAGUES: LeagueMeta[] = [
   { id: "PRIMEIRA", label: "Primeira Liga", country: "Portugal", flag: "🇵🇹" },
   { id: "EREDIVISIE", label: "Eredivisie", country: "Netherlands", flag: "🇳🇱" },
   { id: "SOUTHAM", label: "South America", country: "CONMEBOL", flag: "🌎" },
+  { id: "SOVIET", label: "Soviet Top League", country: "USSR", flag: "🇷🇺" },
   { id: "JSL", label: "Jiangsu City League (苏超)", country: "China", flag: "🇨🇳" },
 ];
 

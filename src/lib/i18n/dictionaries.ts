@@ -335,7 +335,7 @@ const zh: Dict = {
     placement: "止步于决赛、未能夺冠的旅程",
   },
   axis: { International: "国际赛", Domestic: "国内赛", Individual: "个人", Peak: "巅峰", Longevity: "长青", Country: "国家队", Club: "俱乐部" },
-  league: { PL: "英超", LALIGA: "西甲", SERIEA: "意甲", BUNDESLIGA: "德甲", LIGUE1: "法甲", PRIMEIRA: "葡超", EREDIVISIE: "荷甲", SOUTHAM: "南美", JSL: "苏超" },
+  league: { PL: "英超", LALIGA: "西甲", SERIEA: "意甲", BUNDESLIGA: "德甲", LIGUE1: "法甲", PRIMEIRA: "葡超", EREDIVISIE: "荷甲", SOUTHAM: "南美", SOVIET: "苏联联赛", JSL: "苏超" },
   axisDesc: {
     International: "世界赛与 MSI 冠军、国际赛 MVP 及决赛经历。",
     Domestic: "赛区联赛冠军、国内决赛及决赛 MVP。",
