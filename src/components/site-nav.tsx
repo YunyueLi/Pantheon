@@ -18,6 +18,7 @@ function sectionLinks(sport: string) {
   if (sport === "football") {
     return [
       { href: "/football/leaderboard", key: "nav.leaderboard" },
+      { href: "/football/clubs", key: "nav.clubs" },
       { href: "/football/compare", key: "nav.compare" },
       { href: "/football/methodology", key: "nav.methodology" },
     ];
