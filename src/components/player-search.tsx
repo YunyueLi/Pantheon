@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Search, CornerDownLeft } from "lucide-react";
-import { PLAYERS, ranked } from "@/lib/data";
-import { TEAMS } from "@/lib/teams";
-import type { Player } from "@/lib/types";
-import type { Team } from "@/lib/teams";
+import { getSport } from "@/lib/sport/registry";
+import { ranked } from "@/lib/sport/honor";
+import type { Player } from "@/lib/sport/types";
+import { TEAMS, type Team } from "@/lib/teams";
 import { useI18n } from "@/lib/i18n/provider";
 import { PlayerAvatar } from "@/components/player-avatar";
-import { RegionBadge, RoleBadge } from "@/components/badges";
+import { RegionBadge, PositionBadge } from "@/components/badges";
 import { cn } from "@/lib/utils";
 
 type Hit = { kind: "player"; player: Player } | { kind: "team"; team: Team };
@@ -18,6 +18,13 @@ type Hit = { kind: "player"; player: Player } | { kind: "team"; team: Team };
 export function PlayerSearch() {
   const { t } = useI18n();
   const router = useRouter();
+  const path = usePathname();
+  const sportId = path.startsWith("/football") ? "football" : "lol";
+  const config = getSport(sportId)!;
+  const players = config.players;
+  const base = config.basePath;
+  const posAbbr = (id: string) => config.positions.find((p) => p.id === id)?.abbr ?? id;
+
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
   const [active, setActive] = useState(0);
@@ -37,28 +44,30 @@ export function PlayerSearch() {
   const hits = useMemo<Hit[]>(() => {
     const query = q.trim().toLowerCase();
     if (!query) {
-      return ranked(PLAYERS)
+      return ranked(players, config.model)
         .slice(0, 6)
         .map((r) => ({ kind: "player", player: r.player }));
     }
-    const players: Hit[] = PLAYERS.filter((p) =>
-      [p.name, p.realName, p.team, p.region, p.role]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase()
-        .includes(query)
-    )
+    const playerHits: Hit[] = players
+      .filter((p) =>
+        [p.name, p.realName, p.team, p.league, p.position]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase()
+          .includes(query)
+      )
       .slice(0, 6)
       .map((player) => ({ kind: "player", player }));
-    const teams: Hit[] = TEAMS.filter((tm) =>
-      [tm.name, ...(tm.aka ?? []), tm.region].join(" ").toLowerCase().includes(query)
-    )
-      .slice(0, 4)
-      .map((team) => ({ kind: "team", team }));
-    return [...players, ...teams];
-  }, [q]);
+    // Teams currently exist only for LoL.
+    const teamHits: Hit[] =
+      sportId === "lol"
+        ? TEAMS.filter((tm) => [tm.name, ...(tm.aka ?? []), tm.region].join(" ").toLowerCase().includes(query))
+            .slice(0, 4)
+            .map((team) => ({ kind: "team", team }))
+        : [];
+    return [...playerHits, ...teamHits];
+  }, [q, sportId, players, config.model]);
 
-  // Reset highlight whenever the result set changes; keep it in range.
   useEffect(() => setActive(0), [q]);
   useEffect(() => {
     if (active >= hits.length) setActive(0);
@@ -67,7 +76,7 @@ export function PlayerSearch() {
   const go = (hit: Hit) => {
     setOpen(false);
     setQ("");
-    router.push(hit.kind === "player" ? `/lol/players/${hit.player.id}` : `/lol/teams/${hit.team.id}`);
+    router.push(hit.kind === "player" ? `${base}/players/${hit.player.id}` : `/lol/teams/${hit.team.id}`);
   };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
@@ -83,7 +92,6 @@ export function PlayerSearch() {
     }
   };
 
-  // Keep the active row scrolled into view.
   useEffect(() => {
     const el = listRef.current?.querySelector<HTMLElement>(`[data-idx="${active}"]`);
     el?.scrollIntoView({ block: "nearest" });
@@ -149,8 +157,8 @@ export function PlayerSearch() {
                           </div>
                           <div className="truncate text-xs text-fg-subtle">{hit.player.team}</div>
                         </div>
-                        <RegionBadge region={hit.player.region} />
-                        <RoleBadge role={hit.player.role} />
+                        <RegionBadge region={hit.player.league} />
+                        <PositionBadge abbr={posAbbr(hit.player.position)} />
                       </>
                     ) : (
                       <>

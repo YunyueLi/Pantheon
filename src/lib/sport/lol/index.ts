@@ -23,25 +23,25 @@ const players: Player[] = LOL_RAW.map((p) => ({
 
 const axes: Axis[] = [
   {
-    id: "international",
+    id: "International",
     label: "International",
     kind: "sum",
     types: ["worlds_title", "msi_title", "worlds_mvp", "msi_mvp", "worlds_runnerup"],
   },
   {
-    id: "domestic",
+    id: "Domestic",
     label: "Domestic",
     kind: "sum",
     types: ["regional_title", "regional_runnerup", "finals_mvp"],
   },
   {
-    id: "individual",
+    id: "Individual",
     label: "Individual",
     kind: "sum",
     types: ["worlds_mvp", "msi_mvp", "season_mvp", "finals_mvp", "all_pro_1", "all_pro_2", "all_pro_3"],
   },
-  { id: "peak", label: "Peak", kind: "peak" },
-  { id: "longevity", label: "Longevity", kind: "longevity" },
+  { id: "Peak", label: "Peak", kind: "peak" },
+  { id: "Longevity", label: "Longevity", kind: "longevity" },
 ];
 
 const model: HonorModel = {

@@ -1,25 +1,37 @@
 "use client";
 
 import { ParentSize } from "@visx/responsive";
-import { AXES } from "@/lib/honor";
-import { useI18n } from "@/lib/i18n/provider";
+import { useAxisLabel } from "@/lib/sport/provider";
 
 export type RadarSeries = { label: string; values: number[] };
+export type RadarAxis = { id: string; label: string };
 
-export function CompareRadar({ a, b }: { a: RadarSeries; b: RadarSeries }) {
+export function CompareRadar({ a, b, axes }: { a: RadarSeries; b: RadarSeries; axes: RadarAxis[] }) {
   return (
     <div className="mx-auto h-[360px] w-full max-w-[460px]">
-      <ParentSize>{({ width }) => <Radar width={width} height={360} a={a} b={b} />}</ParentSize>
+      <ParentSize>{({ width }) => <Radar width={width} height={360} a={a} b={b} axes={axes} />}</ParentSize>
     </div>
   );
 }
 
-function Radar({ width, height, a, b }: { width: number; height: number; a: RadarSeries; b: RadarSeries }) {
-  const { t } = useI18n();
+function Radar({
+  width,
+  height,
+  a,
+  b,
+  axes,
+}: {
+  width: number;
+  height: number;
+  a: RadarSeries;
+  b: RadarSeries;
+  axes: RadarAxis[];
+}) {
+  const axisLabel = useAxisLabel();
   const cx = width / 2;
   const cy = height / 2;
   const radius = Math.min(width, height) / 2 - 58;
-  const n = AXES.length;
+  const n = axes.length;
   const angle = (i: number) => (Math.PI * 2 * i) / n - Math.PI / 2;
   const at = (i: number, vPct: number): [number, number] => [
     cx + Math.cos(angle(i)) * radius * (vPct / 100),
@@ -33,13 +45,13 @@ function Radar({ width, height, a, b }: { width: number; height: number; a: Rada
       {rings.map((r) => (
         <polygon
           key={r}
-          points={AXES.map((_, i) => at(i, r).join(",")).join(" ")}
+          points={axes.map((_, i) => at(i, r).join(",")).join(" ")}
           fill="none"
           stroke="var(--border)"
           opacity={r === 100 ? 1 : 0.55}
         />
       ))}
-      {AXES.map((_, i) => {
+      {axes.map((_, i) => {
         const [x, y] = at(i, 100);
         return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke="var(--border)" opacity={0.55} />;
       })}
@@ -55,14 +67,14 @@ function Radar({ width, height, a, b }: { width: number; height: number; a: Rada
         return <circle key={i} cx={x} cy={y} r={3} fill="var(--accent)" />;
       })}
 
-      {AXES.map((ax, i) => {
+      {axes.map((ax, i) => {
         const lx = cx + Math.cos(angle(i)) * (radius + 26);
         const ly = cy + Math.sin(angle(i)) * (radius + 26);
         const c = Math.cos(angle(i));
         const anchor = c > 0.3 ? "start" : c < -0.3 ? "end" : "middle";
         return (
           <text
-            key={ax}
+            key={ax.id}
             x={lx}
             y={ly}
             textAnchor={anchor}
@@ -70,7 +82,7 @@ function Radar({ width, height, a, b }: { width: number; height: number; a: Rada
             fontSize={11}
             fill="var(--fg-2)"
           >
-            {t(`axis.${ax}`)}
+            {axisLabel(ax.id, ax.label)}
           </text>
         );
       })}

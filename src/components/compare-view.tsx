@@ -2,36 +2,38 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { PLAYERS, getPlayer } from "@/lib/data";
-import { AXES, honorScore, normalizedAxes, titleCounts } from "@/lib/honor";
+import { honorScore, normalizedAxes, countType, ranked } from "@/lib/sport/honor";
+import type { Player } from "@/lib/sport/types";
+import { useSport, useHonorLabel, useAxisLabel } from "@/lib/sport/provider";
 import { cn, formatNumber } from "@/lib/utils";
 import { PlayerAvatar } from "@/components/player-avatar";
 import { PlayerPicker } from "@/components/player-picker";
-import { RegionBadge, RoleBadge } from "@/components/badges";
+import { RegionBadge, PositionBadge } from "@/components/badges";
 import { CompareRadar } from "@/components/compare-radar";
 import { Card } from "@/components/ui/card";
 import { useI18n } from "@/lib/i18n/provider";
 
 export function CompareView() {
   const { t } = useI18n();
+  const { config } = useSport();
+  const { players, model, headlineTypes } = config;
+  const honorLabel = useHonorLabel();
+  const axisLabel = useAxisLabel();
   const sp = useSearchParams();
-  const [aId, setAId] = useState(() => (getPlayer(sp.get("a") ?? "") ? (sp.get("a") as string) : "faker"));
-  const [bId, setBId] = useState(() => (getPlayer(sp.get("b") ?? "") ? (sp.get("b") as string) : "chovy"));
-  const a = getPlayer(aId)!;
-  const b = getPlayer(bId)!;
+  const has = (id: string) => players.some((p) => p.id === id);
+  const rankedRows = useMemo(() => ranked(players, model), [players, model]);
+  const [aId, setAId] = useState(() => (has(sp.get("a") ?? "") ? (sp.get("a") as string) : rankedRows[0]?.player.id));
+  const [bId, setBId] = useState(() => (has(sp.get("b") ?? "") ? (sp.get("b") as string) : rankedRows[1]?.player.id));
+  const a = players.find((p) => p.id === aId)!;
+  const b = players.find((p) => p.id === bId)!;
 
-  const aAxes = useMemo(() => normalizedAxes(a, PLAYERS).map((d) => d.value), [aId]); // eslint-disable-line react-hooks/exhaustive-deps
-  const bAxes = useMemo(() => normalizedAxes(b, PLAYERS).map((d) => d.value), [bId]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const aCounts = titleCounts(a);
-  const bCounts = titleCounts(b);
+  const aAxes = useMemo(() => normalizedAxes(a, players, model).map((d) => d.value), [aId]); // eslint-disable-line react-hooks/exhaustive-deps
+  const bAxes = useMemo(() => normalizedAxes(b, players, model).map((d) => d.value), [bId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const metrics: { label: string; av: number; bv: number; fmt?: (n: number) => string }[] = [
-    { label: t("player.honorIndex"), av: honorScore(a), bv: honorScore(b), fmt: formatNumber },
-    { label: t("player.statWorld"), av: aCounts.worlds, bv: bCounts.worlds },
-    { label: t("player.statMsi"), av: aCounts.msi, bv: bCounts.msi },
-    { label: t("player.statRegional"), av: aCounts.regional, bv: bCounts.regional },
-    ...AXES.map((axis, i) => ({ label: t(`axis.${axis}`), av: aAxes[i], bv: bAxes[i] })),
+    { label: t("player.honorIndex"), av: honorScore(a, model), bv: honorScore(b, model), fmt: formatNumber },
+    ...headlineTypes.map((type) => ({ label: honorLabel(type), av: countType(a, type), bv: countType(b, type) })),
+    ...model.axes.map((ax, i) => ({ label: axisLabel(ax.id, ax.label), av: aAxes[i], bv: bAxes[i] })),
   ];
 
   return (
@@ -47,7 +49,7 @@ export function CompareView() {
       </div>
 
       <Card className="p-2">
-        <CompareRadar a={{ label: a.name, values: aAxes }} b={{ label: b.name, values: bAxes }} />
+        <CompareRadar a={{ label: a.name, values: aAxes }} b={{ label: b.name, values: bAxes }} axes={model.axes} />
       </Card>
 
       <Card className="divide-y divide-border">
@@ -90,13 +92,14 @@ function PlayerCard({
   exclude,
   align = "left",
 }: {
-  player: ReturnType<typeof getPlayer>;
+  player: Player;
   dotClass: string;
   selectValue: string;
   onSelect: (v: string) => void;
   exclude: string;
   align?: "left" | "right";
 }) {
+  const { positionMeta } = useSport();
   if (!player) return null;
   return (
     <Card className="p-4">
@@ -108,8 +111,8 @@ function PlayerCard({
             <span className="truncate font-medium text-fg">{player.name}</span>
           </div>
           <div className="mt-1 flex items-center gap-2">
-            <RegionBadge region={player.region} />
-            <RoleBadge role={player.role} />
+            <RegionBadge region={player.league} />
+            <PositionBadge abbr={positionMeta(player.position)?.abbr ?? player.position} />
           </div>
         </div>
       </div>

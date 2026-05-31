@@ -3,13 +3,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Search, ChevronsUpDown } from "lucide-react";
-import { PLAYERS, getPlayer } from "@/lib/data";
+import { useSport } from "@/lib/sport/provider";
 import { useI18n } from "@/lib/i18n/provider";
 import { PlayerAvatar } from "@/components/player-avatar";
-import { RegionBadge, RoleBadge } from "@/components/badges";
+import { RegionBadge, PositionBadge } from "@/components/badges";
 import { cn } from "@/lib/utils";
 
-/** A searchable player selector — a typeahead dialog replacing the unwieldy 80-entry dropdown. */
+/** A searchable player selector — a typeahead dialog replacing the unwieldy dropdown. */
 export function PlayerPicker({
   value,
   onSelect,
@@ -20,25 +20,26 @@ export function PlayerPicker({
   exclude?: string;
 }) {
   const { t } = useI18n();
+  const { config, positionMeta } = useSport();
+  const { players } = config;
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
   const [active, setActive] = useState(0);
   const listRef = useRef<HTMLUListElement>(null);
-  const current = getPlayer(value);
+  const current = players.find((p) => p.id === value);
 
   const results = useMemo(() => {
     const query = q.trim().toLowerCase();
-    const list = query
-      ? PLAYERS.filter((p) =>
-          [p.name, p.realName, p.team, p.region, p.role]
+    return query
+      ? players.filter((p) =>
+          [p.name, p.realName, p.team, p.league, p.position]
             .filter(Boolean)
             .join(" ")
             .toLowerCase()
             .includes(query)
         )
-      : PLAYERS;
-    return list;
-  }, [q]);
+      : players;
+  }, [q, players]);
 
   useEffect(() => setActive(0), [q]);
 
@@ -126,8 +127,8 @@ export function PlayerPicker({
                       </div>
                       <div className="truncate text-xs text-fg-subtle">{p.team}</div>
                     </div>
-                    <RegionBadge region={p.region} />
-                    <RoleBadge role={p.role} />
+                    <RegionBadge region={p.league} />
+                    <PositionBadge abbr={positionMeta(p.position)?.abbr ?? p.position} />
                   </button>
                 </li>
               );

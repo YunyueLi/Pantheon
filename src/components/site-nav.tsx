@@ -9,30 +9,61 @@ import { PlayerSearch } from "@/components/player-search";
 import { useI18n } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 
-const LINKS = [
-  { href: "/", key: "nav.explore" },
-  { href: "/lol/leaderboard", key: "nav.leaderboard" },
-  { href: "/lol/teams", key: "nav.teams" },
-  { href: "/compare", key: "nav.compare" },
-  { href: "/methodology", key: "nav.methodology" },
-];
+const SPORTS = [
+  { id: "lol", base: "/lol", key: "nav.lol" },
+  { id: "football", base: "/football", key: "nav.football" },
+] as const;
+
+function sectionLinks(sport: string) {
+  if (sport === "football") {
+    return [
+      { href: "/football/leaderboard", key: "nav.leaderboard" },
+      { href: "/football/compare", key: "nav.compare" },
+    ];
+  }
+  return [
+    { href: "/lol/leaderboard", key: "nav.leaderboard" },
+    { href: "/lol/teams", key: "nav.teams" },
+    { href: "/lol/compare", key: "nav.compare" },
+    { href: "/methodology", key: "nav.methodology" },
+  ];
+}
 
 export function SiteNav() {
   const path = usePathname();
   const { t } = useI18n();
+  const sport = path.startsWith("/football") ? "football" : "lol";
+  const links = sectionLinks(sport);
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-[color:var(--bg-glass)] backdrop-blur-xl backdrop-saturate-150">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-5">
-        <div className="flex items-center gap-7">
+        <div className="flex items-center gap-4">
           <Link href="/" className="flex items-center gap-2">
             <span className="grid h-6 w-6 place-items-center rounded-md bg-accent text-[11px] font-bold text-accent-contrast">
               P
             </span>
-            <span className="text-sm font-semibold tracking-tight">Pantheon</span>
+            <span className="hidden text-sm font-semibold tracking-tight sm:inline">Pantheon</span>
           </Link>
+          <div className="flex items-center gap-0.5 rounded-full border border-border p-0.5">
+            {SPORTS.map((s) => {
+              const active = path.startsWith(s.base);
+              return (
+                <Link
+                  key={s.id}
+                  href={`${s.base}/leaderboard`}
+                  className={cn(
+                    "rounded-full px-2.5 py-1 text-xs font-medium transition-colors",
+                    active ? "bg-accent-soft text-accent" : "text-fg-subtle hover:text-fg"
+                  )}
+                >
+                  {t(s.key)}
+                </Link>
+              );
+            })}
+          </div>
           <nav className="hidden items-center gap-0.5 md:flex">
-            {LINKS.map((l) => {
-              const active = l.href === "/" ? path === "/" : path.startsWith(l.href);
+            {links.map((l) => {
+              const active = path.startsWith(l.href);
               return (
                 <Link
                   key={l.href}

@@ -93,11 +93,11 @@ const INDIVIDUAL_TYPES = [
 ];
 
 const AXES: Axis[] = [
-  { id: "country", label: "Country", kind: "sum", types: COUNTRY_TYPES },
-  { id: "club", label: "Club", kind: "sum", types: CLUB_TYPES },
-  { id: "individual", label: "Individual", kind: "sum", types: INDIVIDUAL_TYPES },
-  { id: "peak", label: "Peak", kind: "peak" },
-  { id: "longevity", label: "Longevity", kind: "longevity" },
+  { id: "Country", label: "Country", kind: "sum", types: COUNTRY_TYPES },
+  { id: "Club", label: "Club", kind: "sum", types: CLUB_TYPES },
+  { id: "Individual", label: "Individual", kind: "sum", types: INDIVIDUAL_TYPES },
+  { id: "Peak", label: "Peak", kind: "peak" },
+  { id: "Longevity", label: "Longevity", kind: "longevity" },
 ];
 
 const CABINET_ORDER = [

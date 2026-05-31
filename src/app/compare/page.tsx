@@ -1,12 +1,14 @@
-import { Suspense } from "react";
-import { CompareView } from "@/components/compare-view";
+"use client";
 
-export default function ComparePage() {
-  return (
-    <div className="mx-auto max-w-4xl px-5 py-10">
-      <Suspense>
-        <CompareView />
-      </Suspense>
-    </div>
-  );
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+// Compare moved under each sport (/lol/compare, /football/compare). Keep the old
+// path working for existing links by redirecting to the LoL comparison.
+export default function CompareRedirect() {
+  const router = useRouter();
+  useEffect(() => {
+    router.replace("/lol/compare");
+  }, [router]);
+  return null;
 }

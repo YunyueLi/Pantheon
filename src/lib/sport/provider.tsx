@@ -47,3 +47,13 @@ export function useHonorLabel() {
     return v === key ? config.model.achievementMeta[type]?.label ?? type : v;
   };
 }
+
+/** Resolve a radar-axis label: translated when the dict has `axis.<id>`, else the model's label. */
+export function useAxisLabel() {
+  const { t } = useI18n();
+  return (id: string, fallback: string) => {
+    const key = `axis.${id}`;
+    const v = t(key);
+    return v === key ? fallback : v;
+  };
+}
