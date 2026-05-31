@@ -139,7 +139,7 @@ export function Leaderboard() {
   return (
     <div>
       <header className="mb-7">
-        <p className="text-xs font-medium uppercase tracking-wide text-fg-subtle">{t("leaderboard.eyebrow")}</p>
+        <p className="text-xs font-medium uppercase tracking-wide text-fg-subtle">{t(`nav.${config.id}`)}</p>
         <h1 className="mt-1.5 text-2xl font-semibold tracking-tight">{t("leaderboard.title")}</h1>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-fg-muted">{t("leaderboard.desc")}</p>
       </header>
