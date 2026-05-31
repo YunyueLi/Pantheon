@@ -13,7 +13,7 @@ const BUCKET_COLOR: Record<Bucket, string> = {
 const BUCKETS: Bucket[] = ["team", "individual", "placement"];
 
 export function Methodology() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { config } = useSport();
   const { model } = config;
   const honorLabel = useHonorLabel();
@@ -43,6 +43,13 @@ export function Methodology() {
             ))}
           </ul>
           <p className="mt-4 text-xs leading-relaxed text-fg-subtle">{t("methodology.voteShareNote")}</p>
+          {model.repeatDecay && (
+            <p className="mt-2 text-xs leading-relaxed text-fg-subtle">
+              {locale === "zh"
+                ? `重复夺得同一项俱乐部冠军采用边际递减:第 k 次按 ${model.repeatDecay.factor}^k 加权,使长期效力豪门的“刷冠”不致压过巅峰表现与个人荣誉。国家队冠军与个人奖项不递减。`
+                : `Repeated club trophies use diminishing returns — the k-th win of a club title is scaled by ${model.repeatDecay.factor}^k, so accumulation at dominant clubs can't outweigh peak and individual greatness. National-team titles and individual awards are never discounted.`}
+            </p>
+          )}
         </CardContent>
       </Card>
 
