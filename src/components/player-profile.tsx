@@ -66,6 +66,9 @@ export function PlayerProfile({ id }: { id: string }) {
                 {!player.active && (
                   <span className="text-[10px] uppercase tracking-wide text-fg-subtle">{t("common.retired")}</span>
                 )}
+                <span className="tnum rounded-full border border-border px-2 py-0.5 text-[11px] text-fg-subtle">
+                  {player.debutYear}–{player.active ? (locale === "zh" ? "至今" : "now") : lastYear}
+                </span>
               </div>
               {player.realName && <p className="mt-0.5 text-sm text-fg-subtle">{player.realName}</p>}
               <p className="mt-2 text-sm text-fg-muted">

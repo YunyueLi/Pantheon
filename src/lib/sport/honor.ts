@@ -60,6 +60,19 @@ export function countType(p: Player, type: string): number {
   return p.achievements.filter((a) => a.type === type).length;
 }
 
+/** Active span: debut year → the player's last decorated year (proxy for career end). */
+export function careerSpan(p: Player): { start: number; end: number } {
+  let end = p.debutYear;
+  for (const a of p.achievements) if (a.year > end) end = a.year;
+  return { start: p.debutYear, end };
+}
+
+/** True if a player's active span overlaps the decade beginning at `decade` (e.g. 2010). */
+export function activeInDecade(p: Player, decade: number): boolean {
+  const { start, end } = careerSpan(p);
+  return start <= decade + 9 && end >= decade;
+}
+
 export type CabinetGroup = { type: string; meta: AchievementMeta; items: Achievement[] };
 
 /** Group a player's achievements by type, in the model's cabinet order. */

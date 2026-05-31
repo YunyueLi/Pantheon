@@ -9,7 +9,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { honorScore, countType } from "@/lib/sport/honor";
+import { honorScore, countType, careerSpan, activeInDecade } from "@/lib/sport/honor";
 import type { Player } from "@/lib/sport/types";
 import { useSport, useName, useLeagueLabel } from "@/lib/sport/provider";
 import { cn, formatNumber } from "@/lib/utils";
@@ -44,8 +44,23 @@ export function Leaderboard() {
     positions.some((p) => p.id === spRole) ? (spRole as string) : "ALL"
   );
   const [presetKey, setPresetKey] = useState(model.presets[0].key);
+  const [era, setEra] = useState<string>("ALL");
 
   const weights = model.presets.find((p) => p.key === presetKey)!.weights;
+
+  // Active-era buckets (decades), derived from the roster's actual span.
+  const eras = useMemo(() => {
+    let min = Infinity;
+    let max = -Infinity;
+    for (const p of players) {
+      const s = careerSpan(p);
+      if (s.start < min) min = s.start;
+      if (s.end > max) max = s.end;
+    }
+    const out: number[] = [];
+    for (let d = Math.floor(max / 10) * 10; d >= Math.floor(min / 10) * 10; d -= 10) out.push(d);
+    return out;
+  }, [players]);
 
   const regionOpts = [
     { value: "ALL", label: t("leaderboard.allRegions") },
@@ -67,6 +82,10 @@ export function Leaderboard() {
     ...availablePositions.map((p) => ({ value: p.id, label: roleLabel(p.id) })),
   ];
   const presetOpts = model.presets.map((p) => ({ value: p.key, label: t(`preset.${p.key}`) }));
+  const eraOpts = [
+    { value: "ALL", label: t("leaderboard.allEras") },
+    ...eras.map((d) => ({ value: String(d), label: `${d}s` })),
+  ];
 
   const data = useMemo<Row[]>(
     () =>
@@ -75,11 +94,12 @@ export function Leaderboard() {
         .filter(
           (p) =>
             (region === "ALL" || p.league === region) &&
-            (kind === "coach" || role === "ALL" || p.position === role)
+            (kind === "coach" || role === "ALL" || p.position === role) &&
+            (era === "ALL" || activeInDecade(p, +era))
         )
         .map((player) => ({ player, score: honorScore(player, model, weights) }))
         .sort((a, b) => b.score - a.score),
-    [region, role, kind, weights, players, model]
+    [region, role, kind, era, weights, players, model]
   );
 
   const maxScore = useMemo(() => Math.max(1, ...data.map((d) => d.score)), [data]);
@@ -187,6 +207,13 @@ export function Leaderboard() {
                 className="min-w-[7.5rem]"
               />
             )}
+            <SelectMenu
+              value={era}
+              onChange={setEra}
+              options={eraOpts}
+              ariaLabel={t("leaderboard.era")}
+              className="min-w-[7rem]"
+            />
           </div>
           <div className="flex items-center gap-2">
             <span className="text-[11px] uppercase tracking-wide text-fg-subtle">{t("leaderboard.weighting")}</span>
