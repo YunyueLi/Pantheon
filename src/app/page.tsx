@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Gauge, SlidersHorizontal, Swords, Trophy } from "lucide-react";
 import { listSports } from "@/lib/sport/registry";
-import { ranked } from "@/lib/sport/honor";
+import { ranked, countType } from "@/lib/sport/honor";
+import { TrophyIcon } from "@/components/trophy-icon";
 import { Button } from "@/components/ui/button";
 import { PlayerAvatar } from "@/components/player-avatar";
 import { formatNumber } from "@/lib/utils";
@@ -48,6 +49,41 @@ export default function Home() {
                 {t("nav.football")} <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
+          </div>
+
+          {/* GOAT spotlight — each sport's all-time #1 by Honor Index. */}
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {sports.map((s) => {
+              const goat = ranked(s.players, s.model)[0];
+              if (!goat) return null;
+              const p = goat.player;
+              const marquee = s.headlineTypes[0];
+              const n = countType(p, marquee);
+              return (
+                <Link
+                  key={s.id}
+                  href={`${s.basePath}/players/${p.id}`}
+                  className="group flex items-center gap-4 rounded-2xl border border-border bg-surface/80 p-4 shadow-card backdrop-blur transition-colors hover:border-border-strong"
+                >
+                  <PlayerAvatar id={p.id} name={p.name} photo={p.photo} size={60} />
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[11px] font-medium uppercase tracking-wide text-fg-subtle">
+                      {t(`nav.${s.id}`)} · GOAT
+                    </div>
+                    <div className="truncate text-lg font-semibold tracking-tight group-hover:text-accent">
+                      {name(p)}
+                    </div>
+                    <div className="tnum mt-0.5 text-sm font-semibold text-accent">{formatNumber(goat.score)}</div>
+                  </div>
+                  {n > 0 && (
+                    <div className="flex shrink-0 items-center gap-1 text-[color:var(--medal-gold)]">
+                      <TrophyIcon type={marquee} size={18} />
+                      <span className="tnum text-sm font-semibold">{n}</span>
+                    </div>
+                  )}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
