@@ -93,7 +93,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
   },
   {
     id: "cruyff", name: "Johan Cruyff", realName: "Hendrik Johannes Cruijff", sport: "football",
-    league: "EREDIVISIE", position: "MID", team: "Ajax", nation: "Netherlands", active: false, debutYear: 1964,
+    league: "EREDIVISIE", position: "FWD", team: "Ajax", nation: "Netherlands", active: false, debutYear: 1964,
     blurb: "Total Football's avatar — three Ballon d'Ors and three straight European Cups with Ajax.",
     achievements: [
       ...T("ballon_dor", [1971, 1973, 1974]),
@@ -303,8 +303,8 @@ export const FOOTBALL_PLAYERS: Player[] = [
   // —— Jiangsu City League (苏超) · 2025 inaugural-season award winners ——
   {
     id: "fan-houtai", name: "Fan Houtai", realName: "范厚泰", sport: "football",
-    league: "JSL", position: "MID", team: "Taizhou", nation: "China", active: true, debutYear: 2025,
-    blurb: "Named Best Player of the inaugural 苏超 as Taizhou won the 2025 title on penalties.",
+    league: "JSL", position: "DEF", team: "Taizhou", nation: "China", active: true, debutYear: 2025,
+    blurb: "A 20-year-old centre-back named Best Player of the inaugural 苏超 as Taizhou won the 2025 title on penalties.",
     achievements: [
       ...T("jsl_title", [2025], "Taizhou"),
       ...T("jsl_best_player", [2025]),
