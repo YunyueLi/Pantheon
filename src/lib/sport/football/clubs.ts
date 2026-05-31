@@ -69,7 +69,10 @@ export const CLUBS: Club[] = [
  */
 export const TROPHY_WEIGHT = {
   championsLeague: 100,
-  libertadores: 42,
+  // Libertadores at ~32% of the UCL (not 42%): 19 straight years of European
+  // Club World Cup dominance + the money/talent gap put it clearly second, but
+  // research backs ~0.3–0.5 of the UCL, not the old ~0.67 (player-base 300→230).
+  libertadores: 32,
   intercontinental: 30,
   europa: 18,
   leagueTitle: 10,
@@ -123,4 +126,34 @@ export function clubPlayers(club: Club): Player[] {
   return FOOTBALL_PLAYERS.filter((p) => clubIdFromName(p.team) === club.id).sort(
     (a, b) => honorScore(b, FOOTBALL_MODEL) - honorScore(a, FOOTBALL_MODEL)
   );
+}
+
+/**
+ * Club display names in Chinese, keyed by the English `team` string stored on
+ * achievements. Used to localize the club shown next to each trophy (and a
+ * player's current team) for zh. Non-football teams (e.g. LoL orgs) aren't here,
+ * so localizeTeam() returns them unchanged.
+ */
+export const CLUB_NAME_ZH: Record<string, string> = {
+  Barcelona: "巴塞罗那", "Real Madrid": "皇家马德里", "Atlético Madrid": "马德里竞技",
+  "Paris Saint-Germain": "巴黎圣日耳曼", "Manchester United": "曼联", "Manchester City": "曼城",
+  "Bayern Munich": "拜仁慕尼黑", "Borussia Dortmund": "多特蒙德", "AC Milan": "AC米兰",
+  "Inter Milan": "国际米兰", Juventus: "尤文图斯", Liverpool: "利物浦", Arsenal: "阿森纳",
+  Chelsea: "切尔西", Benfica: "本菲卡", Porto: "波尔图", Ajax: "阿贾克斯",
+  "Boca Juniors": "博卡青年", "River Plate": "河床", Independiente: "独立队",
+  "PSV Eindhoven": "埃因霍温", Sampdoria: "桑普多利亚", Mallorca: "马略卡", Sevilla: "塞维利亚",
+  Fluminense: "弗鲁米嫩塞", Santos: "桑托斯", "Atlético Mineiro": "米内罗竞技", Lyon: "里昂",
+  "Tottenham Hotspur": "托特纳姆热刺", "Newcastle United": "纽卡斯尔联", "Blackburn Rovers": "布莱克本",
+  Lazio: "拉齐奥", "AS Roma": "罗马", Roma: "罗马", Fiorentina: "佛罗伦萨", Valencia: "瓦伦西亚",
+  Zaragoza: "萨拉戈萨", "Budapest Honvéd": "布达佩斯洪韦德", "Dynamo Moscow": "莫斯科迪纳摩",
+  "Stoke City": "斯托克城", "West Ham United": "西汉姆联", "Vasco da Gama": "瓦斯科达伽马",
+  Corinthians: "科林蒂安", Botafogo: "博塔弗戈", Monaco: "摩纳哥", Parma: "帕尔马",
+  "Schalke 04": "沙尔克04", "Werder Bremen": "云达不莱梅", "Sparta Prague": "布拉格斯巴达",
+  Feyenoord: "费耶诺德", "Dynamo Kyiv": "基辅迪纳摩",
+};
+
+/** Localize a club/team string to zh when available; unchanged for other locales/teams. */
+export function localizeTeam(name: string | undefined, locale: string): string {
+  if (!name) return "";
+  return locale === "zh" ? CLUB_NAME_ZH[name] ?? name : name;
 }

@@ -6,6 +6,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Search, CornerDownLeft } from "lucide-react";
 import { getSport } from "@/lib/sport/registry";
 import { ranked } from "@/lib/sport/honor";
+import { localizeTeam } from "@/lib/sport/football/clubs";
 import type { Player } from "@/lib/sport/types";
 import { TEAMS, type Team } from "@/lib/teams";
 import { useI18n } from "@/lib/i18n/provider";
@@ -161,7 +162,7 @@ export function PlayerSearch() {
                               </span>
                             )}
                           </div>
-                          <div className="truncate text-xs text-fg-subtle">{hit.player.team}</div>
+                          <div className="truncate text-xs text-fg-subtle">{localizeTeam(hit.player.team, locale)}</div>
                         </div>
                         <RegionBadge region={leagueLabel(hit.player.league)} />
                         <PositionBadge abbr={posAbbr(hit.player.position)} />

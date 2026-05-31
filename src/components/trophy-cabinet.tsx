@@ -3,6 +3,8 @@
 import { cabinet } from "@/lib/sport/honor";
 import type { Achievement, Player } from "@/lib/sport/types";
 import { useSport, useHonorLabel } from "@/lib/sport/provider";
+import { localizeTeam } from "@/lib/sport/football/clubs";
+import { useI18n } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 import { TrophyIcon, trophyTone } from "@/components/trophy-icon";
 
@@ -22,6 +24,7 @@ function byTeam(items: Achievement[]): { team: string | null; years: number[] }[
 export function TrophyCabinet({ player }: { player: Player }) {
   const { config } = useSport();
   const honorLabel = useHonorLabel();
+  const { locale } = useI18n();
   const marquee = config.headlineTypes[0];
   const groups = cabinet(player, config.model);
   if (groups.length === 0) {
@@ -57,7 +60,9 @@ export function TrophyCabinet({ player }: { player: Player }) {
               {teams.map((grp, gi) => (
                 <div key={gi}>
                   {grp.team && (
-                    <div className="truncate text-[11px] font-medium leading-tight text-fg-muted">{grp.team}</div>
+                    <div className="truncate text-[11px] font-medium leading-tight text-fg-muted">
+                      {localizeTeam(grp.team, locale)}
+                    </div>
                   )}
                   <div className="mt-0.5 flex flex-wrap gap-1">
                     {grp.years.map((y, i) => (

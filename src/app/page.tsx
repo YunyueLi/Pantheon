@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Gauge, SlidersHorizontal, Swords, Trophy } from "lucide-react";
 import { listSports } from "@/lib/sport/registry";
 import { ranked, countType } from "@/lib/sport/honor";
+import { localizeTeam } from "@/lib/sport/football/clubs";
 import { TrophyIcon } from "@/components/trophy-icon";
 import { Button } from "@/components/ui/button";
 import { PlayerAvatar } from "@/components/player-avatar";
@@ -117,7 +118,7 @@ export default function Home() {
                     <PlayerAvatar id={row.player.id} name={row.player.name} photo={row.player.photo} size={34} />
                     <div className="min-w-0 flex-1">
                       <div className="truncate font-medium text-fg">{name(row.player)}</div>
-                      <div className="truncate text-xs text-fg-subtle">{row.player.team}</div>
+                      <div className="truncate text-xs text-fg-subtle">{localizeTeam(row.player.team, locale)}</div>
                     </div>
                     <div className="w-28 shrink-0">
                       <div className="tnum text-right text-sm font-semibold text-fg">{formatNumber(row.score)}</div>

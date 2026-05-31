@@ -7,6 +7,7 @@ import { achievementPoints, countType, honorScore, percentile, ranked } from "@/
 import { useSport, useHonorLabel, useName, useLeagueLabel } from "@/lib/sport/provider";
 import { BackButton } from "@/components/back-button";
 import { teamIdFromName } from "@/lib/teams";
+import { localizeTeam } from "@/lib/sport/football/clubs";
 import { PlayerAvatar } from "@/components/player-avatar";
 import { RegionBadge, PositionBadge } from "@/components/badges";
 import { TrophyCabinet } from "@/components/trophy-cabinet";
@@ -74,10 +75,10 @@ export function PlayerProfile({ id }: { id: string }) {
               <p className="mt-2 text-sm text-fg-muted">
                 {teamId ? (
                   <Link href={`${basePath}/teams/${teamId}`} className="transition-colors hover:text-fg">
-                    {player.team}
+                    {localizeTeam(player.team, locale)}
                   </Link>
                 ) : (
-                  player.team
+                  localizeTeam(player.team, locale)
                 )}{" "}
                 {country && <>· {country} </>}· {t("common.debut", { y: player.debutYear })}
               </p>
@@ -207,7 +208,7 @@ export function PlayerProfile({ id }: { id: string }) {
                         )}
                       </span>
                     </td>
-                    <td className="px-2 py-2.5 text-sm text-fg-subtle">{a.team ?? "—"}</td>
+                    <td className="px-2 py-2.5 text-sm text-fg-subtle">{a.team ? localizeTeam(a.team, locale) : "—"}</td>
                     <td className="px-2 py-2.5 text-center">
                       <span className="rounded border border-border px-1.5 py-0.5 text-[10px] font-medium text-fg-subtle">
                         {meta?.tier}

@@ -12,6 +12,7 @@ import { TrophyIcon } from "@/components/trophy-icon";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn, formatNumber } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n/provider";
+import { getSport } from "@/lib/sport/registry";
 
 function labels(locale: string) {
   return locale === "zh"
@@ -145,7 +146,9 @@ export function FootballClubProfile({ id }: { id: string }) {
     const v = t(`league.${lid}`);
     return v !== `league.${lid}` ? v : FOOTBALL_LEAGUES.find((l) => l.id === lid)?.label ?? lid;
   };
-  const name = (e: { name: string; i18n?: Record<string, string> }) => e.i18n?.[locale] ?? e.name;
+  const mergedById = new Map(getSport("football")!.players.map((m) => [m.id, m] as const));
+  const name = (e: { id: string; name: string; i18n?: Record<string, string> }) =>
+    mergedById.get(e.id)?.i18n?.[locale] ?? e.i18n?.[locale] ?? e.name;
   const club = getClub(id);
   if (!club) return null;
   const honor = clubHonor(club);

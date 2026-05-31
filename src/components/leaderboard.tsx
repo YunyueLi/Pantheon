@@ -10,6 +10,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { honorScore, countType, careerSpan, activeInDecade } from "@/lib/sport/honor";
+import { localizeTeam } from "@/lib/sport/football/clubs";
 import type { Player } from "@/lib/sport/types";
 import { useSport, useName, useLeagueLabel } from "@/lib/sport/provider";
 import { cn, formatNumber } from "@/lib/utils";
@@ -141,7 +142,7 @@ export function Leaderboard() {
                     </span>
                   )}
                 </div>
-                <div className="truncate text-xs text-fg-subtle">{p.team}</div>
+                <div className="truncate text-xs text-fg-subtle">{localizeTeam(p.team, locale)}</div>
               </div>
             </Link>
           );
