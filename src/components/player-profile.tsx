@@ -26,6 +26,7 @@ export function PlayerProfile({ id }: { id: string }) {
   const player = players.find((p) => p.id === id);
   if (!player) return null;
 
+  const also = player.alsoId ? players.find((p) => p.id === player.alsoId) : undefined;
   const teamId = teamIdFromName(player.team);
   const score = honorScore(player, model);
   const overall = ranked(players, model).find((r) => r.player.id === player.id)!;
@@ -75,6 +76,16 @@ export function PlayerProfile({ id }: { id: string }) {
                 )}{" "}
                 {country && <>· {country} </>}· {t("common.debut", { y: player.debutYear })}
               </p>
+              {also && (
+                <Link
+                  href={`${basePath}/players/${also.id}`}
+                  className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-accent transition-colors hover:underline"
+                >
+                  {locale === "zh"
+                    ? `也是冠军${also.kind === "coach" ? "教练" : "球员"} →`
+                    : `Also a champion ${also.kind === "coach" ? "coach" : "player"} →`}
+                </Link>
+              )}
               {locale === "en" && player.blurb && (
                 <p className="mt-3 max-w-md text-sm leading-relaxed text-fg-muted">{player.blurb}</p>
               )}

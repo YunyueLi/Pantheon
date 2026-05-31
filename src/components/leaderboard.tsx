@@ -25,6 +25,12 @@ export function Leaderboard() {
   const { t, locale } = useI18n();
   const { config, positionMeta } = useSport();
   const { players, model, leagues, positions, headlineTypes, basePath } = config;
+  const hasCoaches = useMemo(() => players.some((p) => p.kind === "coach"), [players]);
+  const [kind, setKind] = useState<string>("player");
+  const kindOpts = [
+    { value: "player", label: locale === "zh" ? "球员" : "Players" },
+    { value: "coach", label: locale === "zh" ? "教练" : "Coaches" },
+  ];
   const sp = useSearchParams();
   const spRegion = sp.get("region");
   const spRole = sp.get("role");
@@ -51,12 +57,15 @@ export function Leaderboard() {
   const data = useMemo<Row[]>(
     () =>
       players
+        .filter((p) => (kind === "coach" ? p.kind === "coach" : p.kind !== "coach"))
         .filter(
-          (p) => (region === "ALL" || p.league === region) && (role === "ALL" || p.position === role)
+          (p) =>
+            (region === "ALL" || p.league === region) &&
+            (kind === "coach" || role === "ALL" || p.position === role)
         )
         .map((player) => ({ player, score: honorScore(player, model, weights) }))
         .sort((a, b) => b.score - a.score),
-    [region, role, weights, players, model]
+    [region, role, kind, weights, players, model]
   );
 
   const maxScore = useMemo(() => Math.max(1, ...data.map((d) => d.score)), [data]);
@@ -147,8 +156,9 @@ export function Leaderboard() {
       <div className="space-y-5">
         <div className="flex flex-col gap-4 rounded-2xl border border-border bg-surface p-4 shadow-card sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           <div className="flex flex-col gap-3">
+            {hasCoaches && <Pills options={kindOpts} value={kind} onChange={setKind} size="sm" />}
             <Pills options={regionOpts} value={region} onChange={setRegion} />
-            <Pills options={roleOpts} value={role} onChange={setRole} />
+            {kind !== "coach" && <Pills options={roleOpts} value={role} onChange={setRole} />}
           </div>
           <div className="flex flex-col items-start gap-1.5 sm:items-end">
             <span className="text-[11px] uppercase tracking-wide text-fg-subtle">{t("leaderboard.weighting")}</span>

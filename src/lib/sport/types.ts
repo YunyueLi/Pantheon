@@ -47,6 +47,12 @@ export type Player = {
   debutYear: number;
   blurb?: string;
   photo?: string;
+  /** "player" (default) or "coach" — lets a sport rank managers as a separate group. */
+  kind?: "player" | "coach";
+  /** Cross-link to the same person's other identity (e.g., a player who also coached). */
+  alsoId?: string;
+  /** Optional per-locale display name; falls back to `name`. */
+  i18n?: Record<string, string>;
   achievements: Achievement[];
 };
 

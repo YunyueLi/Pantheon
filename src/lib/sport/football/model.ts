@@ -45,6 +45,7 @@ const ACHIEVEMENTS: Record<string, AchievementMeta> = {
   wc_golden_boot: { label: "World Cup Golden Boot", short: "Golden Boot", bucket: "individual", tier: "A", base: 120 },
   uefa_poty: { label: "UEFA Player of the Year", short: "UEFA POTY", bucket: "individual", tier: "A", base: 120 },
   yashin_trophy: { label: "Yashin Trophy", short: "Yashin", bucket: "individual", tier: "A", base: 110 },
+  best_coach: { label: "World's Best Coach", short: "Best Coach", bucket: "individual", tier: "A", base: 150 },
   league_poty: { label: "League Player of the Season", short: "League POTS", bucket: "individual", tier: "B", base: 60 },
   league_top_scorer: { label: "League Top Scorer", short: "Top Scorer", bucket: "individual", tier: "B", base: 45 },
   world_xi: { label: "FIFA/FIFPRO World XI", short: "World XI", bucket: "individual", tier: "B", base: 30 },
@@ -88,7 +89,7 @@ const CLUB_TYPES = [
 const INDIVIDUAL_TYPES = [
   "ballon_dor", "ballon_dor_retro", "fifa_best", "wc_golden_ball", "golden_shoe",
   "wc_golden_boot", "uefa_poty", "yashin_trophy", "league_poty", "league_top_scorer",
-  "world_xi", "ballon_dor_2nd", "ballon_dor_3rd",
+  "world_xi", "ballon_dor_2nd", "ballon_dor_3rd", "best_coach",
   "jsl_best_player", "jsl_golden_boot", "jsl_best_gk",
 ];
 
@@ -105,7 +106,7 @@ const CABINET_ORDER = [
   "club_world_cup", "olympic_gold_early", "olympic_gold_amateur", "olympic_gold_u23",
   "nations_league", "europa_league", "copa_sudamericana", "continental_club", "recopa",
   "confederations_cup", "domestic_cup", "super_cup",
-  "ballon_dor", "ballon_dor_retro", "fifa_best", "uefa_poty", "yashin_trophy",
+  "ballon_dor", "ballon_dor_retro", "fifa_best", "uefa_poty", "yashin_trophy", "best_coach",
   "wc_golden_ball", "wc_golden_boot", "golden_shoe", "league_poty", "league_top_scorer", "world_xi",
   "ballon_dor_2nd", "ballon_dor_3rd", "wc_runnerup", "ucl_runnerup", "continental_nt_runnerup",
   "jsl_title", "jsl_best_player", "jsl_golden_boot", "jsl_best_gk", "jsl_runnerup",
@@ -135,4 +136,5 @@ export const FOOTBALL_POSITIONS: PositionMeta[] = [
   { id: "DEF", label: "Defender", abbr: "DEF" },
   { id: "MID", label: "Midfielder", abbr: "MID" },
   { id: "FWD", label: "Forward", abbr: "FWD" },
+  { id: "Manager", label: "Manager", abbr: "MGR" },
 ];

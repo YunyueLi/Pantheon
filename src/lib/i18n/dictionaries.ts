@@ -307,6 +307,7 @@ const zh: Dict = {
     wc_golden_boot: "世界杯金靴",
     uefa_poty: "欧足联年度最佳球员",
     yashin_trophy: "雅辛奖",
+    best_coach: "世界最佳教练",
     league_poty: "联赛年度最佳球员",
     league_top_scorer: "联赛最佳射手",
     world_xi: "世界最佳阵容",
