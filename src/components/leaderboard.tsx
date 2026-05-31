@@ -31,8 +31,8 @@ export function Leaderboard() {
   const hasCoaches = useMemo(() => players.some((p) => p.kind === "coach"), [players]);
   const [kind, setKind] = useState<string>("player");
   const kindOpts = [
-    { value: "player", label: locale === "zh" ? "球员" : "Players" },
-    { value: "coach", label: locale === "zh" ? "教练" : "Coaches" },
+    { value: "player", label: t("leaderboard.kindPlayers") },
+    { value: "coach", label: t("leaderboard.kindCoaches") },
   ];
   const sp = useSearchParams();
   const spRegion = sp.get("region");
@@ -51,9 +51,20 @@ export function Leaderboard() {
     { value: "ALL", label: t("leaderboard.allRegions") },
     ...leagues.map((l) => ({ value: l.id, label: leagueLabel(l.id) })),
   ];
+  const roleLabel = (pid: string) => {
+    const v = t(`role.${pid}`);
+    return v !== `role.${pid}` ? v : positionMeta(pid)?.label ?? pid;
+  };
+  // Only offer positions actually held by the players currently in view, so a
+  // coach-only position (e.g. Manager) never shows up in the player filter.
+  const availablePositions = positions.filter((p) =>
+    players.some(
+      (pl) => (kind === "coach" ? pl.kind === "coach" : pl.kind !== "coach") && pl.position === p.id
+    )
+  );
   const roleOpts = [
     { value: "ALL", label: t("leaderboard.allRoles") },
-    ...positions.map((p) => ({ value: p.id, label: t(`role.${p.id}`) })),
+    ...availablePositions.map((p) => ({ value: p.id, label: roleLabel(p.id) })),
   ];
   const presetOpts = model.presets.map((p) => ({ value: p.key, label: t(`preset.${p.key}`) }));
 
