@@ -151,7 +151,12 @@ const en = {
   preset: { balanced: "Balanced", titles: "Titles purist", individual: "Individual brilliance", silverware: "Silverware" },
 };
 
-export type Dict = typeof en;
+// honorType and axis carry dynamic, per-sport keys (LoL + football), so they are
+// typed loosely to let each locale localize whatever subset it wants.
+export type Dict = Omit<typeof en, "honorType" | "axis"> & {
+  honorType: Record<string, string>;
+  axis: Record<string, string>;
+};
 
 const zh: Dict = {
   nav: { explore: "探索", leaderboard: "排行榜", teams: "战队", compare: "对比", methodology: "算法说明", lol: "英雄联盟", football: "足球" },
@@ -277,6 +282,44 @@ const zh: Dict = {
     all_pro_3: "最佳三阵",
     worlds_runnerup: "世界赛亚军",
     regional_runnerup: "赛区亚军",
+    world_cup: "世界杯",
+    champions_league: "欧冠",
+    continental_nt: "洲际冠军",
+    copa_libertadores: "解放者杯",
+    club_world_cup: "世俱杯",
+    league_title: "联赛冠军",
+    europa_league: "欧联杯",
+    copa_sudamericana: "南美杯",
+    continental_club: "洲际俱乐部冠军",
+    nations_league: "欧国联",
+    domestic_cup: "国内杯赛",
+    recopa: "南美超级杯",
+    confederations_cup: "联合会杯",
+    super_cup: "欧洲超级杯",
+    olympic_gold_early: "奥运金牌（1932前）",
+    olympic_gold_amateur: "奥运金牌（1936–88）",
+    olympic_gold_u23: "奥运金牌（U23）",
+    ballon_dor: "金球奖",
+    ballon_dor_retro: "追授金球奖",
+    fifa_best: "世界足球先生",
+    wc_golden_ball: "世界杯金球奖",
+    golden_shoe: "欧洲金靴",
+    wc_golden_boot: "世界杯金靴",
+    uefa_poty: "欧足联年度最佳球员",
+    yashin_trophy: "雅辛奖",
+    league_poty: "联赛年度最佳球员",
+    league_top_scorer: "联赛最佳射手",
+    world_xi: "世界最佳阵容",
+    ballon_dor_2nd: "金球奖亚军",
+    wc_runnerup: "世界杯亚军",
+    ballon_dor_3rd: "金球奖季军",
+    ucl_runnerup: "欧冠亚军",
+    continental_nt_runnerup: "洲际赛亚军",
+    jsl_title: "苏超冠军",
+    jsl_best_player: "苏超最佳球员",
+    jsl_golden_boot: "苏超金靴",
+    jsl_best_gk: "苏超最佳门将",
+    jsl_runnerup: "苏超亚军",
   },
   bucket: { team: "团队冠军", individual: "个人奖项", placement: "决赛之旅" },
   bucketDesc: {
@@ -284,7 +327,7 @@ const zh: Dict = {
     individual: "MVP 与最佳阵容，按得票率折算",
     placement: "止步于决赛、未能夺冠的旅程",
   },
-  axis: { International: "国际赛", Domestic: "国内赛", Individual: "个人", Peak: "巅峰", Longevity: "长青" },
+  axis: { International: "国际赛", Domestic: "国内赛", Individual: "个人", Peak: "巅峰", Longevity: "长青", Country: "国家队", Club: "俱乐部" },
   axisDesc: {
     International: "世界赛与 MSI 冠军、国际赛 MVP 及决赛经历。",
     Domestic: "赛区联赛冠军、国内决赛及决赛 MVP。",
