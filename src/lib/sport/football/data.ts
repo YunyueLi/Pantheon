@@ -121,7 +121,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
     ],
   },
   {
-    id: "ronaldo-r9", name: "Ronaldo", realName: "Ronaldo Luís Nazário de Lima", sport: "football",
+    id: "ronaldo-r9", name: "Ronaldo Nazário", realName: "Ronaldo Luís Nazário de Lima", sport: "football",
     league: "SERIEA", position: "FWD", team: "Inter Milan", nation: "Brazil", active: false, debutYear: 1993,
     blurb: "O Fenômeno — two World Cups and two Ballon d'Ors despite career-altering knee injuries.",
     achievements: [
@@ -196,7 +196,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
     ],
   },
   {
-    id: "xavi", name: "Xavi", realName: "Xavier Hernández Creus", sport: "football",
+    id: "xavi", name: "Xavi Hernández", realName: "Xavier Hernández Creus", sport: "football",
     league: "LALIGA", position: "MID", team: "Barcelona", nation: "Spain", active: false, debutYear: 1998,
     blurb: "The metronome of Spain's and Barcelona's golden age — a World Cup, two Euros, four Champions Leagues.",
     achievements: [
@@ -343,7 +343,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
   {
     id: "guardiola", name: "Pep Guardiola", realName: "Josep Guardiola i Sala", sport: "football",
     league: "PL", position: "Manager", team: "Manchester City", nation: "Spain", active: true, debutYear: 2007,
-    kind: "coach", i18n: { zh: "瓜迪奥拉" },
+    kind: "coach", i18n: { zh: "何塞普·瓜迪奥拉" },
     blurb: "The defining tactician of the era — treble-winning sides at Barcelona and Manchester City.",
     achievements: [
       ...T("champions_league", [2009, 2011], "Barcelona"),
@@ -359,7 +359,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
   {
     id: "ancelotti", name: "Carlo Ancelotti", realName: "Carlo Ancelotti", sport: "football",
     league: "LALIGA", position: "Manager", team: "Real Madrid", nation: "Italy", active: true, debutYear: 1995,
-    kind: "coach", i18n: { zh: "安切洛蒂" },
+    kind: "coach", i18n: { zh: "卡洛·安切洛蒂" },
     blurb: "Record five-time Champions League-winning manager, with a league title in each of Europe's top five.",
     achievements: [
       ...T("champions_league", [2003, 2007], "AC Milan"),
@@ -377,7 +377,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
   {
     id: "ferguson", name: "Alex Ferguson", realName: "Sir Alexander Chapman Ferguson", sport: "football",
     league: "PL", position: "Manager", team: "Manchester United", nation: "Scotland", active: false, debutYear: 1974,
-    kind: "coach", i18n: { zh: "弗格森" },
+    kind: "coach", i18n: { zh: "亚历克斯·弗格森" },
     blurb: "Built two decades of dynasties at Manchester United — two Champions Leagues, thirteen league titles.",
     achievements: [
       ...T("champions_league", [1999, 2008], "Manchester United"),
@@ -389,7 +389,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
   {
     id: "mourinho", name: "José Mourinho", realName: "José Mário dos Santos Mourinho Félix", sport: "football",
     league: "PL", position: "Manager", team: "Chelsea", nation: "Portugal", active: true, debutYear: 2000,
-    kind: "coach", i18n: { zh: "穆里尼奥" },
+    kind: "coach", i18n: { zh: "若泽·穆里尼奥" },
     blurb: "The Special One — Champions Leagues with Porto and Inter, and league titles in four countries.",
     achievements: [
       ...T("champions_league", [2004], "Porto"),
@@ -407,7 +407,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
   {
     id: "zidane-coach", name: "Zinedine Zidane", realName: "Zinédine Yazid Zidane", sport: "football",
     league: "LALIGA", position: "Manager", team: "Real Madrid", nation: "France", active: false, debutYear: 2016,
-    kind: "coach", alsoId: "zidane", i18n: { zh: "齐达内" },
+    kind: "coach", alsoId: "zidane", i18n: { zh: "齐内丁·齐达内" },
     blurb: "Won the Champions League three seasons running as Real Madrid's manager — after starring as a player.",
     achievements: [
       ...T("champions_league", [2016, 2017, 2018], "Real Madrid"),
@@ -419,7 +419,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
   {
     id: "beckenbauer-coach", name: "Franz Beckenbauer", realName: "Franz Anton Beckenbauer", sport: "football",
     league: "BUNDESLIGA", position: "Manager", team: "Bayern Munich", nation: "Germany", active: false, debutYear: 1984,
-    kind: "coach", alsoId: "beckenbauer", i18n: { zh: "贝肯鲍尔" },
+    kind: "coach", alsoId: "beckenbauer", i18n: { zh: "弗朗茨·贝肯鲍尔" },
     blurb: "Lifted the 1990 World Cup as manager — having won it as captain in 1974.",
     achievements: [
       ...T("world_cup", [1990]),
@@ -430,7 +430,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
   {
     id: "cruyff-coach", name: "Johan Cruyff", realName: "Hendrik Johannes Cruijff", sport: "football",
     league: "LALIGA", position: "Manager", team: "Barcelona", nation: "Netherlands", active: false, debutYear: 1985,
-    kind: "coach", alsoId: "cruyff", i18n: { zh: "克鲁伊夫" },
+    kind: "coach", alsoId: "cruyff", i18n: { zh: "约翰·克鲁伊夫" },
     blurb: "Built Barcelona's 'Dream Team' and its first European Cup — the cradle of modern positional play.",
     achievements: [
       ...T("champions_league", [1992], "Barcelona"),
@@ -440,7 +440,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
   {
     id: "klopp", name: "Jürgen Klopp", realName: "Jürgen Norbert Klopp", sport: "football",
     league: "PL", position: "Manager", team: "Liverpool", nation: "Germany", active: true, debutYear: 2001,
-    kind: "coach", i18n: { zh: "克洛普" },
+    kind: "coach", i18n: { zh: "尤尔根·克洛普" },
     blurb: "Heavy-metal football — a Champions League and Liverpool's first league title in 30 years.",
     achievements: [
       ...T("champions_league", [2019], "Liverpool"),
@@ -453,7 +453,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
   {
     id: "lippi", name: "Marcello Lippi", realName: "Marcello Lippi", sport: "football",
     league: "SERIEA", position: "Manager", team: "Juventus", nation: "Italy", active: false, debutYear: 1989,
-    kind: "coach", i18n: { zh: "里皮" },
+    kind: "coach", i18n: { zh: "马尔切洛·里皮" },
     blurb: "World Cup winner with Italy in 2006, and a Champions League with Juventus.",
     achievements: [
       ...T("world_cup", [2006]),
@@ -465,7 +465,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
   {
     id: "del-bosque", name: "Vicente del Bosque", realName: "Vicente del Bosque González", sport: "football",
     league: "LALIGA", position: "Manager", team: "Real Madrid", nation: "Spain", active: false, debutYear: 1999,
-    kind: "coach", i18n: { zh: "德尔·博斯克" },
+    kind: "coach", i18n: { zh: "比森特·德尔·博斯克" },
     blurb: "Won the Champions League, the World Cup and the European Championship as a head coach.",
     achievements: [
       ...T("world_cup", [2010]),
@@ -478,7 +478,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
   {
     id: "sacchi", name: "Arrigo Sacchi", realName: "Arrigo Sacchi", sport: "football",
     league: "SERIEA", position: "Manager", team: "AC Milan", nation: "Italy", active: false, debutYear: 1985,
-    kind: "coach", i18n: { zh: "萨基" },
+    kind: "coach", i18n: { zh: "阿里戈·萨基" },
     blurb: "His pressing, zonal Milan of the late 1980s reshaped how the game is played.",
     achievements: [
       ...T("champions_league", [1989, 1990], "AC Milan"),
@@ -489,7 +489,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
   {
     id: "deschamps", name: "Didier Deschamps", realName: "Didier Claude Deschamps", sport: "football",
     league: "LIGUE1", position: "Manager", team: "France", nation: "France", active: true, debutYear: 2001,
-    kind: "coach", i18n: { zh: "德尚" },
+    kind: "coach", i18n: { zh: "迪迪埃·德尚" },
     blurb: "Lifted the World Cup as France's coach in 2018 — having captained the 1998 winners.",
     achievements: [
       ...T("world_cup", [2018]),
