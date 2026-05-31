@@ -13,7 +13,8 @@ export function achievementPoints(a: Achievement, model: HonorModel, w: Weights 
   const meta = model.achievementMeta[a.type];
   if (!meta) return 0;
   const share = meta.bucket === "individual" && typeof a.share === "number" ? a.share : 1;
-  return meta.base * w[meta.bucket] * share;
+  const part = typeof a.part === "number" ? a.part : 1;
+  return meta.base * w[meta.bucket] * share * part;
 }
 
 export function honorScore(p: Player, model: HonorModel, w: Weights = DEFAULT_WEIGHTS): number {

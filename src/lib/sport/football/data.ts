@@ -474,7 +474,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
     i18n: { zh: "弗兰科·巴雷西" },
     blurb: "Milan's sweeper and captain — three European Cups and six Scudetti.",
     achievements: [
-      ...T("world_cup", [1982]),
+      { type: "world_cup", year: 1982, part: 0.25 },
       ...T("wc_runnerup", [1994]),
       ...T("ballon_dor_2nd", [1989]),
       ...T("champions_league", [1989, 1990, 1994], "AC Milan"),
@@ -1041,7 +1041,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
       ...T("wc_runnerup", [2002]),
       ...T("wc_golden_ball", [2002]),
       ...T("ballon_dor_3rd", [2002]),
-      ...T("continental_nt", [1996]),
+      { type: "continental_nt", year: 1996, part: 0.25 },
       ...T("champions_league", [2001], "Bayern Munich"),
       ...T("ucl_runnerup", [1999], "Bayern Munich"),
       ...T("europa_league", [1996], "Bayern Munich"),
@@ -1281,7 +1281,7 @@ export const FOOTBALL_PLAYERS: Player[] = [
     blurb: "The King of the Stretford End — Scotland's only Ballon d'Or winner (1964).",
     achievements: [
       ...T("ballon_dor", [1964]),
-      ...T("champions_league", [1968], "Manchester United"),
+      { type: "champions_league", year: 1968, team: "Manchester United", part: 0.5 },
       ...T("league_title", [1965, 1967], "Manchester United"),
       ...T("domestic_cup", [1963], "Manchester United"),
     ],
@@ -1354,7 +1354,8 @@ export const FOOTBALL_PLAYERS: Player[] = [
     i18n: { zh: "丹尼尔·帕萨雷拉" },
     blurb: "Argentina's 1978 World Cup-winning captain — a commanding, goalscoring centre-back.",
     achievements: [
-      ...T("world_cup", [1978, 1986]),
+      ...T("world_cup", [1978]),
+      { type: "world_cup", year: 1986, part: 0.25 },
       ...T("league_title", [1975, 1977, 1979, 1980, 1981], "River Plate"),
     ],
   },

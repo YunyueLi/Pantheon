@@ -53,6 +53,8 @@ export type Achievement = {
   team?: string;
   /** 0..1 vote share for voted awards (drives individual-award weighting) */
   share?: number;
+  /** 0..1 participation factor for a title won with a limited/rotational role; defaults to 1. */
+  part?: number;
 };
 
 export type Player = {

@@ -1678,7 +1678,7 @@ const CURATED_PLAYERS: Player[] = [
     blurb: "Won Worlds with both SKT (2016) and Invictus Gaming (2018).",
     achievements: [
       ...rep("worlds_title", [2016], "SKT T1"),
-      ...rep("worlds_title", [2018], "Invictus Gaming"),
+      { type: "worlds_title", year: 2018, team: "Invictus Gaming", part: 0.5 },
       ...rep("regional_title", [2019], "Invictus Gaming"),
     ],
   },

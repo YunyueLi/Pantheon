@@ -45,7 +45,8 @@ export const PRESETS: { key: string; label: string; weights: Weights }[] = [
 export function achievementPoints(a: Achievement, w: Weights = DEFAULT_WEIGHTS): number {
   const meta = ACHIEVEMENT_META[a.type];
   const share = meta.bucket === "individual" && typeof a.share === "number" ? a.share : 1;
-  return meta.base * w[meta.bucket] * share;
+  const part = typeof a.part === "number" ? a.part : 1;
+  return meta.base * w[meta.bucket] * share * part;
 }
 
 export function honorScore(p: Player, w: Weights = DEFAULT_WEIGHTS): number {

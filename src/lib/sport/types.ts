@@ -28,6 +28,12 @@ export type Achievement = {
   team?: string;
   /** 0..1 vote share for voted individual awards (optional; defaults to 1). */
   share?: number;
+  /**
+   * 0..1 participation factor for a title the player contributed little to —
+   * a squad/bench medal or a near-absent campaign (e.g. an unused reserve).
+   * Defaults to 1 (full credit). Set below 1 only for well-documented cases.
+   */
+  part?: number;
 };
 
 export type Player = {
