@@ -59,6 +59,12 @@ export type Player = {
   alsoId?: string;
   /** Optional per-locale display name; falls back to `name`. */
   i18n?: Record<string, string>;
+  /**
+   * 0..100 Stature / Influence score — all-time standing and cultural footprint,
+   * sourced from authoritative all-time rankings (and fan-vote/popularity for
+   * esports). Kept SEPARATE from the trophy-based Honor Index; an optional lens.
+   */
+  stature?: number;
   achievements: Achievement[];
 };
 

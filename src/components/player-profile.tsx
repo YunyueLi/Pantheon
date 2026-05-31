@@ -106,6 +106,13 @@ export function PlayerProfile({ id }: { id: string }) {
               <div className="mt-1.5 text-xs text-fg-muted">
                 {t("player.topPct", { p: Math.max(1, 100 - pct), role: t(`role.${player.position}`) })}
               </div>
+              {player.stature != null && (
+                <div className="mt-1 text-xs text-fg-muted">
+                  {t("leaderboard.byStature")}{" "}
+                  <span className="tnum font-semibold text-fg">{player.stature}</span>
+                  <span className="text-fg-subtle">/100</span>
+                </div>
+              )}
             </div>
             <div className="flex flex-wrap gap-1.5">
               <RankChip label={t("player.rankOverall")} value={overall.rank} />

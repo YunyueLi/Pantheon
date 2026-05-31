@@ -45,6 +45,7 @@ export function Leaderboard() {
   );
   const [presetKey, setPresetKey] = useState(model.presets[0].key);
   const [era, setEra] = useState<string>("ALL");
+  const [rankBy, setRankBy] = useState<"honor" | "stature">("honor");
 
   const weights = model.presets.find((p) => p.key === presetKey)!.weights;
 
@@ -86,6 +87,11 @@ export function Leaderboard() {
     { value: "ALL", label: t("leaderboard.allEras") },
     ...eras.map((d) => ({ value: String(d), label: `${d}s` })),
   ];
+  const hasStature = players.some((p) => p.stature != null);
+  const rankByOpts = [
+    { value: "honor", label: t("leaderboard.byHonor") },
+    { value: "stature", label: t("leaderboard.byStature") },
+  ];
 
   const data = useMemo<Row[]>(
     () =>
@@ -97,9 +103,12 @@ export function Leaderboard() {
             (kind === "coach" || role === "ALL" || p.position === role) &&
             (era === "ALL" || activeInDecade(p, +era))
         )
-        .map((player) => ({ player, score: honorScore(player, model, weights) }))
+        .map((player) => ({
+          player,
+          score: rankBy === "stature" ? player.stature ?? 0 : honorScore(player, model, weights),
+        }))
         .sort((a, b) => b.score - a.score),
-    [region, role, kind, era, weights, players, model]
+    [region, role, kind, era, rankBy, weights, players, model]
   );
 
   const maxScore = useMemo(() => Math.max(1, ...data.map((d) => d.score)), [data]);
@@ -162,13 +171,13 @@ export function Leaderboard() {
       },
       {
         id: "score",
-        header: t("leaderboard.colHonor"),
+        header: rankBy === "stature" ? t("leaderboard.byStature") : t("leaderboard.colHonor"),
         accessorFn: (r) => r.score,
         cell: ({ row }) => <ScoreCell score={row.original.score} max={maxScore} />,
       },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [maxScore, locale]
+    [maxScore, locale, rankBy]
   );
 
   const table = useReactTable({
@@ -215,15 +224,29 @@ export function Leaderboard() {
               className="min-w-[7rem]"
             />
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] uppercase tracking-wide text-fg-subtle">{t("leaderboard.weighting")}</span>
-            <SelectMenu
-              value={presetKey}
-              onChange={setPresetKey}
-              options={presetOpts}
-              ariaLabel={t("leaderboard.weighting")}
-              className="min-w-[9rem]"
-            />
+          <div className="flex flex-wrap items-center gap-2">
+            {hasStature && (
+              <Pills
+                options={rankByOpts}
+                value={rankBy}
+                onChange={(v) => setRankBy(v as "honor" | "stature")}
+                size="sm"
+              />
+            )}
+            {rankBy === "honor" && (
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] uppercase tracking-wide text-fg-subtle">
+                  {t("leaderboard.weighting")}
+                </span>
+                <SelectMenu
+                  value={presetKey}
+                  onChange={setPresetKey}
+                  options={presetOpts}
+                  ariaLabel={t("leaderboard.weighting")}
+                  className="min-w-[9rem]"
+                />
+              </div>
+            )}
           </div>
         </div>
 
