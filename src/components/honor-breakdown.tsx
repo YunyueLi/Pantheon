@@ -1,8 +1,9 @@
 "use client";
 
 import { Cell, Pie, PieChart } from "recharts";
-import { bucketTotals, honorScore } from "@/lib/honor";
-import type { Bucket, Player } from "@/lib/types";
+import { bucketTotals, honorScore } from "@/lib/sport/honor";
+import type { Bucket, Player } from "@/lib/sport/types";
+import { useSport } from "@/lib/sport/provider";
 import { formatNumber } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n/provider";
 
@@ -16,8 +17,9 @@ const ORDER: Bucket[] = ["team", "individual", "placement"];
 
 export function HonorBreakdown({ player }: { player: Player }) {
   const { t } = useI18n();
-  const totals = bucketTotals(player);
-  const total = honorScore(player);
+  const { config } = useSport();
+  const totals = bucketTotals(player, config.model);
+  const total = honorScore(player, config.model);
   const data = ORDER.map((b) => ({ key: b, label: t(`bucket.${b}`), value: Math.round(totals[b]) }));
 
   return (

@@ -4,15 +4,15 @@ import { useState } from "react";
 import { ParentSize } from "@visx/responsive";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Group } from "@visx/group";
-import { timeline } from "@/lib/honor";
-import type { Achievement, Player } from "@/lib/types";
+import { timeline } from "@/lib/sport/honor";
+import type { Achievement, HonorModel, Player } from "@/lib/sport/types";
+import { useSport, useHonorLabel } from "@/lib/sport/provider";
 import { formatNumber } from "@/lib/utils";
-import { useI18n } from "@/lib/i18n/provider";
 
-type YearBar = { year: number; points: number; items: Achievement[]; hasWorlds: boolean };
+type YearBar = { year: number; points: number; items: Achievement[]; hasMarquee: boolean };
 
-function buildYears(player: Player): YearBar[] {
-  const t = timeline(player);
+function buildYears(player: Player, model: HonorModel, marquee: string): YearBar[] {
+  const t = timeline(player, model);
   if (t.length === 0) return [];
   const last = Math.max(...t.map((d) => d.year));
   const start = Math.min(player.debutYear, t[0].year);
@@ -24,24 +24,36 @@ function buildYears(player: Player): YearBar[] {
       year: y,
       points: d?.points ?? 0,
       items: d?.items ?? [],
-      hasWorlds: (d?.items ?? []).some((a) => a.type === "worlds_title"),
+      hasMarquee: (d?.items ?? []).some((a) => a.type === marquee),
     });
   }
   return years;
 }
 
 export function HonorTimeline({ player }: { player: Player }) {
-  const data = buildYears(player);
+  const { config } = useSport();
+  const marquee = config.headlineTypes[0];
+  const data = buildYears(player, config.model, marquee);
   if (data.length === 0) return null;
   return (
     <div className="h-[210px] w-full">
-      <ParentSize>{({ width }) => <Chart width={width} height={210} data={data} />}</ParentSize>
+      <ParentSize>{({ width }) => <Chart width={width} height={210} data={data} marquee={marquee} />}</ParentSize>
     </div>
   );
 }
 
-function Chart({ width, height, data }: { width: number; height: number; data: YearBar[] }) {
-  const { t } = useI18n();
+function Chart({
+  width,
+  height,
+  data,
+  marquee,
+}: {
+  width: number;
+  height: number;
+  data: YearBar[];
+  marquee: string;
+}) {
+  const honorLabel = useHonorLabel();
   const margin = { top: 22, right: 6, bottom: 28, left: 6 };
   const iw = Math.max(0, width - margin.left - margin.right);
   const ih = Math.max(0, height - margin.top - margin.bottom);
@@ -79,12 +91,12 @@ function Chart({ width, height, data }: { width: number; height: number; data: Y
                     width={bw}
                     height={barH}
                     rx={3}
-                    fill={d.hasWorlds ? "var(--accent)" : "var(--chart-3)"}
+                    fill={d.hasMarquee ? "var(--accent)" : "var(--chart-3)"}
                     opacity={dim ? 0.35 : 1}
                     style={{ transition: "opacity 150ms" }}
                   />
                 )}
-                {d.hasWorlds && d.points > 0 && (
+                {d.hasMarquee && d.points > 0 && (
                   <circle cx={bx + bw / 2} cy={y(d.points) - 7} r={2.5} fill="var(--accent)" />
                 )}
                 {i % showEvery === 0 && (
@@ -117,12 +129,9 @@ function Chart({ width, height, data }: { width: number; height: number; data: Y
               <li key={i} className="flex items-center gap-1.5 text-[11px] text-fg-muted">
                 <span
                   className="h-1.5 w-1.5 rounded-full"
-                  style={{
-                    background:
-                      a.type === "worlds_title" ? "var(--accent)" : "var(--fg-3)",
-                  }}
+                  style={{ background: a.type === marquee ? "var(--accent)" : "var(--fg-3)" }}
                 />
-                {t(`honorType.${a.type}`)}
+                {honorLabel(a.type)}
               </li>
             ))}
           </ul>

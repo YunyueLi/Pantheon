@@ -3,6 +3,7 @@
 import { createContext, useContext, useMemo, type ReactNode } from "react";
 import type { LeagueMeta, PositionMeta, SportConfig } from "./types";
 import { getSport } from "./registry";
+import { useI18n } from "@/lib/i18n/provider";
 
 type SportCtx = {
   config: SportConfig;
@@ -31,4 +32,18 @@ export function useSport() {
   const ctx = useContext(Ctx);
   if (!ctx) throw new Error("useSport must be used within a SportProvider");
   return ctx;
+}
+
+/**
+ * Resolve an achievement type's display name: the translated dictionary entry
+ * when present (LoL), otherwise the sport model's own English label (football).
+ */
+export function useHonorLabel() {
+  const { t } = useI18n();
+  const { config } = useSport();
+  return (type: string) => {
+    const key = `honorType.${type}`;
+    const v = t(key);
+    return v === key ? config.model.achievementMeta[type]?.label ?? type : v;
+  };
 }

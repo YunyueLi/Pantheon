@@ -91,3 +91,19 @@ export function normalizedAxes(
     return { axis: axis.id, label: axis.label, value: Math.round((axisValue(p, axis, model) / max) * 100) };
   });
 }
+
+export type RankedRow = { player: Player; score: number; rank: number };
+
+export function ranked(players: Player[], model: HonorModel, w: Weights = DEFAULT_WEIGHTS): RankedRow[] {
+  return players
+    .map((player) => ({ player, score: honorScore(player, model, w) }))
+    .sort((a, b) => b.score - a.score)
+    .map((row, i) => ({ ...row, rank: i + 1 }));
+}
+
+/** Percentile (0..100) of a player's score within a pool. */
+export function percentile(player: Player, pool: Player[], model: HonorModel, w: Weights = DEFAULT_WEIGHTS): number {
+  const s = honorScore(player, model, w);
+  const below = pool.filter((p) => honorScore(p, model, w) < s).length;
+  return Math.round((below / Math.max(1, pool.length - 1)) * 100);
+}
