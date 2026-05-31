@@ -11,7 +11,7 @@ import {
 } from "@tanstack/react-table";
 import { honorScore, countType } from "@/lib/sport/honor";
 import type { Player } from "@/lib/sport/types";
-import { useSport } from "@/lib/sport/provider";
+import { useSport, useName, useLeagueLabel } from "@/lib/sport/provider";
 import { cn, formatNumber } from "@/lib/utils";
 import { Pills } from "@/components/pills";
 import { PlayerAvatar } from "@/components/player-avatar";
@@ -25,6 +25,8 @@ export function Leaderboard() {
   const { t, locale } = useI18n();
   const { config, positionMeta } = useSport();
   const { players, model, leagues, positions, headlineTypes, basePath } = config;
+  const name = useName();
+  const leagueLabel = useLeagueLabel();
   const hasCoaches = useMemo(() => players.some((p) => p.kind === "coach"), [players]);
   const [kind, setKind] = useState<string>("player");
   const kindOpts = [
@@ -46,7 +48,7 @@ export function Leaderboard() {
 
   const regionOpts = [
     { value: "ALL", label: t("leaderboard.allRegions") },
-    ...leagues.map((l) => ({ value: l.id, label: l.id })),
+    ...leagues.map((l) => ({ value: l.id, label: leagueLabel(l.id) })),
   ];
   const roleOpts = [
     { value: "ALL", label: t("leaderboard.allRoles") },
@@ -91,7 +93,7 @@ export function Leaderboard() {
               <PlayerAvatar id={p.id} name={p.name} photo={p.photo} size={34} />
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="font-medium text-fg group-hover:text-accent">{p.name}</span>
+                  <span className="font-medium text-fg group-hover:text-accent">{name(p)}</span>
                   {!p.active && (
                     <span className="text-[10px] uppercase tracking-wide text-fg-subtle">
                       {t("common.retired")}
@@ -108,7 +110,7 @@ export function Leaderboard() {
         id: "region",
         header: t("leaderboard.colRegion"),
         accessorFn: (r) => r.player.league,
-        cell: ({ row }) => <RegionBadge region={row.original.player.league} />,
+        cell: ({ row }) => <RegionBadge region={leagueLabel(row.original.player.league)} />,
       },
       {
         id: "role",
@@ -181,7 +183,7 @@ export function Leaderboard() {
                   <PlayerAvatar id={p.id} name={p.name} photo={p.photo} size={34} />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
-                      <span className="truncate text-sm font-medium text-fg">{p.name}</span>
+                      <span className="truncate text-sm font-medium text-fg">{name(p)}</span>
                       {!p.active && (
                         <span className="shrink-0 text-[9px] uppercase tracking-wide text-fg-subtle">
                           {t("common.retired")}
@@ -189,7 +191,7 @@ export function Leaderboard() {
                       )}
                     </div>
                     <div className="mt-1 flex items-center gap-1.5">
-                      <RegionBadge region={p.league} />
+                      <RegionBadge region={leagueLabel(p.league)} />
                       <PositionBadge abbr={positionMeta(p.position)?.abbr ?? p.position} />
                     </div>
                   </div>

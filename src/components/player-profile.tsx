@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Clock, GitCompareArrows } from "lucide-react";
 import { achievementPoints, countType, honorScore, percentile, ranked } from "@/lib/sport/honor";
-import { useSport, useHonorLabel } from "@/lib/sport/provider";
+import { useSport, useHonorLabel, useName, useLeagueLabel } from "@/lib/sport/provider";
 import { BackButton } from "@/components/back-button";
 import { teamIdFromName } from "@/lib/teams";
 import { PlayerAvatar } from "@/components/player-avatar";
@@ -23,6 +23,8 @@ export function PlayerProfile({ id }: { id: string }) {
   const { config, leagueMeta, positionMeta } = useSport();
   const { players, model, headlineTypes, basePath } = config;
   const honorLabel = useHonorLabel();
+  const name = useName();
+  const leagueLabel = useLeagueLabel();
   const player = players.find((p) => p.id === id);
   if (!player) return null;
 
@@ -58,8 +60,8 @@ export function PlayerProfile({ id }: { id: string }) {
             <PlayerAvatar id={player.id} name={player.name} photo={player.photo} size={64} />
             <div>
               <div className="flex flex-wrap items-center gap-2.5">
-                <h1 className="text-2xl font-semibold tracking-tight">{player.name}</h1>
-                <RegionBadge region={player.league} />
+                <h1 className="text-2xl font-semibold tracking-tight">{name(player)}</h1>
+                <RegionBadge region={leagueLabel(player.league)} />
                 <PositionBadge abbr={positionMeta(player.position)?.abbr ?? player.position} />
                 {!player.active && (
                   <span className="text-[10px] uppercase tracking-wide text-fg-subtle">{t("common.retired")}</span>
@@ -105,7 +107,7 @@ export function PlayerProfile({ id }: { id: string }) {
             <div className="flex flex-wrap gap-1.5">
               <RankChip label={t("player.rankOverall")} value={overall.rank} />
               <RankChip label={t(`role.${player.position}`)} value={roleRank.rank} />
-              <RankChip label={player.league} value={regionRank.rank} />
+              <RankChip label={leagueLabel(player.league)} value={regionRank.rank} />
             </div>
             <Button asChild variant="outline" size="sm">
               <Link href={`${basePath}/compare?a=${player.id}`}>

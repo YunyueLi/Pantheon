@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 type Hit = { kind: "player"; player: Player } | { kind: "team"; team: Team };
 
 export function PlayerSearch() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
   const path = usePathname();
   const sportId = path.startsWith("/football") ? "football" : "lol";
@@ -24,6 +24,12 @@ export function PlayerSearch() {
   const players = config.players;
   const base = config.basePath;
   const posAbbr = (id: string) => config.positions.find((p) => p.id === id)?.abbr ?? id;
+  const name = (e: { name: string; i18n?: Record<string, string> }) => e.i18n?.[locale] ?? e.name;
+  const leagueLabel = (id: string) => {
+    const k = `league.${id}`;
+    const v = t(k);
+    return v !== k ? v : config.leagues.find((l) => l.id === id)?.label ?? id;
+  };
 
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
@@ -148,7 +154,7 @@ export function PlayerSearch() {
                         <PlayerAvatar id={hit.player.id} name={hit.player.name} photo={hit.player.photo} size={30} />
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-1.5">
-                            <span className="truncate text-sm font-medium text-fg">{hit.player.name}</span>
+                            <span className="truncate text-sm font-medium text-fg">{name(hit.player)}</span>
                             {!hit.player.active && (
                               <span className="shrink-0 text-[9px] uppercase tracking-wide text-fg-subtle">
                                 {t("common.retired")}
@@ -157,7 +163,7 @@ export function PlayerSearch() {
                           </div>
                           <div className="truncate text-xs text-fg-subtle">{hit.player.team}</div>
                         </div>
-                        <RegionBadge region={hit.player.league} />
+                        <RegionBadge region={leagueLabel(hit.player.league)} />
                         <PositionBadge abbr={posAbbr(hit.player.position)} />
                       </>
                     ) : (
@@ -169,7 +175,7 @@ export function PlayerSearch() {
                           <div className="truncate text-sm font-medium text-fg">{hit.team.name}</div>
                           <div className="truncate text-xs text-fg-subtle">{t("nav.teams")}</div>
                         </div>
-                        <RegionBadge region={hit.team.region} />
+                        <RegionBadge region={leagueLabel(hit.team.region)} />
                       </>
                     )}
                   </button>

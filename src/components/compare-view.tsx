@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { honorScore, normalizedAxes, countType, ranked } from "@/lib/sport/honor";
 import type { Player } from "@/lib/sport/types";
-import { useSport, useHonorLabel, useAxisLabel } from "@/lib/sport/provider";
+import { useSport, useHonorLabel, useAxisLabel, useName, useLeagueLabel } from "@/lib/sport/provider";
 import { cn, formatNumber } from "@/lib/utils";
 import { PlayerAvatar } from "@/components/player-avatar";
 import { PlayerPicker } from "@/components/player-picker";
@@ -19,6 +19,7 @@ export function CompareView() {
   const { players, model, headlineTypes } = config;
   const honorLabel = useHonorLabel();
   const axisLabel = useAxisLabel();
+  const name = useName();
   const sp = useSearchParams();
   const has = (id: string) => players.some((p) => p.id === id);
   const rankedRows = useMemo(() => ranked(players, model), [players, model]);
@@ -49,7 +50,7 @@ export function CompareView() {
       </div>
 
       <Card className="p-2">
-        <CompareRadar a={{ label: a.name, values: aAxes }} b={{ label: b.name, values: bAxes }} axes={model.axes} />
+        <CompareRadar a={{ label: name(a), values: aAxes }} b={{ label: name(b), values: bAxes }} axes={model.axes} />
       </Card>
 
       <Card className="divide-y divide-border">
@@ -100,6 +101,8 @@ function PlayerCard({
   align?: "left" | "right";
 }) {
   const { positionMeta } = useSport();
+  const name = useName();
+  const leagueLabel = useLeagueLabel();
   if (!player) return null;
   return (
     <Card className="p-4">
@@ -108,10 +111,10 @@ function PlayerCard({
         <div className={cn("min-w-0 flex-1", align === "right" && "flex flex-col items-end")}>
           <div className="flex items-center gap-2">
             <span className={cn("h-2 w-2 rounded-full", dotClass)} />
-            <span className="truncate font-medium text-fg">{player.name}</span>
+            <span className="truncate font-medium text-fg">{name(player)}</span>
           </div>
           <div className="mt-1 flex items-center gap-2">
-            <RegionBadge region={player.league} />
+            <RegionBadge region={leagueLabel(player.league)} />
             <PositionBadge abbr={positionMeta(player.position)?.abbr ?? player.position} />
           </div>
         </div>

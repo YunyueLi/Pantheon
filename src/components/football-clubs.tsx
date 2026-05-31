@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { clubHonor, clubPlayers, getClub, rankedClubs } from "@/lib/sport/football/clubs";
+import { FOOTBALL_LEAGUES } from "@/lib/sport/football/model";
 import { BackButton } from "@/components/back-button";
 import { PlayerAvatar } from "@/components/player-avatar";
 import { RegionBadge } from "@/components/badges";
@@ -32,9 +33,22 @@ function labels(locale: string) {
       };
 }
 
+const CLUB_ZH: Record<string, string> = {
+  "real-madrid": "皇家马德里", barcelona: "巴塞罗那", "atletico-madrid": "马德里竞技",
+  bayern: "拜仁慕尼黑", dortmund: "多特蒙德", "ac-milan": "AC米兰", inter: "国际米兰",
+  juventus: "尤文图斯", liverpool: "利物浦", "man-united": "曼联", "man-city": "曼城",
+  arsenal: "阿森纳", chelsea: "切尔西", benfica: "本菲卡", porto: "波尔图", ajax: "阿贾克斯",
+  "boca-juniors": "博卡青年", "river-plate": "河床",
+};
+
 export function FootballClubsList() {
-  const { locale } = useI18n();
+  const { t, locale } = useI18n();
   const L = labels(locale);
+  const clubName = (c: { id: string; name: string }) => (locale === "zh" && CLUB_ZH[c.id]) || c.name;
+  const leagueLabel = (id: string) => {
+    const v = t(`league.${id}`);
+    return v !== `league.${id}` ? v : FOOTBALL_LEAGUES.find((l) => l.id === id)?.label ?? id;
+  };
   const clubs = rankedClubs();
   return (
     <div className="mx-auto max-w-6xl px-5 py-10">
@@ -53,9 +67,9 @@ export function FootballClubsList() {
                 {club.code}
               </span>
               <div className="min-w-0 flex-1">
-                <div className="truncate font-semibold tracking-tight group-hover:text-accent">{club.name}</div>
+                <div className="truncate font-semibold tracking-tight group-hover:text-accent">{clubName(club)}</div>
                 <div className="mt-1">
-                  <RegionBadge region={club.league} />
+                  <RegionBadge region={leagueLabel(club.league)} />
                 </div>
               </div>
               <div className="tnum shrink-0 text-right text-sm font-semibold text-accent">{formatNumber(honor)}</div>
@@ -88,8 +102,14 @@ export function FootballClubsList() {
 }
 
 export function FootballClubProfile({ id }: { id: string }) {
-  const { locale } = useI18n();
+  const { t, locale } = useI18n();
   const L = labels(locale);
+  const clubName = (c: { id: string; name: string }) => (locale === "zh" && CLUB_ZH[c.id]) || c.name;
+  const leagueLabel = (lid: string) => {
+    const v = t(`league.${lid}`);
+    return v !== `league.${lid}` ? v : FOOTBALL_LEAGUES.find((l) => l.id === lid)?.label ?? lid;
+  };
+  const name = (e: { name: string; i18n?: Record<string, string> }) => e.i18n?.[locale] ?? e.name;
   const club = getClub(id);
   if (!club) return null;
   const honor = clubHonor(club);
@@ -112,8 +132,8 @@ export function FootballClubProfile({ id }: { id: string }) {
             </span>
             <div>
               <div className="flex flex-wrap items-center gap-2.5">
-                <h1 className="text-2xl font-semibold tracking-tight">{club.name}</h1>
-                <RegionBadge region={club.league} />
+                <h1 className="text-2xl font-semibold tracking-tight">{clubName(club)}</h1>
+                <RegionBadge region={leagueLabel(club.league)} />
               </div>
             </div>
           </div>
@@ -153,7 +173,7 @@ export function FootballClubProfile({ id }: { id: string }) {
                   )}
                 >
                   <PlayerAvatar id={p.id} name={p.name} photo={p.photo} size={32} />
-                  <span className="truncate text-sm font-medium text-fg">{p.name}</span>
+                  <span className="truncate text-sm font-medium text-fg">{name(p)}</span>
                 </Link>
               ))}
             </div>

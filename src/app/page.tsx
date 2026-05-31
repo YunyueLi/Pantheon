@@ -19,7 +19,8 @@ const FEATURES = [
 ] as const;
 
 export default function Home() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
+  const name = (e: { name: string; i18n?: Record<string, string> }) => e.i18n?.[locale] ?? e.name;
   const sports = listSports();
 
   return (
@@ -79,7 +80,7 @@ export default function Home() {
                     <span className="tnum w-5 text-right text-sm text-fg-subtle">{i + 1}</span>
                     <PlayerAvatar id={row.player.id} name={row.player.name} photo={row.player.photo} size={34} />
                     <div className="min-w-0 flex-1">
-                      <div className="truncate font-medium text-fg">{row.player.name}</div>
+                      <div className="truncate font-medium text-fg">{name(row.player)}</div>
                       <div className="truncate text-xs text-fg-subtle">{row.player.team}</div>
                     </div>
                     <div className="w-28 shrink-0">

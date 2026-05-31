@@ -57,3 +57,20 @@ export function useAxisLabel() {
     return v === key ? fallback : v;
   };
 }
+
+/** Localized display name for an entity (player/coach/club): per-locale override, else the Latin name. */
+export function useName() {
+  const { locale } = useI18n();
+  return (e: { name: string; i18n?: Record<string, string> }) => e.i18n?.[locale] ?? e.name;
+}
+
+/** Localized league/region label: `league.<id>` when present, else the league's own label. */
+export function useLeagueLabel() {
+  const { t } = useI18n();
+  const { leagueMeta } = useSport();
+  return (id: string) => {
+    const key = `league.${id}`;
+    const v = t(key);
+    return v !== key ? v : leagueMeta(id)?.label ?? id;
+  };
+}

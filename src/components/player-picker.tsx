@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Search, ChevronsUpDown } from "lucide-react";
-import { useSport } from "@/lib/sport/provider";
+import { useSport, useName, useLeagueLabel } from "@/lib/sport/provider";
 import { useI18n } from "@/lib/i18n/provider";
 import { PlayerAvatar } from "@/components/player-avatar";
 import { RegionBadge, PositionBadge } from "@/components/badges";
@@ -22,6 +22,8 @@ export function PlayerPicker({
   const { t } = useI18n();
   const { config, positionMeta } = useSport();
   const { players } = config;
+  const name = useName();
+  const leagueLabel = useLeagueLabel();
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
   const [active, setActive] = useState(0);
@@ -73,7 +75,7 @@ export function PlayerPicker({
       <Dialog.Trigger asChild>
         <button className="flex w-full items-center justify-between gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-sm transition-colors hover:border-border-strong">
           <span className="truncate text-fg">
-            {current ? `${current.name} · ${current.team}` : t("search.placeholder")}
+            {current ? `${name(current)} · ${current.team}` : t("search.placeholder")}
           </span>
           <ChevronsUpDown className="h-4 w-4 shrink-0 text-fg-subtle" />
         </button>
@@ -118,7 +120,7 @@ export function PlayerPicker({
                     <PlayerAvatar id={p.id} name={p.name} photo={p.photo} size={30} />
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-1.5">
-                        <span className="truncate text-sm font-medium text-fg">{p.name}</span>
+                        <span className="truncate text-sm font-medium text-fg">{name(p)}</span>
                         {!p.active && (
                           <span className="shrink-0 text-[9px] uppercase tracking-wide text-fg-subtle">
                             {t("common.retired")}
@@ -127,7 +129,7 @@ export function PlayerPicker({
                       </div>
                       <div className="truncate text-xs text-fg-subtle">{p.team}</div>
                     </div>
-                    <RegionBadge region={p.league} />
+                    <RegionBadge region={leagueLabel(p.league)} />
                     <PositionBadge abbr={positionMeta(p.position)?.abbr ?? p.position} />
                   </button>
                 </li>
