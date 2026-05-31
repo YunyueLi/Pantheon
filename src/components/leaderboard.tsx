@@ -14,6 +14,7 @@ import type { Player } from "@/lib/sport/types";
 import { useSport, useName, useLeagueLabel } from "@/lib/sport/provider";
 import { cn, formatNumber } from "@/lib/utils";
 import { Pills } from "@/components/pills";
+import { SelectMenu } from "@/components/ui/select";
 import { PlayerAvatar } from "@/components/player-avatar";
 import { RegionBadge, PositionBadge } from "@/components/badges";
 import { TrophyIcon } from "@/components/trophy-icon";
@@ -156,15 +157,35 @@ export function Leaderboard() {
       </header>
 
       <div className="space-y-5">
-        <div className="flex flex-col gap-4 rounded-2xl border border-border bg-surface p-4 shadow-card sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-          <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-3.5 shadow-card sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+          <div className="flex flex-wrap items-center gap-2">
             {hasCoaches && <Pills options={kindOpts} value={kind} onChange={setKind} size="sm" />}
-            <Pills options={regionOpts} value={region} onChange={setRegion} />
-            {kind !== "coach" && <Pills options={roleOpts} value={role} onChange={setRole} />}
+            <SelectMenu
+              value={region}
+              onChange={setRegion}
+              options={regionOpts}
+              ariaLabel={t("leaderboard.colRegion")}
+              className="min-w-[8.5rem]"
+            />
+            {kind !== "coach" && (
+              <SelectMenu
+                value={role}
+                onChange={setRole}
+                options={roleOpts}
+                ariaLabel={t("leaderboard.colRole")}
+                className="min-w-[7.5rem]"
+              />
+            )}
           </div>
-          <div className="flex flex-col items-start gap-1.5 sm:items-end">
+          <div className="flex items-center gap-2">
             <span className="text-[11px] uppercase tracking-wide text-fg-subtle">{t("leaderboard.weighting")}</span>
-            <Pills options={presetOpts} value={presetKey} onChange={setPresetKey} size="sm" />
+            <SelectMenu
+              value={presetKey}
+              onChange={setPresetKey}
+              options={presetOpts}
+              ariaLabel={t("leaderboard.weighting")}
+              className="min-w-[9rem]"
+            />
           </div>
         </div>
 

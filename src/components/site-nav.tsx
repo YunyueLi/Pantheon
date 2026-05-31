@@ -6,13 +6,9 @@ import { Star } from "lucide-react";
 import { ThemeControls } from "@/components/theme-controls";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { PlayerSearch } from "@/components/player-search";
+import { SportSwitcher } from "@/components/sport-switcher";
 import { useI18n } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
-
-const SPORTS = [
-  { id: "lol", base: "/lol", key: "nav.lol" },
-  { id: "football", base: "/football", key: "nav.football" },
-] as const;
 
 function sectionLinks(sport: string) {
   if (sport === "football") {
@@ -39,30 +35,14 @@ export function SiteNav() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-[color:var(--bg-glass)] backdrop-blur-xl backdrop-saturate-150">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-5">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2">
             <span className="grid h-6 w-6 place-items-center rounded-md bg-accent text-[11px] font-bold text-accent-contrast">
               P
             </span>
             <span className="hidden text-sm font-semibold tracking-tight sm:inline">Pantheon</span>
           </Link>
-          <div className="flex items-center gap-0.5 rounded-full border border-border p-0.5">
-            {SPORTS.map((s) => {
-              const active = path.startsWith(s.base);
-              return (
-                <Link
-                  key={s.id}
-                  href={`${s.base}/leaderboard`}
-                  className={cn(
-                    "rounded-full px-2.5 py-1 text-xs font-medium transition-colors",
-                    active ? "bg-accent-soft text-accent" : "text-fg-subtle hover:text-fg"
-                  )}
-                >
-                  {t(s.key)}
-                </Link>
-              );
-            })}
-          </div>
+          <SportSwitcher />
           <nav className="hidden items-center gap-0.5 md:flex">
             {links.map((l) => {
               const active = path.startsWith(l.href);
@@ -98,6 +78,25 @@ export function SiteNav() {
           </a>
         </div>
       </div>
+
+      {/* Mobile section nav: wraps instead of overflowing, since the desktop row is hidden < md. */}
+      <nav className="flex flex-wrap items-center gap-x-1 gap-y-1 border-t border-border px-4 py-2 md:hidden">
+        {links.map((l) => {
+          const active = path.startsWith(l.href);
+          return (
+            <Link
+              key={l.href}
+              href={l.href}
+              className={cn(
+                "rounded-lg px-2.5 py-1 text-[13px] transition-colors",
+                active ? "bg-surface-2 text-fg" : "text-fg-subtle hover:text-fg"
+              )}
+            >
+              {t(l.key)}
+            </Link>
+          );
+        })}
+      </nav>
     </header>
   );
 }

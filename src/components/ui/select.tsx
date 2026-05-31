@@ -86,4 +86,37 @@ const SelectItem = React.forwardRef<
 ));
 SelectItem.displayName = "SelectItem";
 
+/**
+ * Opinionated single-select dropdown. Compact, fixed-footprint replacement for a
+ * pill row — scales to any number of options and never overflows on small screens.
+ */
+export function SelectMenu({
+  value,
+  onChange,
+  options,
+  className,
+  ariaLabel,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  options: { value: string; label: string }[];
+  className?: string;
+  ariaLabel?: string;
+}) {
+  return (
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger className={cn("h-8 w-auto gap-1.5 rounded-full px-3 text-[13px]", className)} aria-label={ariaLabel}>
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        {options.map((o) => (
+          <SelectItem key={o.value} value={o.value}>
+            {o.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}
+
 export { Select, SelectGroup, SelectValue, SelectTrigger, SelectContent, SelectLabel, SelectItem };
