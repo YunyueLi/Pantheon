@@ -82,6 +82,8 @@ export type SportConfig = {
   basePath: string;
   leagues: LeagueMeta[];
   positions: PositionMeta[];
+  /** Achievement types shown as headline trophy counts on the leaderboard. */
+  headlineTypes: string[];
   model: HonorModel;
   players: Player[];
 };

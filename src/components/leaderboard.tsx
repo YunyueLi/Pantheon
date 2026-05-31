@@ -9,13 +9,13 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { PLAYERS } from "@/lib/data";
-import { PRESETS, honorScore, titleCounts } from "@/lib/honor";
-import { REGIONS, ROLES, type Player, type Region, type Role } from "@/lib/types";
+import { honorScore, countType } from "@/lib/sport/honor";
+import type { Player } from "@/lib/sport/types";
+import { useSport } from "@/lib/sport/provider";
 import { cn, formatNumber } from "@/lib/utils";
 import { Pills } from "@/components/pills";
 import { PlayerAvatar } from "@/components/player-avatar";
-import { RegionBadge, RoleBadge } from "@/components/badges";
+import { RegionBadge, PositionBadge } from "@/components/badges";
 import { TrophyIcon } from "@/components/trophy-icon";
 import { useI18n } from "@/lib/i18n/provider";
 
@@ -23,31 +23,40 @@ type Row = { player: Player; score: number };
 
 export function Leaderboard() {
   const { t, locale } = useI18n();
+  const { config, positionMeta } = useSport();
+  const { players, model, leagues, positions, headlineTypes, basePath } = config;
   const sp = useSearchParams();
   const spRegion = sp.get("region");
   const spRole = sp.get("role");
-  const [region, setRegion] = useState<Region | "ALL">(
-    REGIONS.includes(spRegion as Region) ? (spRegion as Region) : "ALL"
+  const [region, setRegion] = useState<string>(
+    leagues.some((l) => l.id === spRegion) ? (spRegion as string) : "ALL"
   );
-  const [role, setRole] = useState<Role | "ALL">(
-    ROLES.includes(spRole as Role) ? (spRole as Role) : "ALL"
+  const [role, setRole] = useState<string>(
+    positions.some((p) => p.id === spRole) ? (spRole as string) : "ALL"
   );
-  const [presetKey, setPresetKey] = useState(PRESETS[0].key);
+  const [presetKey, setPresetKey] = useState(model.presets[0].key);
 
-  const weights = PRESETS.find((p) => p.key === presetKey)!.weights;
+  const weights = model.presets.find((p) => p.key === presetKey)!.weights;
 
-  const regionOpts = [{ value: "ALL" as const, label: t("leaderboard.allRegions") }, ...REGIONS.map((r) => ({ value: r, label: r }))];
-  const roleOpts = [{ value: "ALL" as const, label: t("leaderboard.allRoles") }, ...ROLES.map((r) => ({ value: r, label: t(`role.${r}`) }))];
-  const presetOpts = PRESETS.map((p) => ({ value: p.key, label: t(`preset.${p.key}`) }));
+  const regionOpts = [
+    { value: "ALL", label: t("leaderboard.allRegions") },
+    ...leagues.map((l) => ({ value: l.id, label: l.id })),
+  ];
+  const roleOpts = [
+    { value: "ALL", label: t("leaderboard.allRoles") },
+    ...positions.map((p) => ({ value: p.id, label: t(`role.${p.id}`) })),
+  ];
+  const presetOpts = model.presets.map((p) => ({ value: p.key, label: t(`preset.${p.key}`) }));
 
   const data = useMemo<Row[]>(
     () =>
-      PLAYERS.filter(
-        (p) => (region === "ALL" || p.region === region) && (role === "ALL" || p.role === role)
-      )
-        .map((player) => ({ player, score: honorScore(player, weights) }))
+      players
+        .filter(
+          (p) => (region === "ALL" || p.league === region) && (role === "ALL" || p.position === role)
+        )
+        .map((player) => ({ player, score: honorScore(player, model, weights) }))
         .sort((a, b) => b.score - a.score),
-    [region, role, weights]
+    [region, role, weights, players, model]
   );
 
   const maxScore = useMemo(() => Math.max(1, ...data.map((d) => d.score)), [data]);
@@ -69,7 +78,7 @@ export function Leaderboard() {
         cell: ({ row }) => {
           const p = row.original.player;
           return (
-            <Link href={`/lol/players/${p.id}`} className="group flex items-center gap-3">
+            <Link href={`${basePath}/players/${p.id}`} className="group flex items-center gap-3">
               <PlayerAvatar id={p.id} name={p.name} photo={p.photo} size={34} />
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
@@ -89,20 +98,24 @@ export function Leaderboard() {
       {
         id: "region",
         header: t("leaderboard.colRegion"),
-        accessorFn: (r) => r.player.region,
-        cell: ({ row }) => <RegionBadge region={row.original.player.region} />,
+        accessorFn: (r) => r.player.league,
+        cell: ({ row }) => <RegionBadge region={row.original.player.league} />,
       },
       {
         id: "role",
         header: t("leaderboard.colRole"),
-        accessorFn: (r) => r.player.role,
-        cell: ({ row }) => <RoleBadge role={row.original.player.role} />,
+        accessorFn: (r) => r.player.position,
+        cell: ({ row }) => (
+          <PositionBadge
+            abbr={positionMeta(row.original.player.position)?.abbr ?? row.original.player.position}
+          />
+        ),
       },
       {
         id: "titles",
         header: t("leaderboard.colTitles"),
         enableSorting: false,
-        cell: ({ row }) => <TitlesCell player={row.original.player} />,
+        cell: ({ row }) => <TitlesCell player={row.original.player} headlineTypes={headlineTypes} />,
       },
       {
         id: "score",
@@ -151,7 +164,7 @@ export function Leaderboard() {
               return (
                 <Link
                   key={row.id}
-                  href={`/lol/players/${p.id}`}
+                  href={`${basePath}/players/${p.id}`}
                   className="flex items-center gap-3 rounded-xl border border-border bg-surface px-3 py-2.5 shadow-card transition-colors hover:border-border-strong"
                 >
                   <span className="tnum w-5 shrink-0 text-right text-sm text-fg-subtle">{i + 1}</span>
@@ -166,8 +179,8 @@ export function Leaderboard() {
                       )}
                     </div>
                     <div className="mt-1 flex items-center gap-1.5">
-                      <RegionBadge region={p.region} />
-                      <RoleBadge role={p.role} />
+                      <RegionBadge region={p.league} />
+                      <PositionBadge abbr={positionMeta(p.position)?.abbr ?? p.position} />
                     </div>
                   </div>
                   <div className="tnum shrink-0 text-right text-sm font-semibold text-fg">
@@ -244,21 +257,19 @@ function ScoreCell({ score, max }: { score: number; max: number }) {
   );
 }
 
-function TitlesCell({ player }: { player: Player }) {
-  const { worlds, msi, regional } = titleCounts(player);
-  if (worlds + msi + regional === 0) return <span className="text-xs text-fg-subtle">—</span>;
-  const item = (n: number, type: "worlds_title" | "msi_title" | "regional_title") =>
-    n > 0 ? (
-      <span className="inline-flex items-center gap-1">
-        <TrophyIcon type={type} size={16} className="text-[color:var(--medal-gold)]" />
-        <span className="tnum text-xs font-medium text-fg-muted">{n}</span>
-      </span>
-    ) : null;
+function TitlesCell({ player, headlineTypes }: { player: Player; headlineTypes: string[] }) {
+  const counts = headlineTypes.map((type) => ({ type, n: countType(player, type) }));
+  if (counts.every((c) => c.n === 0)) return <span className="text-xs text-fg-subtle">—</span>;
   return (
     <div className="flex items-center gap-3">
-      {item(worlds, "worlds_title")}
-      {item(msi, "msi_title")}
-      {item(regional, "regional_title")}
+      {counts.map((c) =>
+        c.n > 0 ? (
+          <span key={c.type} className="inline-flex items-center gap-1">
+            <TrophyIcon type={c.type} size={16} className="text-[color:var(--medal-gold)]" />
+            <span className="tnum text-xs font-medium text-fg-muted">{c.n}</span>
+          </span>
+        ) : null
+      )}
     </div>
   );
 }

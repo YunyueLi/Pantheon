@@ -61,6 +61,7 @@ export const LOL: SportConfig = {
   basePath: "/lol",
   leagues: REGIONS.map((r) => ({ id: r, ...REGION_META[r] })),
   positions: ROLES.map((r) => ({ id: r, ...ROLE_META[r] })),
+  headlineTypes: ["worlds_title", "msi_title", "regional_title"],
   model,
   players,
 };

@@ -1,10 +1,9 @@
-import type { AchievementType } from "@/lib/types";
 import { ACHIEVEMENT_META } from "@/lib/honor";
 import { cn } from "@/lib/utils";
 
 type Kind = "worlds" | "msi" | "regional" | "medal" | "star";
 
-const ICON: Record<AchievementType, { kind: Kind; ghost?: boolean }> = {
+const ICON: Record<string, { kind: Kind; ghost?: boolean }> = {
   worlds_title: { kind: "worlds" },
   worlds_runnerup: { kind: "worlds", ghost: true },
   msi_title: { kind: "msi" },
@@ -21,6 +20,46 @@ const ICON: Record<AchievementType, { kind: Kind; ghost?: boolean }> = {
   all_pro_1: { kind: "star" },
   all_pro_2: { kind: "star" },
   all_pro_3: { kind: "star" },
+
+  // Football
+  world_cup: { kind: "worlds" },
+  wc_runnerup: { kind: "worlds", ghost: true },
+  champions_league: { kind: "msi" },
+  ucl_runnerup: { kind: "msi", ghost: true },
+  continental_nt: { kind: "regional" },
+  continental_nt_runnerup: { kind: "regional", ghost: true },
+  copa_libertadores: { kind: "regional" },
+  copa_sudamericana: { kind: "regional" },
+  recopa: { kind: "regional" },
+  club_world_cup: { kind: "regional" },
+  league_title: { kind: "regional" },
+  europa_league: { kind: "regional" },
+  nations_league: { kind: "regional" },
+  domestic_cup: { kind: "regional" },
+  continental_club: { kind: "regional" },
+  super_cup: { kind: "regional" },
+  confederations_cup: { kind: "regional" },
+  olympic_gold_early: { kind: "medal" },
+  olympic_gold_amateur: { kind: "medal" },
+  olympic_gold_u23: { kind: "medal" },
+  ballon_dor: { kind: "medal" },
+  ballon_dor_retro: { kind: "medal", ghost: true },
+  ballon_dor_2nd: { kind: "medal", ghost: true },
+  ballon_dor_3rd: { kind: "medal", ghost: true },
+  fifa_best: { kind: "medal" },
+  uefa_poty: { kind: "star" },
+  yashin_trophy: { kind: "star" },
+  wc_golden_ball: { kind: "star" },
+  wc_golden_boot: { kind: "star" },
+  golden_shoe: { kind: "star" },
+  league_poty: { kind: "star" },
+  league_top_scorer: { kind: "star" },
+  world_xi: { kind: "star" },
+  jsl_title: { kind: "regional" },
+  jsl_runnerup: { kind: "regional", ghost: true },
+  jsl_best_player: { kind: "star" },
+  jsl_golden_boot: { kind: "star" },
+  jsl_best_gk: { kind: "star" },
 };
 
 export function TrophyIcon({
@@ -28,11 +67,11 @@ export function TrophyIcon({
   size = 28,
   className,
 }: {
-  type: AchievementType;
+  type: string;
   size?: number;
   className?: string;
 }) {
-  const { kind, ghost } = ICON[type];
+  const { kind, ghost } = ICON[type] ?? { kind: "medal" as Kind };
 
   const body = ghost
     ? ({ fill: "none", stroke: "currentColor", strokeWidth: 1.4, strokeLinejoin: "round" } as const)
@@ -115,9 +154,9 @@ export function TrophyIcon({
 }
 
 /** Cups & finals use the gold tone; personal awards stay neutral to preserve hierarchy. */
-export function trophyTone(type: AchievementType): string {
+export function trophyTone(type: string): string {
   // Team/placement honors render gold; personal awards (MVP, All-Pro) stay neutral.
-  return ACHIEVEMENT_META[type].bucket === "individual"
+  return ACHIEVEMENT_META[type as keyof typeof ACHIEVEMENT_META]?.bucket === "individual"
     ? "text-fg-muted"
     : "text-[color:var(--medal-gold)]";
 }

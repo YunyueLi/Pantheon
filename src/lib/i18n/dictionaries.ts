@@ -146,9 +146,9 @@ const en = {
     Peak: "The single most decorated season of the career.",
     Longevity: "Career span and the number of decorated seasons.",
   },
-  role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support" },
+  role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Goalkeeper", DEF: "Defender", MID: "Midfielder", FWD: "Forward" },
   regionCountry: { LCK: "Korea", LPL: "China", LEC: "EMEA", LCS: "N. America", PCS: "Pacific", VCS: "Vietnam", LJL: "Japan", CBLOL: "Brazil", LLA: "Latin America" },
-  preset: { balanced: "Balanced", titles: "Titles purist", individual: "Individual brilliance" },
+  preset: { balanced: "Balanced", titles: "Titles purist", individual: "Individual brilliance", silverware: "Silverware" },
 };
 
 export type Dict = typeof en;
@@ -292,9 +292,9 @@ const zh: Dict = {
     Peak: "生涯中荣誉最密集的单个赛季。",
     Longevity: "生涯跨度与有荣誉入账的赛季数。",
   },
-  role: { Top: "上单", Jungle: "打野", Mid: "中单", Bot: "下路", Support: "辅助" },
+  role: { Top: "上单", Jungle: "打野", Mid: "中单", Bot: "下路", Support: "辅助", GK: "门将", DEF: "后卫", MID: "中场", FWD: "前锋" },
   regionCountry: { LCK: "韩国", LPL: "中国", LEC: "欧洲", LCS: "北美", PCS: "太平洋", VCS: "越南", LJL: "日本", CBLOL: "巴西", LLA: "拉丁美洲" },
-  preset: { balanced: "均衡", titles: "唯冠军论", individual: "个人光环" },
+  preset: { balanced: "均衡", titles: "唯冠军论", individual: "个人光环", silverware: "奖杯优先" },
 };
 
 const ko: Dict = {
@@ -437,9 +437,9 @@ const ko: Dict = {
     Peak: "커리어에서 가장 화려했던 단일 시즌.",
     Longevity: "커리어 기간과 수상 시즌 수.",
   },
-  role: { Top: "탑", Jungle: "정글", Mid: "미드", Bot: "바텀", Support: "서포터" },
+  role: { Top: "탑", Jungle: "정글", Mid: "미드", Bot: "바텀", Support: "서포터", GK: "골키퍼", DEF: "수비수", MID: "미드필더", FWD: "공격수" },
   regionCountry: { LCK: "한국", LPL: "중국", LEC: "유럽", LCS: "북미", PCS: "퍼시픽", VCS: "베트남", LJL: "일본", CBLOL: "브라질", LLA: "라틴 아메리카" },
-  preset: { balanced: "균형", titles: "우승 중심", individual: "개인 기량" },
+  preset: { balanced: "균형", titles: "우승 중심", individual: "개인 기량", silverware: "트로피 중심" },
 };
 
 const ja: Dict = {
@@ -582,9 +582,9 @@ const ja: Dict = {
     Peak: "キャリアで最も輝いた単一シーズン。",
     Longevity: "キャリアの長さと栄誉を得たシーズン数。",
   },
-  role: { Top: "トップ", Jungle: "ジャングル", Mid: "ミッド", Bot: "ボット", Support: "サポート" },
+  role: { Top: "トップ", Jungle: "ジャングル", Mid: "ミッド", Bot: "ボット", Support: "サポート", GK: "ゴールキーパー", DEF: "ディフェンダー", MID: "ミッドフィールダー", FWD: "フォワード" },
   regionCountry: { LCK: "韓国", LPL: "中国", LEC: "EMEA", LCS: "北米", PCS: "太平洋", VCS: "ベトナム", LJL: "日本", CBLOL: "ブラジル", LLA: "ラテンアメリカ" },
-  preset: { balanced: "バランス", titles: "優勝重視", individual: "個人技重視" },
+  preset: { balanced: "バランス", titles: "優勝重視", individual: "個人技重視", silverware: "タイトル重視" },
 };
 
 const de: Dict = {
@@ -733,9 +733,9 @@ const de: Dict = {
     Peak: "Die mit Abstand stärkste einzelne Saison der Karriere.",
     Longevity: "Karrieredauer und Anzahl ausgezeichneter Saisons.",
   },
-  role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support" },
+  role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Goalkeeper", DEF: "Defender", MID: "Midfielder", FWD: "Forward" },
   regionCountry: { LCK: "Korea", LPL: "China", LEC: "EMEA", LCS: "Nordamerika", PCS: "Pazifik", VCS: "Vietnam", LJL: "Japan", CBLOL: "Brasilien", LLA: "Lateinamerika" },
-  preset: { balanced: "Ausgewogen", titles: "Titel-Purist", individual: "Individuelle Klasse" },
+  preset: { balanced: "Ausgewogen", titles: "Titel-Purist", individual: "Individuelle Klasse", silverware: "Titelsammlung" },
 };
 
 const fr: Dict = {
@@ -878,9 +878,9 @@ const fr: Dict = {
     Peak: "La meilleure saison de la carrière, et de loin.",
     Longevity: "Durée de carrière et nombre de saisons primées.",
   },
-  role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support" },
+  role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Goalkeeper", DEF: "Defender", MID: "Midfielder", FWD: "Forward" },
   regionCountry: { LCK: "Corée", LPL: "Chine", LEC: "EMEA", LCS: "Am. du Nord", PCS: "Pacifique", VCS: "Vietnam", LJL: "Japon", CBLOL: "Brésil", LLA: "Amérique latine" },
-  preset: { balanced: "Équilibré", titles: "Puriste des titres", individual: "Brio individuel" },
+  preset: { balanced: "Équilibré", titles: "Puriste des titres", individual: "Brio individuel", silverware: "Palmarès" },
 };
 
 const es: Dict = {
@@ -1023,9 +1023,9 @@ const es: Dict = {
     Peak: "La mejor temporada de la carrera, con diferencia.",
     Longevity: "Duración de la carrera y número de temporadas premiadas.",
   },
-  role: { Top: "Top", Jungle: "Jungla", Mid: "Mid", Bot: "Bot", Support: "Support" },
+  role: { Top: "Top", Jungle: "Jungla", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Portero", DEF: "Defensa", MID: "Centrocampista", FWD: "Delantero" },
   regionCountry: { LCK: "Corea", LPL: "China", LEC: "EMEA", LCS: "Norteamérica", PCS: "Pacífico", VCS: "Vietnam", LJL: "Japón", CBLOL: "Brasil", LLA: "Latinoamérica" },
-  preset: { balanced: "Equilibrado", titles: "Purista de títulos", individual: "Brillo individual" },
+  preset: { balanced: "Equilibrado", titles: "Purista de títulos", individual: "Brillo individual", silverware: "Trofeos" },
 };
 
 export const dictionaries: Record<Locale, Dict> = { en, zh, ko, ja, de, fr, es };

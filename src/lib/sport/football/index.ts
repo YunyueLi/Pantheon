@@ -8,6 +8,7 @@ export const FOOTBALL: SportConfig = {
   basePath: "/football",
   leagues: FOOTBALL_LEAGUES,
   positions: FOOTBALL_POSITIONS,
+  headlineTypes: ["world_cup", "champions_league", "ballon_dor"],
   model: FOOTBALL_MODEL,
   players: FOOTBALL_PLAYERS,
 };
