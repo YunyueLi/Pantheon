@@ -299,4 +299,40 @@ export const FOOTBALL_PLAYERS: Player[] = [
       ...T("club_world_cup", [2009], "Barcelona"),
     ],
   },
+
+  // —— Jiangsu City League (苏超) · 2025 inaugural-season award winners ——
+  {
+    id: "fan-houtai", name: "Fan Houtai", realName: "范厚泰", sport: "football",
+    league: "JSL", position: "MID", team: "Taizhou", nation: "China", active: true, debutYear: 2025,
+    blurb: "Named Best Player of the inaugural 苏超 as Taizhou won the 2025 title on penalties.",
+    achievements: [
+      ...T("jsl_title", [2025], "Taizhou"),
+      ...T("jsl_best_player", [2025]),
+    ],
+  },
+  {
+    id: "zhao-dongxu", name: "Zhao Dongxu", realName: "赵冬旭", sport: "football",
+    league: "JSL", position: "GK", team: "Nantong", nation: "China", active: true, debutYear: 2025,
+    blurb: "Best Goalkeeper of the 2025 苏超; Nantong reached the final before losing on penalties.",
+    achievements: [
+      ...T("jsl_best_gk", [2025]),
+      ...T("jsl_runnerup", [2025], "Nantong"),
+    ],
+  },
+  {
+    id: "teng-shuai", name: "Teng Shuai", realName: "滕帅", sport: "football",
+    league: "JSL", position: "FWD", team: "Nanjing", nation: "China", active: true, debutYear: 2025,
+    blurb: "Former CSL Jiangsu player; shared the 2025 苏超 Golden Boot with nine goals for Nanjing.",
+    achievements: [
+      ...T("jsl_golden_boot", [2025]),
+    ],
+  },
+  {
+    id: "gao-chi", name: "Gao Chi", realName: "高驰", sport: "football",
+    league: "JSL", position: "FWD", team: "Suqian", nation: "China", active: true, debutYear: 2025,
+    blurb: "A university student who shared the 2025 苏超 Golden Boot with nine goals for Suqian.",
+    achievements: [
+      ...T("jsl_golden_boot", [2025]),
+    ],
+  },
 ];

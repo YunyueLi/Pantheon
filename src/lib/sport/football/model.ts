@@ -55,6 +55,15 @@ const ACHIEVEMENTS: Record<string, AchievementMeta> = {
   ballon_dor_3rd: { label: "Ballon d'Or Third", short: "Ballon 3rd", bucket: "placement", tier: "A", base: 120 },
   ucl_runnerup: { label: "Champions League Final", short: "UCL Final", bucket: "placement", tier: "B", base: 110 },
   continental_nt_runnerup: { label: "Continental Final", short: "Cont. Final", bucket: "placement", tier: "B", base: 90 },
+
+  // ---- Jiangsu City League (苏超) — China's viral amateur city league (est. 2025) ----
+  // Small weights by design: a grassroots league sits far below world football, so
+  // these players rank at the foot of the global board but form their own ladder when filtered.
+  jsl_title: { label: "Jiangsu League Title", short: "苏超 Champ", bucket: "team", tier: "B", base: 40 },
+  jsl_best_player: { label: "Jiangsu Best Player", short: "苏超 MVP", bucket: "individual", tier: "B", base: 38 },
+  jsl_golden_boot: { label: "Jiangsu Golden Boot", short: "苏超 Boot", bucket: "individual", tier: "B", base: 30 },
+  jsl_best_gk: { label: "Jiangsu Best Goalkeeper", short: "苏超 GK", bucket: "individual", tier: "B", base: 28 },
+  jsl_runnerup: { label: "Jiangsu League Runner-up", short: "苏超 2nd", bucket: "placement", tier: "B", base: 18 },
 };
 
 const PRESETS: Preset[] = [
@@ -73,13 +82,14 @@ const COUNTRY_TYPES = [
 const CLUB_TYPES = [
   "champions_league", "copa_libertadores", "league_title", "club_world_cup",
   "europa_league", "copa_sudamericana", "continental_club", "domestic_cup",
-  "recopa", "super_cup", "ucl_runnerup",
+  "recopa", "super_cup", "ucl_runnerup", "jsl_title", "jsl_runnerup",
 ];
 // Individual awards.
 const INDIVIDUAL_TYPES = [
   "ballon_dor", "ballon_dor_retro", "fifa_best", "wc_golden_ball", "golden_shoe",
   "wc_golden_boot", "uefa_poty", "yashin_trophy", "league_poty", "league_top_scorer",
   "world_xi", "ballon_dor_2nd", "ballon_dor_3rd",
+  "jsl_best_player", "jsl_golden_boot", "jsl_best_gk",
 ];
 
 const AXES: Axis[] = [
@@ -98,6 +108,7 @@ const CABINET_ORDER = [
   "ballon_dor", "ballon_dor_retro", "fifa_best", "uefa_poty", "yashin_trophy",
   "wc_golden_ball", "wc_golden_boot", "golden_shoe", "league_poty", "league_top_scorer", "world_xi",
   "ballon_dor_2nd", "ballon_dor_3rd", "wc_runnerup", "ucl_runnerup", "continental_nt_runnerup",
+  "jsl_title", "jsl_best_player", "jsl_golden_boot", "jsl_best_gk", "jsl_runnerup",
 ];
 
 export const FOOTBALL_MODEL = {
@@ -116,6 +127,7 @@ export const FOOTBALL_LEAGUES: LeagueMeta[] = [
   { id: "PRIMEIRA", label: "Primeira Liga", country: "Portugal", flag: "🇵🇹" },
   { id: "EREDIVISIE", label: "Eredivisie", country: "Netherlands", flag: "🇳🇱" },
   { id: "SOUTHAM", label: "South America", country: "CONMEBOL", flag: "🌎" },
+  { id: "JSL", label: "Jiangsu City League (苏超)", country: "China", flag: "🇨🇳" },
 ];
 
 export const FOOTBALL_POSITIONS: PositionMeta[] = [
