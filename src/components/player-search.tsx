@@ -56,7 +56,7 @@ export function PlayerSearch() {
     }
     const playerHits: Hit[] = players
       .filter((p) =>
-        [p.name, p.realName, p.team, p.league, p.position]
+        [p.name, p.realName, p.team, p.league, p.position, ...Object.values(p.i18n ?? {})]
           .filter(Boolean)
           .join(" ")
           .toLowerCase()
