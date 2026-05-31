@@ -19,13 +19,14 @@ function sectionLinks(sport: string) {
     return [
       { href: "/football/leaderboard", key: "nav.leaderboard" },
       { href: "/football/compare", key: "nav.compare" },
+      { href: "/football/methodology", key: "nav.methodology" },
     ];
   }
   return [
     { href: "/lol/leaderboard", key: "nav.leaderboard" },
     { href: "/lol/teams", key: "nav.teams" },
     { href: "/lol/compare", key: "nav.compare" },
-    { href: "/methodology", key: "nav.methodology" },
+    { href: "/lol/methodology", key: "nav.methodology" },
   ];
 }
 
