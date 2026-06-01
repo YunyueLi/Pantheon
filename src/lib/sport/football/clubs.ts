@@ -252,6 +252,7 @@ export const NBA_TEAM_ZH: Record<string, string> = {
   // EuroLeague clubs (international basketball players)
   "Cibona Zagreb": "萨格勒布西博纳", "Žalgiris Kaunas": "考纳斯萨格里斯", Panathinaikos: "帕纳辛奈科斯",
   "CSKA Moscow": "莫斯科中央陆军", Olympiacos: "奥林匹亚科斯", "FC Barcelona": "巴塞罗那",
+  "Partizan Belgrade": "贝尔格莱德游击队",
 };
 
 /** Localize a club/team string to zh when available; unchanged for other locales/teams. */

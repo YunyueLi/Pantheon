@@ -37,6 +37,9 @@ const ZH_NAMES: Record<string, string> = {
   "vassilis-spanoulis": "瓦西里斯·斯帕诺利斯", "juan-carlos-navarro": "胡安·卡洛斯·纳瓦罗",
   "manu-ginobili": "马努·吉诺比利", "luis-scola": "路易斯·斯科拉",
   "sarunas-jasikevicius": "萨鲁纳斯·亚西凯维丘斯", "predrag-stojakovic": "佩贾·斯托贾科维奇",
+  "toni-kukoc": "托尼·库科奇", "vlade-divac": "弗拉德·迪瓦茨",
+  "kresimir-cosic": "克雷希米尔·丘西奇", "drazen-dalipagic": "德拉任·达利帕吉奇",
+  "pau-gasol": "保罗·加索尔", "marc-gasol": "马克·加索尔", "ricky-rubio": "里基·卢比奥",
 };
 
 // Stature / influence (0-100): all-time cultural standing, from consensus GOAT
@@ -63,6 +66,8 @@ const STATURE: Record<string, number> = {
   "manu-ginobili": 82, "arvydas-sabonis": 80, "drazen-petrovic": 78, "dejan-bodiroga": 70,
   "predrag-stojakovic": 64, "dimitris-diamantidis": 64, "vassilis-spanoulis": 64, "juan-carlos-navarro": 64,
   "sarunas-marciulionis": 64, "sarunas-jasikevicius": 62, "luis-scola": 60, "theodoros-papaloukas": 60,
+  "pau-gasol": 82, "vlade-divac": 78, "toni-kukoc": 76, "kresimir-cosic": 70, "marc-gasol": 70,
+  "drazen-dalipagic": 68, "ricky-rubio": 60,
 };
 
 const players: Player[] = BASKETBALL_PLAYERS.map((p) => ({

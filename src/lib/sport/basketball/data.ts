@@ -1144,4 +1144,74 @@ export const BASKETBALL_PLAYERS: Player[] = [
       ...A("eurobasket_gold", [2001]), ...A("fiba_gold", [2002]),
     ],
   }),
+  // ---- Yugoslav/Croatian golden generation (World Championship USA-beaters) ----
+  mk({
+    id: "toni-kukoc", name: "Toni Kukoč", nation: "Croatia", position: "SF", team: "Chicago Bulls",
+    league: "INTL", active: false, debut: 1985,
+    blurb: "A 6'11\" point-forward genius and 1990 World Championship MVP — three EuroLeague crowns and three Chicago Bulls titles, after beating the USA for 1990 World gold.",
+    honors: [
+      ...A("nba_title", [1996, 1997, 1998]),
+      ...A("euroleague", [1989, 1990, 1991]), ...A("euroleague_mvp", [1990, 1991, 1993]),
+      ...A("eurobasket_gold", [1989, 1991]), ...A("fiba_gold", [1990]),
+    ],
+  }),
+  mk({
+    id: "vlade-divac", name: "Vlade Divac", nation: "Serbia", position: "C", team: "Los Angeles Lakers",
+    league: "INTL", active: false, debut: 1983,
+    blurb: "Pioneering center and All-Star; two World golds twelve years apart, including FR Yugoslavia's 2002 quarterfinal upset of the NBA-stocked USA.",
+    honors: [
+      ...A("all_star", [2001]),
+      ...A("eurobasket_gold", [1989, 1991, 1995]), ...A("fiba_gold", [1990, 2002]),
+    ],
+  }),
+  mk({
+    id: "kresimir-cosic", name: "Krešimir Ćosić", nation: "Yugoslavia", position: "C", team: "Cibona Zagreb",
+    league: "INTL", active: false, debut: 1964,
+    blurb: "Hall of Fame five-position big man who twice beat the USA for World gold (1970, 1978) and was the first international NCAA All-American.",
+    honors: [
+      ...A("olympic_gold", [1980]),
+      ...A("eurobasket_gold", [1973, 1975, 1977]), ...A("fiba_gold", [1970, 1978]),
+    ],
+  }),
+  mk({
+    id: "drazen-dalipagic", name: "Dražen Dalipagić", nation: "Yugoslavia", position: "SF", team: "Partizan Belgrade",
+    league: "INTL", active: false, debut: 1971,
+    blurb: "Prolific scorer 'Praja' and 1978 World Championship MVP — an Olympic and World gold medalist who toppled the USA en route to the 1978 title.",
+    honors: [
+      ...A("olympic_gold", [1980]),
+      ...A("eurobasket_gold", [1973, 1975, 1977]), ...A("fiba_gold", [1978]),
+    ],
+  }),
+  // ---- Spain's golden generation (foils who pushed Team USA hardest) ----
+  mk({
+    id: "pau-gasol", name: "Pau Gasol", nation: "Spain", position: "PF", team: "Los Angeles Lakers",
+    league: "INTL", active: false, debut: 2001,
+    blurb: "Spain's greatest player and two-time NBA champion; the 2006 World Championship MVP whose golden generation pushed Team USA to the limit but never past it.",
+    honors: [
+      ...A("nba_title", [2009, 2010]), ...A("roy", [2002]),
+      ...A("all_nba_second", [2011, 2015]), ...A("all_nba_third", [2009, 2010]),
+      ...A("all_star", [2006, 2009, 2010, 2011, 2015, 2016]),
+      ...A("eurobasket_gold", [2009, 2011, 2015]), ...A("fiba_gold", [2006]),
+    ],
+  }),
+  mk({
+    id: "marc-gasol", name: "Marc Gasol", nation: "Spain", position: "C", team: "Memphis Grizzlies",
+    league: "INTL", active: false, debut: 2008,
+    blurb: "Cerebral two-way center, 2013 Defensive Player of the Year and 2019 NBA champion; a two-time FIBA World champion for Spain.",
+    honors: [
+      ...A("nba_title", [2019]), ...A("dpoy", [2013]),
+      ...A("all_nba_first", [2015]), ...A("all_nba_second", [2013]),
+      ...A("all_star", [2012, 2015, 2017]),
+      ...A("eurobasket_gold", [2009, 2011]), ...A("fiba_gold", [2006, 2019]),
+    ],
+  }),
+  mk({
+    id: "ricky-rubio", name: "Ricky Rubio", nation: "Spain", position: "PG", team: "Minnesota Timberwolves",
+    league: "INTL", active: false, debut: 2005,
+    blurb: "Flashy floor general and 2019 World Cup MVP; a prodigy who won the EuroLeague at nineteen and ran Spain's deepest international runs.",
+    honors: [
+      ...A("euroleague", [2010]),
+      ...A("eurobasket_gold", [2009, 2011]), ...A("fiba_gold", [2019]),
+    ],
+  }),
 ];
