@@ -115,12 +115,19 @@ export const CLUBS: Club[] = [
  */
 export const TROPHY_WEIGHT = {
   championsLeague: 100,
-  // Libertadores at ~32% of the UCL (not 42%): 19 straight years of European
-  // Club World Cup dominance + the money/talent gap put it clearly second, but
-  // research backs ~0.3–0.5 of the UCL, not the old ~0.67 (player-base 300→230).
-  libertadores: 32,
-  intercontinental: 30,
-  europa: 18,
+  // Libertadores at 40% of the UCL. Research (CONMEBOL prize money, IFFHS rating it
+  // a peer top-tier continental cup, the even 22–21 Intercontinental Cup era) backs
+  // ~0.40–0.55; we sit at the LOW end because Europe has won every world club title
+  // since 2013 and outspends ~7×. Up from a too-low 32 that under-rated South
+  // America's premier trophy.
+  libertadores: 40,
+  // World club title (Intercontinental Cup + FIFA CWC): just below a continental
+  // crown, clearly above the Europa League. Historically a formality in Europe but
+  // a genuine, FIFA-recognized world-champion honor.
+  intercontinental: 35,
+  // Europa League ≈ 0.27 of the UCL — UEFA prize pool ≈0.23, winner payout ≈0.28,
+  // and the coefficient knockout bonus is 2/3 of the UCL. Up from a too-low 18.
+  europa: 27,
   leagueTitle: 10,
 } as const;
 
@@ -131,22 +138,29 @@ export const TROPHY_WEIGHT = {
  * strong discount their domestic dominance would float them above continental winners.
  */
 export const LEAGUE_STRENGTH: Record<string, number> = {
+  // Big four kept level at the top (all current/recent UCL producers).
   PL: 1,
   LALIGA: 1,
   SERIEA: 1,
   BUNDESLIGA: 1,
-  LIGUE1: 0.85,
+  // Ligue 1 is a clear 5th on the UEFA country coefficient (~0.63 of England), not a
+  // near-peer of the big four — trimmed from 0.85.
+  LIGUE1: 0.75,
   PRIMEIRA: 0.55,
   EREDIVISIE: 0.55,
-  BRA: 0.5, // Brazilian Série A — strongest in South America
-  ARG: 0.45, // Argentine Primera División
-  // Weak leagues (Scotland, Serbia, Romania, Uruguay, Paraguay, Colombia): heavy discount.
-  SCO: 0.12,
-  SRB: 0.12,
-  ROU: 0.12,
-  URU: 0.12,
-  PAR: 0.12,
-  COL: 0.12,
+  // Brazil's Série A ranks top-4 worldwide on IFFHS (above the Bundesliga in several
+  // years), Argentina just below. Raised from 0.50/0.45 — but held under the raw
+  // IFFHS level, which double-counts Libertadores runs this model scores separately.
+  BRA: 0.6,
+  ARG: 0.5,
+  // Weak leagues (Scotland, Serbia, Romania, Uruguay, Paraguay, Colombia): heavy
+  // discount so a century of titles in a weak league can't out-rank silverware.
+  SCO: 0.14,
+  SRB: 0.14,
+  ROU: 0.14,
+  URU: 0.14,
+  PAR: 0.14,
+  COL: 0.14,
 };
 
 export function clubHonor(c: Club): number {

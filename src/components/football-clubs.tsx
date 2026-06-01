@@ -31,7 +31,7 @@ function labels(locale: string) {
         southAm: "南美",
         method: "排名方法",
         methodBody:
-          "欧冠 ×100、解放者杯 ×32、洲际杯/世俱杯 ×30、欧联杯 ×18；联赛冠军 ×10 并按联赛强度加权（英超/西甲/意甲/德甲 1.0，法甲 0.85，葡超/荷甲 0.55，巴西 0.50，阿根廷 0.45，其余弱势联赛 0.12）。每家俱乐部数据均逐一核对维基百科，截至 2025 年 8 月 1 日（含 2024-25 赛季与 2025 年世俱杯）。",
+          "欧冠 ×100、解放者杯 ×40、洲际杯/世俱杯 ×35、欧联杯 ×27；联赛冠军 ×10 并按联赛强度加权（英超/西甲/意甲/德甲 1.0，法甲 0.75，巴西 0.60，葡超/荷甲 0.55，阿根廷 0.50，其余弱势联赛 0.14）。权重依据奖金、欧足联系数、IFFHS 联赛排名等公开认可度调研设定；数据逐一核对维基百科，截至 2025 年 8 月 1 日（含 2024-25 赛季与 2025 年世俱杯）。",
       }
     : {
         title: "Top clubs",
@@ -48,7 +48,7 @@ function labels(locale: string) {
         southAm: "South America",
         method: "How we rank",
         methodBody:
-          "Champions League ×100, Copa Libertadores ×32, Intercontinental / Club World Cup ×30, Europa League ×18; league titles ×10 scaled by league strength (PL / LaLiga / Serie A / Bundesliga 1.0, Ligue 1 0.85, Primeira / Eredivisie 0.55, Brazil 0.50, Argentina 0.45, other weaker leagues 0.12). Every club verified against Wikipedia, as of 1 August 2025 (incl. the 2024-25 season and the 2025 Club World Cup).",
+          "Champions League ×100, Copa Libertadores ×40, Intercontinental / Club World Cup ×35, Europa League ×27; league titles ×10 scaled by league strength (PL / LaLiga / Serie A / Bundesliga 1.0, Ligue 1 0.75, Brazil 0.60, Primeira / Eredivisie 0.55, Argentina 0.50, other weaker leagues 0.14). Weights calibrated from prize money, UEFA coefficients and IFFHS league ranks; every club verified against Wikipedia, as of 1 August 2025.",
       };
 }
 
