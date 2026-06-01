@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Clock, GitCompareArrows } from "lucide-react";
 import { achievementPoints, countType, honorScore, percentile, ranked } from "@/lib/sport/honor";
-import { useSport, useHonorLabel, useName, useLeagueLabel } from "@/lib/sport/provider";
+import { useSport, useHonorLabel, useName, useLeagueLabel, usePositionAbbr } from "@/lib/sport/provider";
 import { BackButton } from "@/components/back-button";
 import { teamIdFromName } from "@/lib/teams";
 import { localizeTeam } from "@/lib/sport/football/clubs";
@@ -26,6 +26,7 @@ export function PlayerProfile({ id }: { id: string }) {
   const honorLabel = useHonorLabel();
   const name = useName();
   const leagueLabel = useLeagueLabel();
+  const posAbbr = usePositionAbbr();
   // Localized position label, falling back to the sport model's own label when the
   // dictionary lacks a `role.<id>` entry (e.g. sports added without full i18n).
   const roleLabel = (pid: string) => {
@@ -69,7 +70,7 @@ export function PlayerProfile({ id }: { id: string }) {
               <div className="flex flex-wrap items-center gap-2.5">
                 <h1 className="text-2xl font-semibold tracking-tight">{name(player)}</h1>
                 <RegionBadge region={leagueLabel(player.league)} />
-                <PositionBadge abbr={positionMeta(player.position)?.abbr ?? player.position} />
+                <PositionBadge abbr={posAbbr(player.position)} />
                 {!player.active && (
                   <span className="text-[10px] uppercase tracking-wide text-fg-subtle">{t("common.retired")}</span>
                 )}

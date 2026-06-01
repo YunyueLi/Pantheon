@@ -164,6 +164,9 @@ export type Dict = Omit<typeof en, "honorType" | "axis"> & {
   axis: Record<string, string>;
   // Optional per-locale league/region display names; falls back to the league's own label.
   league?: Record<string, string>;
+  // Optional per-locale SHORT position codes for the badge (e.g. zh 得分后卫 → 分卫);
+  // falls back to the sport model's own abbr when a locale omits it.
+  roleAbbr?: Record<string, string>;
 };
 
 const zh: Dict = {
@@ -370,6 +373,7 @@ const zh: Dict = {
     Longevity: "生涯跨度与有荣誉入账的赛季数。",
   },
   role: { Top: "上单", Jungle: "打野", Mid: "中单", Bot: "下路", Support: "辅助", GK: "门将", DEF: "后卫", MID: "中场", FWD: "前锋", Manager: "主教练", PG: "控球后卫", SG: "得分后卫", SF: "小前锋", PF: "大前锋", C: "中锋" },
+  roleAbbr: { Top: "上单", Jungle: "打野", Mid: "中单", Bot: "下路", Support: "辅助", GK: "门将", DEF: "后卫", MID: "中场", FWD: "前锋", Manager: "教练", PG: "控卫", SG: "分卫", SF: "小前", PF: "大前", C: "中锋" },
   regionCountry: { LCK: "韩国", LPL: "中国", LEC: "欧洲", LCS: "北美", PCS: "太平洋", VCS: "越南", LJL: "日本", CBLOL: "巴西", LLA: "拉丁美洲" },
   preset: { balanced: "均衡", titles: "唯冠军论", individual: "个人光环", silverware: "奖杯优先" },
 };

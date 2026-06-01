@@ -74,3 +74,14 @@ export function useLeagueLabel() {
     return v !== key ? v : leagueMeta(id)?.label ?? id;
   };
 }
+
+/** Localized SHORT position code for the badge: `roleAbbr.<id>` when present, else the model abbr. */
+export function usePositionAbbr() {
+  const { t } = useI18n();
+  const { positionMeta } = useSport();
+  return (id: string) => {
+    const key = `roleAbbr.${id}`;
+    const v = t(key);
+    return v !== key ? v : positionMeta(id)?.abbr ?? id;
+  };
+}

@@ -12,7 +12,7 @@ import {
 import { honorScore, countType, careerSpan, activeInDecade } from "@/lib/sport/honor";
 import { localizeTeam } from "@/lib/sport/football/clubs";
 import type { Player } from "@/lib/sport/types";
-import { useSport, useName, useLeagueLabel } from "@/lib/sport/provider";
+import { useSport, useName, useLeagueLabel, usePositionAbbr } from "@/lib/sport/provider";
 import { cn, formatNumber } from "@/lib/utils";
 import { Pills } from "@/components/pills";
 import { SelectMenu } from "@/components/ui/select";
@@ -29,6 +29,7 @@ export function Leaderboard() {
   const { players, model, leagues, positions, headlineTypes, basePath } = config;
   const name = useName();
   const leagueLabel = useLeagueLabel();
+  const posAbbr = usePositionAbbr();
   const hasCoaches = useMemo(() => players.some((p) => p.kind === "coach"), [players]);
   const [kind, setKind] = useState<string>("player");
   const kindOpts = [
@@ -160,7 +161,7 @@ export function Leaderboard() {
         accessorFn: (r) => r.player.position,
         cell: ({ row }) => (
           <PositionBadge
-            abbr={positionMeta(row.original.player.position)?.abbr ?? row.original.player.position}
+            abbr={posAbbr(row.original.player.position)}
           />
         ),
       },
@@ -275,7 +276,7 @@ export function Leaderboard() {
                     </div>
                     <div className="mt-1 flex items-center gap-1.5">
                       <RegionBadge region={leagueLabel(p.league)} />
-                      <PositionBadge abbr={positionMeta(p.position)?.abbr ?? p.position} />
+                      <PositionBadge abbr={posAbbr(p.position)} />
                     </div>
                   </div>
                   <div className="tnum shrink-0 text-right text-sm font-semibold text-fg">

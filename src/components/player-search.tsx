@@ -24,7 +24,11 @@ export function PlayerSearch() {
   const config = getSport(sportId)!;
   const players = config.players;
   const base = config.basePath;
-  const posAbbr = (id: string) => config.positions.find((p) => p.id === id)?.abbr ?? id;
+  const posAbbr = (id: string) => {
+    const k = `roleAbbr.${id}`;
+    const v = t(k);
+    return v !== k ? v : config.positions.find((p) => p.id === id)?.abbr ?? id;
+  };
   const name = (e: { name: string; i18n?: Record<string, string> }) => e.i18n?.[locale] ?? e.name;
   const leagueLabel = (id: string) => {
     const k = `league.${id}`;
