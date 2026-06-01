@@ -30,11 +30,14 @@ export default function Home() {
       <section className="relative overflow-hidden border-b border-border">
         <div className="pointer-events-none absolute inset-0 grid-bg opacity-60 [mask-image:radial-gradient(120%_80%_at_50%_0%,black,transparent_70%)]" />
         <div className="relative mx-auto max-w-6xl px-5 py-24">
-          <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-fg-subtle">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-medium uppercase tracking-wide text-fg-subtle">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent" />
-            {t("nav.lol")}
-            <span className="text-fg-subtle/70">· {t("nav.football")}</span>
-            <span className="text-fg-subtle/70">· {t("nav.basketball")}</span>
+            {sports.map((s, i) => (
+              <span key={s.id} className={i > 0 ? "text-fg-subtle/70" : undefined}>
+                {i > 0 && "· "}
+                {t(`nav.${s.id}`)}
+              </span>
+            ))}
           </div>
           <h1 className="mt-5 max-w-3xl text-balance text-5xl font-semibold leading-[1.05] tracking-tight">
             {t("home.heroTitle")}
