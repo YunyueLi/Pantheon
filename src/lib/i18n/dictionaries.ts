@@ -1,7 +1,7 @@
 import type { Locale } from "./config";
 
 const en = {
-  nav: { explore: "Explore", leaderboard: "Leaderboard", teams: "Teams", compare: "Compare", methodology: "Methodology", lol: "LoL", football: "Football", clubs: "Clubs" },
+  nav: { explore: "Explore", leaderboard: "Leaderboard", teams: "Teams", compare: "Compare", methodology: "Methodology", lol: "LoL", football: "Football", basketball: "Basketball", clubs: "Clubs" },
   search: { label: "Search players", placeholder: "Search players, teams…", empty: "No players found" },
   theme: { gold: "Gold", indigo: "Indigo" },
   common: {
@@ -152,7 +152,7 @@ const en = {
     Peak: "The single most decorated season of the career.",
     Longevity: "Career span and the number of decorated seasons.",
   },
-  role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Goalkeeper", DEF: "Defender", MID: "Midfielder", FWD: "Forward", Manager: "Manager" },
+  role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Goalkeeper", DEF: "Defender", MID: "Midfielder", FWD: "Forward", Manager: "Manager", PG: "Point Guard", SG: "Shooting Guard", SF: "Small Forward", PF: "Power Forward", C: "Center" },
   regionCountry: { LCK: "Korea", LPL: "China", LEC: "EMEA", LCS: "N. America", PCS: "Pacific", VCS: "Vietnam", LJL: "Japan", CBLOL: "Brazil", LLA: "Latin America" },
   preset: { balanced: "Balanced", titles: "Titles purist", individual: "Individual brilliance", silverware: "Silverware" },
 };
@@ -167,7 +167,7 @@ export type Dict = Omit<typeof en, "honorType" | "axis"> & {
 };
 
 const zh: Dict = {
-  nav: { explore: "探索", leaderboard: "排行榜", teams: "战队", compare: "对比", methodology: "算法说明", lol: "英雄联盟", football: "足球", clubs: "俱乐部" },
+  nav: { explore: "探索", leaderboard: "排行榜", teams: "战队", compare: "对比", methodology: "算法说明", lol: "英雄联盟", football: "足球", basketball: "篮球", clubs: "俱乐部" },
   search: { label: "搜索选手", placeholder: "搜索选手、战队…", empty: "未找到选手" },
   theme: { gold: "金色", indigo: "靛蓝" },
   common: {
@@ -335,6 +335,24 @@ const zh: Dict = {
     jsl_golden_boot: "苏超金靴",
     jsl_best_gk: "苏超最佳门将",
     jsl_runnerup: "苏超亚军",
+    nba_title: "NBA总冠军",
+    nba_finals_mvp: "总决赛MVP",
+    mvp: "常规赛MVP",
+    dpoy: "年度最佳防守球员",
+    scoring_title: "得分王",
+    all_nba_first: "最佳阵容一阵",
+    all_nba_second: "最佳阵容二阵",
+    all_nba_third: "最佳阵容三阵",
+    all_defensive_first: "最佳防守阵容一阵",
+    all_star: "全明星",
+    stat_title: "单项数据王",
+    roy: "年度最佳新秀",
+    olympic_gold: "奥运金牌",
+    fiba_gold: "FIBA世界杯冠军",
+    euroleague: "欧洲篮球联赛",
+    aba_title: "ABA总冠军",
+    aba_mvp: "ABA MVP",
+    finals_loss: "总决赛（亚军）",
   },
   bucket: { team: "团队冠军", individual: "个人奖项", placement: "决赛之旅" },
   bucketDesc: {
@@ -342,7 +360,7 @@ const zh: Dict = {
     individual: "MVP 与最佳阵容，按得票率折算",
     placement: "止步于决赛、未能夺冠的旅程",
   },
-  axis: { International: "国际赛", Domestic: "国内赛", Individual: "个人", Peak: "巅峰", Longevity: "长青", Country: "国家队", Club: "俱乐部" },
+  axis: { International: "国际赛", Domestic: "国内赛", Individual: "个人", Peak: "巅峰", Longevity: "长青", Country: "国家队", Club: "俱乐部", Titles: "冠军", Honors: "入选阵容" },
   league: { PL: "英超", LALIGA: "西甲", SERIEA: "意甲", BUNDESLIGA: "德甲", LIGUE1: "法甲", PRIMEIRA: "葡超", EREDIVISIE: "荷甲", SOUTHAM: "南美", SOVIET: "苏联联赛", JSL: "苏超" },
   axisDesc: {
     International: "世界赛与 MSI 冠军、国际赛 MVP 及决赛经历。",
@@ -351,13 +369,13 @@ const zh: Dict = {
     Peak: "生涯中荣誉最密集的单个赛季。",
     Longevity: "生涯跨度与有荣誉入账的赛季数。",
   },
-  role: { Top: "上单", Jungle: "打野", Mid: "中单", Bot: "下路", Support: "辅助", GK: "门将", DEF: "后卫", MID: "中场", FWD: "前锋", Manager: "主教练" },
+  role: { Top: "上单", Jungle: "打野", Mid: "中单", Bot: "下路", Support: "辅助", GK: "门将", DEF: "后卫", MID: "中场", FWD: "前锋", Manager: "主教练", PG: "控球后卫", SG: "得分后卫", SF: "小前锋", PF: "大前锋", C: "中锋" },
   regionCountry: { LCK: "韩国", LPL: "中国", LEC: "欧洲", LCS: "北美", PCS: "太平洋", VCS: "越南", LJL: "日本", CBLOL: "巴西", LLA: "拉丁美洲" },
   preset: { balanced: "均衡", titles: "唯冠军论", individual: "个人光环", silverware: "奖杯优先" },
 };
 
 const ko: Dict = {
-  nav: { explore: "둘러보기", leaderboard: "리더보드", teams: "팀", compare: "비교", methodology: "산정 방식", lol: "LoL", football: "축구", clubs: "클럽" },
+  nav: { explore: "둘러보기", leaderboard: "리더보드", teams: "팀", compare: "비교", methodology: "산정 방식", lol: "LoL", football: "축구", basketball: "농구", clubs: "클럽" },
   search: { label: "선수 검색", placeholder: "선수·팀 검색…", empty: "선수를 찾을 수 없습니다" },
   theme: { gold: "골드", indigo: "인디고" },
   common: {
@@ -502,13 +520,13 @@ const ko: Dict = {
     Peak: "커리어에서 가장 화려했던 단일 시즌.",
     Longevity: "커리어 기간과 수상 시즌 수.",
   },
-  role: { Top: "탑", Jungle: "정글", Mid: "미드", Bot: "바텀", Support: "서포터", GK: "골키퍼", DEF: "수비수", MID: "미드필더", FWD: "공격수", Manager: "감독" },
+  role: { Top: "탑", Jungle: "정글", Mid: "미드", Bot: "바텀", Support: "서포터", GK: "골키퍼", DEF: "수비수", MID: "미드필더", FWD: "공격수", Manager: "감독", PG: "포인트 가드", SG: "슈팅 가드", SF: "스몰 포워드", PF: "파워 포워드", C: "센터" },
   regionCountry: { LCK: "한국", LPL: "중국", LEC: "유럽", LCS: "북미", PCS: "퍼시픽", VCS: "베트남", LJL: "일본", CBLOL: "브라질", LLA: "라틴 아메리카" },
   preset: { balanced: "균형", titles: "우승 중심", individual: "개인 기량", silverware: "트로피 중심" },
 };
 
 const ja: Dict = {
-  nav: { explore: "ホーム", leaderboard: "ランキング", teams: "チーム", compare: "比較", methodology: "算出方法", lol: "LoL", football: "サッカー", clubs: "クラブ" },
+  nav: { explore: "ホーム", leaderboard: "ランキング", teams: "チーム", compare: "比較", methodology: "算出方法", lol: "LoL", football: "サッカー", basketball: "バスケ", clubs: "クラブ" },
   search: { label: "選手を検索", placeholder: "選手・チームを検索…", empty: "選手が見つかりません" },
   theme: { gold: "ゴールド", indigo: "インディゴ" },
   common: {
@@ -653,13 +671,13 @@ const ja: Dict = {
     Peak: "キャリアで最も輝いた単一シーズン。",
     Longevity: "キャリアの長さと栄誉を得たシーズン数。",
   },
-  role: { Top: "トップ", Jungle: "ジャングル", Mid: "ミッド", Bot: "ボット", Support: "サポート", GK: "ゴールキーパー", DEF: "ディフェンダー", MID: "ミッドフィールダー", FWD: "フォワード", Manager: "監督" },
+  role: { Top: "トップ", Jungle: "ジャングル", Mid: "ミッド", Bot: "ボット", Support: "サポート", GK: "ゴールキーパー", DEF: "ディフェンダー", MID: "ミッドフィールダー", FWD: "フォワード", Manager: "監督", PG: "ポイントガード", SG: "シューティングガード", SF: "スモールフォワード", PF: "パワーフォワード", C: "センター" },
   regionCountry: { LCK: "韓国", LPL: "中国", LEC: "EMEA", LCS: "北米", PCS: "太平洋", VCS: "ベトナム", LJL: "日本", CBLOL: "ブラジル", LLA: "ラテンアメリカ" },
   preset: { balanced: "バランス", titles: "優勝重視", individual: "個人技重視", silverware: "タイトル重視" },
 };
 
 const de: Dict = {
-  nav: { explore: "Entdecken", leaderboard: "Rangliste", teams: "Teams", compare: "Vergleich", methodology: "Methodik", lol: "LoL", football: "Fußball", clubs: "Vereine" },
+  nav: { explore: "Entdecken", leaderboard: "Rangliste", teams: "Teams", compare: "Vergleich", methodology: "Methodik", lol: "LoL", football: "Fußball", basketball: "Basketball", clubs: "Vereine" },
   search: { label: "Spieler suchen", placeholder: "Spieler, Teams suchen…", empty: "Keine Spieler gefunden" },
   theme: { gold: "Gold", indigo: "Indigo" },
   common: {
@@ -810,13 +828,13 @@ const de: Dict = {
     Peak: "Die mit Abstand stärkste einzelne Saison der Karriere.",
     Longevity: "Karrieredauer und Anzahl ausgezeichneter Saisons.",
   },
-  role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Torwart", DEF: "Verteidiger", MID: "Mittelfeld", FWD: "Stürmer", Manager: "Trainer" },
+  role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Torwart", DEF: "Verteidiger", MID: "Mittelfeld", FWD: "Stürmer", Manager: "Trainer", PG: "Point Guard", SG: "Shooting Guard", SF: "Small Forward", PF: "Power Forward", C: "Center" },
   regionCountry: { LCK: "Korea", LPL: "China", LEC: "EMEA", LCS: "Nordamerika", PCS: "Pazifik", VCS: "Vietnam", LJL: "Japan", CBLOL: "Brasilien", LLA: "Lateinamerika" },
   preset: { balanced: "Ausgewogen", titles: "Titel-Purist", individual: "Individuelle Klasse", silverware: "Titelsammlung" },
 };
 
 const fr: Dict = {
-  nav: { explore: "Explorer", leaderboard: "Classement", teams: "Équipes", compare: "Comparer", methodology: "Méthodologie", lol: "LoL", football: "Football", clubs: "Clubs" },
+  nav: { explore: "Explorer", leaderboard: "Classement", teams: "Équipes", compare: "Comparer", methodology: "Méthodologie", lol: "LoL", football: "Football", basketball: "Basket", clubs: "Clubs" },
   search: { label: "Rechercher des joueurs", placeholder: "Rechercher joueurs, équipes…", empty: "Aucun joueur trouvé" },
   theme: { gold: "Or", indigo: "Indigo" },
   common: {
@@ -961,13 +979,13 @@ const fr: Dict = {
     Peak: "La meilleure saison de la carrière, et de loin.",
     Longevity: "Durée de carrière et nombre de saisons primées.",
   },
-  role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Gardien", DEF: "Défenseur", MID: "Milieu", FWD: "Attaquant", Manager: "Entraîneur" },
+  role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Gardien", DEF: "Défenseur", MID: "Milieu", FWD: "Attaquant", Manager: "Entraîneur", PG: "Meneur", SG: "Arrière", SF: "Ailier", PF: "Ailier fort", C: "Pivot" },
   regionCountry: { LCK: "Corée", LPL: "Chine", LEC: "EMEA", LCS: "Am. du Nord", PCS: "Pacifique", VCS: "Vietnam", LJL: "Japon", CBLOL: "Brésil", LLA: "Amérique latine" },
   preset: { balanced: "Équilibré", titles: "Puriste des titres", individual: "Brio individuel", silverware: "Palmarès" },
 };
 
 const es: Dict = {
-  nav: { explore: "Explorar", leaderboard: "Clasificación", teams: "Equipos", compare: "Comparar", methodology: "Metodología", lol: "LoL", football: "Fútbol", clubs: "Clubes" },
+  nav: { explore: "Explorar", leaderboard: "Clasificación", teams: "Equipos", compare: "Comparar", methodology: "Metodología", lol: "LoL", football: "Fútbol", basketball: "Baloncesto", clubs: "Clubes" },
   search: { label: "Buscar jugadores", placeholder: "Buscar jugadores, equipos…", empty: "No se encontraron jugadores" },
   theme: { gold: "Oro", indigo: "Índigo" },
   common: {
@@ -1112,7 +1130,7 @@ const es: Dict = {
     Peak: "La mejor temporada de la carrera, con diferencia.",
     Longevity: "Duración de la carrera y número de temporadas premiadas.",
   },
-  role: { Top: "Top", Jungle: "Jungla", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Portero", DEF: "Defensa", MID: "Centrocampista", FWD: "Delantero", Manager: "Entrenador" },
+  role: { Top: "Top", Jungle: "Jungla", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Portero", DEF: "Defensa", MID: "Centrocampista", FWD: "Delantero", Manager: "Entrenador", PG: "Base", SG: "Escolta", SF: "Alero", PF: "Ala-pívot", C: "Pívot" },
   regionCountry: { LCK: "Corea", LPL: "China", LEC: "EMEA", LCS: "Norteamérica", PCS: "Pacífico", VCS: "Vietnam", LJL: "Japón", CBLOL: "Brasil", LLA: "Latinoamérica" },
   preset: { balanced: "Equilibrado", titles: "Purista de títulos", individual: "Brillo individual", silverware: "Trofeos" },
 };

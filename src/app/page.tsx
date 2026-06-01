@@ -34,6 +34,7 @@ export default function Home() {
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent" />
             {t("nav.lol")}
             <span className="text-fg-subtle/70">· {t("nav.football")}</span>
+            <span className="text-fg-subtle/70">· {t("nav.basketball")}</span>
           </div>
           <h1 className="mt-5 max-w-3xl text-balance text-5xl font-semibold leading-[1.05] tracking-tight">
             {t("home.heroTitle")}

@@ -20,7 +20,7 @@ export function PlayerSearch() {
   const { t, locale } = useI18n();
   const router = useRouter();
   const path = usePathname();
-  const sportId = path.startsWith("/football") ? "football" : "lol";
+  const sportId = path.startsWith("/football") ? "football" : path.startsWith("/basketball") ? "basketball" : "lol";
   const config = getSport(sportId)!;
   const players = config.players;
   const base = config.basePath;

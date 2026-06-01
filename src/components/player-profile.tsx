@@ -26,6 +26,12 @@ export function PlayerProfile({ id }: { id: string }) {
   const honorLabel = useHonorLabel();
   const name = useName();
   const leagueLabel = useLeagueLabel();
+  // Localized position label, falling back to the sport model's own label when the
+  // dictionary lacks a `role.<id>` entry (e.g. sports added without full i18n).
+  const roleLabel = (pid: string) => {
+    const v = t(`role.${pid}`);
+    return v !== `role.${pid}` ? v : positionMeta(pid)?.label ?? pid;
+  };
   const player = players.find((p) => p.id === id);
   if (!player) return null;
 
@@ -105,7 +111,7 @@ export function PlayerProfile({ id }: { id: string }) {
               </div>
               <div className="tnum text-4xl font-semibold leading-none text-accent">{formatNumber(score)}</div>
               <div className="mt-1.5 text-xs text-fg-muted">
-                {t("player.topPct", { p: Math.max(1, 100 - pct), role: t(`role.${player.position}`) })}
+                {t("player.topPct", { p: Math.max(1, 100 - pct), role: roleLabel(player.position) })}
               </div>
               {player.stature != null && (
                 <div className="mt-1 text-xs text-fg-muted">
@@ -117,7 +123,7 @@ export function PlayerProfile({ id }: { id: string }) {
             </div>
             <div className="flex flex-wrap gap-1.5">
               <RankChip label={t("player.rankOverall")} value={overall.rank} />
-              <RankChip label={t(`role.${player.position}`)} value={roleRank.rank} />
+              <RankChip label={roleLabel(player.position)} value={roleRank.rank} />
               <RankChip label={leagueLabel(player.league)} value={regionRank.rank} />
             </div>
             <Button asChild variant="outline" size="sm">

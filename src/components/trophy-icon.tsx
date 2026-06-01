@@ -60,6 +60,26 @@ const ICON: Record<string, { kind: Kind; ghost?: boolean }> = {
   jsl_best_player: { kind: "star" },
   jsl_golden_boot: { kind: "star" },
   jsl_best_gk: { kind: "star" },
+
+  // Basketball
+  nba_title: { kind: "worlds" },
+  aba_title: { kind: "regional" },
+  olympic_gold: { kind: "medal" },
+  fiba_gold: { kind: "medal" },
+  euroleague: { kind: "regional" },
+  mvp: { kind: "medal" },
+  nba_finals_mvp: { kind: "medal" },
+  aba_mvp: { kind: "medal" },
+  dpoy: { kind: "star" },
+  scoring_title: { kind: "star" },
+  all_nba_first: { kind: "star" },
+  all_nba_second: { kind: "star" },
+  all_nba_third: { kind: "star" },
+  all_defensive_first: { kind: "star" },
+  all_star: { kind: "star" },
+  stat_title: { kind: "star" },
+  roy: { kind: "star" },
+  finals_loss: { kind: "regional", ghost: true },
 };
 
 export function TrophyIcon({

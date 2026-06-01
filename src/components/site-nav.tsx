@@ -19,6 +19,13 @@ function sectionLinks(sport: string) {
       { href: "/football/methodology", key: "nav.methodology" },
     ];
   }
+  if (sport === "basketball") {
+    return [
+      { href: "/basketball/leaderboard", key: "nav.leaderboard" },
+      { href: "/basketball/compare", key: "nav.compare" },
+      { href: "/basketball/methodology", key: "nav.methodology" },
+    ];
+  }
   return [
     { href: "/lol/leaderboard", key: "nav.leaderboard" },
     { href: "/lol/teams", key: "nav.teams" },
@@ -30,7 +37,7 @@ function sectionLinks(sport: string) {
 export function SiteNav() {
   const path = usePathname();
   const { t } = useI18n();
-  const sport = path.startsWith("/football") ? "football" : "lol";
+  const sport = path.startsWith("/football") ? "football" : path.startsWith("/basketball") ? "basketball" : "lol";
   const links = sectionLinks(sport);
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-[color:var(--bg-glass)] backdrop-blur-xl backdrop-saturate-150">
