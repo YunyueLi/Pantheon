@@ -1,7 +1,7 @@
 import type { Locale } from "./config";
 
 const en = {
-  nav: { explore: "Explore", leaderboard: "Leaderboard", teams: "Teams", compare: "Compare", methodology: "Methodology", lol: "LoL", football: "Football", basketball: "Basketball", clubs: "Clubs" },
+  nav: { explore: "Explore", leaderboard: "Leaderboard", teams: "Teams", compare: "Compare", methodology: "Methodology", lol: "LoL", football: "Football", basketball: "Basketball", clubs: "Clubs", f1: "F1", "table-tennis": "Table Tennis", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "Search players", placeholder: "Search players, teams…", empty: "No players found" },
   theme: { gold: "Gold", indigo: "Indigo" },
   common: {
@@ -72,6 +72,7 @@ const en = {
     statureBase: "base",
     eraStrength: "era",
     topPct: "Top {p}% of {role} players",
+    topPctNoRole: "Top {p}% all-time",
     careerTimeline: "Career timeline",
     timelineHint: "Honor points per season · highlighted = Worlds",
     indexComposition: "Index composition",
@@ -172,7 +173,7 @@ export type Dict = Omit<typeof en, "honorType" | "axis"> & {
 };
 
 const zh: Dict = {
-  nav: { explore: "探索", leaderboard: "排行榜", teams: "战队", compare: "对比", methodology: "算法说明", lol: "英雄联盟", football: "足球", basketball: "篮球", clubs: "俱乐部" },
+  nav: { explore: "探索", leaderboard: "排行榜", teams: "战队", compare: "对比", methodology: "算法说明", lol: "英雄联盟", football: "足球", basketball: "篮球", clubs: "俱乐部", f1: "F1", "table-tennis": "乒乓球", go: "围棋", dota2: "Dota 2", valorant: "无畏契约" },
   search: { label: "搜索选手", placeholder: "搜索选手、战队…", empty: "未找到选手" },
   theme: { gold: "金色", indigo: "靛蓝" },
   common: {
@@ -243,6 +244,7 @@ const zh: Dict = {
     statureBase: "基础",
     eraStrength: "时代强度",
     topPct: "{role}位置 前 {p}%",
+    topPctNoRole: "历史前 {p}%",
     careerTimeline: "生涯时间线",
     timelineHint: "每赛季荣誉分 · 高亮 = 世界赛",
     indexComposition: "指数构成",
@@ -362,6 +364,13 @@ const zh: Dict = {
     euroleague_mvp: "欧洲联赛MVP",
     eurobasket_gold: "欧锦赛冠军",
     finals_loss: "总决赛（亚军）",
+    wdc: "年度车手总冠军", race_win: "分站冠军", pole: "杆位", podium: "登台",
+    olympic_singles_gold: "奥运单打金牌", world_singles_gold: "世锦赛单打冠军", world_cup_singles_gold: "世界杯单打冠军",
+    career_grand_slam: "大满贯", olympic_team_gold: "奥运团体金牌", world_team_gold: "世锦赛团体冠军",
+    olympic_doubles_gold: "奥运双打金牌", world_doubles_gold: "世锦赛双打冠军", tour_finals_gold: "总决赛冠军",
+    world_title: "世界大赛冠军", domestic_title: "国内头衔",
+    ti_title: "国际邀请赛冠军", ti_runner_up: "TI 四强", valve_major_title: "V社锦标赛冠军", premier_title: "顶级锦标赛冠军", best_player_award: "最佳选手",
+    champions_title: "全球总决赛冠军", champions_mvp: "总决赛MVP", masters_title: "大师赛冠军", masters_mvp: "大师赛MVP", vct_regional: "赛区联赛冠军", champions_finalist: "总决赛亚军",
   },
   bucket: { team: "团队冠军", individual: "个人奖项", placement: "决赛之旅" },
   bucketDesc: {
@@ -369,7 +378,7 @@ const zh: Dict = {
     individual: "MVP 与最佳阵容，按得票率折算",
     placement: "止步于决赛、未能夺冠的旅程",
   },
-  axis: { International: "国际赛", Domestic: "国内赛", Individual: "个人", Peak: "巅峰", Longevity: "长青", Country: "国家队", Club: "俱乐部", Titles: "冠军", Honors: "入选阵容", Placement: "决赛之旅" },
+  axis: { International: "国际赛", Domestic: "国内赛", Individual: "个人", Peak: "巅峰", Longevity: "长青", Country: "国家队", Club: "俱乐部", Titles: "冠军", Honors: "入选阵容", Placement: "决赛之旅", Wins: "胜场", Poles: "杆位", Podiums: "领奖台", Singles: "单打", Team: "团体", Doubles: "双打", Tour: "巡回赛", World: "世界大赛", TI: "国际邀请赛", Majors: "Major", Premier: "顶级赛事", Awards: "个人奖", Champions: "全球总决赛", Masters: "大师赛", MVPs: "MVP", Regional: "赛区" },
   league: { PL: "英超", LALIGA: "西甲", SERIEA: "意甲", BUNDESLIGA: "德甲", LIGUE1: "法甲", PRIMEIRA: "葡超", EREDIVISIE: "荷甲", SOUTHAM: "南美", SOVIET: "苏联联赛", JSL: "苏超", INTL: "国际" },
   axisDesc: {
     International: "世界赛与 MSI 冠军、国际赛 MVP 及决赛经历。",
@@ -379,13 +388,13 @@ const zh: Dict = {
     Longevity: "生涯跨度与有荣誉入账的赛季数。",
   },
   role: { Top: "上单", Jungle: "打野", Mid: "中单", Bot: "下路", Support: "辅助", GK: "门将", DEF: "后卫", MID: "中场", FWD: "前锋", Manager: "主教练", PG: "控球后卫", SG: "得分后卫", SF: "小前锋", PF: "大前锋", C: "中锋" },
-  roleAbbr: { Top: "上单", Jungle: "打野", Mid: "中单", Bot: "下路", Support: "辅助", GK: "门将", DEF: "后卫", MID: "中场", FWD: "前锋", Manager: "教练", PG: "控卫", SG: "分卫", SF: "小前", PF: "大前", C: "中锋" },
+  roleAbbr: { Top: "上单", Jungle: "打野", Mid: "中单", Bot: "下路", Support: "辅助", GK: "门将", DEF: "后卫", MID: "中场", FWD: "前锋", Manager: "教练", PG: "控卫", SG: "分卫", SF: "小前", PF: "大前", C: "中锋", M: "男子", W: "女子", carry: "一号位", mid: "中单", offlane: "劣单", "soft-support": "软辅", "hard-support": "硬辅", duelist: "决斗", controller: "控场", initiator: "先锋", sentinel: "哨位", flex: "自由人", igl: "指挥" },
   regionCountry: { LCK: "韩国", LPL: "中国", LEC: "欧洲", LCS: "北美", PCS: "太平洋", VCS: "越南", LJL: "日本", CBLOL: "巴西", LLA: "拉丁美洲" },
   preset: { balanced: "均衡", titles: "唯冠军论", individual: "个人光环", silverware: "奖杯优先" },
 };
 
 const ko: Dict = {
-  nav: { explore: "둘러보기", leaderboard: "리더보드", teams: "팀", compare: "비교", methodology: "산정 방식", lol: "LoL", football: "축구", basketball: "농구", clubs: "클럽" },
+  nav: { explore: "둘러보기", leaderboard: "리더보드", teams: "팀", compare: "비교", methodology: "산정 방식", lol: "LoL", football: "축구", basketball: "농구", clubs: "클럽", f1: "F1", "table-tennis": "탁구", go: "바둑", dota2: "Dota 2", valorant: "발로란트" },
   search: { label: "선수 검색", placeholder: "선수·팀 검색…", empty: "선수를 찾을 수 없습니다" },
   theme: { gold: "골드", indigo: "인디고" },
   common: {
@@ -456,6 +465,7 @@ const ko: Dict = {
     statureBase: "기본",
     eraStrength: "시대",
     topPct: "{role} 중 상위 {p}%",
+    topPctNoRole: "역대 상위 {p}%",
     careerTimeline: "커리어 타임라인",
     timelineHint: "시즌별 명예 점수 · 강조 = 월즈",
     indexComposition: "지수 구성",
@@ -538,7 +548,7 @@ const ko: Dict = {
 };
 
 const ja: Dict = {
-  nav: { explore: "ホーム", leaderboard: "ランキング", teams: "チーム", compare: "比較", methodology: "算出方法", lol: "LoL", football: "サッカー", basketball: "バスケ", clubs: "クラブ" },
+  nav: { explore: "ホーム", leaderboard: "ランキング", teams: "チーム", compare: "比較", methodology: "算出方法", lol: "LoL", football: "サッカー", basketball: "バスケ", clubs: "クラブ", f1: "F1", "table-tennis": "卓球", go: "囲碁", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "選手を検索", placeholder: "選手・チームを検索…", empty: "選手が見つかりません" },
   theme: { gold: "ゴールド", indigo: "インディゴ" },
   common: {
@@ -609,6 +619,7 @@ const ja: Dict = {
     statureBase: "基礎",
     eraStrength: "時代",
     topPct: "{role}で上位 {p}%",
+    topPctNoRole: "歴代上位 {p}%",
     careerTimeline: "キャリアタイムライン",
     timelineHint: "シーズン別の名誉点 ・ 強調 = ワールドズ",
     indexComposition: "指数の内訳",
@@ -691,7 +702,7 @@ const ja: Dict = {
 };
 
 const de: Dict = {
-  nav: { explore: "Entdecken", leaderboard: "Rangliste", teams: "Teams", compare: "Vergleich", methodology: "Methodik", lol: "LoL", football: "Fußball", basketball: "Basketball", clubs: "Vereine" },
+  nav: { explore: "Entdecken", leaderboard: "Rangliste", teams: "Teams", compare: "Vergleich", methodology: "Methodik", lol: "LoL", football: "Fußball", basketball: "Basketball", clubs: "Vereine", f1: "F1", "table-tennis": "Tischtennis", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "Spieler suchen", placeholder: "Spieler, Teams suchen…", empty: "Keine Spieler gefunden" },
   theme: { gold: "Gold", indigo: "Indigo" },
   common: {
@@ -762,6 +773,7 @@ const de: Dict = {
     statureBase: "Basis",
     eraStrength: "Ära",
     topPct: "Top {p}% der {role}-Spieler",
+    topPctNoRole: "Top {p}% aller Zeiten",
     careerTimeline: "Karriere-Verlauf",
     timelineHint: "Honor-Punkte pro Saison · hervorgehoben = Worlds",
     indexComposition: "Index-Zusammensetzung",
@@ -850,7 +862,7 @@ const de: Dict = {
 };
 
 const fr: Dict = {
-  nav: { explore: "Explorer", leaderboard: "Classement", teams: "Équipes", compare: "Comparer", methodology: "Méthodologie", lol: "LoL", football: "Football", basketball: "Basket", clubs: "Clubs" },
+  nav: { explore: "Explorer", leaderboard: "Classement", teams: "Équipes", compare: "Comparer", methodology: "Méthodologie", lol: "LoL", football: "Football", basketball: "Basket", clubs: "Clubs", f1: "F1", "table-tennis": "Tennis de table", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "Rechercher des joueurs", placeholder: "Rechercher joueurs, équipes…", empty: "Aucun joueur trouvé" },
   theme: { gold: "Or", indigo: "Indigo" },
   common: {
@@ -921,6 +933,7 @@ const fr: Dict = {
     statureBase: "base",
     eraStrength: "ère",
     topPct: "Top {p}% des {role}",
+    topPctNoRole: "Top {p}% de tous les temps",
     careerTimeline: "Chronologie de carrière",
     timelineHint: "Points d'honneur par saison · en évidence = Worlds",
     indexComposition: "Composition de l'indice",
@@ -1003,7 +1016,7 @@ const fr: Dict = {
 };
 
 const es: Dict = {
-  nav: { explore: "Explorar", leaderboard: "Clasificación", teams: "Equipos", compare: "Comparar", methodology: "Metodología", lol: "LoL", football: "Fútbol", basketball: "Baloncesto", clubs: "Clubes" },
+  nav: { explore: "Explorar", leaderboard: "Clasificación", teams: "Equipos", compare: "Comparar", methodology: "Metodología", lol: "LoL", football: "Fútbol", basketball: "Baloncesto", clubs: "Clubes", f1: "F1", "table-tennis": "Tenis de mesa", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "Buscar jugadores", placeholder: "Buscar jugadores, equipos…", empty: "No se encontraron jugadores" },
   theme: { gold: "Oro", indigo: "Índigo" },
   common: {
@@ -1074,6 +1087,7 @@ const es: Dict = {
     statureBase: "base",
     eraStrength: "era",
     topPct: "Top {p}% de los {role}",
+    topPctNoRole: "Top {p}% de todos los tiempos",
     careerTimeline: "Cronología de carrera",
     timelineHint: "Puntos de honor por temporada · resaltado = Worlds",
     indexComposition: "Composición del índice",

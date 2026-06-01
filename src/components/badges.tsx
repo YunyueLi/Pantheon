@@ -29,6 +29,7 @@ export function RoleBadge({ role, className }: { role: Role; className?: string 
 
 /** Sport-neutral position chip: render a pre-resolved abbreviation (LoL role or football position). */
 export function PositionBadge({ abbr, className }: { abbr: string; className?: string }) {
+  if (!abbr) return null;
   return (
     <span
       className={cn(

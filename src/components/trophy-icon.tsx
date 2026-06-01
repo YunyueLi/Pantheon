@@ -80,6 +80,42 @@ const ICON: Record<string, { kind: Kind; ghost?: boolean }> = {
   stat_title: { kind: "star" },
   roy: { kind: "star" },
   finals_loss: { kind: "regional", ghost: true },
+
+  // F1
+  wdc: { kind: "worlds" },
+  race_win: { kind: "msi" },
+  pole: { kind: "star" },
+  podium: { kind: "regional" },
+
+  // Table tennis
+  olympic_singles_gold: { kind: "worlds" },
+  world_singles_gold: { kind: "worlds" },
+  world_cup_singles_gold: { kind: "msi" },
+  career_grand_slam: { kind: "worlds" },
+  olympic_team_gold: { kind: "medal" },
+  world_team_gold: { kind: "regional" },
+  olympic_doubles_gold: { kind: "medal" },
+  world_doubles_gold: { kind: "regional" },
+  tour_finals_gold: { kind: "star" },
+
+  // Go
+  world_title: { kind: "worlds" },
+  domestic_title: { kind: "regional" },
+
+  // Dota 2
+  ti_title: { kind: "worlds" },
+  ti_runner_up: { kind: "worlds", ghost: true },
+  valve_major_title: { kind: "msi" },
+  premier_title: { kind: "regional" },
+  best_player_award: { kind: "star" },
+
+  // VALORANT
+  champions_title: { kind: "worlds" },
+  champions_mvp: { kind: "medal" },
+  masters_title: { kind: "msi" },
+  masters_mvp: { kind: "medal" },
+  vct_regional: { kind: "regional" },
+  champions_finalist: { kind: "worlds", ghost: true },
 };
 
 export function TrophyIcon({

@@ -36,6 +36,10 @@ export function TrophyCabinet({ player }: { player: Player }) {
         const isMarquee = g.type === marquee;
         const tone = trophyTone(g.type);
         const teams = byTeam(g.items);
+        const total = g.items.reduce((s, a) => s + (a.count ?? 1), 0);
+        // Bulk volume honors (F1 wins/poles) carry a count and no meaningful per-win
+        // year — show the tally, not a wall of identical year chips.
+        const dated = g.items.every((a) => (a.count ?? 1) === 1);
         return (
           <div
             key={g.type}
@@ -52,12 +56,12 @@ export function TrophyCabinet({ player }: { player: Player }) {
                   isMarquee ? "text-[color:var(--medal-gold)]" : "text-fg"
                 )}
               >
-                {g.items.length}
+                {total}
               </span>
             </div>
             <div className="mt-2.5 text-[13px] font-medium leading-tight text-fg">{honorLabel(g.type)}</div>
             <div className="mt-2 space-y-1.5">
-              {teams.map((grp, gi) => (
+              {dated && teams.map((grp, gi) => (
                 <div key={gi}>
                   {grp.team && (
                     <div className="truncate text-[11px] font-medium leading-tight text-fg-muted">

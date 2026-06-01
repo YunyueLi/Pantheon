@@ -35,6 +35,9 @@ export function PlayerProfile({ id }: { id: string }) {
   };
   const player = players.find((p) => p.id === id);
   if (!player) return null;
+  // Individual sports (F1, Go, table tennis) may have no positions; degrade the
+  // role-based UI (role rank chip, "top of role" copy) gracefully when absent.
+  const hasRole = Boolean(player.position) && Boolean(positionMeta(player.position));
 
   const also = player.alsoId ? players.find((p) => p.id === player.alsoId) : undefined;
   const teamId = teamIdFromName(player.team);
@@ -112,7 +115,9 @@ export function PlayerProfile({ id }: { id: string }) {
               </div>
               <div className="tnum text-4xl font-semibold leading-none text-accent">{formatNumber(score)}</div>
               <div className="mt-1.5 text-xs text-fg-muted">
-                {t("player.topPct", { p: Math.max(1, 100 - pct), role: roleLabel(player.position) })}
+                {hasRole
+                  ? t("player.topPct", { p: Math.max(1, 100 - pct), role: roleLabel(player.position) })
+                  : t("player.topPctNoRole", { p: Math.max(1, 100 - pct) })}
               </div>
               {player.stature != null && (
                 <div className="mt-1 text-xs text-fg-muted">
@@ -129,7 +134,7 @@ export function PlayerProfile({ id }: { id: string }) {
             </div>
             <div className="flex flex-wrap gap-1.5">
               <RankChip label={t("player.rankOverall")} value={overall.rank} />
-              <RankChip label={roleLabel(player.position)} value={roleRank.rank} />
+              {hasRole && <RankChip label={roleLabel(player.position)} value={roleRank.rank} />}
               <RankChip label={leagueLabel(player.league)} value={regionRank.rank} />
             </div>
             <Button asChild variant="outline" size="sm">
@@ -213,6 +218,9 @@ export function PlayerProfile({ id }: { id: string }) {
                       <span className="flex items-center gap-2">
                         <TrophyIcon type={a.type} size={18} className={trophyTone(a.type)} />
                         <span className="text-sm text-fg">{honorLabel(a.type)}</span>
+                        {typeof a.count === "number" && a.count > 1 && (
+                          <span className="tnum text-[11px] font-medium text-fg-muted">×{a.count}</span>
+                        )}
                         {typeof a.share === "number" && (
                           <span className="tnum text-[11px] text-fg-subtle">
                             {a.share.toFixed(2)} {t("common.share")}

@@ -27,18 +27,28 @@ function sectionLinks(sport: string) {
       { href: "/basketball/methodology", key: "nav.methodology" },
     ];
   }
+  if (sport === "lol") {
+    return [
+      { href: "/lol/leaderboard", key: "nav.leaderboard" },
+      { href: "/lol/teams", key: "nav.teams" },
+      { href: "/lol/compare", key: "nav.compare" },
+      { href: "/lol/methodology", key: "nav.methodology" },
+    ];
+  }
+  // Individual sports (F1, table tennis, Go) and esports without a club/team page.
   return [
-    { href: "/lol/leaderboard", key: "nav.leaderboard" },
-    { href: "/lol/teams", key: "nav.teams" },
-    { href: "/lol/compare", key: "nav.compare" },
-    { href: "/lol/methodology", key: "nav.methodology" },
+    { href: `/${sport}/leaderboard`, key: "nav.leaderboard" },
+    { href: `/${sport}/compare`, key: "nav.compare" },
+    { href: `/${sport}/methodology`, key: "nav.methodology" },
   ];
 }
+
+const SPORT_PREFIXES = ["football", "basketball", "f1", "table-tennis", "go", "dota2", "valorant"];
 
 export function SiteNav() {
   const path = usePathname();
   const { t } = useI18n();
-  const sport = path.startsWith("/football") ? "football" : path.startsWith("/basketball") ? "basketball" : "lol";
+  const sport = SPORT_PREFIXES.find((s) => path.startsWith(`/${s}`)) ?? "lol";
   const links = sectionLinks(sport);
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-[color:var(--bg-glass)] backdrop-blur-xl backdrop-saturate-150">

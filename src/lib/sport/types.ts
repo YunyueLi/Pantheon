@@ -34,6 +34,13 @@ export type Achievement = {
    * Defaults to 1 (full credit). Set below 1 only for well-documented cases.
    */
   part?: number;
+  /**
+   * Multiplicity for volume honors counted in bulk rather than enumerated —
+   * e.g. an F1 driver's "105 wins" is ONE entry with count: 105 instead of 105
+   * rows. Score = base × … × count; display shows ×count. Defaults to 1.
+   * Do not combine with repeatDecay types (decay assumes one entry per win).
+   */
+  count?: number;
 };
 
 export type Player = {
