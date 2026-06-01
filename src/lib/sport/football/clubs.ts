@@ -244,7 +244,11 @@ export const NBA_TEAM_ZH: Record<string, string> = {
   "Orlando Magic": "奥兰多魔术", "Philadelphia 76ers": "费城76人", "Phoenix Suns": "菲尼克斯太阳",
   "Portland Trail Blazers": "波特兰开拓者", "Sacramento Kings": "萨克拉门托国王", "San Antonio Spurs": "圣安东尼奥马刺",
   "Toronto Raptors": "多伦多猛龙", "Utah Jazz": "犹他爵士", "Washington Wizards": "华盛顿奇才",
-  "Cincinnati Royals": "辛辛那提皇家",
+  // Historic / relocated NBA franchises (for older players' team strings)
+  "Cincinnati Royals": "辛辛那提皇家", "New Jersey Nets": "新泽西篮网", "Buffalo Braves": "布法罗勇敢者",
+  "New Orleans Jazz": "新奥尔良爵士", "Washington Bullets": "华盛顿子弹", "Kansas City Kings": "堪萨斯城国王",
+  "St. Louis Hawks": "圣路易斯老鹰", "Minneapolis Lakers": "明尼阿波利斯湖人", "Philadelphia Warriors": "费城勇士",
+  "Syracuse Nationals": "锡拉丘兹民族", "Seattle SuperSonics": "西雅图超音速",
 };
 
 /** Localize a club/team string to zh when available; unchanged for other locales/teams. */
