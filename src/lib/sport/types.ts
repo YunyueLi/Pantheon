@@ -65,6 +65,15 @@ export type Player = {
    * esports). Kept SEPARATE from the trophy-based Honor Index; an optional lens.
    */
   stature?: number;
+  /**
+   * Era-strength engine outputs (computed in the registry, not authored):
+   * `statureBase` is the curated/derived base before era adjustment;
+   * `eraStrength` (0..100) is how concentrated elite, honor-bearing talent was
+   * during this player's prime; `stature` above becomes the era-adjusted display
+   * value (base × (1 ± ~12%)). Honor Index is never affected — Stature only.
+   */
+  statureBase?: number;
+  eraStrength?: number;
   achievements: Achievement[];
 };
 

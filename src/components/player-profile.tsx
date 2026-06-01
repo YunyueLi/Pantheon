@@ -119,6 +119,11 @@ export function PlayerProfile({ id }: { id: string }) {
                   {t("leaderboard.byStature")}{" "}
                   <span className="tnum font-semibold text-fg">{player.stature}</span>
                   <span className="text-fg-subtle">/100</span>
+                  {player.statureBase != null && player.eraStrength != null && (
+                    <span className="text-fg-subtle">
+                      {" "}({t("player.statureBase")} {player.statureBase} · {t("player.eraStrength")} {player.eraStrength})
+                    </span>
+                  )}
                 </div>
               )}
             </div>

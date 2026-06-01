@@ -69,6 +69,8 @@ const en = {
   },
   player: {
     honorIndex: "Honor Index",
+    statureBase: "base",
+    eraStrength: "era",
     topPct: "Top {p}% of {role} players",
     careerTimeline: "Career timeline",
     timelineHint: "Honor points per season · highlighted = Worlds",
@@ -238,6 +240,8 @@ const zh: Dict = {
   },
   player: {
     honorIndex: "荣誉指数",
+    statureBase: "基础",
+    eraStrength: "时代强度",
     topPct: "{role}位置 前 {p}%",
     careerTimeline: "生涯时间线",
     timelineHint: "每赛季荣誉分 · 高亮 = 世界赛",
@@ -449,6 +453,8 @@ const ko: Dict = {
   },
   player: {
     honorIndex: "명예 지수",
+    statureBase: "기본",
+    eraStrength: "시대",
     topPct: "{role} 중 상위 {p}%",
     careerTimeline: "커리어 타임라인",
     timelineHint: "시즌별 명예 점수 · 강조 = 월즈",
@@ -600,6 +606,8 @@ const ja: Dict = {
   },
   player: {
     honorIndex: "名誉指数",
+    statureBase: "基礎",
+    eraStrength: "時代",
     topPct: "{role}で上位 {p}%",
     careerTimeline: "キャリアタイムライン",
     timelineHint: "シーズン別の名誉点 ・ 強調 = ワールドズ",
@@ -751,6 +759,8 @@ const de: Dict = {
   },
   player: {
     honorIndex: "Honor Index",
+    statureBase: "Basis",
+    eraStrength: "Ära",
     topPct: "Top {p}% der {role}-Spieler",
     careerTimeline: "Karriere-Verlauf",
     timelineHint: "Honor-Punkte pro Saison · hervorgehoben = Worlds",
@@ -908,6 +918,8 @@ const fr: Dict = {
   },
   player: {
     honorIndex: "Indice d'Honneur",
+    statureBase: "base",
+    eraStrength: "ère",
     topPct: "Top {p}% des {role}",
     careerTimeline: "Chronologie de carrière",
     timelineHint: "Points d'honneur par saison · en évidence = Worlds",
@@ -1059,6 +1071,8 @@ const es: Dict = {
   },
   player: {
     honorIndex: "Índice de Honor",
+    statureBase: "base",
+    eraStrength: "era",
     topPct: "Top {p}% de los {role}",
     careerTimeline: "Cronología de carrera",
     timelineHint: "Puntos de honor por temporada · resaltado = Worlds",
