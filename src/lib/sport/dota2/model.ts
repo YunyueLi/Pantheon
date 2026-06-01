@@ -1,0 +1,71 @@
+import type { AchievementMeta, Axis, LeagueMeta, Preset, PositionMeta } from "../types";
+
+/**
+ * Dota 2 honor model. The International (TI) — the annual world championship and
+ * its Aegis — is the towering pinnacle (very few players have ever won two), with
+ * Valve Majors second and the broader premier-LAN circuit third. Deep TI runs
+ * (runner-up / top-3) are credited so longevity icons without an Aegis still rank.
+ */
+const ACHIEVEMENTS: Record<string, AchievementMeta> = {
+  ti_title: { label: "The International (Champion)", short: "TI", bucket: "team", tier: "S", base: 480 },
+  ti_runner_up: { label: "The International (Top finish)", short: "TI top", bucket: "placement", tier: "A", base: 90 },
+  valve_major_title: { label: "Valve Major (Champion)", short: "Major", bucket: "team", tier: "A", base: 110 },
+  premier_title: { label: "Premier Title", short: "Premier", bucket: "team", tier: "B", base: 35 },
+  best_player_award: { label: "Best Player Award", short: "Award", bucket: "individual", tier: "B", base: 60 },
+};
+
+const PRESETS: Preset[] = [
+  { key: "balanced", label: "Balanced", weights: { team: 1, individual: 1, placement: 1 } },
+  { key: "aegis", label: "Aegis", weights: { team: 1.4, individual: 0.7, placement: 0.9 } },
+  { key: "individual", label: "Individual", weights: { team: 0.8, individual: 1.6, placement: 0.8 } },
+];
+
+const AXES: Axis[] = [
+  { id: "TI", label: "The International", kind: "sum", types: ["ti_title", "ti_runner_up"] },
+  { id: "Majors", label: "Majors", kind: "sum", types: ["valve_major_title"] },
+  { id: "Premier", label: "Premier", kind: "sum", types: ["premier_title"] },
+  { id: "Awards", label: "Awards", kind: "sum", types: ["best_player_award"] },
+  { id: "Peak", label: "Peak", kind: "peak" },
+  { id: "Longevity", label: "Longevity", kind: "longevity" },
+];
+
+const CABINET_ORDER = ["ti_title", "ti_runner_up", "valve_major_title", "premier_title", "best_player_award"];
+
+// Only the Aegis (TI title) decays per win — a 2nd TI is monumental but not
+// quite double. The lower-tier volume honors are carried as bulk counts.
+const REPEAT_DECAY_TYPES = ["ti_title"];
+
+export const DOTA2_MODEL = {
+  achievementMeta: ACHIEVEMENTS,
+  presets: PRESETS,
+  axes: AXES,
+  cabinetOrder: CABINET_ORDER,
+  repeatDecay: { factor: 0.8, types: REPEAT_DECAY_TYPES },
+};
+
+export const DOTA2_LEAGUES: LeagueMeta[] = [
+  { id: "DEN", label: "Denmark", country: "Denmark", flag: "🇩🇰" },
+  { id: "FIN", label: "Finland", country: "Finland", flag: "🇫🇮" },
+  { id: "UKR", label: "Ukraine", country: "Ukraine", flag: "🇺🇦" },
+  { id: "RUS", label: "Russia", country: "Russia", flag: "🇷🇺" },
+  { id: "CHN", label: "China", country: "China", flag: "🇨🇳" },
+  { id: "EST", label: "Estonia", country: "Estonia", flag: "🇪🇪" },
+  { id: "GER", label: "Germany", country: "Germany", flag: "🇩🇪" },
+  { id: "JOR", label: "Jordan", country: "Jordan", flag: "🇯🇴" },
+  { id: "LBN", label: "Lebanon", country: "Lebanon", flag: "🇱🇧" },
+  { id: "PAK", label: "Pakistan", country: "Pakistan", flag: "🇵🇰" },
+  { id: "SWE", label: "Sweden", country: "Sweden", flag: "🇸🇪" },
+  { id: "ISR", label: "Israel", country: "Israel", flag: "🇮🇱" },
+  { id: "POL", label: "Poland", country: "Poland", flag: "🇵🇱" },
+  { id: "AUS", label: "Australia", country: "Australia", flag: "🇦🇺" },
+  { id: "FRA", label: "France", country: "France", flag: "🇫🇷" },
+  { id: "CAN", label: "Canada", country: "Canada", flag: "🇨🇦" },
+];
+
+export const DOTA2_POSITIONS: PositionMeta[] = [
+  { id: "carry", label: "Carry (1)", abbr: "1" },
+  { id: "mid", label: "Mid (2)", abbr: "2" },
+  { id: "offlane", label: "Offlane (3)", abbr: "3" },
+  { id: "soft-support", label: "Soft Support (4)", abbr: "4" },
+  { id: "hard-support", label: "Hard Support (5)", abbr: "5" },
+];
