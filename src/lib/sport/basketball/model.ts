@@ -45,7 +45,8 @@ const PRESETS: Preset[] = [
   { key: "individual", label: "Individual brilliance", weights: { team: 0.7, individual: 1.6, placement: 0.5 } },
 ];
 
-const TITLE_TYPES = ["nba_title", "aba_title", "euroleague", "olympic_gold", "fiba_gold", "finals_loss"];
+const TITLE_TYPES = ["nba_title", "aba_title", "euroleague", "finals_loss"];
+const INTERNATIONAL_TYPES = ["olympic_gold", "fiba_gold"];
 const INDIVIDUAL_TYPES = ["mvp", "nba_finals_mvp", "aba_mvp", "dpoy", "scoring_title", "roy"];
 const HONORS_TYPES = [
   "all_nba_first", "all_nba_second", "all_nba_third", "all_defensive_first", "all_star", "stat_title",
@@ -53,6 +54,7 @@ const HONORS_TYPES = [
 
 const AXES: Axis[] = [
   { id: "Titles", label: "Titles", kind: "sum", types: TITLE_TYPES },
+  { id: "International", label: "International", kind: "sum", types: INTERNATIONAL_TYPES },
   { id: "Individual", label: "Individual", kind: "sum", types: INDIVIDUAL_TYPES },
   { id: "Honors", label: "Selections", kind: "sum", types: HONORS_TYPES },
   { id: "Peak", label: "Peak", kind: "peak" },

@@ -93,10 +93,14 @@ const INDIVIDUAL_TYPES = [
   "jsl_best_player", "jsl_golden_boot", "jsl_best_gk",
 ];
 
+// Near-misses (radar dimension): finals reached & podium finishes that fell short.
+const PLACEMENT_TYPES = ["wc_runnerup", "ucl_runnerup", "continental_nt_runnerup", "ballon_dor_2nd", "ballon_dor_3rd"];
+
 const AXES: Axis[] = [
   { id: "Country", label: "Country", kind: "sum", types: COUNTRY_TYPES },
   { id: "Club", label: "Club", kind: "sum", types: CLUB_TYPES },
   { id: "Individual", label: "Individual", kind: "sum", types: INDIVIDUAL_TYPES },
+  { id: "Placement", label: "Deep runs", kind: "sum", types: PLACEMENT_TYPES },
   { id: "Peak", label: "Peak", kind: "peak" },
   { id: "Longevity", label: "Longevity", kind: "longevity" },
 ];

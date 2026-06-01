@@ -22,6 +22,7 @@ function sectionLinks(sport: string) {
   if (sport === "basketball") {
     return [
       { href: "/basketball/leaderboard", key: "nav.leaderboard" },
+      { href: "/basketball/clubs", key: "nav.clubs" },
       { href: "/basketball/compare", key: "nav.compare" },
       { href: "/basketball/methodology", key: "nav.methodology" },
     ];

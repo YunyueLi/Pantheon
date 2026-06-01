@@ -34,7 +34,7 @@ const en = {
     f3t: "Trophy cabinet",
     f3d: "Real competition hardware; finals losses appear as faded ghost cups.",
     f4t: "Head-to-head",
-    f4d: "Five honor dimensions on a radar to settle any GOAT debate.",
+    f4d: "Six honor dimensions on a radar to settle any GOAT debate.",
     ctaTitle: "See where your favorite ranks",
     ctaDesc: "Open the leaderboard, slice by region and role, and compare careers side by side.",
     github: "View on GitHub",
@@ -65,7 +65,7 @@ const en = {
   compare: {
     eyebrow: "Head to head",
     title: "Compare honors",
-    desc: "Five honor dimensions, each scaled 0–100 against the strongest player in the dataset. The accent shape is the first player; the outline is the second.",
+    desc: "Six honor dimensions, each scaled 0–100 against the strongest player in the dataset. The accent shape is the first player; the outline is the second.",
   },
   player: {
     honorIndex: "Honor Index",
@@ -103,7 +103,7 @@ const en = {
     presetsTitle: "Weighting presets",
     presetsDesc: "Multipliers applied per bucket. Switch presets on the leaderboard to re-rank instantly.",
     axesTitle: "Comparison dimensions",
-    axesDesc: "The head-to-head radar maps five facets, each scaled 0–100 against the strongest player.",
+    axesDesc: "The head-to-head radar maps six facets, each scaled 0–100 against the strongest player.",
     dataTitle: "Data & sourcing",
     dataNote:
       "Illustrative dataset for this prototype — honors are approximate and seeded by hand, not yet synced from Leaguepedia.",
@@ -203,7 +203,7 @@ const zh: Dict = {
     f3t: "奖杯陈列",
     f3d: "真实赛事奖杯;决赛憾负以半透明的虚影奖杯呈现。",
     f4t: "正面对决",
-    f4d: "五个荣誉维度的雷达图,终结任何 GOAT 之争。",
+    f4d: "六个荣誉维度的雷达图,终结任何 GOAT 之争。",
     ctaTitle: "看看你的本命排第几",
     ctaDesc: "打开排行榜,按赛区与位置切片,把生涯并排对比。",
     github: "在 GitHub 查看",
@@ -234,7 +234,7 @@ const zh: Dict = {
   compare: {
     eyebrow: "正面对决",
     title: "荣誉对比",
-    desc: "五个荣誉维度，各自相对数据集中最强者归一化到 0–100。高亮形状为第一位选手，描边为第二位。",
+    desc: "六个荣誉维度，各自相对数据集中最强者归一化到 0–100。高亮形状为第一位选手，描边为第二位。",
   },
   player: {
     honorIndex: "荣誉指数",
@@ -272,7 +272,7 @@ const zh: Dict = {
     presetsTitle: "权重预设",
     presetsDesc: "对每个类别施加的乘数。在排行榜切换预设即可即时重排。",
     axesTitle: "对比维度",
-    axesDesc: "正面对决雷达图映射五个维度，各自相对最强者归一化到 0–100。",
+    axesDesc: "正面对决雷达图映射六个维度，各自相对最强者归一化到 0–100。",
     dataTitle: "数据与来源",
     dataNote: "本原型使用示例数据——荣誉为手工录入的近似值，尚未与 Leaguepedia 同步。",
     dataNote2:
@@ -363,7 +363,7 @@ const zh: Dict = {
     individual: "MVP 与最佳阵容，按得票率折算",
     placement: "止步于决赛、未能夺冠的旅程",
   },
-  axis: { International: "国际赛", Domestic: "国内赛", Individual: "个人", Peak: "巅峰", Longevity: "长青", Country: "国家队", Club: "俱乐部", Titles: "冠军", Honors: "入选阵容" },
+  axis: { International: "国际赛", Domestic: "国内赛", Individual: "个人", Peak: "巅峰", Longevity: "长青", Country: "国家队", Club: "俱乐部", Titles: "冠军", Honors: "入选阵容", Placement: "决赛之旅" },
   league: { PL: "英超", LALIGA: "西甲", SERIEA: "意甲", BUNDESLIGA: "德甲", LIGUE1: "法甲", PRIMEIRA: "葡超", EREDIVISIE: "荷甲", SOUTHAM: "南美", SOVIET: "苏联联赛", JSL: "苏超" },
   axisDesc: {
     International: "世界赛与 MSI 冠军、国际赛 MVP 及决赛经历。",
@@ -412,7 +412,7 @@ const ko: Dict = {
     f3t: "트로피 캐비닛",
     f3d: "실제 대회 트로피; 결승 패배는 흐릿한 고스트 컵으로 표시됩니다.",
     f4t: "정면 대결",
-    f4d: "다섯 가지 명예 지표 레이더로 어떤 GOAT 논쟁도 정리합니다.",
+    f4d: "여섯 가지 명예 지표 레이더로 어떤 GOAT 논쟁도 정리합니다.",
     ctaTitle: "최애가 몇 위인지 확인하세요",
     ctaDesc: "리더보드를 열어 지역·포지션으로 나누고, 커리어를 나란히 비교하세요.",
     github: "GitHub에서 보기",
@@ -443,7 +443,7 @@ const ko: Dict = {
   compare: {
     eyebrow: "정면 대결",
     title: "명예 비교",
-    desc: "다섯 가지 명예 지표를 데이터셋 내 최강 선수 기준으로 0–100으로 환산합니다. 채워진 도형이 첫 번째 선수, 외곽선이 두 번째 선수입니다.",
+    desc: "여섯 가지 명예 지표를 데이터셋 내 최강 선수 기준으로 0–100으로 환산합니다. 채워진 도형이 첫 번째 선수, 외곽선이 두 번째 선수입니다.",
   },
   player: {
     honorIndex: "명예 지수",
@@ -481,7 +481,7 @@ const ko: Dict = {
     presetsTitle: "가중치 프리셋",
     presetsDesc: "묶음별로 적용되는 배수입니다. 리더보드에서 프리셋을 바꾸면 즉시 재정렬됩니다.",
     axesTitle: "비교 지표",
-    axesDesc: "정면 대결 레이더는 다섯 가지 측면을 최강 선수 기준 0–100으로 표시합니다.",
+    axesDesc: "정면 대결 레이더는 여섯 가지 측면을 최강 선수 기준 0–100으로 표시합니다.",
     dataTitle: "데이터 & 출처",
     dataNote:
       "이 프로토타입은 예시 데이터입니다 — 수상 내역은 수작업으로 입력한 근사치이며 아직 Leaguepedia와 동기화되지 않았습니다.",
@@ -563,7 +563,7 @@ const ja: Dict = {
     f3t: "トロフィーキャビネット",
     f3d: "実際の大会トロフィー。準優勝は半透明のゴーストカップで表示。",
     f4t: "直接対決",
-    f4d: "5 つの名誉指標をレーダーで比較し、あらゆる GOAT 論争に決着を。",
+    f4d: "6 つの名誉指標をレーダーで比較し、あらゆる GOAT 論争に決着を。",
     ctaTitle: "推しの順位を確かめよう",
     ctaDesc: "ランキングを開き、地域とポジションで切り分け、キャリアを並べて比較。",
     github: "GitHub で見る",
@@ -594,7 +594,7 @@ const ja: Dict = {
   compare: {
     eyebrow: "直接対決",
     title: "名誉を比較",
-    desc: "5 つの名誉指標を、データ内で最強の選手を基準に 0〜100 へ換算。塗りつぶしが 1 人目、輪郭が 2 人目です。",
+    desc: "6 つの名誉指標を、データ内で最強の選手を基準に 0〜100 へ換算。塗りつぶしが 1 人目、輪郭が 2 人目です。",
   },
   player: {
     honorIndex: "名誉指数",
@@ -632,7 +632,7 @@ const ja: Dict = {
     presetsTitle: "重み付けプリセット",
     presetsDesc: "区分ごとに掛かる倍率です。ランキングでプリセットを切り替えると即座に再集計されます。",
     axesTitle: "比較の指標",
-    axesDesc: "直接対決のレーダーは 5 つの側面を、最強の選手を基準に 0〜100 で表します。",
+    axesDesc: "直接対決のレーダーは 6 つの側面を、最強の選手を基準に 0〜100 で表します。",
     dataTitle: "データと出典",
     dataNote:
       "本プロトタイプはサンプルデータです。栄誉は手入力の概算で、まだ Leaguepedia と同期していません。",
@@ -714,7 +714,7 @@ const de: Dict = {
     f3t: "Trophäenschrank",
     f3d: "Echte Turnier-Hardware; verlorene Finals erscheinen als blasse Geister-Pokale.",
     f4t: "Direktvergleich",
-    f4d: "Fünf Ehren-Dimensionen im Radar, um jede GOAT-Debatte zu klären.",
+    f4d: "Sechs Ehren-Dimensionen im Radar, um jede GOAT-Debatte zu klären.",
     ctaTitle: "Sieh, wo dein Favorit steht",
     ctaDesc: "Öffne die Rangliste, filtere nach Region und Rolle und vergleiche Karrieren nebeneinander.",
     github: "Auf GitHub ansehen",
@@ -745,7 +745,7 @@ const de: Dict = {
   compare: {
     eyebrow: "Direktvergleich",
     title: "Ehren vergleichen",
-    desc: "Fünf Ehren-Dimensionen, je auf 0–100 relativ zum stärksten Spieler skaliert. Die gefüllte Form ist der erste Spieler, die Kontur der zweite.",
+    desc: "Sechs Ehren-Dimensionen, je auf 0–100 relativ zum stärksten Spieler skaliert. Die gefüllte Form ist der erste Spieler, die Kontur der zweite.",
   },
   player: {
     honorIndex: "Honor Index",
@@ -783,7 +783,7 @@ const de: Dict = {
     presetsTitle: "Gewichtungs-Voreinstellungen",
     presetsDesc: "Multiplikatoren je Gruppe. Wechsle die Voreinstellung in der Rangliste für sofortige Neusortierung.",
     axesTitle: "Vergleichs-Dimensionen",
-    axesDesc: "Das Direktvergleichs-Radar bildet fünf Facetten ab, je auf 0–100 relativ zum stärksten Spieler.",
+    axesDesc: "Das Direktvergleichs-Radar bildet sechs Facetten ab, je auf 0–100 relativ zum stärksten Spieler.",
     dataTitle: "Daten & Quellen",
     dataNote:
       "Beispieldatensatz für diesen Prototyp — Ehren sind angenähert und von Hand erfasst, noch nicht mit Leaguepedia synchronisiert.",
@@ -871,7 +871,7 @@ const fr: Dict = {
     f3t: "Vitrine à trophées",
     f3d: "Vrais trophées de compétition ; les finales perdues apparaissent en coupes fantômes.",
     f4t: "Face-à-face",
-    f4d: "Cinq dimensions d'honneur sur un radar pour trancher tout débat du GOAT.",
+    f4d: "Six dimensions d'honneur sur un radar pour trancher tout débat du GOAT.",
     ctaTitle: "Voyez où se classe votre favori",
     ctaDesc: "Ouvrez le classement, filtrez par région et rôle, et comparez les carrières côte à côte.",
     github: "Voir sur GitHub",
@@ -902,7 +902,7 @@ const fr: Dict = {
   compare: {
     eyebrow: "Face-à-face",
     title: "Comparer les honneurs",
-    desc: "Cinq dimensions d'honneur, chacune ramenée à 0–100 par rapport au meilleur joueur des données. La forme pleine est le premier joueur, le contour le second.",
+    desc: "Six dimensions d'honneur, chacune ramenée à 0–100 par rapport au meilleur joueur des données. La forme pleine est le premier joueur, le contour le second.",
   },
   player: {
     honorIndex: "Indice d'Honneur",
@@ -940,7 +940,7 @@ const fr: Dict = {
     presetsTitle: "Préréglages de pondération",
     presetsDesc: "Multiplicateurs par catégorie. Changez de préréglage dans le classement pour reclasser instantanément.",
     axesTitle: "Dimensions de comparaison",
-    axesDesc: "Le radar de face-à-face cartographie cinq facettes, chacune sur 0–100 par rapport au meilleur joueur.",
+    axesDesc: "Le radar de face-à-face cartographie six facettes, chacune sur 0–100 par rapport au meilleur joueur.",
     dataTitle: "Données & sources",
     dataNote:
       "Jeu de données illustratif pour ce prototype — les honneurs sont approximatifs, saisis à la main, pas encore synchronisés avec Leaguepedia.",
@@ -1022,7 +1022,7 @@ const es: Dict = {
     f3t: "Vitrina de trofeos",
     f3d: "Trofeos reales de competición; las finales perdidas aparecen como copas fantasma.",
     f4t: "Cara a cara",
-    f4d: "Cinco dimensiones de honor en un radar para zanjar cualquier debate del GOAT.",
+    f4d: "Seis dimensiones de honor en un radar para zanjar cualquier debate del GOAT.",
     ctaTitle: "Mira en qué puesto está tu favorito",
     ctaDesc: "Abre la clasificación, segmenta por región y rol, y compara carreras lado a lado.",
     github: "Ver en GitHub",
@@ -1053,7 +1053,7 @@ const es: Dict = {
   compare: {
     eyebrow: "Cara a cara",
     title: "Comparar honores",
-    desc: "Cinco dimensiones de honor, cada una escalada a 0–100 respecto al mejor jugador de los datos. La forma rellena es el primer jugador; el contorno, el segundo.",
+    desc: "Seis dimensiones de honor, cada una escalada a 0–100 respecto al mejor jugador de los datos. La forma rellena es el primer jugador; el contorno, el segundo.",
   },
   player: {
     honorIndex: "Índice de Honor",
@@ -1091,7 +1091,7 @@ const es: Dict = {
     presetsTitle: "Preajustes de ponderación",
     presetsDesc: "Multiplicadores por categoría. Cambia el preajuste en la clasificación para reordenar al instante.",
     axesTitle: "Dimensiones de comparación",
-    axesDesc: "El radar cara a cara representa cinco facetas, cada una de 0–100 respecto al mejor jugador.",
+    axesDesc: "El radar cara a cara representa seis facetas, cada una de 0–100 respecto al mejor jugador.",
     dataTitle: "Datos y fuentes",
     dataNote:
       "Conjunto de datos ilustrativo para este prototipo: los honores son aproximados y cargados a mano, aún sin sincronizar con Leaguepedia.",

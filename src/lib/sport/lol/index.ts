@@ -67,6 +67,7 @@ const axes: Axis[] = [
     kind: "sum",
     types: ["worlds_mvp", "msi_mvp", "season_mvp", "finals_mvp", "all_pro_1", "all_pro_2", "all_pro_3"],
   },
+  { id: "Placement", label: "Deep runs", kind: "sum", types: ["worlds_runnerup", "regional_runnerup"] },
   { id: "Peak", label: "Peak", kind: "peak" },
   { id: "Longevity", label: "Longevity", kind: "longevity" },
 ];
