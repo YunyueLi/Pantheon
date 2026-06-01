@@ -31,6 +31,12 @@ const ZH_NAMES: Record<string, string> = {
   "nate-thurmond": "内特·瑟蒙德", "bob-pettit": "鲍勃·佩蒂特", "walt-frazier": "沃尔特·弗雷泽",
   "george-mikan": "乔治·麦肯", "bob-cousy": "鲍勃·库西", "bill-sharman": "比尔·沙曼",
   "paul-arizin": "保罗·阿里津", "dolph-schayes": "多尔夫·谢伊斯",
+  "drazen-petrovic": "德拉任·彼得洛维奇", "arvydas-sabonis": "阿尔维达斯·萨博尼斯",
+  "dejan-bodiroga": "德扬·博迪洛加", "sarunas-marciulionis": "萨鲁纳斯·马修利奥尼斯",
+  "theodoros-papaloukas": "西奥多罗斯·帕帕卢卡斯", "dimitris-diamantidis": "迪米特里斯·迪亚曼蒂迪斯",
+  "vassilis-spanoulis": "瓦西里斯·斯帕诺利斯", "juan-carlos-navarro": "胡安·卡洛斯·纳瓦罗",
+  "manu-ginobili": "马努·吉诺比利", "luis-scola": "路易斯·斯科拉",
+  "sarunas-jasikevicius": "萨鲁纳斯·亚西凯维丘斯", "predrag-stojakovic": "佩贾·斯托贾科维奇",
 };
 
 // Stature / influence (0-100): all-time cultural standing, from consensus GOAT
@@ -54,6 +60,9 @@ const STATURE: Record<string, number> = {
   "wes-unseld": 62, "earl-monroe": 62, "dave-cowens": 60, "bob-mcadoo": 60, "nate-thurmond": 58,
   "nate-archibald": 58, "dave-bing": 56, "billy-cunningham": 56, "dave-debusschere": 56, "jerry-lucas": 56,
   "hal-greer": 56, "bill-sharman": 56, "paul-arizin": 56, "dolph-schayes": 56, "lenny-wilkens": 54,
+  "manu-ginobili": 82, "arvydas-sabonis": 80, "drazen-petrovic": 78, "dejan-bodiroga": 70,
+  "predrag-stojakovic": 64, "dimitris-diamantidis": 64, "vassilis-spanoulis": 64, "juan-carlos-navarro": 64,
+  "sarunas-marciulionis": 64, "sarunas-jasikevicius": 62, "luis-scola": 60, "theodoros-papaloukas": 60,
 };
 
 const players: Player[] = BASKETBALL_PLAYERS.map((p) => ({

@@ -18,6 +18,7 @@ const ACHIEVEMENTS: Record<string, AchievementMeta> = {
   nba_title: { label: "NBA Championship", short: "Title", bucket: "team", tier: "S", base: 480 },
   olympic_gold: { label: "Olympic Gold", short: "Olympic", bucket: "team", tier: "A", base: 180 },
   fiba_gold: { label: "FIBA World Cup", short: "FIBA", bucket: "team", tier: "A", base: 130 },
+  eurobasket_gold: { label: "EuroBasket Gold", short: "EuroBasket", bucket: "team", tier: "B", base: 110 },
   euroleague: { label: "EuroLeague", short: "EuroLeague", bucket: "team", tier: "A", base: 220 },
   aba_title: { label: "ABA Championship", short: "ABA Title", bucket: "team", tier: "A", base: 240 },
 
@@ -25,6 +26,7 @@ const ACHIEVEMENTS: Record<string, AchievementMeta> = {
   mvp: { label: "NBA Most Valuable Player", short: "MVP", bucket: "individual", tier: "S", base: 600 },
   nba_finals_mvp: { label: "Finals MVP", short: "Finals MVP", bucket: "individual", tier: "S", base: 360 },
   aba_mvp: { label: "ABA Most Valuable Player", short: "ABA MVP", bucket: "individual", tier: "A", base: 300 },
+  euroleague_mvp: { label: "EuroLeague MVP", short: "EL MVP", bucket: "individual", tier: "A", base: 250 },
   dpoy: { label: "Defensive Player of the Year", short: "DPOY", bucket: "individual", tier: "A", base: 160 },
   scoring_title: { label: "Scoring Title", short: "Scoring", bucket: "individual", tier: "A", base: 110 },
   all_nba_first: { label: "All-NBA First Team", short: "All-NBA 1st", bucket: "individual", tier: "A", base: 150 },
@@ -46,8 +48,8 @@ const PRESETS: Preset[] = [
 ];
 
 const TITLE_TYPES = ["nba_title", "aba_title", "euroleague", "finals_loss"];
-const INTERNATIONAL_TYPES = ["olympic_gold", "fiba_gold"];
-const INDIVIDUAL_TYPES = ["mvp", "nba_finals_mvp", "aba_mvp", "dpoy", "scoring_title", "roy"];
+const INTERNATIONAL_TYPES = ["olympic_gold", "fiba_gold", "eurobasket_gold"];
+const INDIVIDUAL_TYPES = ["mvp", "nba_finals_mvp", "aba_mvp", "euroleague_mvp", "dpoy", "scoring_title", "roy"];
 const HONORS_TYPES = [
   "all_nba_first", "all_nba_second", "all_nba_third", "all_defensive_first", "all_star", "stat_title",
 ];
@@ -62,8 +64,8 @@ const AXES: Axis[] = [
 ];
 
 const CABINET_ORDER = [
-  "nba_title", "aba_title", "olympic_gold", "fiba_gold", "euroleague",
-  "mvp", "nba_finals_mvp", "aba_mvp", "dpoy", "roy", "scoring_title",
+  "nba_title", "aba_title", "olympic_gold", "fiba_gold", "eurobasket_gold", "euroleague",
+  "mvp", "nba_finals_mvp", "aba_mvp", "euroleague_mvp", "dpoy", "roy", "scoring_title",
   "all_nba_first", "all_nba_second", "all_nba_third", "all_defensive_first", "all_star", "stat_title",
   "finals_loss",
 ];
@@ -73,8 +75,9 @@ const CABINET_ORDER = [
 // higher-peak careers. The marquee, naturally-scarce awards (MVP, Finals MVP,
 // DPOY, ROY, Olympic / FIBA gold) keep full value.
 const REPEAT_DECAY_TYPES = [
-  "nba_title", "aba_title", "euroleague", "scoring_title", "all_nba_first", "all_nba_second",
-  "all_nba_third", "all_defensive_first", "all_star", "stat_title", "finals_loss",
+  "nba_title", "aba_title", "euroleague", "euroleague_mvp", "eurobasket_gold", "scoring_title",
+  "all_nba_first", "all_nba_second", "all_nba_third", "all_defensive_first", "all_star",
+  "stat_title", "finals_loss",
 ];
 
 export const BASKETBALL_MODEL = {
@@ -87,6 +90,7 @@ export const BASKETBALL_MODEL = {
 
 export const BASKETBALL_LEAGUES: LeagueMeta[] = [
   { id: "NBA", label: "NBA", country: "USA", flag: "🇺🇸" },
+  { id: "INTL", label: "International", country: "FIBA", flag: "🌍" },
 ];
 
 export const BASKETBALL_POSITIONS: PositionMeta[] = [

@@ -31,13 +31,15 @@ type Raw = {
   debut: number;
   blurb: string;
   honors: Achievement[];
+  /** Competitive context; defaults to "NBA". Use "INTL" for non-NBA international players. */
+  league?: string;
 };
 
 const mk = (r: Raw): Player => ({
   id: r.id,
   name: r.name,
   sport: "basketball",
-  league: "NBA",
+  league: r.league ?? "NBA",
   position: r.position,
   team: r.team,
   nation: r.nation,
@@ -1037,6 +1039,109 @@ export const BASKETBALL_PLAYERS: Player[] = [
       ...spread("all_nba_second", 6, 1950, 1961),
       ...A("all_star", [1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962]),
       ...A("stat_title", [1951]), ...A("finals_loss", [1950, 1954]),
+    ],
+  }),
+
+  // ===== International (non-NBA) — FIBA/EuroLeague legends, incl. those who beat the USA =====
+  mk({
+    id: "drazen-petrovic", name: "Dražen Petrović", nation: "Croatia", position: "SG", team: "Cibona Zagreb",
+    league: "INTL", active: false, debut: 1979,
+    blurb: "The 'Mozart of basketball'; back-to-back European Cup winner with Cibona and a FIBA World 1990 + EuroBasket 1989 gold medalist before his NBA career was cut short in 1993.",
+    honors: [
+      ...A("euroleague", [1985, 1986]), ...A("eurobasket_gold", [1989]), ...A("fiba_gold", [1990]),
+    ],
+  }),
+  mk({
+    id: "arvydas-sabonis", name: "Arvydas Sabonis", nation: "Lithuania", position: "C", team: "Žalgiris Kaunas",
+    league: "INTL", active: false, debut: 1981,
+    blurb: "One of the greatest big men ever; led the USSR over the USA to 1988 Olympic gold and won the 1995 EuroLeague with Real Madrid before a late NBA run.",
+    honors: [
+      ...A("euroleague", [1995]), ...A("euroleague_mvp", [1993, 1995, 1995]),
+      ...A("eurobasket_gold", [1985]), ...A("fiba_gold", [1982]), ...A("olympic_gold", [1988]),
+    ],
+  }),
+  mk({
+    id: "dejan-bodiroga", name: "Dejan Bodiroga", nation: "Serbia", position: "SF", team: "Panathinaikos",
+    league: "INTL", active: false, debut: 1989,
+    blurb: "Widely called the best European never to play in the NBA; three EuroLeague titles and a stack of World/EuroBasket golds — and he beat the NBA-stocked USA at the 2002 World Championship.",
+    honors: [
+      ...A("euroleague", [2000, 2002, 2003]), ...A("euroleague_mvp", [2002, 2003]),
+      ...A("eurobasket_gold", [1995, 1997, 2001]), ...A("fiba_gold", [1998, 2002]),
+    ],
+  }),
+  mk({
+    id: "sarunas-marciulionis", name: "Šarūnas Marčiulionis", nation: "Lithuania", position: "SG", team: "Žalgiris Kaunas",
+    league: "INTL", active: false, debut: 1981,
+    blurb: "Pioneering guard and one of the first Soviets in the NBA; won 1988 Olympic gold with the USSR (beating the USA) and led independent Lithuania to its iconic Olympic bronzes.",
+    honors: [
+      ...A("olympic_gold", [1988]),
+    ],
+  }),
+  mk({
+    id: "theodoros-papaloukas", name: "Theodoros Papaloukas", nation: "Greece", position: "PG", team: "CSKA Moscow",
+    league: "INTL", active: false, debut: 1995,
+    blurb: "Greek point-guard maestro of CSKA Moscow's EuroLeague dynasty and EuroBasket 2005 champion; ran the floor as Greece beat the USA at the 2006 World Championship.",
+    honors: [
+      ...A("euroleague", [2006, 2008]), ...A("euroleague_mvp", [2006, 2007]), ...A("eurobasket_gold", [2005]),
+    ],
+  }),
+  mk({
+    id: "dimitris-diamantidis", name: "Dimitris Diamantidis", nation: "Greece", position: "PG", team: "Panathinaikos",
+    league: "INTL", active: false, debut: 1999,
+    blurb: "Two-way Panathinaikos legend, a record six-time EuroLeague Best Defender with three EuroLeague titles and EuroBasket 2005 gold; part of the Greece team that beat the USA in 2006.",
+    honors: [
+      ...A("euroleague", [2007, 2009, 2011]), ...A("euroleague_mvp", [2007, 2010, 2011]), ...A("eurobasket_gold", [2005]),
+    ],
+  }),
+  mk({
+    id: "vassilis-spanoulis", name: "Vassilis Spanoulis", nation: "Greece", position: "SG", team: "Olympiacos",
+    league: "INTL", active: false, debut: 1999,
+    blurb: "'Kill Bill' — the most decorated player in EuroLeague Final Four history (record 3 Final Four MVPs), three EuroLeague titles and EuroBasket 2005 gold; scored 22 as Greece beat the USA in 2006.",
+    honors: [
+      ...A("euroleague", [2009, 2012, 2013]), ...A("euroleague_mvp", [2009, 2012, 2013, 2013]), ...A("eurobasket_gold", [2005]),
+    ],
+  }),
+  mk({
+    id: "juan-carlos-navarro", name: "Juan Carlos Navarro", nation: "Spain", position: "SG", team: "FC Barcelona",
+    league: "INTL", active: false, debut: 1997,
+    blurb: "'La Bomba' — the EuroLeague's all-time leading scorer, two EuroLeague titles with Barcelona, 2006 FIBA World champion and two-time EuroBasket gold medalist.",
+    honors: [
+      ...A("euroleague", [2003, 2010]), ...A("euroleague_mvp", [2009, 2010]),
+      ...A("eurobasket_gold", [2009, 2011]), ...A("fiba_gold", [2006]),
+    ],
+  }),
+  mk({
+    id: "manu-ginobili", name: "Manu Ginóbili", nation: "Argentina", position: "SG", team: "San Antonio Spurs",
+    league: "INTL", active: false, debut: 1995,
+    blurb: "Hall of Fame Spurs guard and four-time NBA champion who led Argentina's Golden Generation to 2004 Olympic gold — beating the USA in the semifinal; earlier won the 2001 EuroLeague + Final Four MVP.",
+    honors: [
+      ...A("nba_title", [2003, 2005, 2007, 2014]), ...A("all_star", [2005, 2011]),
+      ...A("euroleague", [2001]), ...A("euroleague_mvp", [2001]), ...A("olympic_gold", [2004]),
+    ],
+  }),
+  mk({
+    id: "luis-scola", name: "Luis Scola", nation: "Argentina", position: "PF", team: "Houston Rockets",
+    league: "INTL", active: false, debut: 1995,
+    blurb: "Argentine Golden Generation cornerstone and the all-time leading scorer in Olympic basketball history; won 2004 Olympic gold over the USA before an eight-year NBA career.",
+    honors: [
+      ...A("olympic_gold", [2004]),
+    ],
+  }),
+  mk({
+    id: "sarunas-jasikevicius", name: "Šarūnas Jasikevičius", nation: "Lithuania", position: "PG", team: "FC Barcelona",
+    league: "INTL", active: false, debut: 1998,
+    blurb: "One of EuroLeague's greatest guards — four EuroLeague titles, a Final Four MVP and EuroBasket 2003 gold; famous for torching the USA in the 2004 Olympics.",
+    honors: [
+      ...A("euroleague", [2003, 2004, 2005, 2009]), ...A("euroleague_mvp", [2005]), ...A("eurobasket_gold", [2003]),
+    ],
+  }),
+  mk({
+    id: "predrag-stojakovic", name: "Predrag Stojaković", nation: "Serbia", position: "SF", team: "Sacramento Kings",
+    league: "INTL", active: false, debut: 1992,
+    blurb: "Elite shooter, 2011 NBA champion and three-time All-Star; for Yugoslavia he won EuroBasket 2001 and 2002 World gold, beating the NBA-stocked USA along the way.",
+    honors: [
+      ...A("nba_title", [2011]), ...A("all_star", [2002, 2003, 2004]),
+      ...A("eurobasket_gold", [2001]), ...A("fiba_gold", [2002]),
     ],
   }),
 ];

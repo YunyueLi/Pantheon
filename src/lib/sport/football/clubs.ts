@@ -249,6 +249,9 @@ export const NBA_TEAM_ZH: Record<string, string> = {
   "New Orleans Jazz": "新奥尔良爵士", "Washington Bullets": "华盛顿子弹", "Kansas City Kings": "堪萨斯城国王",
   "St. Louis Hawks": "圣路易斯老鹰", "Minneapolis Lakers": "明尼阿波利斯湖人", "Philadelphia Warriors": "费城勇士",
   "Syracuse Nationals": "锡拉丘兹民族", "Seattle SuperSonics": "西雅图超音速",
+  // EuroLeague clubs (international basketball players)
+  "Cibona Zagreb": "萨格勒布西博纳", "Žalgiris Kaunas": "考纳斯萨格里斯", Panathinaikos: "帕纳辛奈科斯",
+  "CSKA Moscow": "莫斯科中央陆军", Olympiacos: "奥林匹亚科斯", "FC Barcelona": "巴塞罗那",
 };
 
 /** Localize a club/team string to zh when available; unchanged for other locales/teams. */
