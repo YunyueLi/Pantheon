@@ -232,8 +232,24 @@ export const CLUB_NAME_ZH: Record<string, string> = {
   Olimpia: "奥林匹亚", "Atlético Nacional": "国民竞技",
 };
 
+/** NBA franchise names in Chinese, keyed by the English `team` string on basketball players. */
+export const NBA_TEAM_ZH: Record<string, string> = {
+  "Atlanta Hawks": "亚特兰大老鹰", "Boston Celtics": "波士顿凯尔特人", "Brooklyn Nets": "布鲁克林篮网",
+  "Charlotte Hornets": "夏洛特黄蜂", "Chicago Bulls": "芝加哥公牛", "Cleveland Cavaliers": "克利夫兰骑士",
+  "Dallas Mavericks": "达拉斯独行侠", "Denver Nuggets": "丹佛掘金", "Detroit Pistons": "底特律活塞",
+  "Golden State Warriors": "金州勇士", "Houston Rockets": "休斯顿火箭", "Indiana Pacers": "印第安纳步行者",
+  "Los Angeles Clippers": "洛杉矶快船", "Los Angeles Lakers": "洛杉矶湖人", "Memphis Grizzlies": "孟菲斯灰熊",
+  "Miami Heat": "迈阿密热火", "Milwaukee Bucks": "密尔沃基雄鹿", "Minnesota Timberwolves": "明尼苏达森林狼",
+  "New Orleans Pelicans": "新奥尔良鹈鹕", "New York Knicks": "纽约尼克斯", "Oklahoma City Thunder": "俄克拉荷马城雷霆",
+  "Orlando Magic": "奥兰多魔术", "Philadelphia 76ers": "费城76人", "Phoenix Suns": "菲尼克斯太阳",
+  "Portland Trail Blazers": "波特兰开拓者", "Sacramento Kings": "萨克拉门托国王", "San Antonio Spurs": "圣安东尼奥马刺",
+  "Toronto Raptors": "多伦多猛龙", "Utah Jazz": "犹他爵士", "Washington Wizards": "华盛顿奇才",
+  "Cincinnati Royals": "辛辛那提皇家",
+};
+
 /** Localize a club/team string to zh when available; unchanged for other locales/teams. */
 export function localizeTeam(name: string | undefined, locale: string): string {
   if (!name) return "";
-  return locale === "zh" ? CLUB_NAME_ZH[name] ?? name : name;
+  if (locale !== "zh") return name;
+  return CLUB_NAME_ZH[name] ?? NBA_TEAM_ZH[name] ?? name;
 }
