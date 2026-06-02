@@ -87,13 +87,11 @@ export function Methodology() {
                 ? "无边际递减:同一项荣誉拿得越多,分值线性累加,绝不打折——统治力只会加分。"
                 : "No diminishing returns: every repeat win of an honor adds full value — dominance is only ever rewarded."}
             </p>
-            {usesCount && (
-              <p className="mt-2 text-xs leading-relaxed text-fg-subtle">
-                {zh
-                  ? "高产量类荣誉(如 F1 分站冠军、围棋国内头衔)按总数计:分值 = 基础分 × 数量,以 ×N 标注,不绑定到某一年。"
-                  : "High-volume honors (F1 wins, Go domestic titles) are counted in bulk: score = base × count, marked ×N and never tied to one season."}
-              </p>
-            )}
+            <p className="mt-2 text-xs leading-relaxed text-fg-subtle">
+              {zh
+                ? "每一个冠军、胜场都按其真实年份单独记录,在生涯时间线上逐年铺开——绝不把生涯总数压到某一年。"
+                : "Every title and win is recorded individually at its real year and laid out year-by-year on the career timeline — career totals are never collapsed onto one season."}
+            </p>
           </CardContent>
         </Card>
 
