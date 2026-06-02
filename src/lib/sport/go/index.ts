@@ -3,20 +3,27 @@ import { GO_PLAYERS } from "./data";
 import { GO_MODEL, GO_LEAGUES, GO_POSITIONS } from "./model";
 
 const ZH_NAMES: Record<string, string> = {
-  "go-seigen": "吴清源", "lee-chang-ho": "李昌镐", "lee-sedol": "李世石", "cho-hunhyun": "曹薰铉",
-  "ke-jie": "柯洁", "gu-li": "古力", "shin-jinseo": "申真谞", "park-junghwan": "朴廷桓",
-  "iyama-yuta": "井山裕太", "cho-chikun": "赵治勋", "kobayashi-koichi": "小林光一", "sakata-eio": "坂田荣男",
-  "nie-weiping": "聂卫平", "ma-xiaochun": "马晓春", "chang-hao": "常昊", "kong-jie": "孔杰",
-  "choi-cheol-han": "崔哲瀚", "fan-tingyu": "范廷钰", "mi-yuting": "芈昱廷", "tang-weixing": "唐韦星",
-  "takemiya-masaki": "武宫正树", "rin-kaiho": "林海峰",
+  "go-seigen": "吴清源", "honinbo-shusaku": "本因坊秀策", "kitani-minoru": "木谷实",
+  "fujisawa-hideyuki": "藤泽秀行", "sakata-eio": "坂田荣男", "rin-kaiho": "林海峰",
+  "takemiya-masaki": "武宫正树", "otake-hideo": "大竹英雄", "kato-masao": "加藤正夫",
+  "kobayashi-koichi": "小林光一", "cho-chikun": "赵治勋", "cho-u": "张栩",
+  "iyama-yuta": "井山裕太", "ichiriki-ryo": "一力辽", "cho-hunhyun": "曹薰铉",
+  "yoo-changhyuk": "刘昌赫", "lee-chang-ho": "李昌镐", "lee-sedol": "李世石",
+  "choi-cheol-han": "崔哲瀚", "park-junghwan": "朴廷桓", "shin-jinseo": "申真谞",
+  "byun-sang-il": "卞相壹", "choi-jeong": "崔精", "nie-weiping": "聂卫平",
+  "ma-xiaochun": "马晓春", "chang-hao": "常昊", "kong-jie": "孔杰", "gu-li": "古力",
+  "fan-tingyu": "范廷钰", "mi-yuting": "芈昱廷", "tang-weixing": "唐韦星",
+  "gu-zihao": "辜梓豪", "ke-jie": "柯洁", "ding-hao": "丁浩",
 };
 
 const STATURE: Record<string, number> = {
-  "go-seigen": 100, "lee-chang-ho": 99, "lee-sedol": 97, "cho-hunhyun": 95, "ke-jie": 92,
-  "shin-jinseo": 90, "gu-li": 88, "cho-chikun": 86, "park-junghwan": 84, "sakata-eio": 83,
-  "iyama-yuta": 80, "kobayashi-koichi": 79, "rin-kaiho": 78, "nie-weiping": 78, "ma-xiaochun": 77,
-  "chang-hao": 76, "takemiya-masaki": 75, "choi-cheol-han": 71, "kong-jie": 70, "tang-weixing": 69,
-  "mi-yuting": 68, "fan-tingyu": 66,
+  "go-seigen": 100, "lee-chang-ho": 99, "lee-sedol": 96, "ke-jie": 93, "honinbo-shusaku": 92,
+  "cho-hunhyun": 90, "shin-jinseo": 90, "cho-chikun": 88, "gu-li": 86, "kitani-minoru": 84,
+  "sakata-eio": 82, "park-junghwan": 82, "iyama-yuta": 81, "rin-kaiho": 80, "ma-xiaochun": 80,
+  "yoo-changhyuk": 79, "kobayashi-koichi": 79, "nie-weiping": 78, "takemiya-masaki": 78,
+  "chang-hao": 76, "fujisawa-hideyuki": 76, "ding-hao": 73, "otake-hideo": 72, "kato-masao": 71,
+  "cho-u": 70, "ichiriki-ryo": 70, "choi-cheol-han": 68, "kong-jie": 68, "gu-zihao": 67,
+  "byun-sang-il": 67, "tang-weixing": 66, "choi-jeong": 64, "fan-tingyu": 63, "mi-yuting": 62,
 };
 
 const players: Player[] = GO_PLAYERS.map((p) => ({
@@ -31,7 +38,7 @@ export const GO: SportConfig = {
   basePath: "/go",
   leagues: GO_LEAGUES,
   positions: GO_POSITIONS,
-  headlineTypes: ["world_title", "domestic_title"],
+  headlineTypes: ["world_title"],
   model: GO_MODEL as HonorModel,
   players,
 };

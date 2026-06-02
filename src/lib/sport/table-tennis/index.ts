@@ -31,6 +31,7 @@ export const TABLE_TENNIS: SportConfig = {
   basePath: "/table-tennis",
   leagues: TABLE_TENNIS_LEAGUES,
   positions: TABLE_TENNIS_POSITIONS,
+  roleNoun: "leaderboard.colGender",
   headlineTypes: ["olympic_singles_gold", "world_singles_gold", "world_cup_singles_gold"],
   model: TABLE_TENNIS_MODEL as HonorModel,
   players,

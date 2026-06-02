@@ -84,6 +84,10 @@ export function Leaderboard() {
     { value: "ALL", label: t("leaderboard.allRoles") },
     ...availablePositions.map((p) => ({ value: p.id, label: roleLabel(p.id) })),
   ];
+  // Individual sports (F1, Go) have no positions → hide the role column + filter.
+  // Table tennis keeps it but renames it "Gender" via config.roleNoun.
+  const hasPositions = availablePositions.length > 0;
+  const roleColLabel = t(config.roleNoun ?? "leaderboard.colRole");
   const presetOpts = model.presets.map((p) => ({ value: p.key, label: t(`preset.${p.key}`) }));
   const eraOpts = [
     { value: "ALL", label: t("leaderboard.allEras") },
@@ -155,16 +159,18 @@ export function Leaderboard() {
         accessorFn: (r) => r.player.league,
         cell: ({ row }) => <RegionBadge region={leagueLabel(row.original.player.league)} />,
       },
-      {
-        id: "role",
-        header: t("leaderboard.colRole"),
-        accessorFn: (r) => r.player.position,
-        cell: ({ row }) => (
-          <PositionBadge
-            abbr={posAbbr(row.original.player.position)}
-          />
-        ),
-      },
+      ...(hasPositions
+        ? [
+            {
+              id: "role",
+              header: roleColLabel,
+              accessorFn: (r: Row) => r.player.position,
+              cell: ({ row }: { row: { original: Row } }) => (
+                <PositionBadge abbr={posAbbr(row.original.player.position)} />
+              ),
+            } as ColumnDef<Row>,
+          ]
+        : []),
       {
         id: "titles",
         header: t("leaderboard.colTitles"),
@@ -179,7 +185,7 @@ export function Leaderboard() {
       },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [maxScore, locale, rankBy]
+    [maxScore, locale, rankBy, hasPositions, roleColLabel]
   );
 
   const table = useReactTable({
@@ -209,12 +215,12 @@ export function Leaderboard() {
               ariaLabel={t("leaderboard.colRegion")}
               className="min-w-[8.5rem]"
             />
-            {kind !== "coach" && (
+            {kind !== "coach" && hasPositions && (
               <SelectMenu
                 value={role}
                 onChange={setRole}
                 options={roleOpts}
-                ariaLabel={t("leaderboard.colRole")}
+                ariaLabel={roleColLabel}
                 className="min-w-[7.5rem]"
               />
             )}

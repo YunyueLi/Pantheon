@@ -43,21 +43,26 @@ export default function Home() {
             {t("home.heroTitle")}
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-fg-muted">{t("home.heroDesc")}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button asChild variant="primary" size="lg">
-              <Link href="/lol/leaderboard">
-                {t("nav.lol")} <ArrowRight className="h-4 w-4" />
+
+          {/* All sports as quick entry points — flow straight into the GOAT spotlight below. */}
+          <div className="mt-8 flex flex-wrap gap-2">
+            {sports.map((s) => (
+              <Link
+                key={s.id}
+                href={`${s.basePath}/leaderboard`}
+                className="rounded-full border border-border bg-surface px-3.5 py-1.5 text-sm font-medium text-fg-muted shadow-card transition-colors hover:border-border-strong hover:text-fg"
+              >
+                {t(`nav.${s.id}`)}
               </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/football/leaderboard">
-                {t("nav.football")} <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
+            ))}
           </div>
 
           {/* GOAT spotlight — each sport's all-time #1 by Honor Index. */}
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="mt-7 flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-fg-subtle">
+            <Trophy className="h-3.5 w-3.5 text-[color:var(--medal-gold)]" />
+            {t("home.goatBand")}
+          </div>
+          <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {sports.map((s) => {
               const goat = ranked(s.players, s.model)[0];
               if (!goat) return null;

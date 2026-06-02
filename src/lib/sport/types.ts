@@ -123,6 +123,13 @@ export type SportConfig = {
   basePath: string;
   leagues: LeagueMeta[];
   positions: PositionMeta[];
+  /**
+   * i18n key for what the `positions` dimension is called on this sport. Defaults
+   * to "leaderboard.colRole" ("Position"). Individual sports with no positions
+   * leave `positions` empty (the column/filter then hides); table tennis sets this
+   * to "leaderboard.colGender" since its split is by gender, not a field position.
+   */
+  roleNoun?: string;
   /** Achievement types shown as headline trophy counts on the leaderboard. */
   headlineTypes: string[];
   model: HonorModel;

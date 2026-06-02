@@ -49,7 +49,8 @@ export function CompareView() {
         <PlayerCard player={b} dotClass="bg-[var(--fg-3)]" selectValue={bId} onSelect={setBId} exclude={aId} align="right" />
       </div>
 
-      <Card className="p-2">
+      <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
+      <Card className="grid place-items-center p-2">
         <CompareRadar a={{ label: name(a), values: aAxes }} b={{ label: name(b), values: bAxes }} axes={model.axes} />
       </Card>
 
@@ -81,6 +82,7 @@ export function CompareView() {
           );
         })}
       </Card>
+      </div>
     </div>
   );
 }
