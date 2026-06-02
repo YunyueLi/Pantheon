@@ -3,15 +3,14 @@ import type { AchievementMeta, Axis, LeagueMeta, Preset, PositionMeta } from "..
 /**
  * Dota 2 honor model. The International (TI) — the annual world championship and
  * its Aegis — is the towering pinnacle (very few players have ever won two), with
- * Valve Majors second and the broader premier-LAN circuit third. Deep TI runs
- * (runner-up / top-3) are credited so longevity icons without an Aegis still rank.
+ * Valve Majors (incl. the DPC Majors) second. Deep TI runs (runner-up / top-3)
+ * are credited so longevity icons without an Aegis still rank. Every TI win,
+ * TI podium and Valve Major is recorded at its real year.
  */
 const ACHIEVEMENTS: Record<string, AchievementMeta> = {
   ti_title: { label: "The International (Champion)", short: "TI", bucket: "team", tier: "S", base: 480 },
   ti_runner_up: { label: "The International (Top finish)", short: "TI top", bucket: "placement", tier: "A", base: 90 },
   valve_major_title: { label: "Valve Major (Champion)", short: "Major", bucket: "team", tier: "A", base: 110 },
-  premier_title: { label: "Premier Title", short: "Premier", bucket: "team", tier: "B", base: 35 },
-  best_player_award: { label: "Best Player Award", short: "Award", bucket: "individual", tier: "B", base: 60 },
 };
 
 const PRESETS: Preset[] = [
@@ -22,14 +21,12 @@ const PRESETS: Preset[] = [
 
 const AXES: Axis[] = [
   { id: "TI", label: "The International", kind: "sum", types: ["ti_title", "ti_runner_up"] },
-  { id: "Majors", label: "Majors", kind: "sum", types: ["valve_major_title"] },
-  { id: "Premier", label: "Premier", kind: "sum", types: ["premier_title"] },
-  { id: "Awards", label: "Awards", kind: "sum", types: ["best_player_award"] },
+  { id: "Majors", label: "Valve Majors", kind: "sum", types: ["valve_major_title"] },
   { id: "Peak", label: "Peak", kind: "peak" },
   { id: "Longevity", label: "Longevity", kind: "longevity" },
 ];
 
-const CABINET_ORDER = ["ti_title", "ti_runner_up", "valve_major_title", "premier_title", "best_player_award"];
+const CABINET_ORDER = ["ti_title", "ti_runner_up", "valve_major_title"];
 
 export const DOTA2_MODEL = {
   achievementMeta: ACHIEVEMENTS,

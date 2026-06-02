@@ -8,17 +8,18 @@ import { useI18n } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 import { TrophyIcon, trophyTone } from "@/components/trophy-icon";
 
-/** Group a type's wins by the club they were won with, earliest club first. */
-function byTeam(items: Achievement[]): { team: string | null; years: number[] }[] {
-  const map = new Map<string | null, number[]>();
+/** Group a type's wins by the club they were won with, earliest club first.
+ *  Each win keeps its real year and per-year count (e.g. an F1 season's 5 wins). */
+function byTeam(items: Achievement[]): { team: string | null; wins: { year: number; count: number }[] }[] {
+  const map = new Map<string | null, { year: number; count: number }[]>();
   for (const a of items) {
     const key = a.team ?? null;
     if (!map.has(key)) map.set(key, []);
-    map.get(key)!.push(a.year);
+    map.get(key)!.push({ year: a.year, count: a.count ?? 1 });
   }
   return [...map.entries()]
-    .map(([team, years]) => ({ team, years: years.sort((x, y) => x - y) }))
-    .sort((a, b) => a.years[0] - b.years[0]);
+    .map(([team, wins]) => ({ team, wins: wins.sort((x, y) => x.year - y.year) }))
+    .sort((a, b) => a.wins[0].year - b.wins[0].year);
 }
 
 export function TrophyCabinet({ player }: { player: Player }) {
@@ -37,9 +38,6 @@ export function TrophyCabinet({ player }: { player: Player }) {
         const tone = trophyTone(g.type);
         const teams = byTeam(g.items);
         const total = g.items.reduce((s, a) => s + (a.count ?? 1), 0);
-        // Bulk volume honors (F1 wins/poles) carry a count and no meaningful per-win
-        // year — show the tally, not a wall of identical year chips.
-        const dated = g.items.every((a) => (a.count ?? 1) === 1);
         return (
           <div
             key={g.type}
@@ -61,7 +59,7 @@ export function TrophyCabinet({ player }: { player: Player }) {
             </div>
             <div className="mt-2.5 text-[13px] font-medium leading-tight text-fg">{honorLabel(g.type)}</div>
             <div className="mt-2 space-y-1.5">
-              {dated && teams.map((grp, gi) => (
+              {teams.map((grp, gi) => (
                 <div key={gi}>
                   {grp.team && (
                     <div className="truncate text-[11px] font-medium leading-tight text-fg-muted">
@@ -69,9 +67,10 @@ export function TrophyCabinet({ player }: { player: Player }) {
                     </div>
                   )}
                   <div className="mt-0.5 flex flex-wrap gap-1">
-                    {grp.years.map((y, i) => (
+                    {grp.wins.map((w, i) => (
                       <span key={i} className="tnum rounded bg-surface px-1 py-0.5 text-[10px] text-fg-subtle">
-                        {`'${String(y).slice(2)}`}
+                        {`'${String(w.year).slice(2)}`}
+                        {w.count > 1 && <span className="text-fg-muted">×{w.count}</span>}
                       </span>
                     ))}
                   </div>

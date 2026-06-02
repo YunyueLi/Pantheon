@@ -51,7 +51,7 @@ export const GO: SportConfig = {
   basePath: "/go",
   leagues: GO_LEAGUES,
   positions: GO_POSITIONS,
-  headlineTypes: ["world_title"],
+  headlineTypes: ["world_title", "domestic_title"],
   model: GO_MODEL as HonorModel,
   players,
 };

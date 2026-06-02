@@ -120,6 +120,9 @@ const ICON: Record<string, { kind: Kind; ghost?: boolean }> = {
   jp_other: { kind: "star" },
   kr_major: { kind: "star" },
   cn_major: { kind: "star" },
+  jp_title: { kind: "regional" },
+  kr_title: { kind: "regional" },
+  cn_title: { kind: "regional" },
 
   // Dota 2
   ti_title: { kind: "worlds" },

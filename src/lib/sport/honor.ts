@@ -94,9 +94,11 @@ export type TimelineYear = { year: number; points: number; items: Achievement[] 
 export function timeline(p: Player, model: HonorModel, w: Weights = DEFAULT_WEIGHTS): TimelineYear[] {
   const byYear = new Map<number, Achievement[]>();
   for (const a of p.achievements) {
-    // Bulk-count aggregates (e.g. an F1 driver's 105 wins) have no single
-    // meaningful year — never dump a career total onto one season.
-    if ((a.count ?? 1) > 1) continue;
+    // Display-only aggregates (base 0) never appear on the timeline.
+    const meta = model.achievementMeta[a.type];
+    if (!meta || meta.base === 0) continue;
+    // Every remaining entry carries its real year — including per-season counts
+    // (e.g. an F1 driver's "5 wins in 2008"), which contribute to that season.
     if (!byYear.has(a.year)) byYear.set(a.year, []);
     byYear.get(a.year)!.push(a);
   }

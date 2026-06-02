@@ -404,6 +404,7 @@ const zh: Dict = {
     quzhou_lanke: "衢州·烂柯杯", nanyang: "南洋杯", other_intl: "其他世界赛/洲际赛",
     kisei: "棋圣（日本）", meijin: "名人（日本）", honinbo: "本因坊（日本）",
     jp_other: "日本其他头衔", kr_major: "韩国头衔", cn_major: "中国头衔",
+    jp_title: "日本头衔", kr_title: "韩国头衔", cn_title: "中国头衔",
     ti_title: "国际邀请赛冠军", ti_runner_up: "TI 四强", valve_major_title: "V社锦标赛冠军", premier_title: "顶级锦标赛冠军", best_player_award: "最佳选手",
     champions_title: "全球总决赛冠军", champions_mvp: "总决赛MVP", masters_title: "大师赛冠军", masters_mvp: "大师赛MVP", vct_regional: "赛区联赛冠军", champions_finalist: "总决赛亚军",
   },

@@ -26,7 +26,7 @@ export const DOTA2: SportConfig = {
   basePath: "/dota2",
   leagues: DOTA2_LEAGUES,
   positions: DOTA2_POSITIONS,
-  headlineTypes: ["ti_title", "valve_major_title", "premier_title"],
+  headlineTypes: ["ti_title", "ti_runner_up", "valve_major_title"],
   model: DOTA2_MODEL as HonorModel,
   players,
 };
