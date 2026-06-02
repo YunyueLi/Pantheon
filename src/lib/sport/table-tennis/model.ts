@@ -14,8 +14,7 @@ const ACHIEVEMENTS: Record<string, AchievementMeta> = {
   tour_finals_gold: { label: "World Tour / WTT Finals", short: "Finals", bucket: "individual", tier: "B", base: 65 },
   olympic_team_gold: { label: "Olympic Team Gold", short: "Oly Team", bucket: "team", tier: "B", base: 90 },
   world_team_gold: { label: "World Team Championship", short: "Team", bucket: "team", tier: "B", base: 52 },
-  olympic_doubles_gold: { label: "Olympic Doubles Gold", short: "Oly Dbl", bucket: "team", tier: "B", base: 80 },
-  world_doubles_gold: { label: "World Doubles Gold", short: "Dbl", bucket: "team", tier: "B", base: 38 },
+  doubles_gold: { label: "Doubles Gold (Olympic / World)", short: "Doubles", bucket: "team", tier: "B", base: 55 },
 };
 
 const PRESETS: Preset[] = [
@@ -27,7 +26,7 @@ const PRESETS: Preset[] = [
 const AXES: Axis[] = [
   { id: "Singles", label: "Singles", kind: "sum", types: ["olympic_singles_gold", "world_singles_gold", "world_cup_singles_gold", "career_grand_slam"] },
   { id: "Team", label: "Team", kind: "sum", types: ["olympic_team_gold", "world_team_gold"] },
-  { id: "Doubles", label: "Doubles", kind: "sum", types: ["olympic_doubles_gold", "world_doubles_gold"] },
+  { id: "Doubles", label: "Doubles", kind: "sum", types: ["doubles_gold"] },
   { id: "Tour", label: "Tour", kind: "sum", types: ["tour_finals_gold"] },
   { id: "Peak", label: "Peak", kind: "peak" },
   { id: "Longevity", label: "Longevity", kind: "longevity" },
@@ -35,7 +34,7 @@ const AXES: Axis[] = [
 
 const CABINET_ORDER = [
   "olympic_singles_gold", "world_singles_gold", "world_cup_singles_gold", "career_grand_slam",
-  "tour_finals_gold", "olympic_team_gold", "world_team_gold", "olympic_doubles_gold", "world_doubles_gold",
+  "tour_finals_gold", "olympic_team_gold", "world_team_gold", "doubles_gold",
 ];
 
 export const TABLE_TENNIS_MODEL = {

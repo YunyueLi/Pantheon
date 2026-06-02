@@ -397,7 +397,7 @@ const zh: Dict = {
     wdc: "年度车手总冠军", race_win: "分站冠军", pole: "杆位", podium: "登台",
     olympic_singles_gold: "奥运单打金牌", world_singles_gold: "世锦赛单打冠军", world_cup_singles_gold: "世界杯单打冠军",
     career_grand_slam: "大满贯", olympic_team_gold: "奥运团体金牌", world_team_gold: "世锦赛团体冠军",
-    olympic_doubles_gold: "奥运双打金牌", world_doubles_gold: "世锦赛双打冠军", tour_finals_gold: "总决赛冠军",
+    olympic_doubles_gold: "奥运双打金牌", world_doubles_gold: "世锦赛双打冠军", doubles_gold: "双打金牌", tour_finals_gold: "总决赛冠军",
     world_title: "世界大赛冠军", domestic_title: "国内头衔",
     ing: "应氏杯", fujitsu: "富士通杯", tong_yang: "东洋证券杯", lg: "LG杯", samsung: "三星杯",
     chunlan: "春兰杯", bailing: "百灵杯", mlily: "梦百合杯", world_oza: "丰田杯（世界王座）",

@@ -96,6 +96,7 @@ const ICON: Record<string, { kind: Kind; ghost?: boolean }> = {
   world_team_gold: { kind: "regional" },
   olympic_doubles_gold: { kind: "medal" },
   world_doubles_gold: { kind: "regional" },
+  doubles_gold: { kind: "regional" },
   tour_finals_gold: { kind: "star" },
 
   // Go
