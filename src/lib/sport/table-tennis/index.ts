@@ -32,6 +32,7 @@ export const TABLE_TENNIS: SportConfig = {
   leagues: TABLE_TENNIS_LEAGUES,
   positions: TABLE_TENNIS_POSITIONS,
   roleNoun: "leaderboard.colGender",
+  splitByPosition: true,
   headlineTypes: ["olympic_singles_gold", "world_singles_gold", "world_cup_singles_gold"],
   model: TABLE_TENNIS_MODEL as HonorModel,
   players,

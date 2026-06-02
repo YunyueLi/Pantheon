@@ -42,8 +42,11 @@ export function Leaderboard() {
   const [region, setRegion] = useState<string>(
     leagues.some((l) => l.id === spRegion) ? (spRegion as string) : "ALL"
   );
+  // Sports flagged splitByPosition (table tennis) never mix positions: no "All",
+  // default to the first position (men's), switchable to women's.
+  const splitGender = Boolean(config.splitByPosition) && positions.length > 0;
   const [role, setRole] = useState<string>(
-    positions.some((p) => p.id === spRole) ? (spRole as string) : "ALL"
+    positions.some((p) => p.id === spRole) ? (spRole as string) : splitGender ? positions[0].id : "ALL"
   );
   const [presetKey, setPresetKey] = useState(model.presets[0].key);
   const [era, setEra] = useState<string>("ALL");
@@ -81,7 +84,7 @@ export function Leaderboard() {
     )
   );
   const roleOpts = [
-    { value: "ALL", label: t("leaderboard.allRoles") },
+    ...(splitGender ? [] : [{ value: "ALL", label: t("leaderboard.allRoles") }]),
     ...availablePositions.map((p) => ({ value: p.id, label: roleLabel(p.id) })),
   ];
   // Individual sports (F1, Go) have no positions → hide the role column + filter.

@@ -130,6 +130,12 @@ export type SportConfig = {
    * to "leaderboard.colGender" since its split is by gender, not a field position.
    */
   roleNoun?: string;
+  /**
+   * When true, players are NEVER ranked in one mixed pool — the position filter
+   * has no "All" option and defaults to the first position. Used by table tennis
+   * so men's and women's boards are always separate (default: men, switch to women).
+   */
+  splitByPosition?: boolean;
   /** Achievement types shown as headline trophy counts on the leaderboard. */
   headlineTypes: string[];
   model: HonorModel;

@@ -104,7 +104,12 @@ export default function Home() {
 
         <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2">
           {sports.map((s) => {
-            const top = ranked(s.players, s.model).slice(0, 5);
+            // Split sports (table tennis) never mix genders — preview the default (men's).
+            const pool =
+              s.splitByPosition && s.positions[0]
+                ? s.players.filter((p) => p.position === s.positions[0].id)
+                : s.players;
+            const top = ranked(pool, s.model).slice(0, 5);
             const maxScore = top[0]?.score ?? 1;
             return (
               <div key={s.id} className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
