@@ -44,12 +44,12 @@ export function CompareView() {
         <h1 className="mt-1.5 text-2xl font-semibold tracking-tight">{t("compare.title")}</h1>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-fg-muted">{t("compare.desc")}</p>
       </header>
+      <div className="mx-auto w-full max-w-4xl space-y-4">
       <div className="grid grid-cols-2 gap-3">
         <PlayerCard player={a} dotClass="bg-accent" selectValue={aId} onSelect={setAId} exclude={bId} />
         <PlayerCard player={b} dotClass="bg-[var(--fg-3)]" selectValue={bId} onSelect={setBId} exclude={aId} align="right" />
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
       <Card className="grid place-items-center p-2">
         <CompareRadar a={{ label: name(a), values: aAxes }} b={{ label: name(b), values: bAxes }} axes={model.axes} />
       </Card>
@@ -60,19 +60,19 @@ export function CompareView() {
           const bWin = m.bv > m.av;
           const fmt = m.fmt ?? ((n: number) => String(n));
           return (
-            <div key={m.label} className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 px-5 py-2.5">
+            <div key={m.label} className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-2.5 odd:bg-surface-2">
               <div
                 className={cn(
-                  "tnum text-right text-sm",
+                  "tnum text-right text-[15px]",
                   aWin ? "font-semibold text-accent" : "text-fg-muted"
                 )}
               >
                 {fmt(m.av)}
               </div>
-              <div className="w-28 text-center text-xs text-fg-subtle">{m.label}</div>
+              <div className="w-36 text-center text-xs leading-tight text-fg-subtle sm:w-44">{m.label}</div>
               <div
                 className={cn(
-                  "tnum text-left text-sm",
+                  "tnum text-left text-[15px]",
                   bWin ? "font-semibold text-fg" : "text-fg-muted"
                 )}
               >
