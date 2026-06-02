@@ -54,28 +54,55 @@ export function CompareView() {
       </Card>
 
       <Card className="divide-y divide-border">
+        <div className="flex items-center justify-between px-5 py-3 text-sm font-medium">
+          <span className="flex items-center gap-1.5 text-accent">
+            <span className="h-2 w-2 rounded-full bg-accent" />
+            {name(a)}
+          </span>
+          <span className="flex items-center gap-1.5 text-fg">
+            {name(b)}
+            <span className="h-2 w-2 rounded-full bg-[var(--fg-3)]" />
+          </span>
+        </div>
         {metrics.map((m) => {
           const aWin = m.av > m.bv;
           const bWin = m.bv > m.av;
           const fmt = m.fmt ?? ((n: number) => String(n));
+          const max = Math.max(m.av, m.bv, 1);
           return (
-            <div key={m.label} className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-2.5 odd:bg-surface-2">
-              <div
-                className={cn(
-                  "tnum text-left text-[15px]",
-                  aWin ? "font-semibold text-accent" : "text-fg-muted"
-                )}
-              >
-                {fmt(m.av)}
-              </div>
-              <div className="w-36 text-center text-xs leading-tight text-fg-subtle sm:w-44">{m.label}</div>
-              <div
-                className={cn(
-                  "tnum text-right text-[15px]",
-                  bWin ? "font-semibold text-fg" : "text-fg-muted"
-                )}
-              >
-                {fmt(m.bv)}
+            <div key={m.label} className="px-5 py-3">
+              <div className="mb-1.5 text-center text-[11px] uppercase tracking-wide text-fg-subtle">{m.label}</div>
+              <div className="flex items-center gap-3">
+                <span
+                  className={cn(
+                    "tnum w-14 shrink-0 text-right text-sm sm:w-16",
+                    aWin ? "font-semibold text-accent" : "text-fg-muted"
+                  )}
+                >
+                  {fmt(m.av)}
+                </span>
+                <div className="flex flex-1 items-center gap-1" aria-hidden>
+                  <div className="relative h-2.5 flex-1 overflow-hidden rounded-l-full bg-surface-2">
+                    <div
+                      className="absolute inset-y-0 right-0 rounded-l-full bg-accent transition-[width]"
+                      style={{ width: `${(m.av / max) * 100}%` }}
+                    />
+                  </div>
+                  <div className="relative h-2.5 flex-1 overflow-hidden rounded-r-full bg-surface-2">
+                    <div
+                      className="absolute inset-y-0 left-0 rounded-r-full bg-[var(--fg-3)] transition-[width]"
+                      style={{ width: `${(m.bv / max) * 100}%` }}
+                    />
+                  </div>
+                </div>
+                <span
+                  className={cn(
+                    "tnum w-14 shrink-0 text-left text-sm sm:w-16",
+                    bWin ? "font-semibold text-fg" : "text-fg-muted"
+                  )}
+                >
+                  {fmt(m.bv)}
+                </span>
               </div>
             </div>
           );
