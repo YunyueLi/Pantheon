@@ -113,3 +113,18 @@
     background-size: 28px 28px;
   }
 }
+
+/* Radar value shapes grow in from the centre. The resting state is fully
+   visible, so the shapes still show even if the animation never plays
+   (reduced-motion, throttled background tab, etc.). */
+@keyframes radar-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .radar-reveal {
+    animation: none !important;
+  }
+}
