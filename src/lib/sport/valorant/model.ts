@@ -20,7 +20,8 @@ const PRESETS: Preset[] = [
 ];
 
 const AXES: Axis[] = [
-  { id: "Champions", label: "Champions", kind: "sum", types: ["champions_title", "champions_finalist"] },
+  { id: "Champions", label: "Champions", kind: "sum", types: ["champions_title"] },
+  { id: "Finals", label: "Finals", kind: "sum", types: ["champions_finalist"] },
   { id: "Masters", label: "Masters", kind: "sum", types: ["masters_title"] },
   { id: "MVPs", label: "MVPs", kind: "sum", types: ["champions_mvp", "masters_mvp"] },
   { id: "Peak", label: "Peak", kind: "peak" },
