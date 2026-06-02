@@ -4,12 +4,13 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { honorScore, normalizedAxes, countType, ranked } from "@/lib/sport/honor";
 import type { Player } from "@/lib/sport/types";
-import { useSport, useHonorLabel, useAxisLabel, useName, useLeagueLabel } from "@/lib/sport/provider";
+import { useSport, useHonorLabel, useName, useLeagueLabel } from "@/lib/sport/provider";
 import { cn, formatNumber } from "@/lib/utils";
 import { PlayerAvatar } from "@/components/player-avatar";
 import { PlayerPicker } from "@/components/player-picker";
 import { RegionBadge, PositionBadge } from "@/components/badges";
 import { CompareRadar } from "@/components/compare-radar";
+import { TrophyIcon } from "@/components/trophy-icon";
 import { Card } from "@/components/ui/card";
 import { useI18n } from "@/lib/i18n/provider";
 
@@ -18,7 +19,6 @@ export function CompareView() {
   const { config } = useSport();
   const { players, model, headlineTypes } = config;
   const honorLabel = useHonorLabel();
-  const axisLabel = useAxisLabel();
   const name = useName();
   const sp = useSearchParams();
   const has = (id: string) => players.some((p) => p.id === id);
@@ -31,10 +31,12 @@ export function CompareView() {
   const aAxes = useMemo(() => normalizedAxes(a, players, model).map((d) => d.value), [aId]); // eslint-disable-line react-hooks/exhaustive-deps
   const bAxes = useMemo(() => normalizedAxes(b, players, model).map((d) => d.value), [bId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const metrics: { label: string; av: number; bv: number; fmt?: (n: number) => string }[] = [
+  // The 6 rated axes live in the radar above — repeating them as rows here is
+  // redundant. This block shows only the raw trophy counts (different units per
+  // row), as a "tale of the tape": exact numbers, winner emphasised by weight.
+  const metrics: { label: string; av: number; bv: number; fmt?: (n: number) => string; type?: string }[] = [
     { label: t("player.honorIndex"), av: honorScore(a, model), bv: honorScore(b, model), fmt: formatNumber },
-    ...headlineTypes.map((type) => ({ label: honorLabel(type), av: countType(a, type), bv: countType(b, type) })),
-    ...model.axes.map((ax, i) => ({ label: axisLabel(ax.id, ax.label), av: aAxes[i], bv: bAxes[i] })),
+    ...headlineTypes.map((type) => ({ label: honorLabel(type), av: countType(a, type), bv: countType(b, type), type })),
   ];
 
   return (
@@ -53,52 +55,40 @@ export function CompareView() {
         <CompareRadar a={{ label: name(a), values: aAxes }} b={{ label: name(b), values: bAxes }} axes={model.axes} />
       </Card>
 
-      <Card className="divide-y divide-border">
-        <div className="flex items-center justify-between px-5 py-3 text-sm font-medium">
-          <span className="flex items-center gap-1.5 text-accent">
-            <span className="h-2 w-2 rounded-full bg-accent" />
-            {name(a)}
-          </span>
-          <span className="flex items-center gap-1.5 text-fg">
-            {name(b)}
-            <span className="h-2 w-2 rounded-full bg-[var(--fg-3)]" />
-          </span>
-        </div>
-        {metrics.map((m) => {
-          const aWin = m.av > m.bv;
-          const bWin = m.bv > m.av;
-          const fmt = m.fmt ?? ((n: number) => String(n));
-          const total = m.av + m.bv;
-          const aShare = total > 0 ? (m.av / total) * 100 : 0;
-          const bShare = total > 0 ? (m.bv / total) * 100 : 0;
-          return (
-            <div key={m.label} className="px-5 py-3">
-              <div className="mb-1.5 text-center text-[11px] uppercase tracking-wide text-fg-subtle">{m.label}</div>
-              <div className="flex items-center gap-3">
-                <span
-                  className={cn(
-                    "tnum w-16 shrink-0 text-right text-sm",
-                    aWin ? "font-semibold text-accent" : "text-fg-muted"
-                  )}
-                >
-                  {fmt(m.av)}
-                </span>
-                <div className="flex h-2.5 flex-1 overflow-hidden rounded-full bg-surface-2" aria-hidden>
-                  <div className="bg-accent transition-[width]" style={{ width: `${aShare}%` }} />
-                  <div className="bg-[var(--fg-3)] transition-[width]" style={{ width: `${bShare}%` }} />
+      <Card className="px-5 py-2">
+        <div className="mx-auto max-w-lg">
+          <div className="flex items-center justify-between py-3 text-sm font-medium">
+            <span className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-accent" />
+              {name(a)}
+            </span>
+            <span className="flex items-center gap-1.5">
+              {name(b)}
+              <span className="h-2 w-2 rounded-full bg-[var(--fg-3)]" />
+            </span>
+          </div>
+          <div className="divide-y divide-border border-t border-border">
+            {metrics.map((m) => {
+              const aWin = m.av > m.bv;
+              const bWin = m.bv > m.av;
+              const fmt = m.fmt ?? ((n: number) => String(n));
+              return (
+                <div key={m.label} className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 py-3.5">
+                  <span className={cn("tnum text-left text-2xl leading-none", aWin ? "font-semibold text-fg" : "text-fg-muted")}>
+                    {fmt(m.av)}
+                  </span>
+                  <span className="flex items-center justify-center gap-1.5">
+                    {m.type && <TrophyIcon type={m.type} size={14} className="text-fg-subtle" />}
+                    <span className="whitespace-nowrap text-[11px] uppercase tracking-wide text-fg-subtle">{m.label}</span>
+                  </span>
+                  <span className={cn("tnum text-right text-2xl leading-none", bWin ? "font-semibold text-fg" : "text-fg-muted")}>
+                    {fmt(m.bv)}
+                  </span>
                 </div>
-                <span
-                  className={cn(
-                    "tnum w-16 shrink-0 text-left text-sm",
-                    bWin ? "font-semibold text-fg" : "text-fg-muted"
-                  )}
-                >
-                  {fmt(m.bv)}
-                </span>
-              </div>
-            </div>
-          );
-        })}
+              );
+            })}
+          </div>
+        </div>
       </Card>
     </div>
   );
