@@ -1,10 +1,10 @@
 import type { AchievementMeta, Axis, LeagueMeta, Preset, PositionMeta } from "../types";
 
 /**
- * Formula 1 honor model. The World Drivers' Championship is the pinnacle
- * (repeatable, lightly decayed so a 7-title great still towers without erasing
- * the field), with race wins / poles / podiums as the volume metrics of
- * sustained excellence. Counts are career-final, capped at the end of 2024.
+ * Formula 1 honor model. The World Drivers' Championship is the pinnacle and is
+ * weighted heaviest; race wins / poles / podiums are the career-volume metrics
+ * of sustained excellence. Every win counts at full value (no diminishing
+ * returns) — dominance is rewarded. All counts are career-final, capped end-2024.
  */
 const ACHIEVEMENTS: Record<string, AchievementMeta> = {
   wdc: { label: "World Drivers' Championship", short: "WDC", bucket: "individual", tier: "S", base: 520 },
@@ -30,16 +30,11 @@ const AXES: Axis[] = [
 
 const CABINET_ORDER = ["wdc", "race_win", "pole", "podium"];
 
-// WDC sees mild diminishing returns; volume stats (wins/poles/podiums) do NOT
-// decay — in F1 the raw career counts are the headline measure of greatness.
-const REPEAT_DECAY_TYPES = ["wdc"];
-
 export const F1_MODEL = {
   achievementMeta: ACHIEVEMENTS,
   presets: PRESETS,
   axes: AXES,
   cabinetOrder: CABINET_ORDER,
-  repeatDecay: { factor: 0.85, types: REPEAT_DECAY_TYPES },
 };
 
 export const F1_LEAGUES: LeagueMeta[] = [
@@ -56,6 +51,14 @@ export const F1_LEAGUES: LeagueMeta[] = [
   { id: "AUS", label: "Australia", country: "Australia", flag: "🇦🇺" },
   { id: "CAN", label: "Canada", country: "Canada", flag: "🇨🇦" },
   { id: "USA", label: "United States", country: "United States", flag: "🇺🇸" },
+  { id: "RSA", label: "South Africa", country: "South Africa", flag: "🇿🇦" },
+  { id: "NZL", label: "New Zealand", country: "New Zealand", flag: "🇳🇿" },
+  { id: "MEX", label: "Mexico", country: "Mexico", flag: "🇲🇽" },
+  { id: "COL", label: "Colombia", country: "Colombia", flag: "🇨🇴" },
+  { id: "SWE", label: "Sweden", country: "Sweden", flag: "🇸🇪" },
+  { id: "BEL", label: "Belgium", country: "Belgium", flag: "🇧🇪" },
+  { id: "MCO", label: "Monaco", country: "Monaco", flag: "🇲🇨" },
+  { id: "SUI", label: "Switzerland", country: "Switzerland", flag: "🇨🇭" },
 ];
 
 // Formula 1 has no positions — drivers are ranked as one pool.

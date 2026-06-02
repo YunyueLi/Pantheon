@@ -70,22 +70,11 @@ const CABINET_ORDER = [
   "finals_loss",
 ];
 
-// Repeated, high-volume honors see diminishing returns (the k-th win scaled by
-// 0.78^k) so a dynasty's ring count or a 19-time All-Star's longevity can't bury
-// higher-peak careers. The marquee, naturally-scarce awards (MVP, Finals MVP,
-// DPOY, ROY, Olympic / FIBA gold) keep full value.
-const REPEAT_DECAY_TYPES = [
-  "nba_title", "aba_title", "euroleague", "euroleague_mvp", "eurobasket_gold", "scoring_title",
-  "all_nba_first", "all_nba_second", "all_nba_third", "all_defensive_first", "all_star",
-  "stat_title", "finals_loss",
-];
-
 export const BASKETBALL_MODEL = {
   achievementMeta: ACHIEVEMENTS,
   presets: PRESETS,
   axes: AXES,
   cabinetOrder: CABINET_ORDER,
-  repeatDecay: { factor: 0.78, types: REPEAT_DECAY_TYPES },
 };
 
 export const BASKETBALL_LEAGUES: LeagueMeta[] = [

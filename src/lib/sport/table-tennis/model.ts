@@ -38,19 +38,11 @@ const CABINET_ORDER = [
   "tour_finals_gold", "olympic_team_gold", "world_team_gold", "olympic_doubles_gold", "world_doubles_gold",
 ];
 
-// Olympic singles gold (max 2 ever) and the Grand Slam keep full value; the
-// repeatable, higher-volume titles decay.
-const REPEAT_DECAY_TYPES = [
-  "world_singles_gold", "world_cup_singles_gold", "tour_finals_gold",
-  "olympic_team_gold", "world_team_gold", "olympic_doubles_gold", "world_doubles_gold",
-];
-
 export const TABLE_TENNIS_MODEL = {
   achievementMeta: ACHIEVEMENTS,
   presets: PRESETS,
   axes: AXES,
   cabinetOrder: CABINET_ORDER,
-  repeatDecay: { factor: 0.8, types: REPEAT_DECAY_TYPES },
 };
 
 export const TABLE_TENNIS_LEAGUES: LeagueMeta[] = [
@@ -59,6 +51,16 @@ export const TABLE_TENNIS_LEAGUES: LeagueMeta[] = [
   { id: "KOR", label: "South Korea", country: "South Korea", flag: "🇰🇷" },
   { id: "GER", label: "Germany", country: "Germany", flag: "🇩🇪" },
   { id: "AUT", label: "Austria", country: "Austria", flag: "🇦🇹" },
+  { id: "FRA", label: "France", country: "France", flag: "🇫🇷" },
+  { id: "JPN", label: "Japan", country: "Japan", flag: "🇯🇵" },
+  { id: "TPE", label: "Chinese Taipei", country: "Chinese Taipei", flag: "🇹🇼" },
+  { id: "BLR", label: "Belarus", country: "Belarus", flag: "🇧🇾" },
+  { id: "CRO", label: "Croatia", country: "Croatia", flag: "🇭🇷" },
+  { id: "HKG", label: "Hong Kong", country: "Hong Kong", flag: "🇭🇰" },
+  { id: "SGP", label: "Singapore", country: "Singapore", flag: "🇸🇬" },
+  { id: "BRA", label: "Brazil", country: "Brazil", flag: "🇧🇷" },
+  { id: "CAN", label: "Canada", country: "Canada", flag: "🇨🇦" },
+  { id: "USA", label: "United States", country: "United States", flag: "🇺🇸" },
 ];
 
 export const TABLE_TENNIS_POSITIONS: PositionMeta[] = [

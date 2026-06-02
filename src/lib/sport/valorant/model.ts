@@ -29,29 +29,19 @@ const AXES: Axis[] = [
 
 const CABINET_ORDER = ["champions_title", "champions_mvp", "masters_title", "masters_mvp", "champions_finalist"];
 
-const REPEAT_DECAY_TYPES = ["champions_title", "masters_title", "masters_mvp"];
-
 export const VALORANT_MODEL = {
   achievementMeta: ACHIEVEMENTS,
   presets: PRESETS,
   axes: AXES,
   cabinetOrder: CABINET_ORDER,
-  repeatDecay: { factor: 0.8, types: REPEAT_DECAY_TYPES },
 };
 
+// VALORANT is organized by the four VCT regional leagues, not nationality.
 export const VALORANT_LEAGUES: LeagueMeta[] = [
-  { id: "BRA", label: "Brazil", country: "Brazil", flag: "🇧🇷" },
-  { id: "USA", label: "United States", country: "United States", flag: "🇺🇸" },
-  { id: "CAN", label: "Canada", country: "Canada", flag: "🇨🇦" },
-  { id: "TUR", label: "Türkiye", country: "Türkiye", flag: "🇹🇷" },
-  { id: "FIN", label: "Finland", country: "Finland", flag: "🇫🇮" },
-  { id: "RUS", label: "Russia", country: "Russia", flag: "🇷🇺" },
-  { id: "SWE", label: "Sweden", country: "Sweden", flag: "🇸🇪" },
-  { id: "GBR", label: "United Kingdom", country: "United Kingdom", flag: "🇬🇧" },
-  { id: "IDN", label: "Indonesia", country: "Indonesia", flag: "🇮🇩" },
-  { id: "SGP", label: "Singapore", country: "Singapore", flag: "🇸🇬" },
-  { id: "KOR", label: "South Korea", country: "South Korea", flag: "🇰🇷" },
-  { id: "BEL", label: "Belgium", country: "Belgium", flag: "🇧🇪" },
+  { id: "Americas", label: "Americas", country: "VCT Americas", flag: "🌎" },
+  { id: "EMEA", label: "EMEA", country: "VCT EMEA", flag: "🌍" },
+  { id: "Pacific", label: "Pacific", country: "VCT Pacific", flag: "🌏" },
+  { id: "China", label: "China", country: "VCT China", flag: "🇨🇳" },
 ];
 
 export const VALORANT_POSITIONS: PositionMeta[] = [

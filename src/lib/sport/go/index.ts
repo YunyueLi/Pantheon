@@ -14,16 +14,29 @@ const ZH_NAMES: Record<string, string> = {
   "ma-xiaochun": "马晓春", "chang-hao": "常昊", "kong-jie": "孔杰", "gu-li": "古力",
   "fan-tingyu": "范廷钰", "mi-yuting": "芈昱廷", "tang-weixing": "唐韦星",
   "gu-zihao": "辜梓豪", "ke-jie": "柯洁", "ding-hao": "丁浩",
+  // ---- added 2026-06 ----
+  "yoda-norimoto": "依田纪基", "o-meien": "王铭琬", "yamashita-keigo": "山下敬吾",
+  "seo-bongsoo": "徐奉洙", "mok-jinseok": "睦镇硕", "won-seongjin": "元晟溱",
+  "park-yeonghun": "朴永训", "kang-dongyun": "姜东润", "kim-jiseok": "金志锡",
+  "shin-minjun": "申旻埈", "luo-xihe": "罗洗河", "chen-yaoye": "陈耀烨",
+  "shi-yue": "时越", "zhou-ruiyang": "周睿羊", "jiang-weijie": "江维杰",
+  "tuo-jiaxi": "柁嘉熹", "tan-xiao": "檀啸", "yang-dingxin": "杨鼎新",
+  "li-xuanhao": "李轩豪", "wang-xinghao": "王星昊",
 };
 
 const STATURE: Record<string, number> = {
   "go-seigen": 100, "lee-chang-ho": 99, "lee-sedol": 96, "ke-jie": 93, "honinbo-shusaku": 92,
   "cho-hunhyun": 90, "shin-jinseo": 90, "cho-chikun": 88, "gu-li": 86, "kitani-minoru": 84,
-  "sakata-eio": 82, "park-junghwan": 82, "iyama-yuta": 81, "rin-kaiho": 80, "ma-xiaochun": 80,
+  "sakata-eio": 82, "park-junghwan": 82, "iyama-yuta": 81, "rin-kaiho": 80,
   "yoo-changhyuk": 79, "kobayashi-koichi": 79, "nie-weiping": 78, "takemiya-masaki": 78,
-  "chang-hao": 76, "fujisawa-hideyuki": 76, "ding-hao": 73, "otake-hideo": 72, "kato-masao": 71,
-  "cho-u": 70, "ichiriki-ryo": 70, "choi-cheol-han": 68, "kong-jie": 68, "gu-zihao": 67,
-  "byun-sang-il": 67, "tang-weixing": 66, "choi-jeong": 64, "fan-tingyu": 63, "mi-yuting": 62,
+  "chang-hao": 76, "fujisawa-hideyuki": 76, "ma-xiaochun": 74, "ding-hao": 73, "yamashita-keigo": 72,
+  "otake-hideo": 72, "kato-masao": 71, "chen-yaoye": 71, "cho-u": 70, "ichiriki-ryo": 70,
+  "yoda-norimoto": 68, "choi-cheol-han": 68, "kong-jie": 68, "seo-bongsoo": 67, "gu-zihao": 67,
+  "byun-sang-il": 67, "kang-dongyun": 66, "park-yeonghun": 66, "tang-weixing": 66, "choi-jeong": 64,
+  "o-meien": 63, "fan-tingyu": 63, "won-seongjin": 62, "li-xuanhao": 62, "mi-yuting": 62,
+  "yang-dingxin": 61, "jiang-weijie": 61, "zhou-ruiyang": 61, "shi-yue": 61, "tuo-jiaxi": 60,
+  "tan-xiao": 60, "luo-xihe": 60, "shin-minjun": 60, "kim-jiseok": 59, "wang-xinghao": 58,
+  "mok-jinseok": 55,
 };
 
 const players: Player[] = GO_PLAYERS.map((p) => ({

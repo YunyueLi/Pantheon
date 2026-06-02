@@ -213,7 +213,9 @@ export function PlayerProfile({ id }: { id: string }) {
                 const meta = model.achievementMeta[a.type];
                 return (
                   <tr key={i} className="border-b border-border/60 last:border-0 hover:bg-surface-2">
-                    <td className="tnum px-5 py-2.5 text-sm text-fg-muted">{a.year}</td>
+                    <td className="tnum px-5 py-2.5 text-sm text-fg-muted">
+                      {typeof a.count === "number" && a.count > 1 ? "—" : a.year}
+                    </td>
                     <td className="px-2 py-2.5">
                       <span className="flex items-center gap-2">
                         <TrophyIcon type={a.type} size={18} className={trophyTone(a.type)} />

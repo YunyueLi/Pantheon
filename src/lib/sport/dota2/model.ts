@@ -31,16 +31,11 @@ const AXES: Axis[] = [
 
 const CABINET_ORDER = ["ti_title", "ti_runner_up", "valve_major_title", "premier_title", "best_player_award"];
 
-// Only the Aegis (TI title) decays per win — a 2nd TI is monumental but not
-// quite double. The lower-tier volume honors are carried as bulk counts.
-const REPEAT_DECAY_TYPES = ["ti_title"];
-
 export const DOTA2_MODEL = {
   achievementMeta: ACHIEVEMENTS,
   presets: PRESETS,
   axes: AXES,
   cabinetOrder: CABINET_ORDER,
-  repeatDecay: { factor: 0.8, types: REPEAT_DECAY_TYPES },
 };
 
 export const DOTA2_LEAGUES: LeagueMeta[] = [
@@ -60,6 +55,14 @@ export const DOTA2_LEAGUES: LeagueMeta[] = [
   { id: "AUS", label: "Australia", country: "Australia", flag: "🇦🇺" },
   { id: "FRA", label: "France", country: "France", flag: "🇫🇷" },
   { id: "CAN", label: "Canada", country: "Canada", flag: "🇨🇦" },
+  { id: "USA", label: "United States", country: "United States", flag: "🇺🇸" },
+  { id: "MAS", label: "Malaysia", country: "Malaysia", flag: "🇲🇾" },
+  { id: "SGP", label: "Singapore", country: "Singapore", flag: "🇸🇬" },
+  { id: "BUL", label: "Bulgaria", country: "Bulgaria", flag: "🇧🇬" },
+  { id: "BLR", label: "Belarus", country: "Belarus", flag: "🇧🇾" },
+  { id: "ROU", label: "Romania", country: "Romania", flag: "🇷🇴" },
+  { id: "MKD", label: "North Macedonia", country: "North Macedonia", flag: "🇲🇰" },
+  { id: "SVK", label: "Slovakia", country: "Slovakia", flag: "🇸🇰" },
 ];
 
 export const DOTA2_POSITIONS: PositionMeta[] = [

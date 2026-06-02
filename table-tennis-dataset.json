@@ -1,0 +1,391 @@
+{
+  "sport": "table-tennis",
+  "cutoffNote": "All counts verified against English Wikipedia and capped at June 2025 — includes the May-2025 Doha World Championships (Wang Chuqin men's singles; Sun Yingsha women's singles) and the April-2025 Macao World Cup (Hugo Calderano men's; Sun Yingsha women's); EXCLUDES later 2025 events such as the December-2025 WTT Finals Hong Kong. Olympic doubles_gold lumps Olympic mixed doubles (e.g. Wang Chuqin / Sun Yingsha 2024); world_doubles_gold lumps World-Championship men's, women's and mixed doubles. world_team_gold counts World Team Championships only (Swaythling/Corbillon Cup), kept separate from Olympic team gold. isGrandSlam = won Olympic + World Championship + World Cup SINGLES gold across a career; exactly 11 players (6 men, 5 women) qualify.",
+  "players": [
+    {
+      "id": "ma-long", "name": "Ma Long", "nation": "China", "league": "CHN", "gender": "M", "active": true, "debut": 2006,
+      "honors": { "olympic_singles_gold": 2, "world_singles_gold": 3, "world_cup_singles_gold": 3, "olympic_team_gold": 4, "world_team_gold": 9, "olympic_doubles_gold": 0, "world_doubles_gold": 2, "tour_finals_gold": 0 },
+      "isGrandSlam": true, "statureSuggestion": 100,
+      "blurb": "The consensus GOAT: only man with a double career Grand Slam and the most Olympic table tennis golds ever.",
+      "uncertain": []
+    },
+    {
+      "id": "fan-zhendong", "name": "Fan Zhendong", "nation": "China", "league": "CHN", "gender": "M", "active": true, "debut": 2012,
+      "honors": { "olympic_singles_gold": 1, "world_singles_gold": 2, "world_cup_singles_gold": 4, "olympic_team_gold": 2, "world_team_gold": 5, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 1 },
+      "isGrandSlam": true, "statureSuggestion": 89,
+      "blurb": "Sealed the Grand Slam with 2024 Olympic singles gold; the sixth man ever to complete it.",
+      "uncertain": []
+    },
+    {
+      "id": "zhang-jike", "name": "Zhang Jike", "nation": "China", "league": "CHN", "gender": "M", "active": false, "debut": 2007,
+      "honors": { "olympic_singles_gold": 1, "world_singles_gold": 2, "world_cup_singles_gold": 2, "olympic_team_gold": 2, "world_team_gold": 4, "olympic_doubles_gold": 0, "world_doubles_gold": 1, "tour_finals_gold": 0 },
+      "isGrandSlam": true, "statureSuggestion": 90,
+      "blurb": "Completed the career Grand Slam in a record 445 days — the fastest the feat has ever been achieved.",
+      "uncertain": []
+    },
+    {
+      "id": "wang-hao", "name": "Wang Hao", "nation": "China", "league": "CHN", "gender": "M", "active": false, "debut": 1998,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 1, "world_cup_singles_gold": 4, "olympic_team_gold": 2, "world_team_gold": 6, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 80,
+      "blurb": "Lost three straight Olympic singles finals; a world and four-time World Cup champion who never struck Olympic gold.",
+      "uncertain": []
+    },
+    {
+      "id": "wang-liqin", "name": "Wang Liqin", "nation": "China", "league": "CHN", "gender": "M", "active": false, "debut": 1993,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 3, "world_cup_singles_gold": 0, "olympic_team_gold": 1, "world_team_gold": 4, "olympic_doubles_gold": 1, "world_doubles_gold": 1, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 83,
+      "blurb": "Three-time world singles champion whose only gap was the elusive Olympic singles title.",
+      "uncertain": []
+    },
+    {
+      "id": "ma-lin", "name": "Ma Lin", "nation": "China", "league": "CHN", "gender": "M", "active": false, "debut": 1994,
+      "honors": { "olympic_singles_gold": 1, "world_singles_gold": 0, "world_cup_singles_gold": 4, "olympic_team_gold": 1, "world_team_gold": 6, "olympic_doubles_gold": 1, "world_doubles_gold": 3, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 83,
+      "blurb": "Won Olympic singles, doubles and team gold — yet, remarkably, never a World Championship singles title.",
+      "uncertain": []
+    },
+    {
+      "id": "kong-linghui", "name": "Kong Linghui", "nation": "China", "league": "CHN", "gender": "M", "active": false, "debut": 1993,
+      "honors": { "olympic_singles_gold": 1, "world_singles_gold": 1, "world_cup_singles_gold": 1, "olympic_team_gold": 0, "world_team_gold": 5, "olympic_doubles_gold": 1, "world_doubles_gold": 3, "tour_finals_gold": 0 },
+      "isGrandSlam": true, "statureSuggestion": 85,
+      "blurb": "Third man to win the career Grand Slam, sealing it with Olympic singles gold in 2000.",
+      "uncertain": []
+    },
+    {
+      "id": "liu-guoliang", "name": "Liu Guoliang", "nation": "China", "league": "CHN", "gender": "M", "active": false, "debut": 1991,
+      "honors": { "olympic_singles_gold": 1, "world_singles_gold": 1, "world_cup_singles_gold": 1, "olympic_team_gold": 0, "world_team_gold": 3, "olympic_doubles_gold": 1, "world_doubles_gold": 2, "tour_finals_gold": 0 },
+      "isGrandSlam": true, "statureSuggestion": 84,
+      "blurb": "First Chinese man to complete the career Grand Slam; later a legendary national-team coach.",
+      "uncertain": []
+    },
+    {
+      "id": "xu-xin", "name": "Xu Xin", "nation": "China", "league": "CHN", "gender": "M", "active": false, "debut": 2009,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 1, "olympic_team_gold": 2, "world_team_gold": 5, "olympic_doubles_gold": 0, "world_doubles_gold": 5, "tour_finals_gold": 2 },
+      "isGrandSlam": false, "statureSuggestion": 78,
+      "blurb": "The greatest penholder of his era and a doubles master, but never an Olympic or Worlds singles gold.",
+      "uncertain": []
+    },
+    {
+      "id": "wang-chuqin", "name": "Wang Chuqin", "nation": "China", "league": "CHN", "gender": "M", "active": true, "debut": 2015,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 1, "world_cup_singles_gold": 0, "olympic_team_gold": 1, "world_team_gold": 3, "olympic_doubles_gold": 1, "world_doubles_gold": 5, "tour_finals_gold": 3 },
+      "isGrandSlam": false, "statureSuggestion": 78,
+      "blurb": "2025 world champion and Olympic mixed/team gold medallist; the first left-handed Chinese world champ.",
+      "uncertain": []
+    },
+    {
+      "id": "liang-jingkun", "name": "Liang Jingkun", "nation": "China", "league": "CHN", "gender": "M", "active": true, "debut": 2016,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 1, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 60,
+      "blurb": "Hard-hitting four-time Worlds singles bronze medallist and 2022 world team gold winner for China.",
+      "uncertain": ["world_team_gold"]
+    },
+    {
+      "id": "lin-gaoyuan", "name": "Lin Gaoyuan", "nation": "China", "league": "CHN", "gender": "M", "active": true, "debut": 2014,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 2, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 59,
+      "blurb": "Two-time world team gold medallist (2018, 2022) and former World Cup runner-up for China.",
+      "uncertain": []
+    },
+    {
+      "id": "jiang-jialiang", "name": "Jiang Jialiang", "nation": "China", "league": "CHN", "gender": "M", "active": false, "debut": 1982,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 2, "world_cup_singles_gold": 1, "olympic_team_gold": 0, "world_team_gold": 3, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 74,
+      "blurb": "Two-time world champion (1985, 1987) who dominated the mid-1980s before the Olympic era began.",
+      "uncertain": ["world_team_gold"]
+    },
+    {
+      "id": "guo-yuehua", "name": "Guo Yuehua", "nation": "China", "league": "CHN", "gender": "M", "active": false, "debut": 1977,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 2, "world_cup_singles_gold": 2, "olympic_team_gold": 0, "world_team_gold": 4, "olympic_doubles_gold": 0, "world_doubles_gold": 1, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 75,
+      "blurb": "Two-time world and two-time World Cup champion who led China's early-1980s rise to dominance.",
+      "uncertain": ["world_doubles_gold"]
+    },
+    {
+      "id": "jan-ove-waldner", "name": "Jan-Ove Waldner", "nation": "Sweden", "league": "SWE", "gender": "M", "active": false, "debut": 1982,
+      "honors": { "olympic_singles_gold": 1, "world_singles_gold": 2, "world_cup_singles_gold": 1, "olympic_team_gold": 0, "world_team_gold": 4, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": true, "statureSuggestion": 93,
+      "blurb": "The Mozart of table tennis: the greatest non-Asian ever and first man to complete the Grand Slam.",
+      "uncertain": []
+    },
+    {
+      "id": "jorgen-persson", "name": "Jorgen Persson", "nation": "Sweden", "league": "SWE", "gender": "M", "active": false, "debut": 1984,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 1, "world_cup_singles_gold": 1, "olympic_team_gold": 0, "world_team_gold": 4, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 73,
+      "blurb": "1991 world and World Cup champion and pillar of Sweden's golden generation that toppled China.",
+      "uncertain": []
+    },
+    {
+      "id": "mikael-appelgren", "name": "Mikael Appelgren", "nation": "Sweden", "league": "SWE", "gender": "M", "active": false, "debut": 1980,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 1, "olympic_team_gold": 0, "world_team_gold": 3, "olympic_doubles_gold": 0, "world_doubles_gold": 1, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 70,
+      "blurb": "1983 World Cup winner and three-time world team champion in Sweden's dominant era.",
+      "uncertain": []
+    },
+    {
+      "id": "jean-philippe-gatien", "name": "Jean-Philippe Gatien", "nation": "France", "league": "FRA", "gender": "M", "active": false, "debut": 1986,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 1, "world_cup_singles_gold": 1, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 72,
+      "blurb": "The only Frenchman to win the World Championship singles (1993); also 1994 World Cup champion.",
+      "uncertain": []
+    },
+    {
+      "id": "werner-schlager", "name": "Werner Schlager", "nation": "Austria", "league": "AUT", "gender": "M", "active": false, "debut": 1991,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 1, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 70,
+      "blurb": "2003 world champion — the last non-Asian man to win the World Championships singles title.",
+      "uncertain": []
+    },
+    {
+      "id": "vladimir-samsonov", "name": "Vladimir Samsonov", "nation": "Belarus", "league": "BLR", "gender": "M", "active": false, "debut": 1994,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 3, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 1 },
+      "isGrandSlam": false, "statureSuggestion": 76,
+      "blurb": "Three-time World Cup winner and four-time Olympian; the finest European of the post-Waldner era.",
+      "uncertain": []
+    },
+    {
+      "id": "timo-boll", "name": "Timo Boll", "nation": "Germany", "league": "GER", "gender": "M", "active": false, "debut": 1995,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 2, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 1 },
+      "isGrandSlam": false, "statureSuggestion": 77,
+      "blurb": "Europe's greatest modern player and a record eight-time European champion, twice a World Cup winner.",
+      "uncertain": []
+    },
+    {
+      "id": "dimitrij-ovtcharov", "name": "Dimitrij Ovtcharov", "nation": "Germany", "league": "GER", "gender": "M", "active": true, "debut": 2007,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 1, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 72,
+      "blurb": "2017 World Cup champion and three-time Olympic singles bronze medallist; a German mainstay.",
+      "uncertain": []
+    },
+    {
+      "id": "zoran-primorac", "name": "Zoran Primorac", "nation": "Croatia", "league": "CRO", "gender": "M", "active": false, "debut": 1986,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 2, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 69,
+      "blurb": "Two-time World Cup winner and seven-time Olympian who carried Croatian table tennis for decades.",
+      "uncertain": []
+    },
+    {
+      "id": "jorg-rosskopf", "name": "Jorg Rosskopf", "nation": "Germany", "league": "GER", "gender": "M", "active": false, "debut": 1986,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 1, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 1, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 66,
+      "blurb": "1998 World Cup winner and 1989 world doubles champion; later coach of Germany's national team.",
+      "uncertain": []
+    },
+    {
+      "id": "ryu-seung-min", "name": "Ryu Seung-min", "nation": "South Korea", "league": "KOR", "gender": "M", "active": false, "debut": 2001,
+      "honors": { "olympic_singles_gold": 1, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 71,
+      "blurb": "Penhold attacker whose 2004 Athens gold remains South Korea's only Olympic singles title.",
+      "uncertain": []
+    },
+    {
+      "id": "yoo-nam-kyu", "name": "Yoo Nam-kyu", "nation": "South Korea", "league": "KOR", "gender": "M", "active": false, "debut": 1986,
+      "honors": { "olympic_singles_gold": 1, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 1, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 69,
+      "blurb": "Won the first-ever Olympic men's singles gold at Seoul 1988 on home soil for South Korea.",
+      "uncertain": []
+    },
+    {
+      "id": "kim-taek-soo", "name": "Kim Taek-soo", "nation": "South Korea", "league": "KOR", "gender": "M", "active": false, "debut": 1988,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 62,
+      "blurb": "Top-10 penholder for over a decade and three-time Olympian; later coached Ryu Seung-min to gold.",
+      "uncertain": []
+    },
+    {
+      "id": "joo-sae-hyuk", "name": "Joo Sae-hyuk", "nation": "South Korea", "league": "KOR", "gender": "M", "active": false, "debut": 1999,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 64,
+      "blurb": "The finest modern defender, reaching world No. 1 chopper status and the 2003 Worlds singles final.",
+      "uncertain": []
+    },
+    {
+      "id": "chuang-chih-yuan", "name": "Chuang Chih-yuan", "nation": "Chinese Taipei", "league": "TPE", "gender": "M", "active": false, "debut": 1998,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 1, "tour_finals_gold": 1 },
+      "isGrandSlam": false, "statureSuggestion": 66,
+      "blurb": "2002 World Tour Grand Finals winner and six-time Olympian; a symbol of Taiwanese longevity.",
+      "uncertain": []
+    },
+    {
+      "id": "tomokazu-harimoto", "name": "Tomokazu Harimoto", "nation": "Japan", "league": "JPN", "gender": "M", "active": true, "debut": 2016,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 1 },
+      "isGrandSlam": false, "statureSuggestion": 70,
+      "blurb": "Youngest-ever World Tour Grand Finals winner (2018) and Japan's spearhead against Chinese dominance.",
+      "uncertain": []
+    },
+    {
+      "id": "hugo-calderano", "name": "Hugo Calderano", "nation": "Brazil", "league": "BRA", "gender": "M", "active": true, "debut": 2012,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 1, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 71,
+      "blurb": "First non-Asian, non-European to reach a Worlds final; won the 2025 World Cup as a Brazilian first.",
+      "uncertain": []
+    },
+    {
+      "id": "zhang-yining", "name": "Zhang Yining", "nation": "China", "league": "CHN", "gender": "W", "active": false, "debut": 2000,
+      "honors": { "olympic_singles_gold": 2, "world_singles_gold": 2, "world_cup_singles_gold": 4, "olympic_team_gold": 1, "world_team_gold": 5, "olympic_doubles_gold": 1, "world_doubles_gold": 3, "tour_finals_gold": 0 },
+      "isGrandSlam": true, "statureSuggestion": 97,
+      "blurb": "First-ever double Grand Slam winner and the most dominant women's player of the 2000s.",
+      "uncertain": ["world_doubles_gold"]
+    },
+    {
+      "id": "deng-yaping", "name": "Deng Yaping", "nation": "China", "league": "CHN", "gender": "W", "active": false, "debut": 1988,
+      "honors": { "olympic_singles_gold": 2, "world_singles_gold": 3, "world_cup_singles_gold": 1, "olympic_team_gold": 0, "world_team_gold": 3, "olympic_doubles_gold": 2, "world_doubles_gold": 3, "tour_finals_gold": 0 },
+      "isGrandSlam": true, "statureSuggestion": 96,
+      "blurb": "Dominated the 1990s with four Olympic golds and ranked world No. 1 for eight straight years.",
+      "uncertain": []
+    },
+    {
+      "id": "wang-nan", "name": "Wang Nan", "nation": "China", "league": "CHN", "gender": "W", "active": false, "debut": 1995,
+      "honors": { "olympic_singles_gold": 1, "world_singles_gold": 3, "world_cup_singles_gold": 4, "olympic_team_gold": 1, "world_team_gold": 6, "olympic_doubles_gold": 2, "world_doubles_gold": 5, "tour_finals_gold": 0 },
+      "isGrandSlam": true, "statureSuggestion": 92,
+      "blurb": "Grand Slam champion who won 24 world titles and bridged the Deng and Zhang eras.",
+      "uncertain": ["world_doubles_gold"]
+    },
+    {
+      "id": "ding-ning", "name": "Ding Ning", "nation": "China", "league": "CHN", "gender": "W", "active": false, "debut": 2005,
+      "honors": { "olympic_singles_gold": 1, "world_singles_gold": 3, "world_cup_singles_gold": 3, "olympic_team_gold": 2, "world_team_gold": 4, "olympic_doubles_gold": 0, "world_doubles_gold": 1, "tour_finals_gold": 0 },
+      "isGrandSlam": true, "statureSuggestion": 88,
+      "blurb": "Grand Slam champion and one of the most decorated women's players of the 2010s.",
+      "uncertain": []
+    },
+    {
+      "id": "li-xiaoxia", "name": "Li Xiaoxia", "nation": "China", "league": "CHN", "gender": "W", "active": false, "debut": 2004,
+      "honors": { "olympic_singles_gold": 1, "world_singles_gold": 1, "world_cup_singles_gold": 1, "olympic_team_gold": 2, "world_team_gold": 5, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": true, "statureSuggestion": 86,
+      "blurb": "London 2012 champion who completed the career Grand Slam with her 2013 world title.",
+      "uncertain": []
+    },
+    {
+      "id": "chen-meng", "name": "Chen Meng", "nation": "China", "league": "CHN", "gender": "W", "active": true, "debut": 2007,
+      "honors": { "olympic_singles_gold": 2, "world_singles_gold": 0, "world_cup_singles_gold": 1, "olympic_team_gold": 2, "world_team_gold": 5, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 4 },
+      "isGrandSlam": false, "statureSuggestion": 84,
+      "blurb": "Back-to-back Olympic singles champion (2020, 2024) who never won a World Championships singles title.",
+      "uncertain": []
+    },
+    {
+      "id": "sun-yingsha", "name": "Sun Yingsha", "nation": "China", "league": "CHN", "gender": "W", "active": true, "debut": 2017,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 2, "world_cup_singles_gold": 2, "olympic_team_gold": 2, "world_team_gold": 2, "olympic_doubles_gold": 1, "world_doubles_gold": 5, "tour_finals_gold": 3 },
+      "isGrandSlam": false, "statureSuggestion": 83,
+      "blurb": "World No. 1 with two world and two World Cup singles titles, still chasing elusive Olympic singles gold.",
+      "uncertain": []
+    },
+    {
+      "id": "liu-shiwen", "name": "Liu Shiwen", "nation": "China", "league": "CHN", "gender": "W", "active": false, "debut": 2007,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 1, "world_cup_singles_gold": 5, "olympic_team_gold": 1, "world_team_gold": 4, "olympic_doubles_gold": 0, "world_doubles_gold": 3, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 79,
+      "blurb": "Record five-time World Cup singles champion who finally won her Worlds singles title in 2019.",
+      "uncertain": []
+    },
+    {
+      "id": "guo-yue", "name": "Guo Yue", "nation": "China", "league": "CHN", "gender": "W", "active": false, "debut": 2003,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 1, "world_cup_singles_gold": 0, "olympic_team_gold": 2, "world_team_gold": 2, "olympic_doubles_gold": 0, "world_doubles_gold": 5, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 68,
+      "blurb": "2007 world singles champion and prolific doubles winner across two Olympic team golds.",
+      "uncertain": ["world_doubles_gold"]
+    },
+    {
+      "id": "wang-manyu", "name": "Wang Manyu", "nation": "China", "league": "CHN", "gender": "W", "active": true, "debut": 2015,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 1, "world_cup_singles_gold": 0, "olympic_team_gold": 2, "world_team_gold": 2, "olympic_doubles_gold": 0, "world_doubles_gold": 3, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 74,
+      "blurb": "2021 world singles champion and two-time Olympic team gold medallist for China.",
+      "uncertain": ["world_doubles_gold"]
+    },
+    {
+      "id": "chen-xingtong", "name": "Chen Xingtong", "nation": "China", "league": "CHN", "gender": "W", "active": true, "debut": 2016,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 2, "olympic_doubles_gold": 0, "world_doubles_gold": 1, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 67,
+      "blurb": "Top-three world-ranked attacker and two-time world team gold medallist, chasing her first major singles title.",
+      "uncertain": ["world_doubles_gold"]
+    },
+    {
+      "id": "qiao-hong", "name": "Qiao Hong", "nation": "China", "league": "CHN", "gender": "W", "active": false, "debut": 1989,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 1, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 2, "olympic_doubles_gold": 2, "world_doubles_gold": 2, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 74,
+      "blurb": "1991 world singles champion and Deng Yaping's two-time Olympic doubles gold partner.",
+      "uncertain": ["world_team_gold", "world_doubles_gold"]
+    },
+    {
+      "id": "li-ju", "name": "Li Ju", "nation": "China", "league": "CHN", "gender": "W", "active": false, "debut": 1995,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 1, "olympic_team_gold": 0, "world_team_gold": 1, "olympic_doubles_gold": 1, "world_doubles_gold": 2, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 67,
+      "blurb": "2000 World Cup winner and Sydney Olympic doubles champion alongside Wang Nan.",
+      "uncertain": ["world_team_gold", "world_doubles_gold"]
+    },
+    {
+      "id": "chen-jing", "name": "Chen Jing", "nation": "China", "league": "CHN", "gender": "W", "active": false, "debut": 1986,
+      "honors": { "olympic_singles_gold": 1, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 2, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 67,
+      "blurb": "Won the first-ever Olympic women's singles gold in 1988, then later represented Chinese Taipei.",
+      "uncertain": []
+    },
+    {
+      "id": "jiao-zhimin", "name": "Jiao Zhimin", "nation": "China", "league": "CHN", "gender": "W", "active": false, "debut": 1983,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 1, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 60,
+      "blurb": "1988 Olympic singles bronze and doubles silver medallist and 1987 world team champion for China.",
+      "uncertain": ["world_team_gold"]
+    },
+    {
+      "id": "geng-lijuan", "name": "Geng Lijuan", "nation": "China", "league": "CAN", "gender": "W", "active": false, "debut": 1981,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 3, "olympic_doubles_gold": 0, "world_doubles_gold": 1, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 60,
+      "blurb": "Four-time world champion and former No. 1 for China who later competed at two Olympics for Canada.",
+      "uncertain": ["world_team_gold", "world_doubles_gold"]
+    },
+    {
+      "id": "zhang-deying", "name": "Zhang Deying", "nation": "China", "league": "CHN", "gender": "W", "active": false, "debut": 1977,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 3, "olympic_doubles_gold": 0, "world_doubles_gold": 2, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 58,
+      "blurb": "Late-1970s world team and doubles champion from China's first wave of women's dominance.",
+      "uncertain": ["world_team_gold", "world_doubles_gold"]
+    },
+    {
+      "id": "hyun-jung-hwa", "name": "Hyun Jung-hwa", "nation": "South Korea", "league": "KOR", "gender": "W", "active": false, "debut": 1986,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 1, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 1, "olympic_doubles_gold": 1, "world_doubles_gold": 2, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 71,
+      "blurb": "1993 world singles champion and 1988 Olympic doubles gold medallist; South Korea's finest woman.",
+      "uncertain": []
+    },
+    {
+      "id": "mima-ito", "name": "Mima Ito", "nation": "Japan", "league": "JPN", "gender": "W", "active": true, "debut": 2014,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 1, "world_doubles_gold": 1, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 74,
+      "blurb": "Won Olympic mixed doubles gold over China in 2021; the greatest active threat to Chinese women.",
+      "uncertain": ["world_doubles_gold"]
+    },
+    {
+      "id": "kasumi-ishikawa", "name": "Kasumi Ishikawa", "nation": "Japan", "league": "JPN", "gender": "W", "active": false, "debut": 2007,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 1, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 66,
+      "blurb": "Three-time Olympic team medallist and 2017 world mixed doubles champion; a long-time Japanese No. 1.",
+      "uncertain": []
+    },
+    {
+      "id": "miu-hirano", "name": "Miu Hirano", "nation": "Japan", "league": "JPN", "gender": "W", "active": true, "debut": 2014,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 1, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 67,
+      "blurb": "Youngest-ever Women's World Cup winner (2016) and first non-Chinese woman to take that title.",
+      "uncertain": []
+    },
+    {
+      "id": "feng-tianwei", "name": "Feng Tianwei", "nation": "Singapore", "league": "SGP", "gender": "W", "active": false, "debut": 2007,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 1, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 66,
+      "blurb": "Led Singapore to a stunning 2010 world team gold over China and won three Olympic medals.",
+      "uncertain": []
+    },
+    {
+      "id": "tie-yana", "name": "Tie Yana", "nation": "Hong Kong", "league": "HKG", "gender": "W", "active": false, "debut": 1995,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 0, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 60,
+      "blurb": "Long-time Hong Kong No. 1 and Asian medallist, narrowly missing the Olympic medal that eluded her.",
+      "uncertain": []
+    },
+    {
+      "id": "gao-jun", "name": "Gao Jun", "nation": "United States", "league": "USA", "gender": "W", "active": false, "debut": 1989,
+      "honors": { "olympic_singles_gold": 0, "world_singles_gold": 0, "world_cup_singles_gold": 0, "olympic_team_gold": 0, "world_team_gold": 0, "olympic_doubles_gold": 0, "world_doubles_gold": 1, "tour_finals_gold": 0 },
+      "isGrandSlam": false, "statureSuggestion": 58,
+      "blurb": "1991 world doubles champion and Olympic doubles silver for China who later starred for the USA.",
+      "uncertain": []
+    }
+  ]
+}
