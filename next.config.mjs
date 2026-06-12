@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === "production";
 
-// Static export for GitHub Pages (project site served from /Pantheon).
+// Static export, served at the root of a custom domain (pantheon.ungetsu.net).
 const nextConfig = {
   output: "export",
   trailingSlash: true,
   images: { unoptimized: true },
-  basePath: isProd ? "/Pantheon" : "",
 };
 
 export default nextConfig;
