@@ -115,7 +115,7 @@ export function Methodology() {
         <span className="ghost-glyph" style={{ right: "2%", top: "-18%", fontSize: "clamp(280px,42vw,560px)" }}>
           Σ
         </span>
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative" }} data-reveal>
           <p className="kick">{t("methodology.eyebrow")}</p>
           <h1>{t("methodology.title")}</h1>
           <p className="cx-intro">
@@ -124,14 +124,14 @@ export function Methodology() {
               : "The Honor Index counts only real, hard-won silverware — fully transparent and reproducible by hand, with no black box and no penalty for winning more."}
           </p>
         </div>
-        <div className="cx-formula">
+        <div className="cx-formula" data-reveal>
           HonorScore <span className="op">=</span> Σ <span className="op">(</span> base <span className="op">×</span> bucket{" "}
           <span className="op">×</span> share{usesCount ? <> <span className="op">×</span> count</> : null} <span className="op">)</span>
         </div>
       </section>
 
       {/* ARTICLE Ⅰ — Honor Index */}
-      <section className="sec pad">
+      <section className="sec pad" data-reveal>
         <Plate n="Ⅰ" title={zh ? "荣誉指数 · 数奖杯" : "Honor Index · counting trophies"} />
         <div className="cx-cols">
           <div className="cx-body">
@@ -166,7 +166,7 @@ export function Methodology() {
       </section>
 
       {/* ARTICLE Ⅱ — Stature */}
-      <section className="sec pad">
+      <section className="sec pad" data-reveal>
         <Plate n="Ⅱ" title={zh ? "星光与时代强度 · 口碑透镜" : "Stature & Era Strength · the reputation lens"} />
         <div className="cx-formula sub">
           Stature <span className="op">=</span> base <span className="op">×</span> ( 1 <span className="op">±</span> 12%{" "}
@@ -245,7 +245,7 @@ export function Methodology() {
       )}
 
       {/* TARIFF — base values */}
-      <section className="sec pad">
+      <section className="sec pad" data-reveal>
         <Plate n="Ⅳ" title={t("methodology.weightsTitle")} />
         <table className="tariff">
           <thead>
@@ -275,7 +275,7 @@ export function Methodology() {
       </section>
 
       {/* PRESETS */}
-      <section className="sec pad">
+      <section className="sec pad" data-reveal>
         <Plate n="Ⅴ" title={t("methodology.presetsTitle")} note={t("methodology.presetsDesc")} />
         <div className="cx-grid">
           {model.presets.map((p) => (
@@ -296,7 +296,7 @@ export function Methodology() {
       </section>
 
       {/* AXES */}
-      <section className="sec pad">
+      <section className="sec pad" data-reveal>
         <Plate n="Ⅵ" title={t("methodology.axesTitle")} note={t("methodology.axesDesc")} />
         <div className="cx-axes">
           {model.axes.map((axis) => {
@@ -313,7 +313,7 @@ export function Methodology() {
       </section>
 
       {/* PROVENANCE */}
-      <section className="sec pad">
+      <section className="sec pad" data-reveal>
         <Plate n="Ⅶ" title={t("methodology.dataTitle")} />
         <div className="cx-prov">
           <p>{t("methodology.dataNote")}</p>

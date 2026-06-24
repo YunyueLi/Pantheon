@@ -658,6 +658,21 @@
   }
 }
 
+/* Scroll-reveal motion. Gated behind `.js` (added pre-paint by the theme script)
+   and `prefers-reduced-motion: no-preference`, so content is never hidden unless
+   JS is present to reveal it and the user accepts motion. ScrollReveal toggles `.in`. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1), transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .js [data-reveal].in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Radar value shapes grow in from the centre. The resting state is fully
    visible, so the shapes still show even if the animation never plays
    (reduced-motion, throttled background tab, etc.). */

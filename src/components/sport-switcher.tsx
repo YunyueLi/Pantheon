@@ -6,6 +6,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Check, ChevronDown } from "lucide-react";
 import { listSports } from "@/lib/sport/registry";
 import { useI18n } from "@/lib/i18n/provider";
+import { SportMark } from "@/components/sport-mark";
 import { cn } from "@/lib/utils";
 
 /**
@@ -21,9 +22,9 @@ export function SportSwitcher() {
 
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger className="label flex h-8 items-center gap-1.5 px-1 text-[11px] text-fg outline-none transition-colors hover:text-fg-muted">
-        <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-        <span className="hidden sm:inline">{t(`nav.${current.id}`)}</span>
+      <DropdownMenu.Trigger className="label flex h-8 items-center gap-2 px-1 text-[11px] text-fg outline-none transition-colors hover:text-fg-muted">
+        <SportMark sport={current.id} className="h-4 w-4 shrink-0" />
+        {t(`nav.${current.id}`)}
         <ChevronDown className="h-3.5 w-3.5 text-fg-subtle" />
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
@@ -43,7 +44,10 @@ export function SportSwitcher() {
                     active ? "text-fg" : "text-fg-muted"
                   )}
                 >
-                  {t(`nav.${s.id}`)}
+                  <span className="flex items-center gap-2.5">
+                    <SportMark sport={s.id} className="h-4 w-4 shrink-0" />
+                    {t(`nav.${s.id}`)}
+                  </span>
                   {active && <Check className="h-3.5 w-3.5 text-accent" />}
                 </Link>
               </DropdownMenu.Item>

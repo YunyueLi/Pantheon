@@ -17,7 +17,7 @@ function labels(locale: string) {
   return locale === "zh"
     ? {
         title: "豪门球队",
-        desc: "按 NBA 总冠军与总决赛次数综合加权衡量的最具荣誉球队。",
+        desc: "NBA 最具荣誉的球队。",
         titles: "总冠军",
         finals: "总决赛次数",
         roster: "代表球员",
@@ -31,7 +31,7 @@ function labels(locale: string) {
       }
     : {
         title: "Top franchises",
-        desc: "The most decorated franchises, weighted by NBA titles and Finals appearances.",
+        desc: "The most decorated franchises in the NBA.",
         titles: "Titles",
         finals: "Finals",
         roster: "Notable players",
@@ -89,7 +89,7 @@ export function BasketballFranchisesList() {
         <span className="v-edge" style={{ position: "absolute", right: "18px", top: "58px" }}>
           {t("nav.basketball")} · MMXXVI
         </span>
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative" }} data-reveal>
           <p className="kick">{t("nav.basketball")}</p>
           <h1>{L.title}</h1>
           <p className="desc">{L.desc}</p>
@@ -106,7 +106,13 @@ export function BasketballFranchisesList() {
 
       <div className="pad">
         {rows.map(({ franchise, honor, rank }) => (
-          <Link key={franchise.id} href={`/basketball/clubs/${franchise.id}`} className="row">
+          <Link
+            key={franchise.id}
+            href={`/basketball/clubs/${franchise.id}`}
+            className="row"
+            data-reveal
+            style={{ transitionDelay: rank <= 12 ? `${(rank - 1) * 30}ms` : "0ms" }}
+          >
             <span className="rk">{String(rank).padStart(2, "0")}</span>
             <div style={{ minWidth: 0 }}>
               <span className="nm">{fName(franchise)}</span>
@@ -167,7 +173,7 @@ export function BasketballFranchiseProfile({ id }: { id: string }) {
         <span className="v-edge" style={{ position: "absolute", right: "18px", top: "60px" }}>
           PANTHEON · ANNO MMXXVI
         </span>
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative" }} data-reveal>
           <p className="kick">
             № {rank} · {confName}
           </p>
@@ -179,7 +185,7 @@ export function BasketballFranchiseProfile({ id }: { id: string }) {
         </div>
       </section>
 
-      <section className="titles">
+      <section className="titles" data-reveal>
         {franchise.titles > 0 && (
           <div className="tcell gold">
             <div className="n">{franchise.titles}</div>
@@ -202,7 +208,7 @@ export function BasketballFranchiseProfile({ id }: { id: string }) {
       </section>
 
       {players.length > 0 && (
-        <section className="sec pad" style={{ paddingTop: "8px" }}>
+        <section className="sec pad" style={{ paddingTop: "8px" }} data-reveal>
           <Plate n="Ⅰ" title={L.roster} note={String(players.length)} />
           <div className="roster">
             {players.map((p) => (

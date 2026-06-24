@@ -19,7 +19,7 @@ const en = {
     moreSoon: "more sports soon",
     heroTitle: "Every trophy, one hall of fame.",
     heroDesc:
-      "Pantheon turns scattered championships, MVPs, and All-Pro selections into a single, transparent Honor Index — sliced by region and role, and built to settle the GOAT debate with numbers you can audit.",
+      "Every title and honor, distilled into one transparent, auditable Honor Index.",
     exploreCta: "Explore leaderboard",
     compareCta: "Compare players",
     goatBand: "All-time #1 by Honor Index",
@@ -47,7 +47,7 @@ const en = {
   leaderboard: {
     eyebrow: "League of Legends",
     title: "Honor leaderboard",
-    desc: "Every pro ranked by a transparent, tier-weighted Honor Index. Slice by region and role, or change how championships, individual awards, and deep runs are weighted.",
+    desc: "Every great, ranked by a transparent, tier-weighted Honor Index.",
     allRegions: "All regions",
     allRoles: "All roles",
     kindPlayers: "Players",
@@ -222,7 +222,7 @@ const zh: Dict = {
     moreSoon: "更多项目即将上线",
     heroTitle: "所有荣耀，同一座殿堂。",
     heroDesc:
-      "Pantheon 把散落的冠军、MVP 与最佳阵容整合成一个透明的荣誉指数——按赛区与位置切片，用可核查的数据终结 GOAT 之争。",
+      "把所有冠军与荣誉，提炼成一个透明、可核查的荣誉指数。",
     exploreCta: "进入排行榜",
     compareCta: "对比选手",
     goatBand: "各项目荣誉指数历史第一",
@@ -250,7 +250,7 @@ const zh: Dict = {
   leaderboard: {
     eyebrow: "英雄联盟",
     title: "荣誉排行榜",
-    desc: "每位选手都以透明、按赛事分级加权的荣誉指数排名。可按赛区与位置切片，或调整冠军、个人奖项与决赛之旅的权重。",
+    desc: "每位传奇，以透明、按赛事分级加权的荣誉指数排名。",
     allRegions: "全部赛区",
     allRoles: "全部位置",
     kindPlayers: "球员",
@@ -479,7 +479,7 @@ const ko: Dict = {
     moreSoon: "다른 종목도 곧",
     heroTitle: "모든 트로피, 하나의 전당.",
     heroDesc:
-      "Pantheon은 흩어진 우승, MVP, 올프로 선정을 하나의 투명한 명예 지수로 정리합니다 — 지역과 포지션으로 나눠 보고, 검증 가능한 수치로 GOAT 논쟁을 끝냅니다.",
+      "모든 우승과 영예를 하나의 투명하고 검증 가능한 명예 지수로.",
     exploreCta: "리더보드 보기",
     compareCta: "선수 비교",
     goatBand: "명예 지수 역대 1위",
@@ -507,7 +507,7 @@ const ko: Dict = {
   leaderboard: {
     eyebrow: "리그 오브 레전드",
     title: "명예 리더보드",
-    desc: "모든 프로를 투명하고 등급 가중된 명예 지수로 순위화합니다. 지역과 포지션으로 나누거나, 우승·개인 수상·결승 진출의 가중치를 바꿔 보세요.",
+    desc: "모든 레전드를 투명하고 등급 가중된 명예 지수로 순위화합니다.",
     allRegions: "전체 지역",
     allRoles: "전체 포지션",
     kindPlayers: "선수",
@@ -638,7 +638,7 @@ const ja: Dict = {
     moreSoon: "他競技も近日対応",
     heroTitle: "すべての栄光を、ひとつの殿堂に。",
     heroDesc:
-      "Pantheon は散らばった優勝・MVP・オールプロ選出を、ひとつの透明な名誉指数にまとめます。地域とポジションで切り分け、検証できる数字で GOAT 論争に決着を。",
+      "すべての栄冠を、ひとつの透明で検証できる名誉指数に。",
     exploreCta: "ランキングを見る",
     compareCta: "選手を比較",
     goatBand: "栄誉指数 歴代1位",
@@ -666,7 +666,7 @@ const ja: Dict = {
   leaderboard: {
     eyebrow: "リーグ・オブ・レジェンド",
     title: "名誉ランキング",
-    desc: "全プロを透明で大会別に重み付けした名誉指数でランク付け。地域とポジションで切り分け、優勝・個人受賞・決勝進出の重みも変更できます。",
+    desc: "全レジェンドを、透明で大会別に重み付けした名誉指数でランク付け。",
     allRegions: "全地域",
     allRoles: "全ポジション",
     kindPlayers: "選手",
@@ -797,7 +797,7 @@ const de: Dict = {
     moreSoon: "weitere Sportarten folgen",
     heroTitle: "Jede Trophäe, eine Ruhmeshalle.",
     heroDesc:
-      "Pantheon bündelt verstreute Titel, MVPs und All-Pro-Wahlen in einem transparenten Honor Index — aufgeschlüsselt nach Region und Rolle, um die GOAT-Debatte mit nachprüfbaren Zahlen zu klären.",
+      "Jeder Titel und jede Ehre, destilliert zu einem transparenten, prüfbaren Honor Index.",
     exploreCta: "Rangliste ansehen",
     compareCta: "Spieler vergleichen",
     goatBand: "Nr. 1 aller Zeiten nach Honor Index",
@@ -825,7 +825,7 @@ const de: Dict = {
   leaderboard: {
     eyebrow: "League of Legends",
     title: "Honor-Rangliste",
-    desc: "Jeder Profi nach einem transparenten, nach Turnierstufe gewichteten Honor Index. Filtere nach Region und Rolle oder ändere die Gewichtung von Titeln, Einzelpreisen und Finalläufen.",
+    desc: "Jede Größe nach einem transparenten, turnierstufen-gewichteten Honor Index.",
     allRegions: "Alle Regionen",
     allRoles: "Alle Rollen",
     kindPlayers: "Spieler",
@@ -962,7 +962,7 @@ const fr: Dict = {
     moreSoon: "d'autres sports bientôt",
     heroTitle: "Tous les trophées, un seul panthéon.",
     heroDesc:
-      "Pantheon réunit titres, MVP et sélections All-Pro épars en un Indice d'Honneur transparent — par région et par rôle, pour trancher le débat du GOAT avec des chiffres vérifiables.",
+      "Chaque titre et distinction, condensé en un Indice d'Honneur transparent et vérifiable.",
     exploreCta: "Voir le classement",
     compareCta: "Comparer des joueurs",
     goatBand: "N°1 de tous les temps par Indice d'Honneur",
@@ -990,7 +990,7 @@ const fr: Dict = {
   leaderboard: {
     eyebrow: "League of Legends",
     title: "Classement d'honneur",
-    desc: "Chaque pro classé selon un Indice d'Honneur transparent, pondéré par niveau de tournoi. Filtrez par région et rôle, ou modifiez le poids des titres, récompenses individuelles et parcours en finale.",
+    desc: "Chaque légende classée par un Indice d'Honneur transparent et pondéré par niveau.",
     allRegions: "Toutes les régions",
     allRoles: "Tous les rôles",
     kindPlayers: "Joueurs",
@@ -1121,7 +1121,7 @@ const es: Dict = {
     moreSoon: "más deportes pronto",
     heroTitle: "Todos los trofeos, un solo panteón.",
     heroDesc:
-      "Pantheon reúne títulos, MVP y selecciones All-Pro dispersos en un Índice de Honor transparente — segmentado por región y rol, para zanjar el debate del GOAT con cifras verificables.",
+      "Cada título y honor, destilado en un Índice de Honor transparente y verificable.",
     exploreCta: "Ver la clasificación",
     compareCta: "Comparar jugadores",
     goatBand: "N.º 1 histórico por Índice de Honor",
@@ -1149,7 +1149,7 @@ const es: Dict = {
   leaderboard: {
     eyebrow: "League of Legends",
     title: "Clasificación de honor",
-    desc: "Cada pro clasificado por un Índice de Honor transparente y ponderado por nivel de torneo. Segmenta por región y rol, o cambia el peso de títulos, premios individuales y finales.",
+    desc: "Cada leyenda clasificada por un Índice de Honor transparente y ponderado.",
     allRegions: "Todas las regiones",
     allRoles: "Todos los roles",
     kindPlayers: "Jugadores",

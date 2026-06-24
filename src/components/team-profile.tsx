@@ -40,7 +40,7 @@ export function TeamProfile({ id }: { id: string }) {
         <span className="v-edge" style={{ position: "absolute", right: "18px", top: "60px" }}>
           PANTHEON · ANNO MMXXVI
         </span>
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative" }} data-reveal>
           <p className="kick">
             № {rank} · {team.region} · {t("nav.teams")}
           </p>
@@ -54,7 +54,7 @@ export function TeamProfile({ id }: { id: string }) {
       </section>
 
       {titleGroups.length > 0 && (
-        <section className="titles">
+        <section className="titles" data-reveal>
           {titleGroups.map((g) => {
             const gold = g.type !== "worlds_runnerup";
             return (
@@ -73,7 +73,7 @@ export function TeamProfile({ id }: { id: string }) {
       )}
 
       {players.length > 0 && (
-        <section className="sec pad" style={{ paddingTop: "8px" }}>
+        <section className="sec pad" style={{ paddingTop: "8px" }} data-reveal>
           <Plate n="Ⅰ" title={t("home.teamRoster")} note={String(players.length)} />
           <div className="roster">
             {players.map((p) => (

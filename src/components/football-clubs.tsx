@@ -15,7 +15,7 @@ function labels(locale: string) {
   return locale === "zh"
     ? {
         title: "顶尖俱乐部",
-        desc: "按欧冠/解放者杯、洲际杯赛与联赛冠军综合加权衡量的最具荣誉俱乐部。",
+        desc: "足坛最具荣誉的俱乐部。",
         ucl: "欧冠",
         libertadores: "解放者杯",
         league: "联赛冠军",
@@ -32,7 +32,7 @@ function labels(locale: string) {
       }
     : {
         title: "Top clubs",
-        desc: "The most decorated clubs, weighted across continental, intercontinental and league honors.",
+        desc: "The most decorated clubs in football.",
         ucl: "Champions League",
         libertadores: "Libertadores",
         league: "League titles",
@@ -114,7 +114,7 @@ export function FootballClubsList() {
         <span className="v-edge" style={{ position: "absolute", right: "18px", top: "58px" }}>
           {t("nav.football")} · MMXXVI
         </span>
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative" }} data-reveal>
           <p className="kick">{t("nav.football")}</p>
           <h1>{L.title}</h1>
           <p className="desc">{L.desc}</p>
@@ -131,7 +131,13 @@ export function FootballClubsList() {
 
       <div className="pad">
         {clubs.map(({ club, honor, rank }) => (
-          <Link key={club.id} href={`/football/clubs/${club.id}`} className="row">
+          <Link
+            key={club.id}
+            href={`/football/clubs/${club.id}`}
+            className="row"
+            data-reveal
+            style={{ transitionDelay: rank <= 12 ? `${(rank - 1) * 30}ms` : "0ms" }}
+          >
             <span className="rk">{String(rank).padStart(2, "0")}</span>
             <div style={{ minWidth: 0 }}>
               <span className="nm">{clubName(club)}</span>
@@ -201,7 +207,7 @@ export function FootballClubProfile({ id }: { id: string }) {
         <span className="v-edge" style={{ position: "absolute", right: "18px", top: "60px" }}>
           PANTHEON · ANNO MMXXVI
         </span>
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative" }} data-reveal>
           <p className="kick">
             № {rank} · {regionName}
           </p>
@@ -214,7 +220,7 @@ export function FootballClubProfile({ id }: { id: string }) {
       </section>
 
       {groups.length > 0 && (
-        <section className="titles">
+        <section className="titles" data-reveal>
           {groups.map((g) => (
             <div key={g.type} className="tcell gold">
               <div className="n">{g.n}</div>
@@ -225,7 +231,7 @@ export function FootballClubProfile({ id }: { id: string }) {
       )}
 
       {players.length > 0 && (
-        <section className="sec pad" style={{ paddingTop: "8px" }}>
+        <section className="sec pad" style={{ paddingTop: "8px" }} data-reveal>
           <Plate n="Ⅰ" title={L.roster} note={String(players.length)} />
           <div className="roster">
             {players.map((p) => (

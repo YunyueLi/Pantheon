@@ -98,6 +98,8 @@ export function PlayerProfile({ id }: { id: string }) {
   const overall = ranked(players, model).find((r) => r.player.id === player.id)!;
   const roleRank = ranked(players.filter((p) => p.position === player.position), model).find((r) => r.player.id === player.id)!;
   const regionRank = ranked(players.filter((p) => p.league === player.league), model).find((r) => r.player.id === player.id)!;
+  const roleTotal = players.filter((p) => p.position === player.position).length;
+  const regionTotal = players.filter((p) => p.league === player.league).length;
   const pct = percentile(player, players.filter((p) => p.position === player.position), model);
 
   const countryKey = `regionCountry.${player.league}`;
@@ -157,13 +159,13 @@ export function PlayerProfile({ id }: { id: string }) {
 .portrait-cap{position:absolute;left:22px;bottom:20px;font-size:10px;color:var(--fg-2)}
 
 /* STANDINGS */
-.stand{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-bottom:1px solid var(--border)}
-.stand-cell{position:relative;padding:30px clamp(20px,5vw,64px);border-left:1px solid var(--border)}
+.stand{position:relative;display:flex;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+.stand-cell{position:relative;flex:1 1 160px;min-width:0;padding:26px clamp(16px,3vw,40px);border-left:1px solid var(--border)}
 .stand-cell:first-child{border-left:0}
 .stand-cell .lab{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.18em;font-size:10px;color:var(--fg-2)}
-.stand-cell .val{margin-top:12px;font-family:var(--font-display);font-weight:800;font-size:clamp(40px,6vw,72px);line-height:.9;font-variant-numeric:tabular-nums}
-.stand-cell .sub{font-size:18px;color:var(--fg-3);font-weight:400}
-.stand-note{grid-column:1/-1;border-top:1px solid var(--border);padding:14px clamp(20px,5vw,64px);font-family:var(--font-display);font-style:italic;font-size:14px;color:var(--fg-2)}
+.stand-cell .val{margin-top:12px;font-family:var(--font-display);font-weight:800;font-size:clamp(40px,6vw,72px);line-height:.92;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stand-cell .sub{margin-top:8px;font-family:var(--font-display);font-size:13px;letter-spacing:.04em;color:var(--fg-3);font-variant-numeric:tabular-nums}
+.stand-note{flex:0 0 100%;border-top:1px solid var(--border);padding:14px clamp(20px,5vw,64px);font-family:var(--font-display);font-style:italic;font-size:14px;color:var(--fg-2)}
 
 /* HAUL — the trophy headline numerals */
 .haul{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));border-bottom:1px solid var(--border)}
@@ -205,7 +207,7 @@ export function PlayerProfile({ id }: { id: string }) {
       {/* HERO — rite of enshrinement */}
       <section className="rite">
         <div className="col-grid" />
-        <div className="rite-text pad">
+        <div className="rite-text pad" data-reveal>
           <div className="rite-kick">
             № {overall.rank} · {t(`nav.${config.id}`)} · {verdict}
           </div>
@@ -246,31 +248,29 @@ export function PlayerProfile({ id }: { id: string }) {
       </section>
 
       {/* STANDINGS — the rankings as monumental fractions */}
-      <section className="stand">
+      <section className="stand" data-reveal>
         <div className="stand-cell">
           <div className="lab">{t("player.rankOverall")}</div>
-          <div className="val">
-            №{overall.rank}
-            <span className="sub"> / {players.length}</span>
-          </div>
+          <div className="val">№{overall.rank}</div>
+          <div className="sub">/ {players.length}</div>
         </div>
         {hasRole && (
           <div className="stand-cell">
             <div className="lab">{roleLabel(player.position)}</div>
             <div className="val">№{roleRank.rank}</div>
+            <div className="sub">/ {roleTotal}</div>
           </div>
         )}
         <div className="stand-cell">
           <div className="lab">{leagueLabel(player.league)}</div>
           <div className="val">№{regionRank.rank}</div>
+          <div className="sub">/ {regionTotal}</div>
         </div>
         {player.stature != null && (
           <div className="stand-cell">
             <div className="lab">{t("leaderboard.byStature")}</div>
-            <div className="val">
-              {player.stature}
-              <span className="sub">/100</span>
-            </div>
+            <div className="val">{player.stature}</div>
+            <div className="sub">/ 100</div>
           </div>
         )}
         <div className="stand-note">
@@ -284,7 +284,7 @@ export function PlayerProfile({ id }: { id: string }) {
       {blurb && (
         <section className="verdict">
           <div className="col-grid" />
-          <p style={{ position: "relative" }}>
+          <p style={{ position: "relative" }} data-reveal>
             <span className="mark">“</span>
             {blurb}
             <span className="mark">”</span>
@@ -296,12 +296,17 @@ export function PlayerProfile({ id }: { id: string }) {
       {(haul.length > 0 || seasons > 0) && (
         <section className="haul">
           {haul.map((h, i) => (
-            <div key={h.type} className={`haul-cell${i === 0 ? " gold" : ""}`}>
+            <div
+              key={h.type}
+              className={`haul-cell${i === 0 ? " gold" : ""}`}
+              data-reveal
+              style={{ transitionDelay: `${Math.min(i, 8) * 45}ms` }}
+            >
               <div className="n">{h.n}</div>
               <div className="lab">{h.label}</div>
             </div>
           ))}
-          <div className="haul-cell">
+          <div className="haul-cell" data-reveal style={{ transitionDelay: `${Math.min(haul.length, 8) * 45}ms` }}>
             <div className="n">{seasons}</div>
             <div className="lab">{t("player.statSeasons")}</div>
           </div>
@@ -309,7 +314,7 @@ export function PlayerProfile({ id }: { id: string }) {
       )}
 
       {/* CAREER ARC */}
-      <section className="sec">
+      <section className="sec" data-reveal>
         <div className="pad">
           <Plate n="Ⅰ" title={t("player.careerTimeline")} note={t("player.timelineHint")} />
           <div style={{ marginTop: "18px" }}>
@@ -319,7 +324,7 @@ export function PlayerProfile({ id }: { id: string }) {
       </section>
 
       {/* COMPOSITION */}
-      <section className="sec">
+      <section className="sec" data-reveal>
         <div className="pad">
           <Plate n="Ⅱ" title={t("player.indexComposition")} />
           <div style={{ marginTop: "24px", maxWidth: "560px" }}>
@@ -329,7 +334,7 @@ export function PlayerProfile({ id }: { id: string }) {
       </section>
 
       {/* CABINET */}
-      <section className="sec">
+      <section className="sec" data-reveal>
         <div className="pad">
           <Plate n="Ⅲ" title={t("player.trophyCabinet")} />
           <div style={{ marginTop: "24px" }}>
@@ -339,7 +344,7 @@ export function PlayerProfile({ id }: { id: string }) {
       </section>
 
       {/* THE RECORD — full honors ledger */}
-      <section className="sec">
+      <section className="sec" data-reveal>
         <div className="pad">
           <Plate n="Ⅳ" title={t("player.allHonors")} note={t("common.entries", { n: honors.length })} />
           <table className="recordtbl" style={{ marginTop: "20px" }}>

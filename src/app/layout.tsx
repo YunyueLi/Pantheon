@@ -30,6 +30,7 @@ import { I18nProvider } from "@/lib/i18n/provider";
 import { DEFAULT_LOCALE } from "@/lib/i18n/config";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { ScrollReveal } from "@/components/reveal";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -61,7 +62,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "Pantheon — Competitive Honors", description: SITE_DESC },
 };
 
-const themeScript = `(function(){try{var m=localStorage.getItem('pantheon-mode');var e=document.documentElement;if(m==='paper'){e.classList.add('paper');}else if(m==='crimson'||m==='light'){}else{e.classList.add('dark');}}catch(e){}})();`;
+const themeScript = `(function(){var d=document.documentElement;d.classList.add('js');try{var m=localStorage.getItem('pantheon-mode');if(m==='paper'){d.classList.add('paper');}else if(m==='crimson'||m==='light'){}else{d.classList.add('dark');}}catch(_){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased">
         <I18nProvider initialLocale={DEFAULT_LOCALE}>
           <ThemeProvider>
+            <ScrollReveal />
             <SiteNav />
             <main className="min-h-[calc(100vh-3.5rem)]">{children}</main>
             <SiteFooter />

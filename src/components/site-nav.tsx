@@ -54,8 +54,8 @@ export function SiteNav() {
   const browseLinks = links.filter((l) => l.key !== "nav.methodology");
   const methodology = links.find((l) => l.key === "nav.methodology");
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-[color:var(--bg-glass)] backdrop-blur-xl backdrop-saturate-150">
-      <div className="relative mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-8">
+    <header className="sticky top-0 z-50 border-b border-border bg-[color:var(--bg-glass)] backdrop-blur-lg backdrop-saturate-150">
+      <div className="relative flex h-16 items-center justify-between gap-4 px-[clamp(20px,5vw,64px)]">
         {/* Left — sport context + section links */}
         <div className="flex items-center gap-5">
           <SportSwitcher />

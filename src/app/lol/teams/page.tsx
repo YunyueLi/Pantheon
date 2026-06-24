@@ -21,7 +21,7 @@ export default function TeamsPage() {
         <span className="v-edge" style={{ position: "absolute", right: "18px", top: "58px" }}>
           {t("nav.lol")} · MMXXVI
         </span>
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative" }} data-reveal>
           <p className="kick">{t("home.eyebrow")}</p>
           <h1>{t("nav.teams")}</h1>
           <p className="desc">{t("home.teamsDesc")}</p>
@@ -38,7 +38,13 @@ export default function TeamsPage() {
             { type: "worlds_runnerup" as const, n: team.worldsRunnerup?.length ?? 0, gold: false },
           ].filter((c) => c.n > 0);
           return (
-            <Link key={team.id} href={`/lol/teams/${team.id}`} className="row">
+            <Link
+              key={team.id}
+              href={`/lol/teams/${team.id}`}
+              className="row"
+              data-reveal
+              style={{ transitionDelay: rank <= 12 ? `${(rank - 1) * 32}ms` : "0ms" }}
+            >
               <span className="rk">{String(rank).padStart(2, "0")}</span>
               <div style={{ minWidth: 0 }}>
                 <span className="nm">{team.name}</span>

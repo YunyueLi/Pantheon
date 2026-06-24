@@ -170,59 +170,61 @@ export function TrophyIcon({
       className={cn(className)}
       style={{ opacity: ghost ? 0.5 : 1 }}
     >
+      {/* Grand championship cup — tapered bowl, sweeping handles, two-tier pedestal. */}
       {kind === "worlds" && (
         <>
-          <path d="M6.6 5.2 H25.4 V7.2 H6.6 Z" {...body} />
-          <path
-            d="M8 7.2 H24 L21.8 15.6 C21.2 18 18.9 19.6 16 19.6 C13.1 19.6 10.8 18 10.2 15.6 Z"
-            {...body}
-          />
-          <path d="M8 7.8 C3 8.8 3 15.6 9.4 16.3" {...line} />
-          <path d="M24 7.8 C29 8.8 29 15.6 22.6 16.3" {...line} />
-          <path d="M14.3 19.6 H17.7 V23.6 H14.3 Z" {...body} />
-          <path d="M11 23.6 H21 V25.6 H11 Z" {...body} />
-          <path d="M8.8 25.6 H23.2 V28.6 H8.8 Z" {...body} />
+          <path d="M8.2 5.1 H23.8 V6.7 H8.2 Z" {...body} />
+          <path d="M9.4 6.7 H22.6 L21.5 13 C21 15.7 18.8 17.6 16 17.6 C13.2 17.6 11 15.7 10.5 13 Z" {...body} />
+          <path d="M9.5 7.3 C4.2 7.7 4.2 14.7 11.1 15.5" {...line} />
+          <path d="M22.5 7.3 C27.8 7.7 27.8 14.7 20.9 15.5" {...line} />
+          <path d="M14.7 17.6 H17.3 V20.4 H14.7 Z" {...body} />
+          <path d="M13 20.4 H19 V22 H13 Z" {...body} />
+          <path d="M13.5 22 H18.5 V24.1 H13.5 Z" {...body} />
+          <path d="M10.4 24.1 H21.6 V26.9 H10.4 Z" {...body} />
         </>
       )}
 
+      {/* Stemmed goblet — a rounded chalice on a domed foot. */}
       {kind === "msi" && (
         <>
-          <path d="M9 6.6 H23 L16 17.6 Z" {...body} />
-          <path d="M9 7.3 C5 8.3 5.4 13 10.6 13.7" {...line} />
-          <path d="M23 7.3 C27 8.3 26.6 13 21.4 13.7" {...line} />
-          <path d="M14.5 16.8 H17.5 V21 H14.5 Z" {...body} />
-          <path d="M11.4 21 H20.6 V23.8 H11.4 Z" {...body} />
+          <path d="M9.4 5.3 H22.6 V6.7 H9.4 Z" {...body} />
+          <path d="M10.4 6.7 H21.6 V8.4 C21.6 12.4 19.1 14.9 16 14.9 C12.9 14.9 10.4 12.4 10.4 8.4 Z" {...body} />
+          <path d="M15.2 14.9 H16.8 V21.5 H15.2 Z" {...body} />
+          <path d="M11.7 24.2 C11.7 22.1 13.7 21.5 16 21.5 C18.3 21.5 20.3 22.1 20.3 24.2 Z" {...body} />
+          <path d="M10.9 24.2 H21.1 V25.9 H10.9 Z" {...body} />
         </>
       )}
 
+      {/* Compact handled cup. */}
       {kind === "regional" && (
         <>
-          <path
-            d="M10 7 H22 L20.1 15.4 C19.6 17.3 18 18.4 16 18.4 C14 18.4 12.4 17.3 11.9 15.4 Z"
-            {...body}
-          />
-          <path d="M10 7.6 C6.4 8.2 6.4 13 11 13.7" {...line} />
-          <path d="M22 7.6 C25.6 8.2 25.6 13 21 13.7" {...line} />
-          <path d="M14.5 18.4 H17.5 V21.8 H14.5 Z" {...body} />
-          <path d="M11.6 21.8 H20.4 V24.2 H11.6 Z" {...body} />
+          <path d="M10.6 7 H21.4 L20.5 12.8 C20.1 15 18.3 16.4 16 16.4 C13.7 16.4 11.9 15 11.5 12.8 Z" {...body} />
+          <path d="M10.7 7.5 C7.2 8 7.2 12.7 11.8 13.5" {...line} />
+          <path d="M21.3 7.5 C24.8 8 24.8 12.7 20.2 13.5" {...line} />
+          <path d="M14.7 16.4 H17.3 V19.4 H14.7 Z" {...body} />
+          <path d="M13.9 19.4 H18.1 V21.7 H13.9 Z" {...body} />
+          <path d="M11.8 21.7 H20.2 V24 H11.8 Z" {...body} />
         </>
       )}
 
+      {/* Medallion on a ribbon, with a concentric ring and an inset star. */}
       {kind === "medal" && (
         <>
-          <path d="M11.4 3.4 L15.4 12.6 L10.7 12.6 Z" {...body} />
-          <path d="M20.6 3.4 L16.6 12.6 L21.3 12.6 Z" {...body} />
-          <circle cx="16" cy="21" r="6.4" fill="none" stroke="currentColor" strokeWidth="2.2" />
+          <path d="M11.6 3.5 L15.3 11.4 L10.2 12.6 Z" {...body} />
+          <path d="M20.4 3.5 L16.7 11.4 L21.8 12.6 Z" {...body} />
+          <circle cx="16" cy="20.4" r="6.8" fill="none" stroke="currentColor" strokeWidth={ghost ? 1.4 : 1.9} />
+          <circle cx="16" cy="20.4" r="4.5" fill="none" stroke="currentColor" strokeWidth="0.9" opacity="0.5" />
           <polygon
-            points="16,18 16.74,19.99 18.85,20.07 17.19,21.39 17.76,23.43 16,22.25 14.24,23.43 14.81,21.39 13.15,20.07 15.26,19.99"
+            points="16,16.9 16.95,19.27 19.49,19.42 17.5,21 18.18,23.46 16,22.02 13.82,23.46 14.5,21 12.51,19.42 15.05,19.27"
             fill="currentColor"
           />
         </>
       )}
 
+      {/* Faceted five-point star. */}
       {kind === "star" && (
-        <polygon
-          points="16,7 18.23,12.93 24.56,13.22 19.61,17.17 21.29,23.28 16,19.8 10.71,23.28 12.39,17.17 7.44,13.22 13.77,12.93"
+        <path
+          d="M16 4.6 L18.9 11.95 L26.8 12.5 L20.7 17.5 L22.7 25.2 L16 20.85 L9.3 25.2 L11.3 17.5 L5.2 12.5 L13.1 11.95 Z"
           {...body}
         />
       )}

@@ -102,7 +102,7 @@ export default function Home() {
         <div className="cols" />
         <span className="ghost">Ⅰ</span>
         <span className="vlabel">PANTHEON — ANNO MMXXVI</span>
-        <div>
+        <div data-reveal>
           <div className="kick">Open hall of fame · {sports.length} disciplines · 633 immortals · one index</div>
           <h1 className="mega">
             EVERY<br />
@@ -123,7 +123,7 @@ export default function Home() {
       <section className="feature">
         <Link href={`/lol/players/${gp.id}`} className="fleft">
           <div className="cols" />
-          <div style={{ position: "relative" }}>
+          <div style={{ position: "relative" }} data-reveal>
             <div className="frank">No. 01 · {t("nav.lol")}</div>
             <h2 className="fname">{name(gp)}</h2>
             <div className="fmeta">
@@ -153,8 +153,14 @@ export default function Home() {
           <span className="t">{t("home.topTitle")}</span>
           <span className="kick">{t("home.goatBand")}</span>
         </div>
-        {immortals.map(({ s, p, score }) => (
-          <Link key={s.id} href={`${s.basePath}/players/${p.id}`} className="irow">
+        {immortals.map(({ s, p, score }, i) => (
+          <Link
+            key={s.id}
+            href={`${s.basePath}/players/${p.id}`}
+            className="irow"
+            data-reveal
+            style={{ transitionDelay: `${Math.min(i, 10) * 40}ms` }}
+          >
             <span className="lab">{t(`nav.${s.id}`)}</span>
             <span className="nm">{name(p)}</span>
             <span className="sc">{formatNumber(score)}</span>
@@ -165,7 +171,7 @@ export default function Home() {
       {/* CTA */}
       <section className="cta">
         <div className="cols" />
-        <h2>{t("home.ctaTitle")}</h2>
+        <h2 data-reveal>{t("home.ctaTitle")}</h2>
         <div style={{ marginTop: "34px", display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap", position: "relative" }}>
           <Link href="/lol/leaderboard" className="btn">{t("home.exploreCta")} →</Link>
           <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="btn" style={{ borderColor: "var(--border)", color: "var(--fg-2)" }}>

@@ -62,7 +62,11 @@ function Chart({
   const x = scaleBand<number>({ domain: data.map((d) => d.year), range: [0, iw], padding: 0.34 });
   const maxP = Math.max(1, ...data.map((d) => d.points));
   const y = scaleLinear<number>({ domain: [0, maxP], range: [ih, 0] });
-  const bw = x.bandwidth();
+  // Cap the visual bar width (a 1–2 year career would otherwise render one huge
+  // slab) and centre each bar within its band.
+  const band = x.bandwidth();
+  const bw = Math.min(band, 54);
+  const inset = (band - bw) / 2;
   const showEvery = data.length > 11 ? 2 : 1;
 
   const hovered = hover != null ? data.find((d) => d.year === hover) : null;
@@ -83,10 +87,10 @@ function Chart({
                 onMouseEnter={() => setHover(d.year)}
                 onMouseLeave={() => setHover(null)}
               >
-                <rect x={bx} y={0} width={bw} height={ih} fill="transparent" />
+                <rect x={bx} y={0} width={band} height={ih} fill="transparent" />
                 {d.points > 0 && (
                   <rect
-                    x={bx}
+                    x={bx + inset}
                     y={y(d.points)}
                     width={bw}
                     height={barH}
@@ -97,11 +101,11 @@ function Chart({
                   />
                 )}
                 {d.hasMarquee && d.points > 0 && (
-                  <circle cx={bx + bw / 2} cy={y(d.points) - 7} r={2.5} fill="var(--accent)" />
+                  <circle cx={bx + band / 2} cy={y(d.points) - 7} r={2.5} fill="var(--accent)" />
                 )}
                 {i % showEvery === 0 && (
                   <text
-                    x={bx + bw / 2}
+                    x={bx + band / 2}
                     y={ih + 16}
                     textAnchor="middle"
                     fontSize={10}

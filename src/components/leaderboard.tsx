@@ -143,7 +143,7 @@ export function Leaderboard() {
         <span className="v-edge" style={{ position: "absolute", right: "18px", top: "60px" }}>
           {t(`nav.${config.id}`)} · MMXXVI
         </span>
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative" }} data-reveal>
           <p className="kick">{t(`nav.${config.id}`)}</p>
           <h1>{t("leaderboard.title")}</h1>
           <p className="desc">{t("leaderboard.desc")}</p>
@@ -172,7 +172,13 @@ export function Leaderboard() {
           const first = rank === 1;
           const counts = headlineTypes.map((type) => ({ type, n: countType(p, type), short: model.achievementMeta[type]?.short }));
           return (
-            <Link key={p.id} href={`${basePath}/players/${p.id}`} className={cn("row group", first && "first")}>
+            <Link
+              key={p.id}
+              href={`${basePath}/players/${p.id}`}
+              className={cn("row group", first && "first")}
+              data-reveal
+              style={{ transitionDelay: i < 12 ? `${i * 32}ms` : "0ms" }}
+            >
               <span className="rk">{String(rank).padStart(2, "0")}</span>
               <div style={{ minWidth: 0 }}>
                 <span className="nm">{name(p)}</span>

@@ -10,8 +10,6 @@ import { localizeTeam } from "@/lib/sport/football/clubs";
 import type { Player } from "@/lib/sport/types";
 import { TEAMS, type Team } from "@/lib/teams";
 import { useI18n } from "@/lib/i18n/provider";
-import { PlayerAvatar } from "@/components/player-avatar";
-import { RegionBadge, PositionBadge } from "@/components/badges";
 import { cn } from "@/lib/utils";
 
 type Hit = { kind: "player"; player: Player } | { kind: "team"; team: Team };
@@ -125,10 +123,10 @@ export function PlayerSearch() {
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=open]:animate-fade-in" />
         <Dialog.Content
           aria-describedby={undefined}
-          className="fixed inset-x-0 top-[12%] z-50 mx-auto flex max-h-[76vh] w-[92vw] max-w-lg flex-col overflow-hidden rounded-2xl border border-border bg-raised shadow-pop data-[state=open]:animate-fade-up"
+          className="fixed inset-x-0 top-[12%] z-50 mx-auto flex max-h-[76vh] w-[92vw] max-w-lg flex-col overflow-hidden border border-border-strong bg-raised shadow-pop data-[state=open]:animate-fade-up"
         >
           <Dialog.Title className="sr-only">{t("search.label")}</Dialog.Title>
-          <div className="flex items-center gap-2.5 border-b border-border px-4">
+          <div className="flex items-center gap-3 border-b border-border px-5">
             <Search className="h-4 w-4 shrink-0 text-fg-subtle" />
             <input
               autoFocus
@@ -136,10 +134,10 @@ export function PlayerSearch() {
               onChange={(e) => setQ(e.target.value)}
               onKeyDown={onKeyDown}
               placeholder={t("search.placeholder")}
-              className="h-12 w-full bg-transparent text-sm text-fg outline-none placeholder:text-fg-subtle"
+              className="h-14 w-full bg-transparent font-display text-base text-fg outline-none placeholder:text-fg-subtle"
             />
           </div>
-          <ul ref={listRef} className="min-h-0 flex-1 overflow-y-auto p-2">
+          <ul ref={listRef} className="min-h-0 flex-1 overflow-y-auto">
             {hits.map((hit, i) => {
               const id = hit.kind === "player" ? hit.player.id : hit.team.id;
               const isActive = i === active;
@@ -149,37 +147,35 @@ export function PlayerSearch() {
                     onClick={() => go(hit)}
                     onMouseMove={() => setActive(i)}
                     className={cn(
-                      "flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors",
-                      isActive ? "bg-surface-2" : "hover:bg-surface-2"
+                      "flex w-full items-center gap-4 border-b border-border px-5 py-3.5 text-left transition-colors",
+                      isActive ? "bg-accent-soft text-fg" : "hover:bg-accent-soft"
                     )}
                   >
                     {hit.kind === "player" ? (
                       <>
-                        <PlayerAvatar id={hit.player.id} name={hit.player.name} photo={hit.player.photo} size={30} />
                         <div className="min-w-0 flex-1">
-                          <div className="flex items-center gap-1.5">
-                            <span className="truncate text-sm font-medium text-fg">{name(hit.player)}</span>
+                          <span className="flex items-center gap-2">
+                            <span className="truncate font-display text-lg font-semibold text-fg">{name(hit.player)}</span>
                             {!hit.player.active && (
-                              <span className="shrink-0 text-[9px] uppercase tracking-wide text-fg-subtle">
-                                {t("common.retired")}
-                              </span>
+                              <span className="label shrink-0 text-[9px] text-fg-subtle">{t("common.retired")}</span>
                             )}
-                          </div>
-                          <div className="truncate text-xs text-fg-subtle">{localizeTeam(hit.player.team, locale)}</div>
+                          </span>
+                          <span className="mt-0.5 block truncate font-display text-xs italic text-fg-subtle">
+                            {localizeTeam(hit.player.team, locale)}
+                          </span>
                         </div>
-                        <RegionBadge region={leagueLabel(hit.player.league)} />
-                        <PositionBadge abbr={posAbbr(hit.player.position)} />
+                        <span className="label shrink-0 text-[10px] text-fg-muted">
+                          {leagueLabel(hit.player.league)}
+                          {hit.player.position ? ` · ${posAbbr(hit.player.position)}` : ""}
+                        </span>
                       </>
                     ) : (
                       <>
-                        <span className="grid h-[30px] w-[30px] shrink-0 place-items-center rounded-lg bg-surface-2 font-mono text-[11px] font-semibold text-fg-muted">
-                          {hit.team.code}
-                        </span>
                         <div className="min-w-0 flex-1">
-                          <div className="truncate text-sm font-medium text-fg">{hit.team.name}</div>
-                          <div className="truncate text-xs text-fg-subtle">{t("nav.teams")}</div>
+                          <span className="block truncate font-display text-lg font-semibold text-fg">{hit.team.name}</span>
+                          <span className="mt-0.5 block truncate font-display text-xs italic text-fg-subtle">{t("nav.teams")}</span>
                         </div>
-                        <RegionBadge region={leagueLabel(hit.team.region)} />
+                        <span className="label shrink-0 text-[10px] text-fg-muted">{leagueLabel(hit.team.region)}</span>
                       </>
                     )}
                   </button>
@@ -187,17 +183,15 @@ export function PlayerSearch() {
               );
             })}
             {hits.length === 0 && (
-              <li className="px-2 py-10 text-center text-sm text-fg-subtle">{t("search.empty")}</li>
+              <li className="px-5 py-12 text-center font-display text-sm italic text-fg-subtle">{t("search.empty")}</li>
             )}
           </ul>
-          <div className="flex items-center gap-3 border-t border-border px-4 py-2 text-[11px] text-fg-subtle">
-            <span className="inline-flex items-center gap-1">
-              <kbd className="rounded border border-border px-1 font-mono">↑</kbd>
-              <kbd className="rounded border border-border px-1 font-mono">↓</kbd>
+          <div className="flex items-center gap-3 border-t border-border px-5 py-2.5 text-[11px] text-fg-subtle">
+            <span className="inline-flex items-center gap-1.5">
+              <kbd className="label border border-border px-1.5 py-0.5 text-[10px]">↑</kbd>
+              <kbd className="label border border-border px-1.5 py-0.5 text-[10px]">↓</kbd>
             </span>
-            <span className="inline-flex items-center gap-1">
-              <CornerDownLeft className="h-3 w-3" />
-            </span>
+            <CornerDownLeft className="h-3 w-3" />
           </div>
         </Dialog.Content>
       </Dialog.Portal>

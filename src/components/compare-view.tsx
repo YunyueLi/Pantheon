@@ -127,7 +127,7 @@ export function CompareView() {
 
       <header className="o-head pad">
         <div className="col-grid" />
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative" }} data-reveal>
           <p className="kick">{t("compare.eyebrow")}</p>
           <h1>{t("compare.title")}</h1>
         </div>
@@ -143,7 +143,7 @@ export function CompareView() {
       </header>
 
       {/* The duel — two combatants across a central seam. */}
-      <section className="duel">
+      <section className="duel" data-reveal>
         <div className="col-grid" />
         <span className="ghost-glyph duel-vs">VS</span>
         <div className="duel-seam" />
@@ -172,7 +172,7 @@ export function CompareView() {
       </section>
 
       {/* Tale of the tape */}
-      <section className="sec pad">
+      <section className="sec pad" data-reveal>
         <Plate n="Ⅰ" title={zh ? "硬荣誉对账" : "Tale of the Tape"} />
         <div className="tape-key" style={{ marginTop: "18px" }}>
           <span>
@@ -185,12 +185,12 @@ export function CompareView() {
           </span>
         </div>
         <div className="tape">
-          {metrics.map((m) => {
+          {metrics.map((m, i) => {
             const aWin = m.av > m.bv;
             const bWin = m.bv > m.av;
             const fmt = m.fmt ?? ((n: number) => String(n));
             return (
-              <div key={m.label} className="tape-row">
+              <div key={m.label} className="tape-row" data-reveal style={{ transitionDelay: `${Math.min(i, 8) * 45}ms` }}>
                 <span className={cn("num l", aWin ? "win" : bWin ? "lose" : "win")}>{fmt(m.av)}</span>
                 <span className="lab">
                   {m.type && <TrophyIcon type={m.type} size={16} className="text-fg-subtle" />}
@@ -204,7 +204,7 @@ export function CompareView() {
       </section>
 
       {/* Radar — the rated dimensions */}
-      <section className="sec pad">
+      <section className="sec pad" data-reveal>
         <Plate n="Ⅱ" title={zh ? "六维评定" : "The Dimensions"} />
         <div className="radar-frame">
           <div className="col-grid" />
