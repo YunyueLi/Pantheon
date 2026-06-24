@@ -339,7 +339,7 @@
   }
   .houses .head {
     position: relative;
-    padding: 58px 0 26px;
+    padding-block: 58px 26px;
   }
   .houses .head .kick {
     font-family: var(--font-display);
@@ -375,7 +375,7 @@
     gap: 18px 28px;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    padding: 18px 0;
+    padding-block: 18px;
   }
   .houses .method {
     max-width: 44ch;
@@ -519,7 +519,7 @@
     justify-content: flex-end;
     min-height: 46vh;
     border-bottom: 1px solid var(--border);
-    padding: 56px 0 44px;
+    padding-block: 56px 44px;
   }
   .crest .hero .kick {
     font-family: var(--font-display);

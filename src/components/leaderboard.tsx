@@ -107,12 +107,12 @@ export function Leaderboard() {
 .board a{color:inherit}
 .board .pad{padding-left:clamp(20px,5vw,64px);padding-right:clamp(20px,5vw,64px)}
 
-.board .head{position:relative;padding:60px 0 30px}
+.board .head{position:relative;padding-block:60px 30px}
 .board .head .kick{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.3em;font-size:11px;color:var(--fg-2)}
 .board .head h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(56px,12vw,164px);line-height:.82;letter-spacing:-.02em;margin:14px 0 0}
 .board .head .desc{margin-top:22px;max-width:46ch;font-family:var(--font-display);font-style:italic;font-size:clamp(15px,1.8vw,19px);line-height:1.45;color:var(--fg-2)}
 
-.board .filters{position:relative;display:flex;flex-wrap:wrap;align-items:flex-end;gap:26px 34px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 0}
+.board .filters{position:relative;display:flex;flex-wrap:wrap;align-items:flex-end;gap:26px 34px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding-block:20px}
 
 .board .reg{position:relative}
 .board .row{position:relative;display:grid;grid-template-columns:3.4rem 1fr auto;align-items:center;gap:20px;border-bottom:1px solid var(--border);padding:26px 0;transition:background-color .15s}
