@@ -1,0 +1,161 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`top ranking: basketball > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Michael Jordan — 12493",
+  "2. Kareem Abdul-Jabbar — 10973",
+  "3. LeBron James — 10622",
+  "4. Bill Russell — 10299",
+  "5. Magic Johnson — 7959",
+  "6. Tim Duncan — 7750",
+  "7. Kobe Bryant — 7521",
+  "8. Wilt Chamberlain — 7271",
+  "9. Shaquille O'Neal — 6430",
+  "10. Larry Bird — 6319",
+  "11. John Havlicek — 6146",
+  "12. Bob Cousy — 6046",
+  "13. Stephen Curry — 5837",
+  "14. Kevin Durant — 5725",
+  "15. Sam Jones — 5235",
+]
+`;
+
+exports[`top ranking: dota2 > top 15 by balanced Honor Index 1`] = `
+[
+  "1. N0tail — 1400",
+  "2. Puppey — 1390",
+  "3. Ceb — 1290",
+  "4. JerAx — 1180",
+  "5. ana — 1180",
+  "6. Yatoro — 1070",
+  "7. Collapse — 1070",
+  "8. Mira — 1070",
+  "9. Miposhka — 1070",
+  "10. Topson — 1050",
+  "11. 33 — 1050",
+  "12. Nisha — 990",
+  "13. Miracle- — 900",
+  "14. s4 — 900",
+  "15. MATUMBAMAN — 880",
+]
+`;
+
+exports[`top ranking: f1 > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Lewis Hamilton — 6340",
+  "2. Michael Schumacher — 5787",
+  "3. Max Verstappen — 3538",
+  "4. Sebastian Vettel — 3530",
+  "5. Alain Prost — 3310",
+  "6. Juan Manuel Fangio — 3215",
+  "7. Ayrton Senna — 2764",
+  "8. Niki Lauda — 2216",
+  "9. Nelson Piquet — 2206",
+  "10. Jackie Stewart — 2169",
+  "11. Fernando Alonso — 1938",
+  "12. Jack Brabham — 1927",
+  "13. Jim Clark — 1684",
+  "14. Mika Häkkinen — 1629",
+  "15. Graham Hill — 1422",
+]
+`;
+
+exports[`top ranking: football > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Lionel Messi — 13035",
+  "2. Cristiano Ronaldo — 9450",
+  "3. Pelé — 7930",
+  "4. Toni Kroos — 5440",
+  "5. Luka Modrić — 5290",
+  "6. Ronaldo Nazário — 5270",
+  "7. Sergio Ramos — 5210",
+  "8. Gerd Müller — 5175",
+  "9. Xavi Hernández — 5130",
+  "10. Andrés Iniesta — 5120",
+  "11. Karim Benzema — 4785",
+  "12. Franz Beckenbauer — 4690",
+  "13. Cafu — 4580",
+  "14. Johan Cruyff — 4490",
+  "15. Alfredo Di Stéfano — 4460",
+]
+`;
+
+exports[`top ranking: go > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Lee Chang-ho — 2636",
+  "2. Cho Hunhyun — 2012",
+  "3. Lee Sedol — 1522",
+  "4. Gu Li — 1001",
+  "5. Ke Jie — 857",
+  "6. Shin Jin-seo — 800",
+  "7. Yoo Changhyuk — 744",
+  "8. Park Jung-hwan — 644",
+  "9. Ma Xiaochun — 576",
+  "10. Cho Chikun — 528",
+  "11. Iyama Yuta — 496",
+  "12. Chang Hao — 460",
+  "13. Kobayashi Koichi — 388",
+  "14. Kong Jie — 388",
+  "15. Ding Hao — 364",
+]
+`;
+
+exports[`top ranking: lol > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Faker — 9702",
+  "2. Keria — 4220",
+  "3. Gumayusi — 4088",
+  "4. Bengi — 4048",
+  "5. Oner — 3868",
+  "6. Ruler — 3483",
+  "7. Bang — 3348",
+  "8. Wolf — 3330",
+  "9. Zeus — 3058",
+  "10. Canyon — 3022",
+  "11. BeryL — 2488",
+  "12. Chovy — 2368",
+  "13. Caps — 2322",
+  "14. CoreJJ — 1882",
+  "15. Meiko — 1860",
+]
+`;
+
+exports[`top ranking: table-tennis > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Ma Long — 3358",
+  "2. Wang Nan — 2777",
+  "3. Zhang Yining — 2770",
+  "4. Fan Zhendong — 2365",
+  "5. Deng Yaping — 2278",
+  "6. Ding Ning — 2218",
+  "7. Zhang Jike — 1763",
+  "8. Ma Lin — 1672",
+  "9. Liu Shiwen — 1648",
+  "10. Li Xiaoxia — 1600",
+  "11. Sun Yingsha — 1589",
+  "12. Chen Meng — 1545",
+  "13. Wang Liqin — 1488",
+  "14. Kong Linghui — 1423",
+  "15. Wang Hao — 1422",
+]
+`;
+
+exports[`top ranking: valorant > top 15 by balanced Honor Index 1`] = `
+[
+  "1. aspas — 700",
+  "2. Demon1 — 700",
+  "3. ZmjjKK — 700",
+  "4. Sacy — 660",
+  "5. Chronicle — 610",
+  "6. TenZ — 520",
+  "7. Less — 460",
+  "8. cNed — 460",
+  "9. pANcada — 460",
+  "10. Saadhak — 460",
+  "11. CHICHOO — 460",
+  "12. nobody — 460",
+  "13. Smoggy — 460",
+  "14. S1Mon — 460",
+  "15. Marved — 410",
+]
+`;
