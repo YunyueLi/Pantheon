@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Search, CornerDownLeft } from "lucide-react";
+import { Search } from "lucide-react";
 import { getSport } from "@/lib/sport/registry";
 import { ranked } from "@/lib/sport/honor";
 import { localizeTeam } from "@/lib/sport/football/clubs";
@@ -57,7 +57,7 @@ export function PlayerSearch() {
     const query = q.trim().toLowerCase();
     if (!query) {
       return ranked(players, config.model)
-        .slice(0, 6)
+        .slice(0, 30)
         .map((r) => ({ kind: "player", player: r.player }));
     }
     const playerHits: Hit[] = players
@@ -68,13 +68,13 @@ export function PlayerSearch() {
           .toLowerCase()
           .includes(query)
       )
-      .slice(0, 6)
+      .slice(0, 40)
       .map((player) => ({ kind: "player", player }));
     // Teams currently exist only for LoL.
     const teamHits: Hit[] =
       sportId === "lol"
         ? TEAMS.filter((tm) => [tm.name, ...(tm.aka ?? []), tm.region].join(" ").toLowerCase().includes(query))
-            .slice(0, 4)
+            .slice(0, 8)
             .map((team) => ({ kind: "team", team }))
         : [];
     return [...playerHits, ...teamHits];
@@ -186,13 +186,6 @@ export function PlayerSearch() {
               <li className="px-5 py-12 text-center font-display text-sm italic text-fg-subtle">{t("search.empty")}</li>
             )}
           </ul>
-          <div className="flex items-center gap-3 border-t border-border px-5 py-2.5 text-[11px] text-fg-subtle">
-            <span className="inline-flex items-center gap-1.5">
-              <kbd className="label border border-border px-1.5 py-0.5 text-[10px]">↑</kbd>
-              <kbd className="label border border-border px-1.5 py-0.5 text-[10px]">↓</kbd>
-            </span>
-            <CornerDownLeft className="h-3 w-3" />
-          </div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
