@@ -1,16 +1,31 @@
 "use client";
 
-import { useState } from "react";
-import { ParentSize } from "@visx/responsive";
+import { useEffect, useRef, useState } from "react";
 import { useAxisLabel } from "@/lib/sport/provider";
 
 export type RadarSeries = { label: string; values: number[] };
 export type RadarAxis = { id: string; label: string };
 
 export function CompareRadar({ a, b, axes }: { a: RadarSeries; b: RadarSeries; axes: RadarAxis[] }) {
+  // Measure with a ResizeObserver and a non-zero initial width. visx ParentSize
+  // reports 0 on first paint inside this centered, max-width container (it only
+  // works when the parent is full-width, as in the timeline) — a 0 width corrupts
+  // the radar geometry, so we never let width be 0.
+  const ref = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(440);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0]?.contentRect.width ?? 0;
+      if (w > 0) setWidth(w);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
   return (
-    <div className="mx-auto h-[360px] w-full max-w-[460px]">
-      <ParentSize>{({ width }) => <Radar width={width} height={360} a={a} b={b} axes={axes} />}</ParentSize>
+    <div ref={ref} className="mx-auto h-[360px] w-full max-w-[460px]">
+      <Radar width={width} height={360} a={a} b={b} axes={axes} />
     </div>
   );
 }

@@ -2,38 +2,49 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-type Mode = "light" | "dark";
+// Three fields: crimson (the signature, default), paper (warm light), obsidian (dark).
+export type Mode = "crimson" | "paper" | "obsidian";
+const ORDER: Mode[] = ["crimson", "paper", "obsidian"];
 
 type ThemeContextValue = {
   mode: Mode;
   setMode: (m: Mode) => void;
-  toggleMode: () => void;
+  cycleMode: () => void;
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
+/** Obsidian is the default; explicit choices persist. Old values migrate (light→crimson). */
+function normalize(v: string | null): Mode {
+  if (v === "paper") return "paper";
+  if (v === "crimson" || v === "light") return "crimson";
+  return "obsidian"; // "obsidian" | "dark" | null/unknown → default
+}
+
+function apply(el: HTMLElement, m: Mode) {
+  el.classList.toggle("paper", m === "paper");
+  el.classList.toggle("dark", m === "obsidian");
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [mode, setModeState] = useState<Mode>("dark");
+  const [mode, setModeState] = useState<Mode>("obsidian");
 
   useEffect(() => {
-    const el = document.documentElement;
-    const storedMode =
-      (localStorage.getItem("pantheon-mode") as Mode | null) ??
-      (el.classList.contains("dark") ? "dark" : "light");
-    setModeState(storedMode);
-    el.classList.toggle("dark", storedMode === "dark");
+    const stored = normalize(localStorage.getItem("pantheon-mode"));
+    setModeState(stored);
+    apply(document.documentElement, stored);
   }, []);
 
   const setMode = (m: Mode) => {
     setModeState(m);
     localStorage.setItem("pantheon-mode", m);
-    document.documentElement.classList.toggle("dark", m === "dark");
+    apply(document.documentElement, m);
   };
 
-  const toggleMode = () => setMode(mode === "dark" ? "light" : "dark");
+  const cycleMode = () => setMode(ORDER[(ORDER.indexOf(mode) + 1) % ORDER.length]);
 
   return (
-    <ThemeContext.Provider value={{ mode, setMode, toggleMode }}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ mode, setMode, cycleMode }}>{children}</ThemeContext.Provider>
   );
 }
 

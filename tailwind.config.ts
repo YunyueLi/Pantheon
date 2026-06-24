@@ -37,7 +37,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-geist-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+        mono: ["var(--font-plex-mono)", "var(--font-geist-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+        display: ["var(--font-display)", "Georgia", "'Times New Roman'", "serif"],
       },
       boxShadow: {
         card: "0 1px 2px 0 hsl(var(--shadow-color) / 0.04)",

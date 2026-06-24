@@ -20,12 +20,10 @@ export function generateMetadata({ params }: { params: { sport: string } }): Met
 export default function ComparePage({ params }: { params: { sport: string } }) {
   if (!getSport(params.sport)) notFound();
   return (
-    <div className="mx-auto max-w-6xl px-5 py-10">
-      <SportProvider sportId={params.sport}>
-        <Suspense>
-          <CompareView />
-        </Suspense>
-      </SportProvider>
-    </div>
+    <SportProvider sportId={params.sport}>
+      <Suspense>
+        <CompareView />
+      </Suspense>
+    </SportProvider>
   );
 }

@@ -21,16 +21,16 @@ export function SportSwitcher() {
 
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger className="flex h-8 items-center gap-1.5 rounded-full border border-border bg-surface px-3 text-xs font-medium text-fg outline-none transition-colors hover:bg-surface-2 data-[state=open]:bg-surface-2">
+      <DropdownMenu.Trigger className="label flex h-8 items-center gap-1.5 px-1 text-[11px] text-fg outline-none transition-colors hover:text-fg-muted">
         <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-        {t(`nav.${current.id}`)}
+        <span className="hidden sm:inline">{t(`nav.${current.id}`)}</span>
         <ChevronDown className="h-3.5 w-3.5 text-fg-subtle" />
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content
           align="start"
           sideOffset={6}
-          className="z-50 min-w-[var(--radix-dropdown-menu-trigger-width)] overflow-hidden rounded-xl border border-border bg-raised p-1 shadow-pop data-[state=open]:animate-fade-up"
+          className="z-50 min-w-[10rem] border border-border bg-raised p-1 shadow-pop data-[state=open]:animate-fade-up"
         >
           {sports.map((s) => {
             const active = s.id === current.id;
@@ -39,8 +39,8 @@ export function SportSwitcher() {
                 <Link
                   href={`${s.basePath}/leaderboard`}
                   className={cn(
-                    "flex cursor-pointer items-center justify-between gap-6 rounded-lg px-2.5 py-1.5 text-sm outline-none transition-colors data-[highlighted]:bg-surface-2",
-                    active ? "font-medium text-fg" : "text-fg-muted"
+                    "label flex cursor-pointer items-center justify-between gap-6 px-2.5 py-2 text-[11px] outline-none transition-colors data-[highlighted]:bg-surface-2",
+                    active ? "text-fg" : "text-fg-muted"
                   )}
                 >
                   {t(`nav.${s.id}`)}

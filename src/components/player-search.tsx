@@ -116,13 +116,9 @@ export function PlayerSearch() {
       <Dialog.Trigger asChild>
         <button
           aria-label={t("search.label")}
-          className="flex h-8 items-center gap-2 rounded-full border border-border px-2.5 text-xs text-fg-subtle transition-colors hover:bg-surface-2 hover:text-fg"
+          className="flex h-8 w-8 items-center justify-center text-fg-subtle transition-colors hover:text-fg"
         >
-          <Search className="h-3.5 w-3.5" />
-          <span className="hidden lg:inline">{t("search.label")}</span>
-          <kbd className="hidden rounded border border-border px-1 font-mono text-[10px] text-fg-subtle lg:inline">
-            ⌘K
-          </kbd>
+          <Search className="h-4 w-4" />
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>

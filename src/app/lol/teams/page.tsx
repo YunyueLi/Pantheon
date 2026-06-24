@@ -3,63 +3,68 @@
 import Link from "next/link";
 import { rankedTeams } from "@/lib/teams";
 import { TrophyIcon } from "@/components/trophy-icon";
-import { RegionBadge } from "@/components/badges";
 import { formatNumber } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n/provider";
 
 export default function TeamsPage() {
   const { t } = useI18n();
   const teams = rankedTeams();
+  const maxHonor = Math.max(1, ...teams.map((x) => x.honor));
 
   return (
-    <div className="mx-auto max-w-6xl px-5 py-10">
-      <div className="text-xs font-medium uppercase tracking-wide text-fg-subtle">{t("home.eyebrow")}</div>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight">{t("nav.teams")}</h1>
-      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-fg-muted">{t("home.teamsDesc")}</p>
+    <div className="houses">
+      <header className="head pad">
+        <div className="col-grid" />
+        <span className="ghost-glyph" style={{ right: "-1%", top: "-12%", fontSize: "clamp(260px,40vw,600px)" }}>
+          ♛
+        </span>
+        <span className="v-edge" style={{ position: "absolute", right: "18px", top: "58px" }}>
+          {t("nav.lol")} · MMXXVI
+        </span>
+        <div style={{ position: "relative" }}>
+          <p className="kick">{t("home.eyebrow")}</p>
+          <h1>{t("nav.teams")}</h1>
+          <p className="desc">{t("home.teamsDesc")}</p>
+        </div>
+      </header>
 
-      <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="pad">
         {teams.map(({ team, honor, rank }) => {
           const counts = [
-            { type: "worlds_title" as const, n: team.worlds.length },
-            { type: "msi_title" as const, n: team.msi.length },
-            { type: "ewc_title" as const, n: team.ewc?.length ?? 0 },
-            { type: "first_stand_title" as const, n: team.firstStand?.length ?? 0 },
-            { type: "worlds_runnerup" as const, n: team.worldsRunnerup?.length ?? 0 },
+            { type: "worlds_title" as const, n: team.worlds.length, gold: true },
+            { type: "msi_title" as const, n: team.msi.length, gold: true },
+            { type: "ewc_title" as const, n: team.ewc?.length ?? 0, gold: true },
+            { type: "first_stand_title" as const, n: team.firstStand?.length ?? 0, gold: true },
+            { type: "worlds_runnerup" as const, n: team.worldsRunnerup?.length ?? 0, gold: false },
           ].filter((c) => c.n > 0);
           return (
-            <Link
-              key={team.id}
-              href={`/lol/teams/${team.id}`}
-              className="group rounded-2xl border border-border bg-surface p-5 shadow-card transition-colors hover:border-border-strong"
-            >
-              <div className="flex items-center gap-3">
-                <span className="tnum w-5 shrink-0 text-right text-sm text-fg-subtle">{rank}</span>
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-surface-2 font-mono text-sm font-semibold text-fg-muted">
-                  {team.code}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="truncate font-semibold tracking-tight group-hover:text-accent">{team.name}</div>
-                  <div className="mt-1">
-                    <RegionBadge region={team.region} />
-                  </div>
-                </div>
-                <div className="tnum shrink-0 text-right text-sm font-semibold text-accent">{formatNumber(honor)}</div>
-              </div>
-              <div className="mt-4 flex flex-wrap items-center gap-3 text-fg-muted">
-                {counts.length > 0 ? (
-                  counts.map((c) => (
-                    <span key={c.type} className="inline-flex items-center gap-1">
-                      <TrophyIcon
-                        type={c.type}
-                        size={16}
-                        className={c.type === "worlds_runnerup" ? "text-fg-subtle" : "text-[color:var(--medal-gold)]"}
-                      />
-                      <span className="tnum text-xs">{c.n}</span>
+            <Link key={team.id} href={`/lol/teams/${team.id}`} className="row">
+              <span className="rk">{String(rank).padStart(2, "0")}</span>
+              <div style={{ minWidth: 0 }}>
+                <span className="nm">{team.name}</span>
+                <div className="meta">
+                  <span className="reg">{team.region}</span>
+                  {counts.length > 0 && (
+                    <span className="chips">
+                      {counts.map((c) => (
+                        <span key={c.type} className="chip">
+                          <TrophyIcon
+                            type={c.type}
+                            size={15}
+                            className={c.gold ? "text-[color:var(--medal-gold)]" : "text-fg-subtle"}
+                          />
+                          {c.n}
+                        </span>
+                      ))}
                     </span>
-                  ))
-                ) : (
-                  <span className="text-xs text-fg-subtle">—</span>
-                )}
+                  )}
+                </div>
+              </div>
+              <div className="sc">
+                <div className="v">{formatNumber(honor)}</div>
+                <div className="bar">
+                  <span style={{ width: `${(honor / maxHonor) * 100}%` }} />
+                </div>
               </div>
             </Link>
           );

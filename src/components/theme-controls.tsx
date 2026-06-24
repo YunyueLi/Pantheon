@@ -1,17 +1,22 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "@/components/theme-provider";
+import { Flame, Moon, Sun } from "lucide-react";
+import { useTheme, type Mode } from "@/components/theme-provider";
+
+// Icon reflects the CURRENT field; clicking cycles crimson → paper → obsidian.
+const ICON: Record<Mode, typeof Flame> = { crimson: Flame, paper: Sun, obsidian: Moon };
 
 export function ThemeControls() {
-  const { mode, toggleMode } = useTheme();
+  const { mode, cycleMode } = useTheme();
+  const Icon = ICON[mode];
   return (
     <button
-      onClick={toggleMode}
-      aria-label="Toggle light/dark"
-      className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg"
+      onClick={cycleMode}
+      aria-label={`Theme: ${mode}. Click to switch.`}
+      title={`Theme: ${mode}`}
+      className="flex h-8 w-8 items-center justify-center text-fg-muted transition-colors hover:text-fg"
     >
-      {mode === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      <Icon className="h-4 w-4" />
     </button>
   );
 }

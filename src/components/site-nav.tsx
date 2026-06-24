@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Star } from "lucide-react";
 import { ThemeControls } from "@/components/theme-controls";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { PlayerSearch } from "@/components/player-search";
@@ -50,26 +49,25 @@ export function SiteNav() {
   const { t } = useI18n();
   const sport = SPORT_PREFIXES.find((s) => path.startsWith(`/${s}`)) ?? "lol";
   const links = sectionLinks(sport);
+  // Methodology is the "how it's computed" colophon — it sits on the right rail with
+  // the utility controls, set apart from the browse sections (rank / teams / compare).
+  const browseLinks = links.filter((l) => l.key !== "nav.methodology");
+  const methodology = links.find((l) => l.key === "nav.methodology");
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-[color:var(--bg-glass)] backdrop-blur-xl backdrop-saturate-150">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-5">
-        <div className="flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="grid h-6 w-6 place-items-center rounded-md bg-accent text-[11px] font-bold text-accent-contrast">
-              P
-            </span>
-            <span className="hidden text-sm font-semibold tracking-tight sm:inline">Pantheon</span>
-          </Link>
+      <div className="relative mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-8">
+        {/* Left — sport context + section links */}
+        <div className="flex items-center gap-5">
           <SportSwitcher />
-          <nav className="hidden items-center gap-0.5 md:flex">
-            {links.map((l) => {
+          <nav className="hidden items-center gap-5 md:flex">
+            {browseLinks.map((l) => {
               const active = path.startsWith(l.href);
               return (
                 <Link
                   key={l.href}
                   href={l.href}
                   className={cn(
-                    "rounded-lg px-3 py-1.5 text-sm transition-colors",
+                    "label text-[11px] transition-colors",
                     active ? "text-fg" : "text-fg-subtle hover:text-fg"
                   )}
                 >
@@ -79,7 +77,31 @@ export function SiteNav() {
             })}
           </nav>
         </div>
-        <div className="flex items-center gap-2">
+
+        {/* Center — wordmark, optically centered on the bar regardless of side widths */}
+        <Link
+          href="/"
+          className="absolute left-1/2 -translate-x-1/2 font-display text-base font-extrabold uppercase tracking-[0.08em] text-fg sm:text-2xl sm:tracking-[0.18em]"
+        >
+          Pantheon
+        </Link>
+
+        {/* Right — methodology colophon + utility controls */}
+        <div className="flex items-center justify-end gap-1.5 sm:gap-4">
+          {methodology && (
+            <>
+              <Link
+                href={methodology.href}
+                className={cn(
+                  "label hidden text-[11px] transition-colors md:inline",
+                  path.startsWith(methodology.href) ? "text-fg" : "text-fg-subtle hover:text-fg"
+                )}
+              >
+                {t(methodology.key)}
+              </Link>
+              <span aria-hidden className="mr-1 hidden h-4 w-px bg-border md:block" />
+            </>
+          )}
           <PlayerSearch />
           <LanguageSwitcher />
           <ThemeControls />
@@ -88,11 +110,9 @@ export function SiteNav() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Star Pantheon on GitHub"
-            className="flex h-8 items-center gap-1.5 rounded-full border border-border px-2.5 text-xs text-fg-subtle transition-colors hover:border-border-strong hover:text-fg"
+            className="hidden h-8 w-8 items-center justify-center text-fg-subtle transition-colors hover:text-fg sm:flex"
           >
-            <GithubMark className="h-3.5 w-3.5" />
-            <span className="hidden font-medium sm:inline">Star</span>
-            <Star className="h-3 w-3 fill-[color:var(--medal-gold)] text-[color:var(--medal-gold)]" />
+            <GithubMark className="h-4 w-4" />
           </a>
         </div>
       </div>
@@ -106,8 +126,8 @@ export function SiteNav() {
               key={l.href}
               href={l.href}
               className={cn(
-                "rounded-lg px-2.5 py-1 text-[13px] transition-colors",
-                active ? "bg-surface-2 text-fg" : "text-fg-subtle hover:text-fg"
+                "label px-2 py-1 text-[11px] transition-colors",
+                active ? "text-fg" : "text-fg-subtle hover:text-fg"
               )}
             >
               {t(l.key)}

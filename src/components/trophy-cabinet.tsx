@@ -42,8 +42,8 @@ export function TrophyCabinet({ player }: { player: Player }) {
           <div
             key={g.type}
             className={cn(
-              "rounded-xl border p-3.5",
-              isMarquee ? "border-transparent bg-[color:var(--gold-soft)]" : "border-border bg-surface-2"
+              "border p-4",
+              isMarquee ? "border-[color:var(--gold-line)] bg-[color:var(--gold-soft)]" : "border-border"
             )}
           >
             <div className="flex items-center justify-between">
@@ -68,7 +68,7 @@ export function TrophyCabinet({ player }: { player: Player }) {
                   )}
                   <div className="mt-0.5 flex flex-wrap gap-1">
                     {grp.wins.map((w, i) => (
-                      <span key={i} className="tnum rounded bg-surface px-1 py-0.5 text-[10px] text-fg-subtle">
+                      <span key={i} className="tnum border border-border px-1.5 py-0.5 text-[10px] text-fg-subtle">
                         {`'${String(w.year).slice(2)}`}
                         {w.count > 1 && <span className="text-fg-muted">×{w.count}</span>}
                       </span>

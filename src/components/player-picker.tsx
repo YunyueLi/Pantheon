@@ -73,7 +73,7 @@ export function PlayerPicker({
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <button className="flex w-full items-center justify-between gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-sm transition-colors hover:border-border-strong">
+        <button className="flex w-full items-center justify-between gap-2 border-b border-border-strong pb-1.5 text-left font-display text-sm transition-colors hover:border-fg">
           <span className="truncate text-fg">
             {current ? `${name(current)} · ${current.team}` : t("search.placeholder")}
           </span>

@@ -1,6 +1,30 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Playfair_Display, IBM_Plex_Mono, Noto_Serif_SC } from "next/font/google";
 import "./globals.css";
+
+// Latin display = high-contrast Didone (Hermes-style giant caps). CJK = Noto Serif SC
+// (思源宋体), a Song with matching thick/thin contrast. globals.css composes the two
+// into --font-display so every serif rule gets the right glyph per script.
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["700", "800", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-latin",
+  display: "swap",
+});
+const notoSerifSC = Noto_Serif_SC({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  variable: "--font-cjk",
+  display: "swap",
+});
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
+  display: "swap",
+});
 import { ThemeProvider } from "@/components/theme-provider";
 import { I18nProvider } from "@/lib/i18n/provider";
 import { DEFAULT_LOCALE } from "@/lib/i18n/config";
@@ -37,15 +61,19 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "Pantheon — Competitive Honors", description: SITE_DESC },
 };
 
-const themeScript = `(function(){try{var m=localStorage.getItem('pantheon-mode');var e=document.documentElement;if(m==='light'){e.classList.remove('dark');}else if(m==='dark'){e.classList.add('dark');}}catch(e){}})();`;
+const themeScript = `(function(){try{var m=localStorage.getItem('pantheon-mode');var e=document.documentElement;if(m==='paper'){e.classList.add('paper');}else if(m==='crimson'||m==='light'){}else{e.classList.add('dark');}}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={DEFAULT_LOCALE} className="dark" suppressHydrationWarning>
+    <html
+      lang={DEFAULT_LOCALE}
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${plexMono.variable} ${notoSerifSC.variable}`}
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
+      <body className="antialiased">
         <I18nProvider initialLocale={DEFAULT_LOCALE}>
           <ThemeProvider>
             <SiteNav />

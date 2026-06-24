@@ -1,56 +1,103 @@
 "use client";
 
 import Link from "next/link";
-import type { ReactNode } from "react";
-import { Clock, GitCompareArrows } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { achievementPoints, countType, honorScore, percentile, ranked } from "@/lib/sport/honor";
-import { useSport, useHonorLabel, useName, useLeagueLabel, usePositionAbbr, useBlurb } from "@/lib/sport/provider";
-import { BackButton } from "@/components/back-button";
+import { useSport, useHonorLabel, useName, useLeagueLabel, useBlurb } from "@/lib/sport/provider";
 import { teamIdFromName } from "@/lib/teams";
 import { localizeTeam } from "@/lib/sport/football/clubs";
-import { PlayerAvatar } from "@/components/player-avatar";
-import { RegionBadge, PositionBadge } from "@/components/badges";
-import { TrophyCabinet } from "@/components/trophy-cabinet";
 import { TrophyIcon, trophyTone } from "@/components/trophy-icon";
 import { HonorTimeline } from "@/components/honor-timeline";
 import { HonorBreakdown } from "@/components/honor-breakdown";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { TrophyCabinet } from "@/components/trophy-cabinet";
+import { Plate } from "@/components/ui/plate";
 import { formatNumber } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n/provider";
 
+/**
+ * The enshrinement portrait. A halftone duotone field with the player's monogram
+ * engraved over it; if a licensed photo exists at /players/<id>.(jpg|png|webp) it
+ * fades in with a grayscale-duotone treatment and the halftone reads as a screen.
+ */
+function Portrait({ id, photo, initials, caption }: { id: string; photo?: string; initials: string; caption: string }) {
+  const candidates = useMemo(() => {
+    const list: string[] = [];
+    if (photo) list.push(photo);
+    list.push(`/players/${id}.jpg`, `/players/${id}.png`, `/players/${id}.webp`);
+    return list;
+  }, [id, photo]);
+  const [idx, setIdx] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    setIdx(0);
+    setLoaded(false);
+  }, [id, photo]);
+  const src = candidates[idx];
+  const rays = Array.from({ length: 48 }, (_, i) => {
+    const a = (i / 48) * Math.PI * 2;
+    return <line key={i} x1="200" y1="210" x2={200 + Math.cos(a) * 420} y2={210 + Math.sin(a) * 420} stroke="currentColor" strokeWidth="0.6" />;
+  });
+  return (
+    <div className="portrait">
+      <svg className="portrait-ht" viewBox="0 0 400 520" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden>
+        <defs>
+          <pattern id="ht-portrait" width="6" height="6" patternUnits="userSpaceOnUse">
+            <circle cx="3" cy="3" r="1.15" fill="currentColor" />
+          </pattern>
+          <radialGradient id="vig-portrait" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stopColor="currentColor" stopOpacity="0.92" />
+            <stop offset="48%" stopColor="currentColor" stopOpacity="0.12" />
+            <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <rect width="400" height="520" fill="url(#ht-portrait)" opacity="0.4" />
+        <g opacity="0.45">{rays}</g>
+        <rect width="400" height="520" fill="url(#vig-portrait)" />
+      </svg>
+      {src && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={src}
+          alt=""
+          aria-hidden
+          loading="lazy"
+          className="portrait-photo"
+          data-loaded={loaded}
+          onLoad={() => setLoaded(true)}
+          onError={() => setIdx((i) => i + 1)}
+        />
+      )}
+      {!loaded && <span className="portrait-mono mega">{initials}</span>}
+      <span className="portrait-cap label">{caption}</span>
+    </div>
+  );
+}
+
 export function PlayerProfile({ id }: { id: string }) {
   const { t, locale } = useI18n();
+  const zh = locale === "zh";
   const { config, leagueMeta, positionMeta } = useSport();
   const { players, model, headlineTypes, basePath } = config;
   const honorLabel = useHonorLabel();
   const name = useName();
   const leagueLabel = useLeagueLabel();
-  const posAbbr = usePositionAbbr();
   const blurbOf = useBlurb();
-  // Localized position label, falling back to the sport model's own label when the
-  // dictionary lacks a `role.<id>` entry (e.g. sports added without full i18n).
   const roleLabel = (pid: string) => {
     const v = t(`role.${pid}`);
     return v !== `role.${pid}` ? v : positionMeta(pid)?.label ?? pid;
   };
+
   const player = players.find((p) => p.id === id);
   if (!player) return null;
   const blurb = blurbOf(player);
-  // Individual sports (F1, Go, table tennis) may have no positions; degrade the
-  // role-based UI (role rank chip, "top of role" copy) gracefully when absent.
   const hasRole = Boolean(player.position) && Boolean(positionMeta(player.position));
-
   const also = player.alsoId ? players.find((p) => p.id === player.alsoId) : undefined;
   const teamId = teamIdFromName(player.team);
+
   const score = honorScore(player, model);
   const overall = ranked(players, model).find((r) => r.player.id === player.id)!;
-  const roleRank = ranked(players.filter((p) => p.position === player.position), model).find(
-    (r) => r.player.id === player.id
-  )!;
-  const regionRank = ranked(players.filter((p) => p.league === player.league), model).find(
-    (r) => r.player.id === player.id
-  )!;
+  const roleRank = ranked(players.filter((p) => p.position === player.position), model).find((r) => r.player.id === player.id)!;
+  const regionRank = ranked(players.filter((p) => p.league === player.league), model).find((r) => r.player.id === player.id)!;
   const pct = percentile(player, players.filter((p) => p.position === player.position), model);
 
   const countryKey = `regionCountry.${player.league}`;
@@ -61,223 +108,283 @@ export function PlayerProfile({ id }: { id: string }) {
     .filter((a) => (model.achievementMeta[a.type]?.base ?? 0) > 0)
     .map((a) => ({ a, pts: achievementPoints(a, model) }))
     .sort((x, y) => y.a.year - x.a.year || y.pts - x.pts);
-
   const lastYear = Math.max(...player.achievements.map((a) => a.year));
+  const seasons = lastYear - player.debutYear + 1;
+
+  // The headline trophy haul: only the types this player actually owns, biggest first.
+  const haul = headlineTypes
+    .map((type) => ({ type, n: countType(player, type), label: honorLabel(type) }))
+    .filter((h) => h.n > 0);
+
+  const initials = player.name.replace(/[^a-zA-Z0-9]/g, "").slice(0, 2).toUpperCase();
+  const isGoat = overall.rank === 1;
+  const era = `${player.debutYear}–${player.active ? (zh ? "至今" : "NOW") : lastYear}`;
+  const verdict = isGoat ? (zh ? "万神殿之首" : "First of the Pantheon") : (zh ? "封神录" : "Enshrined");
 
   return (
-    <div className="mx-auto max-w-6xl px-5 py-8">
-      <BackButton fallback={`${basePath}/leaderboard`} />
+    <div className="enshrine">
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+.enshrine{position:relative;overflow-x:hidden}
+.enshrine a{color:inherit}
+.enshrine .pad{padding-left:clamp(20px,5vw,64px);padding-right:clamp(20px,5vw,64px)}
+.enshrine .back{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--fg-3);padding:22px 0 0}
+.enshrine .back:hover{color:var(--fg)}
 
-      <Card className="overflow-hidden">
-        <div className="flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-start gap-4">
-            <PlayerAvatar id={player.id} name={player.name} photo={player.photo} size={64} />
-            <div>
-              <div className="flex flex-wrap items-center gap-2.5">
-                <h1 className="text-2xl font-semibold tracking-tight">{name(player)}</h1>
-                <RegionBadge region={leagueLabel(player.league)} />
-                <PositionBadge abbr={posAbbr(player.position)} />
-                {!player.active && (
-                  <span className="text-[10px] uppercase tracking-wide text-fg-subtle">{t("common.retired")}</span>
-                )}
-                <span className="tnum rounded-full border border-border px-2 py-0.5 text-[11px] text-fg-subtle">
-                  {player.debutYear}–{player.active ? (locale === "zh" ? "至今" : "now") : lastYear}
-                </span>
-              </div>
-              {player.realName && <p className="mt-0.5 text-sm text-fg-subtle">{player.realName}</p>}
-              <p className="mt-2 text-sm text-fg-muted">
-                {teamId ? (
-                  <Link href={`${basePath}/teams/${teamId}`} className="transition-colors hover:text-fg">
-                    {localizeTeam(player.team, locale)}
-                  </Link>
-                ) : (
-                  localizeTeam(player.team, locale)
-                )}{" "}
-                {country && <>· {country} </>}· {t("common.debut", { y: player.debutYear })}
-              </p>
-              {also && (
-                <Link
-                  href={`${basePath}/players/${also.id}`}
-                  className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-accent transition-colors hover:underline"
-                >
-                  {locale === "zh"
-                    ? `也是冠军${also.kind === "coach" ? "教练" : "球员"} →`
-                    : `Also a champion ${also.kind === "coach" ? "coach" : "player"} →`}
-                </Link>
-              )}
-              {blurb && (
-                <p className="mt-3 max-w-md text-sm leading-relaxed text-fg-muted">{blurb}</p>
-              )}
-            </div>
+/* HERO — the rite of enshrinement */
+.rite{position:relative;min-height:84vh;display:grid;grid-template-columns:1.1fr .9fr;gap:0;border-bottom:1px solid var(--border)}
+@media(max-width:880px){.rite{grid-template-columns:1fr;min-height:auto}}
+.rite-text{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;padding:64px 0 56px;min-height:84vh}
+@media(max-width:880px){.rite-text{min-height:auto;padding:40px 0 36px}}
+.rite-kick{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.3em;font-size:11px;color:var(--fg-2)}
+.rite-real{font-family:var(--font-display);font-style:italic;font-size:clamp(16px,2vw,22px);color:var(--fg-2);margin-top:20px}
+.rite-name{font-size:clamp(56px,11vw,168px);margin-top:6px;word-break:break-word}
+.rite-meta{margin-top:26px;font-size:12px;color:var(--fg-2);line-height:1.9}
+.rite-also{display:inline-block;margin-top:16px;font-family:var(--font-display);font-style:italic;font-size:14px;color:var(--fg);border-bottom:1px solid var(--border-strong);padding-bottom:2px}
+.rite-index{margin-top:38px;display:flex;align-items:flex-end;gap:22px}
+.rite-index .lab{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.22em;font-size:10px;color:var(--fg-2);writing-mode:vertical-rl;transform:rotate(180deg)}
+.rite-index .val{font-family:var(--font-display);font-weight:900;font-size:clamp(64px,11vw,150px);line-height:.8;letter-spacing:-.03em}
+
+.rite-portrait{position:relative;border-left:1px solid var(--border)}
+@media(max-width:880px){.rite-portrait{border-left:0;border-top:1px solid var(--border);min-height:62vh}}
+.portrait{position:absolute;inset:0;overflow:hidden;color:var(--fg)}
+@media(max-width:880px){.portrait{position:relative;min-height:62vh}}
+.portrait-ht{position:absolute;inset:0}
+.portrait-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;filter:grayscale(1) contrast(1.18) brightness(1.06);mix-blend-mode:luminosity;opacity:0;transition:opacity .5s}
+.portrait-photo[data-loaded="true"]{opacity:.9}
+.portrait-mono{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(120px,22vw,300px);-webkit-text-stroke:1.5px var(--fg);color:transparent;opacity:.5}
+.portrait-cap{position:absolute;left:22px;bottom:20px;font-size:10px;color:var(--fg-2)}
+
+/* STANDINGS */
+.stand{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-bottom:1px solid var(--border)}
+.stand-cell{position:relative;padding:30px clamp(20px,5vw,64px);border-left:1px solid var(--border)}
+.stand-cell:first-child{border-left:0}
+.stand-cell .lab{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.18em;font-size:10px;color:var(--fg-2)}
+.stand-cell .val{margin-top:12px;font-family:var(--font-display);font-weight:800;font-size:clamp(40px,6vw,72px);line-height:.9;font-variant-numeric:tabular-nums}
+.stand-cell .sub{font-size:18px;color:var(--fg-3);font-weight:400}
+.stand-note{grid-column:1/-1;border-top:1px solid var(--border);padding:14px clamp(20px,5vw,64px);font-family:var(--font-display);font-style:italic;font-size:14px;color:var(--fg-2)}
+
+/* HAUL — the trophy headline numerals */
+.haul{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));border-bottom:1px solid var(--border)}
+.haul-cell{position:relative;padding:34px clamp(20px,5vw,64px) 30px;border-left:1px solid var(--border)}
+.haul-cell:first-child{border-left:0}
+.haul-cell .n{font-family:var(--font-display);font-weight:900;font-size:clamp(48px,8vw,104px);line-height:.82;font-variant-numeric:tabular-nums}
+.haul-cell.gold .n{color:var(--medal-gold)}
+.haul-cell .lab{margin-top:14px;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--fg-2)}
+
+/* SECTIONS */
+.sec{position:relative;padding-top:8px;padding-bottom:42px}
+.verdict{position:relative;border-bottom:1px solid var(--border);padding:54px clamp(20px,5vw,64px)}
+.verdict p{font-family:var(--font-display);font-style:italic;font-size:clamp(22px,3.4vw,40px);line-height:1.28;max-width:24ch}
+.verdict .mark{font-size:1.4em;color:var(--fg-3);font-style:normal}
+
+.recordtbl{width:100%;border-collapse:collapse}
+.recordtbl th{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;font-size:10px;color:var(--fg-2);text-align:left;padding:0 12px 14px;border-bottom:1px solid var(--border)}
+.recordtbl th.r{text-align:right}
+.recordtbl td{padding:16px 12px;border-bottom:1px solid var(--border)}
+.recordtbl tr:hover td{background:var(--accent-soft)}
+.recordtbl .yr{font-family:var(--font-display);font-weight:800;font-size:24px;font-variant-numeric:tabular-nums;color:var(--fg)}
+.recordtbl .hon{font-family:var(--font-display);font-size:17px}
+.recordtbl .mut{color:var(--fg-2);font-size:13px}
+.recordtbl .pts{text-align:right;font-family:var(--font-display);font-weight:700;font-variant-numeric:tabular-nums}
+.recordtbl .tier{font-family:var(--font-display);font-size:10px;letter-spacing:.12em;color:var(--fg-3);border:1px solid var(--border);padding:2px 7px}
+
+.enshrine .cta{position:relative;text-align:center;padding:88px 24px;border-top:1px solid var(--border)}
+.enshrine .cta h3{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(30px,5vw,60px);line-height:.92;letter-spacing:-.02em}
+.enshrine .btn{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.2em;font-size:12px;border:1px solid var(--border-strong);padding:15px 28px;display:inline-block;margin-top:30px;transition:background-color .15s,color .15s}
+.enshrine .btn:hover{background:var(--accent);color:var(--accent-contrast)}
+`,
+        }}
+      />
+
+      <div className="pad">
+        <Link href={`${basePath}/leaderboard`} className="back">← {t("common.back")}</Link>
+      </div>
+
+      {/* HERO — rite of enshrinement */}
+      <section className="rite">
+        <div className="col-grid" />
+        <div className="rite-text pad">
+          <div className="rite-kick">
+            № {overall.rank} · {t(`nav.${config.id}`)} · {verdict}
           </div>
-
-          <div className="flex shrink-0 flex-col items-start gap-3 md:items-end">
-            <div className="md:text-right">
-              <div className="text-[11px] font-medium uppercase tracking-wide text-fg-subtle">
-                {t("player.honorIndex")}
-              </div>
-              <div className="tnum text-4xl font-semibold leading-none text-accent">{formatNumber(score)}</div>
-              <div className="mt-1.5 text-xs text-fg-muted">
-                {hasRole
-                  ? t("player.topPct", { p: Math.max(1, 100 - pct), role: roleLabel(player.position) })
-                  : t("player.topPctNoRole", { p: Math.max(1, 100 - pct) })}
-              </div>
-              {player.stature != null && (
-                <div className="mt-1 text-xs text-fg-muted">
-                  {t("leaderboard.byStature")}{" "}
-                  <span className="tnum font-semibold text-fg">{player.stature}</span>
-                  <span className="text-fg-subtle">/100</span>
-                  {player.statureBase != null && player.eraStrength != null && (
-                    <span className="text-fg-subtle">
-                      {" "}({t("player.statureBase")} {player.statureBase} · {t("player.eraStrength")} {player.eraStrength})
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              <RankChip label={t("player.rankOverall")} value={overall.rank} />
-              {hasRole && <RankChip label={roleLabel(player.position)} value={roleRank.rank} />}
-              <RankChip label={leagueLabel(player.league)} value={regionRank.rank} />
-            </div>
-            <Button asChild variant="outline" size="sm">
-              <Link href={`${basePath}/compare?a=${player.id}`}>
-                <GitCompareArrows className="h-3.5 w-3.5" /> {t("player.compare")}
+          {player.realName && <div className="rite-real">{player.realName}</div>}
+          <h1 className="rite-name mega">{name(player)}</h1>
+          <div className="rite-meta label">
+            {leagueLabel(player.league)} · {hasRole ? `${roleLabel(player.position)} · ` : ""}
+            {era}
+            {country ? ` · ${country}` : ""}
+            {!player.active ? ` · ${t("common.retired")}` : ""}
+            <br />
+            {teamId ? (
+              <Link href={`${basePath}/teams/${teamId}`} className="hover:text-fg">
+                {localizeTeam(player.team, locale)}
               </Link>
-            </Button>
+            ) : (
+              localizeTeam(player.team, locale)
+            )}
+          </div>
+          {also && (
+            <Link href={`${basePath}/players/${also.id}`} className="rite-also">
+              {zh
+                ? `亦为封神${also.kind === "coach" ? "教头" : "选手"} →`
+                : `Also an enshrined ${also.kind === "coach" ? "coach" : "player"} →`}
+            </Link>
+          )}
+          <div className="rite-index">
+            <span className="lab">{t("player.honorIndex")}</span>
+            <span className="val">{formatNumber(score)}</span>
           </div>
         </div>
-      </Card>
+        <div className="rite-portrait">
+          <span className="v-edge" style={{ position: "absolute", right: "20px", top: "40px", zIndex: 2 }}>
+            PANTHEON · ANNO MMXXVI
+          </span>
+          <Portrait id={player.id} photo={player.photo} initials={initials} caption={player.realName ?? name(player)} />
+        </div>
+      </section>
 
-      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {headlineTypes.map((type, i) => (
-          <StatTile
-            key={type}
-            label={honorLabel(type)}
-            value={countType(player, type)}
-            gold={i === 0}
-            icon={<TrophyIcon type={type} size={22} className="text-[color:var(--medal-gold)]" />}
-          />
-        ))}
-        <StatTile
-          label={t("player.statSeasons")}
-          value={lastYear - player.debutYear + 1}
-          icon={<Clock className="h-[22px] w-[22px] text-fg-subtle" />}
-        />
-      </div>
+      {/* STANDINGS — the rankings as monumental fractions */}
+      <section className="stand">
+        <div className="stand-cell">
+          <div className="lab">{t("player.rankOverall")}</div>
+          <div className="val">
+            №{overall.rank}
+            <span className="sub"> / {players.length}</span>
+          </div>
+        </div>
+        {hasRole && (
+          <div className="stand-cell">
+            <div className="lab">{roleLabel(player.position)}</div>
+            <div className="val">№{roleRank.rank}</div>
+          </div>
+        )}
+        <div className="stand-cell">
+          <div className="lab">{leagueLabel(player.league)}</div>
+          <div className="val">№{regionRank.rank}</div>
+        </div>
+        {player.stature != null && (
+          <div className="stand-cell">
+            <div className="lab">{t("leaderboard.byStature")}</div>
+            <div className="val">
+              {player.stature}
+              <span className="sub">/100</span>
+            </div>
+          </div>
+        )}
+        <div className="stand-note">
+          {hasRole
+            ? t("player.topPct", { p: Math.max(1, 100 - pct), role: roleLabel(player.position) })
+            : t("player.topPctNoRole", { p: Math.max(1, 100 - pct) })}
+        </div>
+      </section>
 
-      <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle>{t("player.careerTimeline")}</CardTitle>
-            <span className="text-[11px] text-fg-subtle">{t("player.timelineHint")}</span>
-          </CardHeader>
-          <CardContent>
+      {/* VERDICT — the bio as a pull-quote */}
+      {blurb && (
+        <section className="verdict">
+          <div className="col-grid" />
+          <p style={{ position: "relative" }}>
+            <span className="mark">“</span>
+            {blurb}
+            <span className="mark">”</span>
+          </p>
+        </section>
+      )}
+
+      {/* HAUL — headline trophy numerals */}
+      {(haul.length > 0 || seasons > 0) && (
+        <section className="haul">
+          {haul.map((h, i) => (
+            <div key={h.type} className={`haul-cell${i === 0 ? " gold" : ""}`}>
+              <div className="n">{h.n}</div>
+              <div className="lab">{h.label}</div>
+            </div>
+          ))}
+          <div className="haul-cell">
+            <div className="n">{seasons}</div>
+            <div className="lab">{t("player.statSeasons")}</div>
+          </div>
+        </section>
+      )}
+
+      {/* CAREER ARC */}
+      <section className="sec">
+        <div className="pad">
+          <Plate n="Ⅰ" title={t("player.careerTimeline")} note={t("player.timelineHint")} />
+          <div style={{ marginTop: "18px" }}>
             <HonorTimeline player={player} />
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>{t("player.indexComposition")}</CardTitle>
-          </CardHeader>
-          <CardContent>
+          </div>
+        </div>
+      </section>
+
+      {/* COMPOSITION */}
+      <section className="sec">
+        <div className="pad">
+          <Plate n="Ⅱ" title={t("player.indexComposition")} />
+          <div style={{ marginTop: "24px", maxWidth: "560px" }}>
             <HonorBreakdown player={player} />
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </div>
+      </section>
 
-      <Card className="mt-4">
-        <CardHeader>
-          <CardTitle>{t("player.trophyCabinet")}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <TrophyCabinet player={player} />
-        </CardContent>
-      </Card>
+      {/* CABINET */}
+      <section className="sec">
+        <div className="pad">
+          <Plate n="Ⅲ" title={t("player.trophyCabinet")} />
+          <div style={{ marginTop: "24px" }}>
+            <TrophyCabinet player={player} />
+          </div>
+        </div>
+      </section>
 
-      <Card className="mt-4">
-        <CardHeader>
-          <CardTitle>{t("player.allHonors")}</CardTitle>
-          <span className="tnum text-[11px] text-fg-subtle">{t("common.entries", { n: honors.length })}</span>
-        </CardHeader>
-        <CardContent className="px-0 pb-0">
-          <table className="w-full">
+      {/* THE RECORD — full honors ledger */}
+      <section className="sec">
+        <div className="pad">
+          <Plate n="Ⅳ" title={t("player.allHonors")} note={t("common.entries", { n: honors.length })} />
+          <table className="recordtbl" style={{ marginTop: "20px" }}>
             <thead>
-              <tr className="border-y border-border text-[11px] uppercase tracking-wide text-fg-subtle">
-                <th className="px-5 py-2 text-left font-medium">{t("player.colYear")}</th>
-                <th className="px-2 py-2 text-left font-medium">{t("player.colHonor")}</th>
-                <th className="px-2 py-2 text-left font-medium">{t("player.colTeam")}</th>
-                <th className="px-2 py-2 text-center font-medium">{t("player.colTier")}</th>
-                <th className="px-5 py-2 text-right font-medium">{t("player.colPoints")}</th>
+              <tr>
+                <th>{t("player.colYear")}</th>
+                <th>{t("player.colHonor")}</th>
+                <th>{t("player.colTeam")}</th>
+                <th className="r">{t("player.colPoints")}</th>
               </tr>
             </thead>
             <tbody>
               {honors.map(({ a, pts }, i) => {
                 const meta = model.achievementMeta[a.type];
                 return (
-                  <tr key={i} className="border-b border-border/60 last:border-0 hover:bg-surface-2">
-                    <td className="tnum px-5 py-2.5 text-sm text-fg-muted">{a.year}</td>
-                    <td className="px-2 py-2.5">
-                      <span className="flex items-center gap-2">
+                  <tr key={i}>
+                    <td>
+                      <span className="yr">{a.year}</span>
+                    </td>
+                    <td>
+                      <span style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                         <TrophyIcon type={a.type} size={18} className={trophyTone(a.type, model.achievementMeta)} />
-                        <span className="text-sm text-fg">{honorLabel(a.type)}</span>
-                        {typeof a.count === "number" && a.count > 1 && (
-                          <span className="tnum text-[11px] font-medium text-fg-muted">×{a.count}</span>
-                        )}
-                        {typeof a.share === "number" && (
-                          <span className="tnum text-[11px] text-fg-subtle">
-                            {a.share.toFixed(2)} {t("common.share")}
-                          </span>
-                        )}
+                        <span className="hon">{honorLabel(a.type)}</span>
+                        {typeof a.count === "number" && a.count > 1 && <span className="mut">×{a.count}</span>}
+                        {meta?.tier && <span className="tier">{meta.tier}</span>}
                       </span>
                     </td>
-                    <td className="px-2 py-2.5 text-sm text-fg-subtle">{a.team ? localizeTeam(a.team, locale) : "—"}</td>
-                    <td className="px-2 py-2.5 text-center">
-                      <span className="rounded border border-border px-1.5 py-0.5 text-[10px] font-medium text-fg-subtle">
-                        {meta?.tier}
-                      </span>
-                    </td>
-                    <td className="tnum px-5 py-2.5 text-right text-sm font-medium text-fg">{formatNumber(pts)}</td>
+                    <td className="mut">{a.team ? localizeTeam(a.team, locale) : "—"}</td>
+                    <td className="pts">{formatNumber(pts)}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
+        </div>
+      </section>
 
-function RankChip({ label, value }: { label: string; value: number }) {
-  return (
-    <span className="inline-flex items-center gap-1 rounded-full border border-border bg-surface px-2.5 py-1 text-xs">
-      <span className="tnum font-semibold text-fg">#{value}</span>
-      <span className="text-fg-subtle">{label}</span>
-    </span>
-  );
-}
-
-function StatTile({
-  label,
-  value,
-  icon,
-  gold,
-}: {
-  label: string;
-  value: number;
-  icon?: ReactNode;
-  gold?: boolean;
-}) {
-  return (
-    <div className="rounded-xl border border-border bg-surface p-4 shadow-card">
-      {icon && <div className="mb-2">{icon}</div>}
-      <div
-        className={`tnum text-2xl font-semibold ${gold && value > 0 ? "text-[color:var(--medal-gold)]" : "text-fg"}`}
-      >
-        {value}
-      </div>
-      <div className="mt-0.5 text-xs text-fg-subtle">{label}</div>
+      {/* CTA */}
+      <section className="cta">
+        <div className="col-grid" />
+        <h3 style={{ position: "relative" }}>{zh ? "与诸神对决" : "Set against the gods"}</h3>
+        <Link href={`${basePath}/compare?a=${player.id}`} className="btn">
+          {t("player.compare")} →
+        </Link>
+      </section>
     </div>
   );
 }

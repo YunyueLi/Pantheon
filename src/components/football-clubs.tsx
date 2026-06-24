@@ -4,13 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { clubHonor, clubPlayers, getClub, rankedClubs, type Club, type Confederation } from "@/lib/sport/football/clubs";
 import { FOOTBALL_LEAGUES } from "@/lib/sport/football/model";
-import { BackButton } from "@/components/back-button";
-import { PlayerAvatar } from "@/components/player-avatar";
-import { RegionBadge } from "@/components/badges";
-import { Pills } from "@/components/pills";
 import { TrophyIcon } from "@/components/trophy-icon";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn, formatNumber } from "@/lib/utils";
+import { Plate } from "@/components/ui/plate";
+import { FlatToggle } from "@/components/ui/flat-controls";
+import { formatNumber } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n/provider";
 import { getSport } from "@/lib/sport/registry";
 
@@ -100,6 +97,7 @@ export function FootballClubsList() {
   };
   const regionName = (c: Club) => (c.confederation === "CONMEBOL" ? L.southAm : leagueLabel(c.league));
   const clubs = rankedClubs(conf === "ALL" ? undefined : conf);
+  const maxHonor = Math.max(1, ...clubs.map((x) => x.honor));
   const confOpts = [
     { value: "ALL", label: L.all },
     { value: "UEFA", label: L.europe },
@@ -107,47 +105,53 @@ export function FootballClubsList() {
   ];
 
   return (
-    <div className="mx-auto max-w-6xl px-5 py-10">
-      <h1 className="text-3xl font-semibold tracking-tight">{L.title}</h1>
-      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-fg-muted">{L.desc}</p>
+    <div className="houses">
+      <header className="head pad">
+        <div className="col-grid" />
+        <span className="ghost-glyph" style={{ right: "-1%", top: "-12%", fontSize: "clamp(260px,40vw,600px)" }}>
+          ♛
+        </span>
+        <span className="v-edge" style={{ position: "absolute", right: "18px", top: "58px" }}>
+          {t("nav.football")} · MMXXVI
+        </span>
+        <div style={{ position: "relative" }}>
+          <p className="kick">{t("nav.football")}</p>
+          <h1>{L.title}</h1>
+          <p className="desc">{L.desc}</p>
+        </div>
+      </header>
 
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-        <Pills options={confOpts} value={conf} onChange={(v) => setConf(v as "ALL" | Confederation)} size="sm" />
-        <details className="group max-w-xl text-sm text-fg-muted">
-          <summary className="cursor-pointer select-none text-[13px] font-medium text-fg-subtle transition-colors hover:text-fg">
-            {L.method}
-          </summary>
-          <p className="mt-2 leading-relaxed">{L.methodBody}</p>
+      <div className="filters pad">
+        <FlatToggle options={confOpts} value={conf} onChange={(v) => setConf(v as "ALL" | Confederation)} />
+        <details className="method">
+          <summary>{L.method}</summary>
+          <p>{L.methodBody}</p>
         </details>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="pad">
         {clubs.map(({ club, honor, rank }) => (
-          <Link
-            key={club.id}
-            href={`/football/clubs/${club.id}`}
-            className="group rounded-2xl border border-border bg-surface p-5 shadow-card transition-colors hover:border-border-strong"
-          >
-            <div className="flex items-center gap-3">
-              <span className="tnum w-5 shrink-0 text-right text-sm text-fg-subtle">{rank}</span>
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-surface-2 font-mono text-sm font-semibold text-fg-muted">
-                {club.code}
-              </span>
-              <div className="min-w-0 flex-1">
-                <div className="truncate font-semibold tracking-tight group-hover:text-accent">{clubName(club)}</div>
-                <div className="mt-1">
-                  <RegionBadge region={regionName(club)} />
-                </div>
-              </div>
-              <div className="tnum shrink-0 text-right text-sm font-semibold text-accent">{formatNumber(honor)}</div>
-            </div>
-            <div className="mt-4 flex flex-wrap items-center gap-3 text-fg-muted">
-              {trophyChips(club).map((c) => (
-                <span key={c.type} className="inline-flex items-center gap-1">
-                  <TrophyIcon type={c.type} size={16} className="text-[color:var(--medal-gold)]" />
-                  <span className="tnum text-xs">{c.n}</span>
+          <Link key={club.id} href={`/football/clubs/${club.id}`} className="row">
+            <span className="rk">{String(rank).padStart(2, "0")}</span>
+            <div style={{ minWidth: 0 }}>
+              <span className="nm">{clubName(club)}</span>
+              <div className="meta">
+                <span className="reg">{regionName(club)}</span>
+                <span className="chips">
+                  {trophyChips(club).map((c) => (
+                    <span key={c.type} className="chip">
+                      <TrophyIcon type={c.type} size={15} className="text-[color:var(--medal-gold)]" />
+                      {c.n}
+                    </span>
+                  ))}
                 </span>
-              ))}
+              </div>
+            </div>
+            <div className="sc">
+              <div className="v">{formatNumber(honor)}</div>
+              <div className="bar">
+                <span style={{ width: `${(honor / maxHonor) * 100}%` }} />
+              </div>
             </div>
           </Link>
         ))}
@@ -173,6 +177,7 @@ export function FootballClubProfile({ id }: { id: string }) {
   if (!club) return null;
   const honor = clubHonor(club);
   const players = clubPlayers(club);
+  const rank = rankedClubs().findIndex((x) => x.club.id === id) + 1;
   const regionName = club.confederation === "CONMEBOL" ? L.southAm : leagueLabel(club.league);
   const groups = [
     { type: "champions_league" as const, label: L.ucl, n: club.championsLeague },
@@ -183,64 +188,53 @@ export function FootballClubProfile({ id }: { id: string }) {
   ].filter((g) => g.n > 0);
 
   return (
-    <div className="mx-auto max-w-5xl px-5 py-8">
-      <BackButton fallback="/football/clubs" />
-
-      <Card className="p-6">
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-4">
-            <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-surface-2 font-mono text-xl font-semibold text-fg-muted">
-              {club.code}
-            </span>
-            <div>
-              <div className="flex flex-wrap items-center gap-2.5">
-                <h1 className="text-2xl font-semibold tracking-tight">{clubName(club)}</h1>
-                <RegionBadge region={regionName} />
-              </div>
-            </div>
-          </div>
-          <div className="md:text-right">
-            <div className="text-[11px] font-medium uppercase tracking-wide text-fg-subtle">{L.honor}</div>
-            <div className="tnum text-4xl font-semibold leading-none text-accent">{formatNumber(honor)}</div>
-          </div>
-        </div>
-      </Card>
-
-      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        {groups.map((g) => (
-          <div key={g.type} className="rounded-xl border border-transparent bg-[color:var(--gold-soft)] p-3.5">
-            <div className="flex items-center justify-between">
-              <TrophyIcon type={g.type} size={30} className="text-[color:var(--medal-gold)]" />
-              <span className="tnum text-2xl font-semibold leading-none text-[color:var(--medal-gold)]">{g.n}</span>
-            </div>
-            <div className="mt-2.5 text-[13px] font-medium leading-tight text-fg">{g.label}</div>
-          </div>
-        ))}
+    <div className="crest">
+      <div className="pad">
+        <Link href="/football/clubs" className="back">← {t("common.back")}</Link>
       </div>
 
-      {players.length > 0 && (
-        <Card className="mt-4">
-          <CardHeader>
-            <CardTitle>{L.roster}</CardTitle>
-            <span className="tnum text-[11px] text-fg-subtle">{players.length}</span>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {players.map((p) => (
-                <Link
-                  key={p.id}
-                  href={`/football/players/${p.id}`}
-                  className={cn(
-                    "flex items-center gap-3 rounded-xl border border-border bg-surface-2 px-3 py-2 transition-colors hover:border-border-strong"
-                  )}
-                >
-                  <PlayerAvatar id={p.id} name={p.name} photo={p.photo} size={32} />
-                  <span className="truncate text-sm font-medium text-fg">{name(p)}</span>
-                </Link>
-              ))}
+      <section className="hero pad">
+        <div className="col-grid" />
+        <span className="ghost-glyph" style={{ right: "3%", top: "-6%", fontSize: "clamp(150px,26vw,420px)" }}>
+          {club.code}
+        </span>
+        <span className="v-edge" style={{ position: "absolute", right: "18px", top: "60px" }}>
+          PANTHEON · ANNO MMXXVI
+        </span>
+        <div style={{ position: "relative" }}>
+          <p className="kick">
+            № {rank} · {regionName}
+          </p>
+          <h1 className="name">{clubName(club)}</h1>
+          <div className="idx">
+            <span className="lab">{L.honor}</span>
+            <span className="val">{formatNumber(honor)}</span>
+          </div>
+        </div>
+      </section>
+
+      {groups.length > 0 && (
+        <section className="titles">
+          {groups.map((g) => (
+            <div key={g.type} className="tcell gold">
+              <div className="n">{g.n}</div>
+              <div className="lab">{g.label}</div>
             </div>
-          </CardContent>
-        </Card>
+          ))}
+        </section>
+      )}
+
+      {players.length > 0 && (
+        <section className="sec pad" style={{ paddingTop: "8px" }}>
+          <Plate n="Ⅰ" title={L.roster} note={String(players.length)} />
+          <div className="roster">
+            {players.map((p) => (
+              <Link key={p.id} href={`/football/players/${p.id}`} className="rcell">
+                <span className="pn">{name(p)}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
       )}
     </div>
   );

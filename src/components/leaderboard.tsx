@@ -3,22 +3,12 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import {
-  type ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
 import { honorScore, countType, careerSpan, activeInDecade } from "@/lib/sport/honor";
 import { localizeTeam } from "@/lib/sport/football/clubs";
 import type { Player } from "@/lib/sport/types";
 import { useSport, useName, useLeagueLabel, usePositionAbbr } from "@/lib/sport/provider";
 import { cn, formatNumber } from "@/lib/utils";
-import { Pills } from "@/components/pills";
-import { SelectMenu } from "@/components/ui/select";
-import { PlayerAvatar } from "@/components/player-avatar";
-import { RegionBadge, PositionBadge } from "@/components/badges";
-import { TrophyIcon } from "@/components/trophy-icon";
+import { FlatToggle, FlatSelect } from "@/components/ui/flat-controls";
 import { useI18n } from "@/lib/i18n/provider";
 
 type Row = { player: Player; score: number };
@@ -39,11 +29,7 @@ export function Leaderboard() {
   const sp = useSearchParams();
   const spRegion = sp.get("region");
   const spRole = sp.get("role");
-  const [region, setRegion] = useState<string>(
-    leagues.some((l) => l.id === spRegion) ? (spRegion as string) : "ALL"
-  );
-  // Sports flagged splitByPosition (table tennis) never mix positions: no "All",
-  // default to the first position (men's), switchable to women's.
+  const [region, setRegion] = useState<string>(leagues.some((l) => l.id === spRegion) ? (spRegion as string) : "ALL");
   const splitGender = Boolean(config.splitByPosition) && positions.length > 0;
   const [role, setRole] = useState<string>(
     positions.some((p) => p.id === spRole) ? (spRole as string) : splitGender ? positions[0].id : "ALL"
@@ -54,7 +40,6 @@ export function Leaderboard() {
 
   const weights = model.presets.find((p) => p.key === presetKey)!.weights;
 
-  // Active-era buckets (decades), derived from the roster's actual span.
   const eras = useMemo(() => {
     let min = Infinity;
     let max = -Infinity;
@@ -76,26 +61,17 @@ export function Leaderboard() {
     const v = t(`role.${pid}`);
     return v !== `role.${pid}` ? v : positionMeta(pid)?.label ?? pid;
   };
-  // Only offer positions actually held by the players currently in view, so a
-  // coach-only position (e.g. Manager) never shows up in the player filter.
   const availablePositions = positions.filter((p) =>
-    players.some(
-      (pl) => (kind === "coach" ? pl.kind === "coach" : pl.kind !== "coach") && pl.position === p.id
-    )
+    players.some((pl) => (kind === "coach" ? pl.kind === "coach" : pl.kind !== "coach") && pl.position === p.id)
   );
   const roleOpts = [
     ...(splitGender ? [] : [{ value: "ALL", label: t("leaderboard.allRoles") }]),
     ...availablePositions.map((p) => ({ value: p.id, label: roleLabel(p.id) })),
   ];
-  // Individual sports (F1, Go) have no positions → hide the role column + filter.
-  // Table tennis keeps it but renames it "Gender" via config.roleNoun.
   const hasPositions = availablePositions.length > 0;
   const roleColLabel = t(config.roleNoun ?? "leaderboard.colRole");
   const presetOpts = model.presets.map((p) => ({ value: p.key, label: t(`preset.${p.key}`) }));
-  const eraOpts = [
-    { value: "ALL", label: t("leaderboard.allEras") },
-    ...eras.map((d) => ({ value: String(d), label: `${d}s` })),
-  ];
+  const eraOpts = [{ value: "ALL", label: t("leaderboard.allEras") }, ...eras.map((d) => ({ value: String(d), label: `${d}s` }))];
   const hasStature = players.some((p) => p.stature != null);
   const rankByOpts = [
     { value: "honor", label: t("leaderboard.byHonor") },
@@ -122,259 +98,103 @@ export function Leaderboard() {
 
   const maxScore = useMemo(() => Math.max(1, ...data.map((d) => d.score)), [data]);
 
-  const columns = useMemo<ColumnDef<Row>[]>(
-    () => [
-      {
-        id: "rank",
-        header: "#",
-        enableSorting: false,
-        cell: ({ row, table }) => (
-          <Rank n={table.getRowModel().rows.findIndex((r) => r.id === row.id) + 1} />
-        ),
-      },
-      {
-        id: "player",
-        header: t("leaderboard.colPlayer"),
-        accessorFn: (r) => r.player.name,
-        cell: ({ row }) => {
-          const p = row.original.player;
+  return (
+    <div className="board">
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+.board{position:relative;overflow-x:hidden}
+.board a{color:inherit}
+.board .pad{padding-left:clamp(20px,5vw,64px);padding-right:clamp(20px,5vw,64px)}
+
+.board .head{position:relative;padding:60px 0 30px}
+.board .head .kick{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.3em;font-size:11px;color:var(--fg-2)}
+.board .head h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(56px,12vw,164px);line-height:.82;letter-spacing:-.02em;margin:14px 0 0}
+.board .head .desc{margin-top:22px;max-width:46ch;font-family:var(--font-display);font-style:italic;font-size:clamp(15px,1.8vw,19px);line-height:1.45;color:var(--fg-2)}
+
+.board .filters{position:relative;display:flex;flex-wrap:wrap;align-items:flex-end;gap:26px 34px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 0}
+
+.board .reg{position:relative}
+.board .row{position:relative;display:grid;grid-template-columns:3.4rem 1fr auto;align-items:center;gap:20px;border-bottom:1px solid var(--border);padding:26px 0;transition:background-color .15s}
+.board .row:hover{background:var(--accent-soft)}
+.board .row .rk{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.04em;font-size:12px;color:var(--fg-3);text-align:right;font-variant-numeric:tabular-nums}
+.board .row.first .rk{font-size:15px;color:var(--fg)}
+.board .row .nm{font-family:var(--font-display);font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:.86;font-size:clamp(28px,5vw,52px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:font-style .15s}
+.board .row.first .nm{font-size:clamp(48px,10vw,128px);font-weight:900}
+.board .row:hover .nm{font-style:italic}
+.board .row .meta{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.14em;font-size:10px;color:var(--fg-2)}
+.board .row .team{font-family:var(--font-display);text-transform:none;letter-spacing:0;font-style:italic;font-size:13px;color:var(--fg-3)}
+.board .row .retired{color:var(--fg-3)}
+.board .row .sc{text-align:right;min-width:0}
+.board .row .sc .v{font-family:var(--font-display);font-weight:800;font-variant-numeric:tabular-nums;font-size:clamp(18px,2vw,22px)}
+.board .row.first .sc .v{font-size:clamp(30px,4vw,46px)}
+.board .row .sc .bar{margin-top:12px;margin-left:auto;height:2px;width:clamp(96px,16vw,180px);background:var(--border)}
+.board .row .sc .bar span{display:block;height:2px;background:var(--accent)}
+.board .empty{padding:64px 0;text-align:center;font-family:var(--font-display);font-style:italic;color:var(--fg-3)}
+`,
+        }}
+      />
+
+      <header className="head pad">
+        <div className="col-grid" />
+        <span className="ghost-glyph" style={{ right: "-1%", top: "-14%", fontSize: "clamp(300px,42vw,640px)" }}>
+          ★
+        </span>
+        <span className="v-edge" style={{ position: "absolute", right: "18px", top: "60px" }}>
+          {t(`nav.${config.id}`)} · MMXXVI
+        </span>
+        <div style={{ position: "relative" }}>
+          <p className="kick">{t(`nav.${config.id}`)}</p>
+          <h1>{t("leaderboard.title")}</h1>
+          <p className="desc">{t("leaderboard.desc")}</p>
+        </div>
+      </header>
+
+      {/* Filters — a single flat hairline strip of serif controls. */}
+      <div className="filters pad">
+        {hasCoaches && <FlatToggle options={kindOpts} value={kind} onChange={setKind} />}
+        <FlatSelect label={t("leaderboard.colRegion")} value={region} onChange={setRegion} options={regionOpts} />
+        {kind !== "coach" && hasPositions && (
+          <FlatSelect label={roleColLabel} value={role} onChange={setRole} options={roleOpts} />
+        )}
+        <FlatSelect label={t("leaderboard.era")} value={era} onChange={setEra} options={eraOpts} />
+        {hasStature && <FlatToggle options={rankByOpts} value={rankBy} onChange={(v) => setRankBy(v as "honor" | "stature")} />}
+        {rankBy === "honor" && (
+          <FlatSelect label={t("leaderboard.weighting")} value={presetKey} onChange={setPresetKey} options={presetOpts} />
+        )}
+      </div>
+
+      {/* The register — a monumental roll-call of legends. */}
+      <div className="reg pad">
+        {data.map((row, i) => {
+          const p = row.player;
+          const rank = i + 1;
+          const first = rank === 1;
+          const counts = headlineTypes.map((type) => ({ type, n: countType(p, type), short: model.achievementMeta[type]?.short }));
           return (
-            <Link href={`${basePath}/players/${p.id}`} className="group flex items-center gap-3">
-              <PlayerAvatar id={p.id} name={p.name} photo={p.photo} size={34} />
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-fg group-hover:text-accent">{name(p)}</span>
-                  {!p.active && (
-                    <span className="text-[10px] uppercase tracking-wide text-fg-subtle">
-                      {t("common.retired")}
-                    </span>
-                  )}
+            <Link key={p.id} href={`${basePath}/players/${p.id}`} className={cn("row group", first && "first")}>
+              <span className="rk">{String(rank).padStart(2, "0")}</span>
+              <div style={{ minWidth: 0 }}>
+                <span className="nm">{name(p)}</span>
+                <div className="meta">
+                  <span>{leagueLabel(p.league)}</span>
+                  {hasPositions && p.position && <span>{posAbbr(p.position)}</span>}
+                  {counts.map((c) => (c.n > 0 ? <span key={c.type}>{c.n}× {c.short}</span> : null))}
+                  {!p.active && <span className="retired">{t("common.retired")}</span>}
+                  <span className="team">{localizeTeam(p.team, locale)}</span>
                 </div>
-                <div className="truncate text-xs text-fg-subtle">{localizeTeam(p.team, locale)}</div>
+              </div>
+              <div className="sc">
+                <div className="v">{formatNumber(row.score)}</div>
+                <div className="bar">
+                  <span style={{ width: `${(row.score / maxScore) * 100}%` }} />
+                </div>
               </div>
             </Link>
           );
-        },
-      },
-      {
-        id: "region",
-        header: t("leaderboard.colRegion"),
-        accessorFn: (r) => r.player.league,
-        cell: ({ row }) => <RegionBadge region={leagueLabel(row.original.player.league)} />,
-      },
-      ...(hasPositions
-        ? [
-            {
-              id: "role",
-              header: roleColLabel,
-              accessorFn: (r: Row) => r.player.position,
-              cell: ({ row }: { row: { original: Row } }) => (
-                <PositionBadge abbr={posAbbr(row.original.player.position)} />
-              ),
-            } as ColumnDef<Row>,
-          ]
-        : []),
-      {
-        id: "titles",
-        header: t("leaderboard.colTitles"),
-        enableSorting: false,
-        cell: ({ row }) => <TitlesCell player={row.original.player} headlineTypes={headlineTypes} />,
-      },
-      {
-        id: "score",
-        header: rankBy === "stature" ? t("leaderboard.byStature") : t("leaderboard.colHonor"),
-        accessorFn: (r) => r.score,
-        cell: ({ row }) => <ScoreCell score={row.original.score} max={maxScore} />,
-      },
-    ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [maxScore, locale, rankBy, hasPositions, roleColLabel]
-  );
-
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  });
-
-  const rows = table.getRowModel().rows;
-
-  return (
-    <div>
-      <header className="mb-7">
-        <p className="text-xs font-medium uppercase tracking-wide text-fg-subtle">{t(`nav.${config.id}`)}</p>
-        <h1 className="mt-1.5 text-2xl font-semibold tracking-tight">{t("leaderboard.title")}</h1>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-fg-muted">{t("leaderboard.desc")}</p>
-      </header>
-
-      <div className="space-y-5">
-        <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-3.5 shadow-card sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-          <div className="flex flex-wrap items-center gap-2">
-            {hasCoaches && <Pills options={kindOpts} value={kind} onChange={setKind} size="sm" />}
-            <SelectMenu
-              value={region}
-              onChange={setRegion}
-              options={regionOpts}
-              ariaLabel={t("leaderboard.colRegion")}
-              className="min-w-[8.5rem]"
-            />
-            {kind !== "coach" && hasPositions && (
-              <SelectMenu
-                value={role}
-                onChange={setRole}
-                options={roleOpts}
-                ariaLabel={roleColLabel}
-                className="min-w-[7.5rem]"
-              />
-            )}
-            <SelectMenu
-              value={era}
-              onChange={setEra}
-              options={eraOpts}
-              ariaLabel={t("leaderboard.era")}
-              className="min-w-[7rem]"
-            />
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
-            {hasStature && (
-              <Pills
-                options={rankByOpts}
-                value={rankBy}
-                onChange={(v) => setRankBy(v as "honor" | "stature")}
-                size="sm"
-              />
-            )}
-            {rankBy === "honor" && (
-              <div className="flex items-center gap-2">
-                <span className="text-[11px] uppercase tracking-wide text-fg-subtle">
-                  {t("leaderboard.weighting")}
-                </span>
-                <SelectMenu
-                  value={presetKey}
-                  onChange={setPresetKey}
-                  options={presetOpts}
-                  ariaLabel={t("leaderboard.weighting")}
-                  className="min-w-[9rem]"
-                />
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Mobile: the 6-column table overflows, so render a compact ranked list instead. */}
-        <div className="md:hidden">
-          <div className="space-y-2">
-            {rows.map((row, i) => {
-              const p = row.original.player;
-              return (
-                <Link
-                  key={row.id}
-                  href={`${basePath}/players/${p.id}`}
-                  className="flex items-center gap-3 rounded-xl border border-border bg-surface px-3 py-2.5 shadow-card transition-colors hover:border-border-strong"
-                >
-                  <span className="tnum w-5 shrink-0 text-right text-sm text-fg-subtle">{i + 1}</span>
-                  <PlayerAvatar id={p.id} name={p.name} photo={p.photo} size={34} />
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-1.5">
-                      <span className="truncate text-sm font-medium text-fg">{name(p)}</span>
-                      {!p.active && (
-                        <span className="shrink-0 text-[9px] uppercase tracking-wide text-fg-subtle">
-                          {t("common.retired")}
-                        </span>
-                      )}
-                    </div>
-                    <div className="mt-1 flex items-center gap-1.5">
-                      <RegionBadge region={leagueLabel(p.league)} />
-                      <PositionBadge abbr={posAbbr(p.position)} />
-                    </div>
-                  </div>
-                  <div className="tnum shrink-0 text-right text-sm font-semibold text-fg">
-                    {formatNumber(row.original.score)}
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="hidden overflow-hidden rounded-2xl border border-border bg-surface shadow-card md:block">
-          <table className="w-full">
-            <thead>
-              {table.getHeaderGroups().map((hg) => (
-                <tr key={hg.id} className="border-b border-border">
-                  {hg.headers.map((header) => (
-                    <th
-                      key={header.id}
-                      className={cn(
-                        "px-4 py-2.5 text-left text-[11px] font-medium uppercase tracking-wide text-fg-subtle",
-                        header.id === "score" && "w-[180px]",
-                        header.id === "rank" && "w-[64px]"
-                      )}
-                    >
-                      {flexRender(header.column.columnDef.header, header.getContext())}
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-            <tbody>
-              {table.getRowModel().rows.map((row) => (
-                <tr
-                  key={row.id}
-                  className="border-b border-border/70 transition-colors last:border-0 hover:bg-surface-2"
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="px-4 py-3 align-middle">
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        })}
+        {data.length === 0 && <p className="empty">—</p>}
       </div>
-    </div>
-  );
-}
-
-function Rank({ n }: { n: number }) {
-  const medal =
-    n === 1 ? "var(--medal-gold)" : n === 2 ? "var(--medal-silver)" : n === 3 ? "var(--medal-bronze)" : null;
-  return (
-    <div className="flex items-center gap-2">
-      <span className="h-1.5 w-1.5 rounded-full" style={{ background: medal ?? "transparent" }} />
-      <span className={cn("tnum w-5 text-right text-sm", n <= 3 ? "font-semibold text-fg" : "text-fg-subtle")}>
-        {n}
-      </span>
-    </div>
-  );
-}
-
-function ScoreCell({ score, max }: { score: number; max: number }) {
-  return (
-    <div className="min-w-[130px]">
-      <div className="tnum text-sm font-semibold text-fg">{formatNumber(score)}</div>
-      <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-surface-2">
-        <div className="h-full rounded-full bg-accent" style={{ width: `${(score / max) * 100}%` }} />
-      </div>
-    </div>
-  );
-}
-
-function TitlesCell({ player, headlineTypes }: { player: Player; headlineTypes: string[] }) {
-  const counts = headlineTypes.map((type) => ({ type, n: countType(player, type) }));
-  if (counts.every((c) => c.n === 0)) return <span className="text-xs text-fg-subtle">—</span>;
-  return (
-    <div className="flex items-center gap-3">
-      {counts.map((c) =>
-        c.n > 0 ? (
-          <span key={c.type} className="inline-flex items-center gap-1">
-            <TrophyIcon type={c.type} size={16} className="text-[color:var(--medal-gold)]" />
-            <span className="tnum text-xs font-medium text-fg-muted">{c.n}</span>
-          </span>
-        ) : null
-      )}
     </div>
   );
 }

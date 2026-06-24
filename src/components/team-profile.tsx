@@ -2,14 +2,10 @@
 
 import Link from "next/link";
 import type { AchievementType } from "@/lib/types";
-import { ACHIEVEMENT_META } from "@/lib/sport/lol/model";
-import { getTeam, teamHonor, teamPlayers } from "@/lib/teams";
-import { BackButton } from "@/components/back-button";
-import { TrophyIcon, trophyTone } from "@/components/trophy-icon";
-import { PlayerAvatar } from "@/components/player-avatar";
-import { RegionBadge, RoleBadge } from "@/components/badges";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn, formatNumber } from "@/lib/utils";
+import { ROLE_META } from "@/lib/types";
+import { getTeam, teamHonor, teamPlayers, rankedTeams } from "@/lib/teams";
+import { Plate } from "@/components/ui/plate";
+import { formatNumber } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n/provider";
 
 export function TeamProfile({ id }: { id: string }) {
@@ -19,6 +15,7 @@ export function TeamProfile({ id }: { id: string }) {
 
   const honor = teamHonor(team);
   const players = teamPlayers(team);
+  const rank = rankedTeams().findIndex((x) => x.team.id === id) + 1;
 
   const allGroups: { type: AchievementType; years: number[] }[] = [
     { type: "worlds_title", years: team.worlds },
@@ -30,98 +27,64 @@ export function TeamProfile({ id }: { id: string }) {
   const titleGroups = allGroups.filter((g) => g.years.length > 0);
 
   return (
-    <div className="mx-auto max-w-5xl px-5 py-8">
-      <BackButton fallback="/lol/teams" />
+    <div className="crest">
+      <div className="pad">
+        <Link href="/lol/teams" className="back">← {t("common.back")}</Link>
+      </div>
 
-      <Card className="p-6">
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-4">
-            <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-surface-2 font-mono text-xl font-semibold text-fg-muted">
-              {team.code}
-            </span>
-            <div>
-              <div className="flex flex-wrap items-center gap-2.5">
-                <h1 className="text-2xl font-semibold tracking-tight">{team.name}</h1>
-                <RegionBadge region={team.region} />
-              </div>
-              {team.aka && team.aka.length > 0 && (
-                <p className="mt-1 text-sm text-fg-subtle">{team.aka.join(" · ")}</p>
-              )}
-            </div>
-          </div>
-          <div className="md:text-right">
-            <div className="text-[11px] font-medium uppercase tracking-wide text-fg-subtle">
-              {t("player.honorIndex")}
-            </div>
-            <div className="tnum text-4xl font-semibold leading-none text-accent">{formatNumber(honor)}</div>
+      <section className="hero pad">
+        <div className="col-grid" />
+        <span className="ghost-glyph" style={{ right: "3%", top: "-6%", fontSize: "clamp(150px,26vw,420px)" }}>
+          {team.code}
+        </span>
+        <span className="v-edge" style={{ position: "absolute", right: "18px", top: "60px" }}>
+          PANTHEON · ANNO MMXXVI
+        </span>
+        <div style={{ position: "relative" }}>
+          <p className="kick">
+            № {rank} · {team.region} · {t("nav.teams")}
+          </p>
+          <h1 className="name">{team.name}</h1>
+          {team.aka && team.aka.length > 0 && <p className="aka">{team.aka.join(" · ")}</p>}
+          <div className="idx">
+            <span className="lab">{t("player.honorIndex")}</span>
+            <span className="val">{formatNumber(honor)}</span>
           </div>
         </div>
-      </Card>
+      </section>
 
-      <Card className="mt-4">
-        <CardHeader>
-          <CardTitle>{t("home.teamTitles")}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            {titleGroups.map((g) => {
-              const gold = g.type !== "worlds_runnerup";
-              return (
-                <div
-                  key={g.type}
-                  className={cn(
-                    "rounded-xl border p-3.5",
-                    gold ? "border-transparent bg-[color:var(--gold-soft)]" : "border-border bg-surface-2"
-                  )}
-                >
-                  <div className="flex items-center justify-between">
-                    <TrophyIcon type={g.type} size={30} className={trophyTone(g.type, ACHIEVEMENT_META)} />
-                    <span className={cn("tnum text-2xl font-semibold leading-none", gold && "text-[color:var(--medal-gold)]")}>
-                      {g.years.length}
-                    </span>
-                  </div>
-                  <div className="mt-2.5 text-[13px] font-medium leading-tight text-fg">
-                    {t(`honorType.${g.type}`)}
-                  </div>
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    {g.years.map((y) => (
-                      <span key={y} className="tnum rounded bg-surface px-1 py-0.5 text-[10px] text-fg-subtle">
-                        {`'${String(y).slice(2)}`}
-                      </span>
-                    ))}
-                  </div>
+      {titleGroups.length > 0 && (
+        <section className="titles">
+          {titleGroups.map((g) => {
+            const gold = g.type !== "worlds_runnerup";
+            return (
+              <div key={g.type} className={`tcell${gold ? " gold" : ""}`}>
+                <div className="n">{g.years.length}</div>
+                <div className="lab">{t(`honorType.${g.type}`)}</div>
+                <div className="yrs">
+                  {g.years.map((y) => (
+                    <span key={y}>{`'${String(y).slice(2)}`}</span>
+                  ))}
                 </div>
-              );
-            })}
-          </div>
-        </CardContent>
-      </Card>
+              </div>
+            );
+          })}
+        </section>
+      )}
 
-      <Card className="mt-4">
-        <CardHeader>
-          <CardTitle>{t("home.teamRoster")}</CardTitle>
-          <span className="tnum text-[11px] text-fg-subtle">{players.length}</span>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+      {players.length > 0 && (
+        <section className="sec pad" style={{ paddingTop: "8px" }}>
+          <Plate n="Ⅰ" title={t("home.teamRoster")} note={String(players.length)} />
+          <div className="roster">
             {players.map((p) => (
-              <Link
-                key={p.id}
-                href={`/lol/players/${p.id}`}
-                className="flex items-center gap-3 rounded-xl border border-border bg-surface-2 px-3 py-2 transition-colors hover:border-border-strong"
-              >
-                <PlayerAvatar id={p.id} name={p.name} size={32} />
-                <span className="truncate text-sm font-medium text-fg">{p.name}</span>
-                {!p.active && (
-                  <span className="text-[10px] uppercase tracking-wide text-fg-subtle">{t("common.retired")}</span>
-                )}
-                <span className="flex-1" />
-                <RoleBadge role={p.role} />
+              <Link key={p.id} href={`/lol/players/${p.id}`} className="rcell">
+                <span className="pn">{p.name}</span>
+                <span className="role">{!p.active ? t("common.retired") : ROLE_META[p.role].abbr}</span>
               </Link>
             ))}
           </div>
-        </CardContent>
-      </Card>
+        </section>
+      )}
     </div>
   );
 }
