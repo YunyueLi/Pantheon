@@ -33,6 +33,7 @@ TanStack Table · Motion · lucide-react · Geist.
 ```bash
 npm install
 npm run dev      # http://localhost:3000
+npm test         # honor-math + data-integrity + i18n test suite
 # production
 npm run build && npm start
 ```
@@ -71,12 +72,15 @@ strings and honor / role / region / axis labels go through `t()`.
 ## Project structure
 
 ```
-src/app          routes: home, /lol/leaderboard, /lol/players/[id], /compare, /methodology
-src/lib/honor.ts the Honor Index engine (weights, buckets, presets, radar axes)
-src/lib/data.ts  curated player seed + accessors
-src/lib/i18n     locales & dictionaries
-src/components   charts, table, avatar, trophy icons, theme/i18n providers
-scripts          Leaguepedia ingestion
+src/app            routes: home + a dynamic [sport] segment (leaderboard, compare,
+                   methodology, players/[id]); plus /lol/teams, /football/clubs, /basketball/clubs
+src/lib/sport      sport-neutral core: honor.ts (engine), stature.ts (era strength),
+                   types.ts (contract), registry.ts; one plugin per sport under sport/<id>/
+src/lib/data.ts    League of Legends roster seed
+src/lib/i18n       locales & dictionaries
+src/lib/__tests__  Vitest suite (honor math, data integrity, ranking snapshots, i18n parity)
+src/components     charts, table, avatar, trophy icons, theme/i18n providers
+scripts            Leaguepedia ingestion
 ```
 
 ## License

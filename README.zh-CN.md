@@ -63,12 +63,15 @@ node scripts/ingest-leaguepedia.mjs         # 写入 src/lib/players.generated.j
 ## 目录结构
 
 ```
-src/app          路由:首页、/lol/leaderboard、/lol/players/[id]、/compare、/methodology
-src/lib/honor.ts 荣誉指数引擎(权重、类别、预设、雷达维度)
-src/lib/data.ts  手工选手种子 + 取数函数
-src/lib/i18n     语言与词典
-src/components   图表、表格、头像、奖杯图标、主题与 i18n Provider
-scripts          Leaguepedia 抓取脚本
+src/app            路由:首页 + 动态 [sport] 段(leaderboard、compare、methodology、players/[id]);
+                   另有 /lol/teams、/football/clubs、/basketball/clubs
+src/lib/sport      运动无关内核:honor.ts(引擎)、stature.ts(时代强度)、types.ts(数据契约)、
+                   registry.ts;每个运动在 sport/<id>/ 下作为插件接入
+src/lib/data.ts    英雄联盟选手种子数据
+src/lib/i18n       语言与词典
+src/lib/__tests__  Vitest 测试(荣誉算法、数据完整性、排名快照、i18n 一致性)
+src/components     图表、表格、头像、奖杯图标、主题与 i18n Provider
+scripts            Leaguepedia 抓取脚本
 ```
 
 ## 许可证
