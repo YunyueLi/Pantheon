@@ -1,4 +1,3 @@
-import { ACHIEVEMENT_META } from "@/lib/honor";
 import { cn } from "@/lib/utils";
 
 type Kind = "worlds" | "msi" | "regional" | "medal" | "star";
@@ -231,10 +230,12 @@ export function TrophyIcon({
   );
 }
 
-/** Cups & finals use the gold tone; personal awards stay neutral to preserve hierarchy. */
-export function trophyTone(type: string): string {
-  // Team/placement honors render gold; personal awards (MVP, All-Pro) stay neutral.
-  return ACHIEVEMENT_META[type as keyof typeof ACHIEVEMENT_META]?.bucket === "individual"
-    ? "text-fg-muted"
-    : "text-[color:var(--medal-gold)]";
+/**
+ * Cups & finals use the gold tone; personal awards stay neutral to preserve
+ * hierarchy. The bucket comes from the active sport's model, so individual
+ * awards in every sport (Ballon d'Or, NBA MVP, …) get the neutral tone — not
+ * just LoL's. Pass `config.model.achievementMeta` from the caller.
+ */
+export function trophyTone(type: string, meta: Record<string, { bucket: string }>): string {
+  return meta[type]?.bucket === "individual" ? "text-fg-muted" : "text-[color:var(--medal-gold)]";
 }

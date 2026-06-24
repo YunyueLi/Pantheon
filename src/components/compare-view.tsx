@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { Link2, Check, Download } from "lucide-react";
+import { shareMatchupCard } from "@/lib/share-card";
 import { honorScore, normalizedAxes, countType, ranked } from "@/lib/sport/honor";
 import type { Player } from "@/lib/sport/types";
 import { useSport, useHonorLabel, useName, useLeagueLabel } from "@/lib/sport/provider";
@@ -16,9 +18,10 @@ import { useI18n } from "@/lib/i18n/provider";
 
 export function CompareView() {
   const { t } = useI18n();
-  const { config } = useSport();
+  const { config, positionMeta } = useSport();
   const { players, model, headlineTypes } = config;
   const honorLabel = useHonorLabel();
+  const leagueLabel = useLeagueLabel();
   const name = useName();
   const sp = useSearchParams();
   const has = (id: string) => players.some((p) => p.id === id);
@@ -30,6 +33,45 @@ export function CompareView() {
 
   const aAxes = useMemo(() => normalizedAxes(a, players, model).map((d) => d.value), [aId]); // eslint-disable-line react-hooks/exhaustive-deps
   const bAxes = useMemo(() => normalizedAxes(b, players, model).map((d) => d.value), [bId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Deep-linkable share: the URL carries ?a=&b=, so the copied link reopens this
+  // exact head-to-head. Clipboard-first for visible feedback; native share sheet
+  // as a fallback where the clipboard API is blocked (some mobile contexts).
+  const [copied, setCopied] = useState(false);
+  const share = async () => {
+    const url = `${window.location.origin}${window.location.pathname}?a=${aId}&b=${bId}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      if (navigator.share) navigator.share({ url, title: `${name(a)} vs ${name(b)}` }).catch(() => {});
+    }
+  };
+
+  // Render the specific A-vs-B matchup to a PNG card (native share sheet on mobile,
+  // download elsewhere). The only way to ship a per-pairing image on static hosting.
+  const [saving, setSaving] = useState(false);
+  const subOf = (p: Player) => {
+    const lg = leagueLabel(p.league);
+    const pos = positionMeta(p.position)?.abbr;
+    return pos ? `${lg} · ${pos}` : lg;
+  };
+  const saveCard = async () => {
+    if (saving) return;
+    setSaving(true);
+    try {
+      await shareMatchupCard({
+        sport: config.label,
+        a: { name: name(a), sub: subOf(a), initials: a.name.slice(0, 2).toUpperCase(), honor: Math.round(honorScore(a, model)) },
+        b: { name: name(b), sub: subOf(b), initials: b.name.slice(0, 2).toUpperCase(), honor: Math.round(honorScore(b, model)) },
+        metrics: headlineTypes.map((type) => ({ label: honorLabel(type), a: countType(a, type), b: countType(b, type) })),
+        filename: `${a.id}-vs-${b.id}`,
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
 
   // The 6 rated axes live in the radar above — repeating them as rows here is
   // redundant. This block shows only the raw trophy counts (different units per
@@ -43,7 +85,29 @@ export function CompareView() {
     <div className="space-y-4">
       <header className="mb-3">
         <p className="text-xs font-medium uppercase tracking-wide text-fg-subtle">{t("compare.eyebrow")}</p>
-        <h1 className="mt-1.5 text-2xl font-semibold tracking-tight">{t("compare.title")}</h1>
+        <div className="mt-1.5 flex items-start justify-between gap-3">
+          <h1 className="text-2xl font-semibold tracking-tight">{t("compare.title")}</h1>
+          <div className="flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              onClick={saveCard}
+              disabled={saving}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-fg-muted shadow-card transition-colors hover:border-border-strong hover:text-fg disabled:opacity-60"
+            >
+              <Download className="h-3.5 w-3.5" />
+              {t("compare.saveImage")}
+            </button>
+            <button
+              type="button"
+              onClick={share}
+              aria-live="polite"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-fg-muted shadow-card transition-colors hover:border-border-strong hover:text-fg"
+            >
+              {copied ? <Check className="h-3.5 w-3.5 text-accent" /> : <Link2 className="h-3.5 w-3.5" />}
+              {copied ? t("compare.copied") : t("compare.share")}
+            </button>
+          </div>
+        </div>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-fg-muted">{t("compare.desc")}</p>
       </header>
       <div className="grid grid-cols-2 gap-3">

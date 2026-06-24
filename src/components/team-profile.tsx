@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { AchievementType } from "@/lib/types";
+import { ACHIEVEMENT_META } from "@/lib/sport/lol/model";
 import { getTeam, teamHonor, teamPlayers } from "@/lib/teams";
 import { BackButton } from "@/components/back-button";
 import { TrophyIcon, trophyTone } from "@/components/trophy-icon";
@@ -74,7 +75,7 @@ export function TeamProfile({ id }: { id: string }) {
                   )}
                 >
                   <div className="flex items-center justify-between">
-                    <TrophyIcon type={g.type} size={30} className={trophyTone(g.type)} />
+                    <TrophyIcon type={g.type} size={30} className={trophyTone(g.type, ACHIEVEMENT_META)} />
                     <span className={cn("tnum text-2xl font-semibold leading-none", gold && "text-[color:var(--medal-gold)]")}>
                       {g.years.length}
                     </span>

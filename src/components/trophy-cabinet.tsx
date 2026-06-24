@@ -35,7 +35,7 @@ export function TrophyCabinet({ player }: { player: Player }) {
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {groups.map((g) => {
         const isMarquee = g.type === marquee;
-        const tone = trophyTone(g.type);
+        const tone = trophyTone(g.type, config.model.achievementMeta);
         const teams = byTeam(g.items);
         const total = g.items.reduce((s, a) => s + (a.count ?? 1), 0);
         return (

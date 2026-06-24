@@ -1,6 +1,6 @@
-import type { Achievement, AchievementMeta, Axis, HonorModel, Player, Preset, SportConfig } from "../types";
+import type { Achievement, Axis, HonorModel, Player, SportConfig } from "../types";
 import { PLAYERS as LOL_RAW } from "@/lib/data";
-import { ACHIEVEMENT_META, PRESETS } from "@/lib/honor";
+import { ACHIEVEMENT_META, PRESETS } from "./model";
 import { REGIONS, ROLES, REGION_META, ROLE_META } from "@/lib/types";
 
 // Stature / influence (0-100), keyed by lowercased handle. Sourced from all-time
@@ -73,8 +73,8 @@ const axes: Axis[] = [
 ];
 
 const model: HonorModel = {
-  achievementMeta: ACHIEVEMENT_META as unknown as Record<string, AchievementMeta>,
-  presets: PRESETS as Preset[],
+  achievementMeta: ACHIEVEMENT_META,
+  presets: PRESETS,
   axes,
   cabinetOrder: [
     "worlds_title", "msi_title", "first_stand_title", "ewc_title", "asian_games_gold", "msc_title",
@@ -90,6 +90,7 @@ export const LOL: SportConfig = {
   leagues: REGIONS.map((r) => ({ id: r, ...REGION_META[r] })),
   positions: ROLES.map((r) => ({ id: r, ...ROLE_META[r] })),
   headlineTypes: ["worlds_title", "msi_title", "regional_title"],
+  statureSources: ["ESPN all-time rankings", "Sheep Esports", "Dot Esports", "All-Star fan vote"],
   model,
   players,
 };

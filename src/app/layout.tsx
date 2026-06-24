@@ -18,10 +18,23 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const SITE_URL = "https://pantheon.ungetsu.net";
+const SITE_DESC =
+  "A visual hall of fame for competitive sport. Trophy cabinets, a transparent honor index, and head-to-head comparison across regions and roles.";
+
 export const metadata: Metadata = {
-  title: "Pantheon — Competitive Honors",
-  description:
-    "A visual hall of fame for competitive sport. Trophy cabinets, a transparent honor index, and head-to-head comparison across regions and roles.",
+  metadataBase: new URL(SITE_URL),
+  title: { default: "Pantheon — Competitive Honors", template: "%s | Pantheon" },
+  description: SITE_DESC,
+  applicationName: "Pantheon",
+  openGraph: {
+    type: "website",
+    siteName: "Pantheon",
+    title: "Pantheon — Competitive Honors",
+    description: SITE_DESC,
+    url: SITE_URL,
+  },
+  twitter: { card: "summary_large_image", title: "Pantheon — Competitive Honors", description: SITE_DESC },
 };
 
 const themeScript = `(function(){try{var m=localStorage.getItem('pantheon-mode');var e=document.documentElement;if(m==='light'){e.classList.remove('dark');}else if(m==='dark'){e.classList.add('dark');}}catch(e){}})();`;

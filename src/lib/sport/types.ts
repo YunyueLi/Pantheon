@@ -138,6 +138,13 @@ export type SportConfig = {
   splitByPosition?: boolean;
   /** Achievement types shown as headline trophy counts on the leaderboard. */
   headlineTypes: string[];
+  /**
+   * Where this sport's curated Stature base ratings come from (authoritative
+   * all-time rankings, fan votes, etc.). Surfaced on the methodology page so the
+   * subjective popularity input is auditable. Omit when Stature is purely derived
+   * from the Honor-Index percentile (no hand-authored ratings).
+   */
+  statureSources?: string[];
   model: HonorModel;
   players: Player[];
 };

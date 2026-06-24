@@ -67,6 +67,9 @@ const en = {
   compare: {
     eyebrow: "Head to head",
     title: "Compare honors",
+    share: "Share",
+    copied: "Link copied",
+    saveImage: "Save image",
     desc: "Six honor dimensions, each scaled 0–100 against the strongest player in the dataset. The accent shape is the first player; the outline is the second.",
   },
   player: {
@@ -267,6 +270,9 @@ const zh: Dict = {
   compare: {
     eyebrow: "正面对决",
     title: "荣誉对比",
+    share: "分享",
+    copied: "链接已复制",
+    saveImage: "保存图片",
     desc: "六个荣誉维度，各自相对数据集中最强者归一化到 0–100。高亮形状为第一位选手，描边为第二位。",
   },
   player: {
@@ -521,6 +527,9 @@ const ko: Dict = {
   compare: {
     eyebrow: "정면 대결",
     title: "명예 비교",
+    share: "공유",
+    copied: "링크 복사됨",
+    saveImage: "이미지 저장",
     desc: "여섯 가지 명예 지표를 데이터셋 내 최강 선수 기준으로 0–100으로 환산합니다. 채워진 도형이 첫 번째 선수, 외곽선이 두 번째 선수입니다.",
   },
   player: {
@@ -677,6 +686,9 @@ const ja: Dict = {
   compare: {
     eyebrow: "直接対決",
     title: "名誉を比較",
+    share: "共有",
+    copied: "リンクをコピーしました",
+    saveImage: "画像を保存",
     desc: "6 つの名誉指標を、データ内で最強の選手を基準に 0〜100 へ換算。塗りつぶしが 1 人目、輪郭が 2 人目です。",
   },
   player: {
@@ -833,6 +845,9 @@ const de: Dict = {
   compare: {
     eyebrow: "Direktvergleich",
     title: "Ehren vergleichen",
+    share: "Teilen",
+    copied: "Link kopiert",
+    saveImage: "Bild speichern",
     desc: "Sechs Ehren-Dimensionen, je auf 0–100 relativ zum stärksten Spieler skaliert. Die gefüllte Form ist der erste Spieler, die Kontur der zweite.",
   },
   player: {
@@ -995,6 +1010,9 @@ const fr: Dict = {
   compare: {
     eyebrow: "Face-à-face",
     title: "Comparer les honneurs",
+    share: "Partager",
+    copied: "Lien copié",
+    saveImage: "Enregistrer l'image",
     desc: "Six dimensions d'honneur, chacune ramenée à 0–100 par rapport au meilleur joueur des données. La forme pleine est le premier joueur, le contour le second.",
   },
   player: {
@@ -1151,6 +1169,9 @@ const es: Dict = {
   compare: {
     eyebrow: "Cara a cara",
     title: "Comparar honores",
+    share: "Compartir",
+    copied: "Enlace copiado",
+    saveImage: "Guardar imagen",
     desc: "Seis dimensiones de honor, cada una escalada a 0–100 respecto al mejor jugador de los datos. La forma rellena es el primer jugador; el contorno, el segundo.",
   },
   player: {

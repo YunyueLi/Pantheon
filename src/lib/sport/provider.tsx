@@ -4,6 +4,7 @@ import { createContext, useContext, useMemo, type ReactNode } from "react";
 import type { LeagueMeta, PositionMeta, SportConfig } from "./types";
 import { getSport } from "./registry";
 import { useI18n } from "@/lib/i18n/provider";
+import { localizedBlurb } from "@/lib/i18n/blurbs";
 
 type SportCtx = {
   config: SportConfig;
@@ -62,6 +63,12 @@ export function useAxisLabel() {
 export function useName() {
   const { locale } = useI18n();
   return (e: { name: string; i18n?: Record<string, string> }) => e.i18n?.[locale] ?? e.name;
+}
+
+/** Localized player bio: a translated blurb when available, else the English `blurb`. */
+export function useBlurb() {
+  const { locale } = useI18n();
+  return (p: { id: string; blurb?: string }) => localizedBlurb(p.id, p.blurb, locale);
 }
 
 /** Localized league/region label: `league.<id>` when present, else the league's own label. */

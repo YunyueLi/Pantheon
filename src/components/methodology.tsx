@@ -127,6 +127,13 @@ export function Methodology() {
                 ? "关键:这是一次性计算(荣誉分→时代密度→星光),从不回灌荣誉指数,因此没有循环依赖;幅度封顶 ±12%。"
                 : "Crucially this is one-pass (honor scores → era density → stature) and never feeds back into the Honor Index — no circular dependency; capped at ±12%."}
             </p>
+            {config.statureSources && config.statureSources.length > 0 && (
+              <p className="mt-3 text-xs leading-relaxed text-fg-subtle">
+                <span className="font-medium text-fg-muted">{zh ? "基础星光来源:" : "Base ratings sourced from: "}</span>
+                {config.statureSources.join(zh ? "、" : ", ")}
+                {zh ? "(全明星票数等人气信号)。" : "."}
+              </p>
+            )}
           </CardContent>
         </Card>
       </div>

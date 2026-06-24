@@ -1,5 +1,4 @@
 import type { Achievement, AchievementType, Player, Region, Role } from "./types";
-import { DEFAULT_WEIGHTS, honorScore, type Weights } from "./honor";
 import generatedAchievements from "./players.generated.json";
 
 export const DATA_NOTE =
@@ -2387,13 +2386,20 @@ const CURATED_PLAYERS: Player[] = [
 ];
 
 // Real honors synced from Leaguepedia (CC BY-SA) by scripts/ingest-leaguepedia.mjs are
-// merged onto the curated bios: accurate region/role/team/blurb stay, achievements get
-// replaced. Empty file → the curated seed achievements are used as-is.
+// merged onto the curated bios ADDITIVELY: every curated honor is kept, and any synced
+// honor not already present (matched on type+year+team) is added. This means a sync can
+// only improve coverage, never silently drop a curated title the scraper doesn't fetch
+// (e.g. EWC / Asian Games / First Stand). Empty file → the curated seed is used as-is.
 const GENERATED = generatedAchievements as Record<string, Achievement[]>;
+
+const achKey = (a: Achievement) => `${a.type}|${a.year}|${a.team ?? ""}`;
 
 export const PLAYERS: Player[] = CURATED_PLAYERS.map((p) => {
   const synced = GENERATED[p.id];
-  return synced && synced.length > 0 ? { ...p, achievements: synced } : p;
+  if (!synced || synced.length === 0) return p;
+  const have = new Set(p.achievements.map(achKey));
+  const extra = synced.filter((a) => !have.has(achKey(a)));
+  return extra.length > 0 ? { ...p, achievements: [...p.achievements, ...extra] } : p;
 });
 
 // ───────────────────────── accessors ─────────────────────────
@@ -2402,29 +2408,10 @@ export function getPlayer(id: string): Player | undefined {
   return PLAYERS.find((p) => p.id === id);
 }
 
-export type RankedRow = { player: Player; score: number; rank: number };
-
-export function ranked(
-  players: Player[] = PLAYERS,
-  w: Weights = DEFAULT_WEIGHTS
-): RankedRow[] {
-  return players
-    .map((player) => ({ player, score: honorScore(player, w) }))
-    .sort((a, b) => b.score - a.score)
-    .map((row, i) => ({ ...row, rank: i + 1 }));
-}
-
 export function filterPlayers(opts: { region?: Region | "ALL"; role?: Role | "ALL" }): Player[] {
   return PLAYERS.filter(
     (p) =>
       (!opts.region || opts.region === "ALL" || p.region === opts.region) &&
       (!opts.role || opts.role === "ALL" || p.role === opts.role)
   );
-}
-
-/** Percentile (0..100) of a player's score within a pool. */
-export function percentile(player: Player, pool: Player[], w: Weights = DEFAULT_WEIGHTS): number {
-  const s = honorScore(player, w);
-  const below = pool.filter((p) => honorScore(p, w) < s).length;
-  return Math.round((below / Math.max(1, pool.length - 1)) * 100);
 }

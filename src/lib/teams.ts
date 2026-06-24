@@ -1,6 +1,7 @@
 import type { Player, Region } from "./types";
 import { PLAYERS } from "./data";
-import { honorScore } from "./honor";
+import { honorScore } from "./sport/honor";
+import { LOL } from "./sport/lol";
 
 export type Team = {
   id: string;
@@ -70,6 +71,11 @@ export function teamIdFromName(name?: string): string | undefined {
   return undefined;
 }
 
+// Honor by player id, scored via the sport-neutral engine + LoL model. LOL.players
+// share ids with the legacy roster, so we can sort legacy Player records by it
+// without coupling these two Player shapes at the type level.
+const HONOR_BY_ID = new Map(LOL.players.map((p) => [p.id, honorScore(p, LOL.model)]));
+
 /**
  * Players associated with this org, strongest first.
  * Retired players appear ONLY under their last team; active players also surface
@@ -80,5 +86,5 @@ export function teamPlayers(team: Team): Player[] {
     p.active
       ? p.achievements.some((a) => teamIdFromName(a.team) === team.id) || teamIdFromName(p.team) === team.id
       : teamIdFromName(p.team) === team.id
-  ).sort((a, b) => honorScore(b) - honorScore(a));
+  ).sort((a, b) => (HONOR_BY_ID.get(b.id) ?? 0) - (HONOR_BY_ID.get(a.id) ?? 0));
 }

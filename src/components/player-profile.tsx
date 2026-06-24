@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Clock, GitCompareArrows } from "lucide-react";
 import { achievementPoints, countType, honorScore, percentile, ranked } from "@/lib/sport/honor";
-import { useSport, useHonorLabel, useName, useLeagueLabel, usePositionAbbr } from "@/lib/sport/provider";
+import { useSport, useHonorLabel, useName, useLeagueLabel, usePositionAbbr, useBlurb } from "@/lib/sport/provider";
 import { BackButton } from "@/components/back-button";
 import { teamIdFromName } from "@/lib/teams";
 import { localizeTeam } from "@/lib/sport/football/clubs";
@@ -27,6 +27,7 @@ export function PlayerProfile({ id }: { id: string }) {
   const name = useName();
   const leagueLabel = useLeagueLabel();
   const posAbbr = usePositionAbbr();
+  const blurbOf = useBlurb();
   // Localized position label, falling back to the sport model's own label when the
   // dictionary lacks a `role.<id>` entry (e.g. sports added without full i18n).
   const roleLabel = (pid: string) => {
@@ -35,6 +36,7 @@ export function PlayerProfile({ id }: { id: string }) {
   };
   const player = players.find((p) => p.id === id);
   if (!player) return null;
+  const blurb = blurbOf(player);
   // Individual sports (F1, Go, table tennis) may have no positions; degrade the
   // role-based UI (role rank chip, "top of role" copy) gracefully when absent.
   const hasRole = Boolean(player.position) && Boolean(positionMeta(player.position));
@@ -103,8 +105,8 @@ export function PlayerProfile({ id }: { id: string }) {
                     : `Also a champion ${also.kind === "coach" ? "coach" : "player"} →`}
                 </Link>
               )}
-              {locale === "en" && player.blurb && (
-                <p className="mt-3 max-w-md text-sm leading-relaxed text-fg-muted">{player.blurb}</p>
+              {blurb && (
+                <p className="mt-3 max-w-md text-sm leading-relaxed text-fg-muted">{blurb}</p>
               )}
             </div>
           </div>
@@ -217,7 +219,7 @@ export function PlayerProfile({ id }: { id: string }) {
                     <td className="tnum px-5 py-2.5 text-sm text-fg-muted">{a.year}</td>
                     <td className="px-2 py-2.5">
                       <span className="flex items-center gap-2">
-                        <TrophyIcon type={a.type} size={18} className={trophyTone(a.type)} />
+                        <TrophyIcon type={a.type} size={18} className={trophyTone(a.type, model.achievementMeta)} />
                         <span className="text-sm text-fg">{honorLabel(a.type)}</span>
                         {typeof a.count === "number" && a.count > 1 && (
                           <span className="tnum text-[11px] font-medium text-fg-muted">×{a.count}</span>
