@@ -60,7 +60,7 @@ export default function Home() {
 .home .hero{position:relative;min-height:78vh;padding:62px 48px 40px;display:flex;flex-direction:column;justify-content:space-between}
 .home .ghost{position:absolute;right:-30px;top:-130px;font-family:var(--font-display);font-weight:900;font-size:560px;line-height:1;color:var(--fg);opacity:.05;pointer-events:none}
 .home .vlabel{position:absolute;right:22px;top:44%;writing-mode:vertical-rl;text-orientation:mixed;font-family:var(--font-display);text-transform:uppercase;font-size:11px;letter-spacing:.4em;color:var(--fg-2)}
-.home .mega{position:relative;font-family:var(--font-display);font-weight:900;font-size:clamp(64px,12vw,176px);line-height:.84;letter-spacing:-.02em;margin:18px 0 0}
+.home .mega{position:relative;font-family:var(--font-display);font-weight:900;font-size:clamp(42px,12vw,176px);line-height:.84;letter-spacing:-.02em;margin:18px 0 0}
 .home .mega .o{-webkit-text-stroke:2px var(--fg);color:transparent}
 .home .mega em{font-style:italic;font-weight:800}
 .home .zh{font-family:var(--font-display);font-size:20px;letter-spacing:.5em;color:var(--fg-2);margin-top:22px}
@@ -93,6 +93,15 @@ export default function Home() {
 .home .cta h2{font-family:var(--font-display);font-weight:900;font-size:clamp(40px,7vw,84px);line-height:.92;letter-spacing:-.02em;text-transform:uppercase;max-width:18ch;margin:0 auto}
 .home .btn{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.2em;font-size:12px;border:1px solid var(--border-strong);padding:15px 26px;display:inline-block;transition:background-color .15s,color .15s}
 .home .btn:hover{background:var(--accent);color:var(--accent-contrast)}
+/* Phones: drop the vertical edge label, tighten the 48px section padding, shrink the list label column. */
+@media(max-width:640px){
+.home .vlabel{display:none}
+.home .hero{padding:54px 24px 40px}
+.home .fleft{padding:48px 24px;min-height:auto}
+.home .index{padding:44px 24px 18px}
+.home .cta{padding:64px 24px}
+.home .irow{grid-template-columns:84px 1fr auto;gap:8px 14px}
+}
 `,
         }}
       />

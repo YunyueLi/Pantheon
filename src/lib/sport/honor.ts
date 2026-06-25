@@ -38,6 +38,20 @@ export function honorScore(p: Player, model: HonorModel, w: Weights = DEFAULT_WE
   return sum;
 }
 
+/** Best single-season points — the "peak" lens (mirrors the peak radar axis). */
+export function peakValue(p: Player, model: HonorModel): number {
+  const byYear = new Map<number, number>();
+  for (const a of p.achievements) byYear.set(a.year, (byYear.get(a.year) ?? 0) + achievementPoints(a, model));
+  return byYear.size ? Math.max(...Array.from(byYear.values())) : 0;
+}
+
+/** Career span + decorated-season count — the "longevity" lens (mirrors that radar axis). */
+export function longevityValue(p: Player): number {
+  const years = Array.from(new Set(p.achievements.map((a) => a.year)));
+  const span = years.length ? Math.max(...years) - p.debutYear + 1 : 0;
+  return span * 9 + years.length * 12;
+}
+
 export function bucketTotals(p: Player, model: HonorModel, w: Weights = DEFAULT_WEIGHTS): Record<Bucket, number> {
   const totals: Record<Bucket, number> = { team: 0, individual: 0, placement: 0 };
   const decay = model.repeatDecay;

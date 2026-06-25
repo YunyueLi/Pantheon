@@ -188,6 +188,12 @@
     color: var(--fg-3);
     white-space: nowrap;
   }
+  /* Vertical edge labels overlap content on narrow screens — drop them on phones. */
+  @media (max-width: 640px) {
+    .v-edge {
+      display: none;
+    }
+  }
   .ghost-glyph {
     position: absolute;
     font-family: var(--font-display);
@@ -256,8 +262,8 @@
     color: var(--fg-3);
   }
 
-  /* Flat serif controls — a hairline toggle row + a native <select> dressed as an
-     underlined label. Shared by the leaderboard and the club/franchise registers.
+  /* Flat serif controls — a hairline toggle row + a self-drawn listbox dropdown
+     (no native OS popup). Shared by the leaderboard and the club/franchise registers.
      Font comes from the `.label` class the components also apply. */
   .ftog {
     display: inline-flex;
@@ -286,6 +292,7 @@
     color: var(--fg);
   }
   .fsel {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 7px;
@@ -294,27 +301,31 @@
     font-size: 9px;
     color: var(--fg-3);
   }
-  .fsel-wrap {
+  .fsel-btn {
     position: relative;
     display: inline-flex;
     align-items: center;
-    border-bottom: 1px solid var(--border-strong);
-  }
-  .fsel-s {
-    appearance: none;
-    -webkit-appearance: none;
+    gap: 10px;
     background: transparent;
     border: 0;
+    border-bottom: 1px solid var(--border-strong);
     outline: none;
     color: var(--fg);
     font-size: 14px;
     padding: 0 22px 5px 0;
     cursor: pointer;
+    text-align: left;
+    transition: border-color 0.15s;
   }
-  .fsel-s option {
-    color: #1a1a1a;
-    text-transform: none;
-    letter-spacing: 0;
+  .fsel-btn:hover,
+  .fsel-btn[aria-expanded="true"] {
+    border-bottom-color: var(--fg);
+  }
+  .fsel-btn:focus-visible {
+    border-bottom-color: var(--accent);
+  }
+  .fsel-val {
+    white-space: nowrap;
   }
   .fsel-caret {
     position: absolute;
@@ -323,6 +334,43 @@
     font-size: 11px;
     color: var(--fg-2);
     pointer-events: none;
+    transition: transform 0.18s;
+  }
+  .fsel-btn[aria-expanded="true"] .fsel-caret {
+    transform: rotate(180deg);
+  }
+  .fsel-menu {
+    position: absolute;
+    z-index: 60;
+    top: 100%;
+    left: 0;
+    margin: 6px 0 0;
+    min-width: 100%;
+    max-width: min(80vw, 340px);
+    max-height: 52vh;
+    overflow-y: auto;
+    list-style: none;
+    padding: 4px 0;
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
+    box-shadow: 0 16px 44px -14px rgba(0, 0, 0, 0.55);
+  }
+  .fsel-opt {
+    font-size: 13px;
+    color: var(--fg-2);
+    padding: 9px 20px 9px 15px;
+    white-space: nowrap;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: color 0.12s, background-color 0.12s;
+  }
+  .fsel-opt[aria-selected="true"] {
+    color: var(--fg);
+    border-left-color: var(--accent);
+  }
+  .fsel-opt[data-active="true"] {
+    background: var(--accent-soft);
+    color: var(--fg);
   }
 
   /* "Houses" — clubs / franchises / LoL teams list: a monument register. */
@@ -352,7 +400,7 @@
     font-family: var(--font-display);
     font-weight: 900;
     text-transform: uppercase;
-    font-size: clamp(48px, 10vw, 128px);
+    font-size: clamp(36px, 10vw, 128px);
     line-height: 0.84;
     letter-spacing: -0.02em;
     margin: 14px 0 0;
@@ -532,7 +580,7 @@
     font-family: var(--font-display);
     font-weight: 900;
     text-transform: uppercase;
-    font-size: clamp(48px, 9vw, 132px);
+    font-size: clamp(36px, 9vw, 132px);
     line-height: 0.84;
     letter-spacing: -0.02em;
     margin: 12px 0 0;
@@ -685,5 +733,109 @@
 @media (prefers-reduced-motion: reduce) {
   .radar-reveal {
     animation: none !important;
+  }
+}
+
+/* ============================================================
+   PRINT — render any theme as a clean ink-on-paper "codex" sheet.
+   Re-points the color tokens to paper inks (so every component that
+   reads var(--bg)/var(--fg) prints correctly regardless of the live
+   theme), forces revealed content visible, and strips interactive +
+   decorative chrome. Scoped entirely to @media print → no screen effect.
+   ============================================================ */
+@media print {
+  :root {
+    --bg: #ffffff !important;
+    --bg-glass: #ffffff !important;
+    --fg: #1a1410 !important;
+    --fg-2: #514b43 !important;
+    --fg-3: #837c72 !important;
+    --border: #d9d4cb !important;
+    --border-strong: #a9a298 !important;
+    --accent: #a81226 !important;
+    --accent-contrast: #ffffff !important;
+    --accent-soft: #f4efe5 !important;
+    --medal-gold: #927214 !important;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: var(--fg) !important;
+  }
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* Reveal animation must never leave printed content hidden. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  /* Interactive + decorative chrome that doesn't belong on paper. */
+  header.sticky,
+  footer,
+  .ghost-glyph,
+  .col-grid,
+  .v-edge,
+  .board .filters,
+  .houses .filters,
+  .o-actions,
+  .duel-vs,
+  .duel-seam,
+  .side-pick,
+  .portrait-ht,
+  .home .cols,
+  .home .ghost,
+  .home .vlabel,
+  .home .fright,
+  .home .callout,
+  .home .cta,
+  .enshrine .cta {
+    display: none !important;
+  }
+  /* Reclaim the tall monument min-heights so paper isn't mostly empty. */
+  .rite,
+  .rite-text,
+  .rite-portrait,
+  .portrait,
+  .duel-side,
+  .home .hero,
+  .home .fleft {
+    min-height: 0 !important;
+  }
+  .board,
+  .oracle,
+  .codex,
+  .enshrine,
+  .houses,
+  .crest,
+  .home {
+    overflow: visible !important;
+  }
+  /* Keep records and cards intact across page breaks. */
+  .board .row,
+  .houses .row,
+  .haul-cell,
+  .stand-cell,
+  .cx-card,
+  .tape-row,
+  .ex-row,
+  .recordtbl tr,
+  .cabinet article {
+    break-inside: avoid;
+  }
+  h1,
+  h2,
+  h3,
+  .rite-name,
+  .side-name {
+    break-after: avoid;
+  }
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+  @page {
+    margin: 1.4cm;
   }
 }

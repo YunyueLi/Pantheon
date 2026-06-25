@@ -85,4 +85,6 @@ export const BASKETBALL: SportConfig = {
   headlineTypes: ["nba_title", "mvp", "nba_finals_mvp"],
   model: BASKETBALL_MODEL as HonorModel,
   players,
+  dataUpdated: "2026-06",
+  dataSources: ["NBA official records", "Basketball-Reference", "Wikidata"],
 };

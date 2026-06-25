@@ -54,4 +54,6 @@ export const GO: SportConfig = {
   headlineTypes: ["world_title", "domestic_title"],
   model: GO_MODEL as HonorModel,
   players,
+  dataUpdated: "2026-06",
+  dataSources: ["Nihon Ki-in · Hanguk Kiwon · Chinese Weiqi Association", "Go Ratings", "Wikidata"],
 };

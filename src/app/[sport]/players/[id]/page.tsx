@@ -22,8 +22,8 @@ export function generateMetadata({ params }: { params: { sport: string; id: stri
     title,
     description,
     alternates: { canonical: `/${sport.id}/players/${player.id}/` },
-    openGraph: { title, description, type: "profile" },
-    twitter: { card: "summary", title, description },
+    openGraph: { title, description, type: "profile", images: [`/og/${sport.id}-${player.id}.png`] },
+    twitter: { card: "summary_large_image", title, description, images: [`/og/${sport.id}-${player.id}.png`] },
   };
 }
 

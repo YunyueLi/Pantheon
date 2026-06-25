@@ -141,7 +141,7 @@ export function PlayerProfile({ id }: { id: string }) {
 @media(max-width:880px){.rite-text{min-height:auto;padding:40px 0 36px}}
 .rite-kick{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.3em;font-size:11px;color:var(--fg-2)}
 .rite-real{font-family:var(--font-display);font-style:italic;font-size:clamp(16px,2vw,22px);color:var(--fg-2);margin-top:20px}
-.rite-name{font-size:clamp(56px,11vw,168px);margin-top:6px;word-break:break-word}
+.rite-name{font-size:clamp(40px,11vw,168px);margin-top:6px;word-break:break-word}
 .rite-meta{margin-top:26px;font-size:12px;color:var(--fg-2);line-height:1.9}
 .rite-also{display:inline-block;margin-top:16px;font-family:var(--font-display);font-style:italic;font-size:14px;color:var(--fg);border-bottom:1px solid var(--border-strong);padding-bottom:2px}
 .rite-index{margin-top:38px;display:flex;align-items:flex-end;gap:22px}
@@ -180,7 +180,6 @@ export function PlayerProfile({ id }: { id: string }) {
 .verdict{position:relative;border-bottom:1px solid var(--border);padding:54px clamp(20px,5vw,64px)}
 .verdict p{font-family:var(--font-display);font-style:italic;font-size:clamp(22px,3.4vw,40px);line-height:1.28;max-width:24ch}
 .verdict .mark{font-size:1.4em;color:var(--fg-3);font-style:normal}
-
 .recordtbl{width:100%;border-collapse:collapse}
 .recordtbl th{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;font-size:10px;color:var(--fg-2);text-align:left;padding:0 12px 14px;border-bottom:1px solid var(--border)}
 .recordtbl th.r{text-align:right}

@@ -52,7 +52,7 @@ export function Methodology() {
 
 .cx-hero{position:relative;padding:60px 0 44px;border-bottom:1px solid var(--border)}
 .cx-hero .kick{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.3em;font-size:11px;color:var(--fg-2)}
-.cx-hero h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(52px,11vw,150px);line-height:.82;letter-spacing:-.02em;margin:14px 0 0}
+.cx-hero h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(38px,11vw,150px);line-height:.82;letter-spacing:-.02em;margin:14px 0 0}
 .cx-intro{position:relative;margin-top:24px;max-width:52ch;font-family:var(--font-display);font-style:italic;font-size:clamp(16px,2vw,21px);line-height:1.5;color:var(--fg-2)}
 
 .cx-formula{position:relative;margin-top:32px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:30px 0;font-family:var(--font-display);font-size:clamp(18px,3vw,38px);letter-spacing:.01em;color:var(--fg);text-align:center}
@@ -319,6 +319,22 @@ export function Methodology() {
           <p>{t("methodology.dataNote")}</p>
           <p>{t("methodology.dataNote2")}</p>
         </div>
+        {(config.dataUpdated || (config.dataSources && config.dataSources.length > 0)) && (
+          <div className="cx-axes">
+            {config.dataUpdated && (
+              <div className="cx-axis">
+                <span className="an">{zh ? "整理于" : "Compiled"}</span>
+                <span className="ad">{config.dataUpdated}</span>
+              </div>
+            )}
+            {config.dataSources && config.dataSources.length > 0 && (
+              <div className="cx-axis">
+                <span className="an">{zh ? "来源" : "Sources"}</span>
+                <span className="ad">{config.dataSources.join(" · ")}</span>
+              </div>
+            )}
+          </div>
+        )}
       </section>
     </div>
   );

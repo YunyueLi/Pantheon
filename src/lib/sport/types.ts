@@ -145,6 +145,13 @@ export type SportConfig = {
    * from the Honor-Index percentile (no hand-authored ratings).
    */
   statureSources?: string[];
+  /**
+   * Data-trust provenance: the authoritative sources this sport's honors were
+   * compiled from, and when last verified (ISO year-month, e.g. "2026-06").
+   * Surfaced on the methodology "Data & sourcing" article. Both optional.
+   */
+  dataSources?: string[];
+  dataUpdated?: string;
   model: HonorModel;
   players: Player[];
 };

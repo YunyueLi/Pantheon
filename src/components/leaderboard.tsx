@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { honorScore, countType, careerSpan, activeInDecade } from "@/lib/sport/honor";
+import { honorScore, countType, careerSpan, activeInDecade, peakValue, longevityValue } from "@/lib/sport/honor";
 import { localizeTeam } from "@/lib/sport/football/clubs";
-import type { Player } from "@/lib/sport/types";
+import type { Player, Weights } from "@/lib/sport/types";
 import { useSport, useName, useLeagueLabel, usePositionAbbr } from "@/lib/sport/provider";
 import { cn, formatNumber } from "@/lib/utils";
 import { FlatToggle, FlatSelect } from "@/components/ui/flat-controls";
@@ -36,9 +36,9 @@ export function Leaderboard() {
   );
   const [presetKey, setPresetKey] = useState(model.presets[0].key);
   const [era, setEra] = useState<string>("ALL");
-  const [rankBy, setRankBy] = useState<"honor" | "stature">("honor");
+  const [rankBy, setRankBy] = useState<"honor" | "stature" | "peak" | "longevity">("honor");
 
-  const weights = model.presets.find((p) => p.key === presetKey)!.weights;
+  const weights: Weights = model.presets.find((p) => p.key === presetKey)!.weights;
 
   const eras = useMemo(() => {
     let min = Infinity;
@@ -75,7 +75,9 @@ export function Leaderboard() {
   const hasStature = players.some((p) => p.stature != null);
   const rankByOpts = [
     { value: "honor", label: t("leaderboard.byHonor") },
-    { value: "stature", label: t("leaderboard.byStature") },
+    { value: "peak", label: t("leaderboard.byPeak") },
+    { value: "longevity", label: t("leaderboard.byLongevity") },
+    ...(hasStature ? [{ value: "stature", label: t("leaderboard.byStature") }] : []),
   ];
 
   const data = useMemo<Row[]>(
@@ -90,7 +92,14 @@ export function Leaderboard() {
         )
         .map((player) => ({
           player,
-          score: rankBy === "stature" ? player.stature ?? 0 : honorScore(player, model, weights),
+          score:
+            rankBy === "stature"
+              ? player.stature ?? 0
+              : rankBy === "peak"
+                ? peakValue(player, model)
+                : rankBy === "longevity"
+                  ? longevityValue(player)
+                  : honorScore(player, model, weights),
         }))
         .sort((a, b) => b.score - a.score),
     [region, role, kind, era, rankBy, weights, players, model]
@@ -109,18 +118,20 @@ export function Leaderboard() {
 
 .board .head{position:relative;padding-block:60px 30px}
 .board .head .kick{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.3em;font-size:11px;color:var(--fg-2)}
-.board .head h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(56px,12vw,164px);line-height:.82;letter-spacing:-.02em;margin:14px 0 0}
+.board .head h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(38px,12vw,164px);line-height:.82;letter-spacing:-.02em;margin:14px 0 0}
 .board .head .desc{margin-top:22px;max-width:46ch;font-family:var(--font-display);font-style:italic;font-size:clamp(15px,1.8vw,19px);line-height:1.45;color:var(--fg-2)}
 
 .board .filters{position:relative;display:flex;flex-wrap:wrap;align-items:flex-end;gap:26px 34px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding-block:20px}
+/* Caption-less toggles sit beside captioned dropdowns here; match .fsel-btn's bottom offset (5px pad + 1px border) so all control text shares one baseline. */
+.board .ftog{padding-bottom:6px}
 
 .board .reg{position:relative}
 .board .row{position:relative;display:grid;grid-template-columns:3.4rem 1fr auto;align-items:center;gap:20px;border-bottom:1px solid var(--border);padding:26px 0;transition:background-color .15s}
 .board .row:hover{background:var(--accent-soft)}
 .board .row .rk{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.04em;font-size:12px;color:var(--fg-3);text-align:right;font-variant-numeric:tabular-nums}
 .board .row.first .rk{font-size:15px;color:var(--fg)}
-.board .row .nm{font-family:var(--font-display);font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:.86;font-size:clamp(28px,5vw,52px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:font-style .15s}
-.board .row.first .nm{font-size:clamp(48px,10vw,128px);font-weight:900}
+.board .row .nm{font-family:var(--font-display);font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:.86;font-size:clamp(28px,5vw,52px);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:font-style .15s}
+.board .row.first .nm{font-size:clamp(30px,10vw,128px);font-weight:900;white-space:normal}
 .board .row:hover .nm{font-style:italic}
 .board .row .meta{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.14em;font-size:10px;color:var(--fg-2)}
 .board .row .team{font-family:var(--font-display);text-transform:none;letter-spacing:0;font-style:italic;font-size:13px;color:var(--fg-3)}
@@ -131,6 +142,12 @@ export function Leaderboard() {
 .board .row .sc .bar{margin-top:12px;margin-left:auto;height:2px;width:clamp(96px,16vw,180px);background:var(--border)}
 .board .row .sc .bar span{display:block;height:2px;background:var(--accent)}
 .board .empty{padding:64px 0;text-align:center;font-family:var(--font-display);font-style:italic;color:var(--fg-3)}
+/* Phones: the 3-column row is cramped — tame the #1 name, tighten gaps, slim the bar. */
+@media(max-width:560px){
+.board .row{gap:8px 14px}
+.board .row.first .nm{font-size:clamp(28px,8vw,46px)}
+.board .row .sc .bar{width:60px}
+}
 `,
         }}
       />
@@ -158,7 +175,7 @@ export function Leaderboard() {
           <FlatSelect label={roleColLabel} value={role} onChange={setRole} options={roleOpts} />
         )}
         <FlatSelect label={t("leaderboard.era")} value={era} onChange={setEra} options={eraOpts} />
-        {hasStature && <FlatToggle options={rankByOpts} value={rankBy} onChange={(v) => setRankBy(v as "honor" | "stature")} />}
+        <FlatToggle options={rankByOpts} value={rankBy} onChange={(v) => setRankBy(v as "honor" | "stature" | "peak" | "longevity")} />
         {rankBy === "honor" && (
           <FlatSelect label={t("leaderboard.weighting")} value={presetKey} onChange={setPresetKey} options={presetOpts} />
         )}

@@ -85,7 +85,7 @@ export function CompareView() {
 
 .o-head{position:relative;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;padding:58px 0 26px}
 .o-head .kick{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.3em;font-size:11px;color:var(--fg-2)}
-.o-head h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(44px,9vw,128px);line-height:.84;letter-spacing:-.02em;margin:14px 0 0}
+.o-head h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(32px,9vw,128px);line-height:.84;letter-spacing:-.02em;margin:14px 0 0}
 .o-actions{display:flex;gap:10px}
 .o-act{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--fg-2);border:1px solid var(--border-strong);padding:11px 16px;transition:background-color .15s,color .15s}
 .o-act:hover{background:var(--accent);color:var(--accent-contrast)}
@@ -97,13 +97,24 @@ export function CompareView() {
 .duel-side{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;min-height:46vh;padding:48px clamp(20px,5vw,64px) 40px}
 .duel-side.right{align-items:flex-end;text-align:right}
 .side-meta{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--fg-2)}
-.side-name{font-family:var(--font-display);font-weight:900;text-transform:uppercase;line-height:.86;letter-spacing:-.02em;font-size:clamp(36px,6vw,88px);margin:10px 0 0;word-break:break-word}
+.side-name{font-family:var(--font-display);font-weight:900;text-transform:uppercase;line-height:.86;letter-spacing:-.02em;font-size:clamp(26px,6vw,88px);margin:10px 0 0;word-break:break-word}
 .side-idx{margin-top:20px;display:flex;align-items:baseline;gap:12px}
 .duel-side.right .side-idx{flex-direction:row-reverse}
 .side-idx .lab{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;font-size:10px;color:var(--fg-2)}
 .side-idx .val{font-family:var(--font-display);font-weight:900;font-variant-numeric:tabular-nums;font-size:clamp(34px,5vw,68px);line-height:.8}
 .side-pick{margin-top:26px;width:100%;max-width:320px}
 .duel-side.right .side-pick{margin-left:auto}
+/* On phones the side-by-side duel can't fit two names — stack the combatants. */
+@media(max-width:680px){
+.duel{grid-template-columns:1fr}
+.duel-seam{display:none}
+.duel-vs{display:none}
+.duel-side{min-height:auto;padding:30px clamp(20px,5vw,64px)}
+.duel-side.b{border-top:1px solid var(--border)}
+.duel-side.right{align-items:flex-start;text-align:left}
+.duel-side.right .side-idx{flex-direction:row}
+.duel-side.right .side-pick{margin-left:0}
+}
 
 .sec{position:relative;padding-bottom:46px}
 .tape{margin-top:8px}

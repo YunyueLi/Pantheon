@@ -31,6 +31,7 @@ import { DEFAULT_LOCALE } from "@/lib/i18n/config";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { ScrollReveal } from "@/components/reveal";
+import { Analytics } from "@/components/analytics";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -58,8 +59,9 @@ export const metadata: Metadata = {
     title: "Pantheon — Competitive Honors",
     description: SITE_DESC,
     url: SITE_URL,
+    images: ["/og/default.png"],
   },
-  twitter: { card: "summary_large_image", title: "Pantheon — Competitive Honors", description: SITE_DESC },
+  twitter: { card: "summary_large_image", title: "Pantheon — Competitive Honors", description: SITE_DESC, images: ["/og/default.png"] },
 };
 
 const themeScript = `(function(){var d=document.documentElement;d.classList.add('js');try{var m=localStorage.getItem('pantheon-mode');if(m==='paper'){d.classList.add('paper');}else if(m==='crimson'||m==='light'){}else{d.classList.add('dark');}}catch(_){}})();`;
@@ -73,6 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <Analytics />
       </head>
       <body className="antialiased">
         <I18nProvider initialLocale={DEFAULT_LOCALE}>

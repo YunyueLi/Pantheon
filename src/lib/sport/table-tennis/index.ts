@@ -50,4 +50,6 @@ export const TABLE_TENNIS: SportConfig = {
   headlineTypes: ["olympic_singles_gold", "world_singles_gold", "world_cup_singles_gold"],
   model: TABLE_TENNIS_MODEL as HonorModel,
   players,
+  dataUpdated: "2026-06",
+  dataSources: ["ITTF records", "Wikidata"],
 };

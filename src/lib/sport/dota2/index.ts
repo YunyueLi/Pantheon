@@ -29,4 +29,6 @@ export const DOTA2: SportConfig = {
   headlineTypes: ["ti_title", "ti_runner_up", "valve_major_title"],
   model: DOTA2_MODEL as HonorModel,
   players,
+  dataUpdated: "2026-06",
+  dataSources: ["Liquipedia (CC BY-SA)", "Valve DPC / The International records", "Wikidata"],
 };
