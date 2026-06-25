@@ -1,5 +1,7 @@
 # Pantheon — Design Language ("The Codex")
 
+*中文版 / Chinese: [DESIGN.zh-CN.md](./DESIGN.zh-CN.md)*
+
 The single written source of truth for the visual system. The **canonical
 implementation** is the code — `src/app/globals.css` (`:root` tokens + `@layer
 components` primitives) and the shared components in `src/components/ui/`. This
@@ -34,7 +36,7 @@ Mood reference: **Nous Research's Hermes agent site**
   - a saturated **crimson** identity (+ obsidian / paper);
   - a Latin **"monument / codex"** tone ("MMXXVI", roman numerals).
 - **Rejected dead-end:** the literal parchment / Cinzel / gold "Hermetic" pastiche
-  — abandoned as "拙劣的模仿" (clumsy imitation). Don't revive it.
+  — abandoned as a clumsy imitation. Don't revive it.
 
 Numbered Hermes sections → our **roman-numeral Plates (Ⅰ–Ⅶ)**; Hermes' oversized
 hero type → our `.mega`; its scroll disclosure → our `data-reveal`.
@@ -66,7 +68,7 @@ for mode logic.
 ## 3. Typography
 
 - **Everything is serif.** Latin = **Playfair Display** (Didone, high contrast);
-  CJK = **Noto Serif SC / 思源宋体** (a Song with matching contrast). Composed in
+  CJK = **Noto Serif SC** (a Song with matching contrast). Composed in
   `--font-display: var(--font-latin), var(--font-cjk), Georgia, …, serif` so every
   serif rule picks the right glyph per script. No sans-serif anywhere.
 - **`.label`** = serif + `text-transform:uppercase` + `letter-spacing:0.2em`. This
