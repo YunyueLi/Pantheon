@@ -8,6 +8,10 @@ components` primitives) and the shared components in `src/components/ui/`. This
 document explains the *intent* so changes stay coherent; when code and doc
 disagree, the code wins and this doc should be updated.
 
+**Maintenance:** this doc and its Chinese mirror [`DESIGN.zh-CN.md`](./DESIGN.zh-CN.md)
+are section-for-section equivalents. When the visual system changes, update **both
+in the same commit** so they never drift; the code stays the single source of truth.
+
 ---
 
 ## 0. Product thesis (the lens for every decision)
