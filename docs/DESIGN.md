@@ -71,13 +71,15 @@ for mode logic.
 
 ## 3. Typography
 
-- **Everything is serif.** Latin = **Playfair Display** (Didone, high contrast);
-  CJK = **Noto Serif SC** (a Song with matching contrast). Composed in
-  `--font-display: var(--font-latin), var(--font-cjk), Georgia, …, serif` so every
-  serif rule picks the right glyph per script. No sans-serif anywhere.
-- **`.label`** = serif + `text-transform:uppercase` + `letter-spacing:0.2em`. This
-  is the eyebrow / nav / caption voice. **Case + tracking carry the "label" feel —
-  never a different font.**
+- **Display = serif.** Latin = **Playfair Display** (Didone, high contrast); CJK =
+  **Noto Serif SC** (a Song with matching contrast). Composed in `--font-display:
+  var(--font-latin), var(--font-cjk), Georgia, …, serif` so every serif rule picks
+  the right glyph per script. The serif carries all the big/editorial type — hero,
+  names, Plates, numerals.
+- **UI chrome = sans** (`--font-ui`: **Geist** + system CJK sans). The small
+  label / eyebrow / nav / control / caption voice (`.label`, per-page `.kick`) is a
+  clean grotesque, uppercase + tracked — more legible at small sizes and across
+  scripts than the Didone. (Added 2026-06-26; the UI was all-serif before then.)
 - **Display:** `.mega` (weight 900, `line-height:0.84`, tight tracking, uppercase).
 - **Numerals:** tabular + lining (`.tnum`, `.ledger-num`) — rankings, scores,
   years must not shift width.

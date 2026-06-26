@@ -40,6 +40,9 @@
   /* The serif stack: Playfair (Latin Didone) → Noto Serif SC (CJK) → system serif.
      Every `font-family: var(--font-display)` rule resolves the right glyph per script. */
   --font-display: var(--font-latin), var(--font-cjk), Georgia, "Times New Roman", serif;
+  /* UI chrome (nav, labels, controls): a clean grotesque + system CJK sans. Display
+     type stays Didone (--font-display); only the small label voice opts into sans. */
+  --font-ui: var(--font-geist-sans), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
 }
 
 .dark {
@@ -154,9 +157,9 @@
   /* Serif, uppercase, letter-spaced — the recurring label/eyebrow/nav style.
      Everything is serif now; case + spacing carry the "label" feel, not the font. */
   .label {
-    font-family: var(--font-display), Georgia, "Times New Roman", serif;
+    font-family: var(--font-ui);
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.16em;
   }
 }
 

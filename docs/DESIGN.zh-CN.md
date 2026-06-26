@@ -62,12 +62,13 @@ Hermes 的编号分节 → 我们的**罗马数字 Plate（Ⅰ–Ⅶ）**;它的
 
 ## 3. 字体排印
 
-- **一切皆衬线。** 拉丁 = **Playfair Display**（Didone,高对比）;中文 = **Noto Serif
+- **展示字 = 衬线。** 拉丁 = **Playfair Display**（Didone,高对比）;中文 = **Noto Serif
   SC / 思源宋体**（对比度匹配的宋体）。在 `--font-display: var(--font-latin),
-  var(--font-cjk), Georgia, …, serif` 里组合,每条衬线规则都会按字符脚本取对的字形。
-  全站无任何无衬线。
-- **`.label`** = 衬线 + `text-transform:uppercase` + `letter-spacing:0.2em`。这是
-  eyebrow / 导航 / 说明文字的声口。**「标签感」由大写 + 字距承载,绝不靠换字体。**
+  var(--font-cjk), Georgia, …, serif` 里组合,每条衬线规则按脚本取对字形。衬线承载所有
+  大字 / 编辑性文字 —— hero、名号、Plate、数字。
+- **UI chrome = 无衬线**（`--font-ui`:**Geist** + 系统中文黑体）。小号的标签 /
+  eyebrow / 导航 / 控件 / 说明声口(`.label`、各页 `.kick`)改用克制的 grotesque,大写 +
+  字距 —— 小字号与多语言下比 Didone 更清晰。(2026-06-26 起;此前 UI 全衬线。)
 - **Display:** `.mega`（字重 900、`line-height:0.84`、紧字距、大写）。
 - **数字:** 等宽 + lining（`.tnum`、`.ledger-num`）—— 排名、分数、年份不能跳宽。
 - **字号:** 流式 `clamp()`。桌面取 vw/max 端;移动端只压低 *min*。中文宋体无斜体 →

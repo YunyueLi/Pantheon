@@ -39,7 +39,7 @@ export default function Home() {
           __html: `
 .home{position:relative;overflow:hidden}
 .home .cols{position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(90deg,var(--border) 0 1px,transparent 1px calc(100%/6))}
-.home .kick{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.32em;font-size:11px;color:var(--fg-2)}
+.home .kick{font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.26em;font-size:11px;color:var(--fg-2)}
 .home .hero{position:relative;min-height:78vh;padding:62px 48px 40px;display:flex;flex-direction:column;justify-content:space-between}
 .home .ghost{position:absolute;right:-30px;top:-130px;font-family:var(--font-display);font-weight:900;font-size:560px;line-height:1;color:var(--fg);opacity:.05;pointer-events:none}
 .home .vlabel{position:absolute;right:22px;top:44%;writing-mode:vertical-rl;text-orientation:mixed;font-family:var(--font-display);text-transform:uppercase;font-size:11px;letter-spacing:.4em;color:var(--fg-2)}
