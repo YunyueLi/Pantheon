@@ -8,11 +8,40 @@ import { honorScore, normalizedAxes, countType, ranked } from "@/lib/sport/honor
 import type { Player } from "@/lib/sport/types";
 import { useSport, useHonorLabel, useName, useLeagueLabel } from "@/lib/sport/provider";
 import { cn, formatNumber } from "@/lib/utils";
+import { playerPhoto } from "@/lib/player-photos";
+import { photoFraming } from "@/lib/player-photo-framing";
 import { PlayerPicker } from "@/components/player-picker";
 import { CompareRadar } from "@/components/compare-radar";
 import { TrophyIcon } from "@/components/trophy-icon";
 import { Plate } from "@/components/ui/plate";
 import { useI18n } from "@/lib/i18n/provider";
+
+// The combatant's portrait behind one side of the duel — the same monument field as
+// the profile (halftone + radiant bloom), the photo feathered toward the face and a
+// scrim rising from the page colour so the name/index stay legible over it.
+function DuelFace({ photo, pos, side }: { photo: string; pos?: string; side: "a" | "b" }) {
+  return (
+    <div className="duel-portrait" aria-hidden>
+      <svg className="duel-field" viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <pattern id={`dht-${side}`} width="6" height="6" patternUnits="userSpaceOnUse">
+            <circle cx="3" cy="3" r="1.1" fill="currentColor" />
+          </pattern>
+          <radialGradient id={`dvig-${side}`} cx="50%" cy="32%" r="62%">
+            <stop offset="0%" stopColor="currentColor" stopOpacity="0.82" />
+            <stop offset="50%" stopColor="currentColor" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <rect width="400" height="520" fill={`url(#dht-${side})`} opacity="0.3" />
+        <rect className="field-bloom" width="400" height="520" fill={`url(#dvig-${side})`} />
+      </svg>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="duel-photo" src={photo} alt="" aria-hidden decoding="async" style={{ objectPosition: pos ?? "50% 20%" }} />
+      <div className="duel-scrim" />
+    </div>
+  );
+}
 
 export function CompareView() {
   const { t, locale } = useI18n();
@@ -29,6 +58,8 @@ export function CompareView() {
   const [bId, setBId] = useState(() => (has(sp.get("b") ?? "") ? (sp.get("b") as string) : rankedRows[1]?.player.id));
   const a = players.find((p) => p.id === aId)!;
   const b = players.find((p) => p.id === bId)!;
+  const aPhoto = playerPhoto(a.id)?.src;
+  const bPhoto = playerPhoto(b.id)?.src;
 
   const aAxes = useMemo(() => normalizedAxes(a, players, model).map((d) => d.value), [aId]); // eslint-disable-line react-hooks/exhaustive-deps
   const bAxes = useMemo(() => normalizedAxes(b, players, model).map((d) => d.value), [bId]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -92,10 +123,17 @@ export function CompareView() {
 .o-act:disabled{opacity:.5}
 
 .duel{position:relative;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.duel-vs{left:50%;top:50%;transform:translate(-50%,-50%);font-size:clamp(120px,20vw,300px);font-style:italic}
+.duel-vs{left:50%;top:50%;transform:translate(-50%,-50%);font-size:clamp(120px,20vw,300px);font-style:italic;z-index:2;opacity:.13}
 .duel-seam{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--border)}
-.duel-side{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;min-height:46vh;padding:48px clamp(20px,5vw,64px) 40px}
+.duel-side{position:relative;z-index:1;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;min-height:56vh;padding:48px clamp(20px,5vw,64px) 40px}
 .duel-side.right{align-items:flex-end;text-align:right}
+/* combatant portrait behind each side */
+.duel-portrait{position:absolute;inset:0;z-index:0;color:var(--fg);pointer-events:none}
+.duel-field{position:absolute;inset:0;width:100%;height:100%}
+.duel-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.5) brightness(1.02);opacity:.9;-webkit-mask-image:radial-gradient(76% 66% at 50% 30%,#000 42%,transparent 100%);mask-image:radial-gradient(76% 66% at 50% 30%,#000 42%,transparent 100%)}
+.duel-scrim{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 16%,color-mix(in srgb,var(--bg) 52%,transparent) 42%,transparent 72%)}
+.duel-content{position:relative;z-index:2;display:flex;flex-direction:column}
+.duel-side.right .duel-content{align-items:flex-end;text-align:right}
 .side-meta{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--fg-2)}
 .side-name{font-family:var(--font-display);font-weight:900;text-transform:uppercase;line-height:.86;letter-spacing:-.02em;font-size:clamp(26px,6vw,88px);margin:10px 0 0;word-break:break-word}
 .side-idx{margin-top:20px;display:flex;align-items:baseline;gap:12px}
@@ -109,9 +147,10 @@ export function CompareView() {
 .duel{grid-template-columns:1fr}
 .duel-seam{display:none}
 .duel-vs{display:none}
-.duel-side{min-height:auto;padding:30px clamp(20px,5vw,64px)}
+.duel-side{min-height:46vh;padding:30px clamp(20px,5vw,64px)}
 .duel-side.b{border-top:1px solid var(--border)}
 .duel-side.right{align-items:flex-start;text-align:left}
+.duel-side.right .duel-content{align-items:flex-start;text-align:left}
 .duel-side.right .side-idx{flex-direction:row}
 .duel-side.right .side-pick{margin-left:0}
 }
@@ -159,25 +198,31 @@ export function CompareView() {
         <span className="ghost-glyph duel-vs">VS</span>
         <div className="duel-seam" />
         <div className="duel-side a">
-          <div className="side-meta">{subOf(a)}</div>
-          <div className="side-name">{name(a)}</div>
-          <div className="side-idx">
-            <span className="lab">{t("player.honorIndex")}</span>
-            <span className="val">{formatNumber(honorScore(a, model))}</span>
-          </div>
-          <div className="side-pick">
-            <PlayerPicker value={aId} onSelect={setAId} exclude={bId} />
+          {aPhoto && <DuelFace photo={aPhoto} pos={photoFraming(a.id)?.pos} side="a" />}
+          <div className="duel-content">
+            <div className="side-meta">{subOf(a)}</div>
+            <div className="side-name">{name(a)}</div>
+            <div className="side-idx">
+              <span className="lab">{t("player.honorIndex")}</span>
+              <span className="val">{formatNumber(honorScore(a, model))}</span>
+            </div>
+            <div className="side-pick">
+              <PlayerPicker value={aId} onSelect={setAId} exclude={bId} />
+            </div>
           </div>
         </div>
         <div className="duel-side b right">
-          <div className="side-meta">{subOf(b)}</div>
-          <div className="side-name">{name(b)}</div>
-          <div className="side-idx">
-            <span className="lab">{t("player.honorIndex")}</span>
-            <span className="val">{formatNumber(honorScore(b, model))}</span>
-          </div>
-          <div className="side-pick">
-            <PlayerPicker value={bId} onSelect={setBId} exclude={aId} />
+          {bPhoto && <DuelFace photo={bPhoto} pos={photoFraming(b.id)?.pos} side="b" />}
+          <div className="duel-content">
+            <div className="side-meta">{subOf(b)}</div>
+            <div className="side-name">{name(b)}</div>
+            <div className="side-idx">
+              <span className="lab">{t("player.honorIndex")}</span>
+              <span className="val">{formatNumber(honorScore(b, model))}</span>
+            </div>
+            <div className="side-pick">
+              <PlayerPicker value={bId} onSelect={setBId} exclude={aId} />
+            </div>
           </div>
         </div>
       </section>
