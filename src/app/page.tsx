@@ -5,6 +5,7 @@ import { listSports } from "@/lib/sport/registry";
 import { ranked } from "@/lib/sport/honor";
 import { formatNumber } from "@/lib/utils";
 import { playerPhoto } from "@/lib/player-photos";
+import { photoFraming } from "@/lib/player-photo-framing";
 import { useI18n } from "@/lib/i18n/provider";
 import { HomeShowcase, type Immortal } from "@/components/home-showcase";
 
@@ -28,6 +29,8 @@ export default function Home() {
         name: name(g.player),
         honor: formatNumber(g.score),
         photoSrc: playerPhoto(g.player.id)?.src,
+        photoPos: photoFraming(g.player.id)?.pos,
+        photoZoom: photoFraming(g.player.id)?.zoom,
       } as Immortal;
     })
     .filter(Boolean) as Immortal[];

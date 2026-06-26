@@ -12,6 +12,8 @@ export type Immortal = {
   name: string;
   honor: string;
   photoSrc?: string;
+  photoPos?: string;
+  photoZoom?: number;
 };
 
 function initialsOf(name: string) {
@@ -101,7 +103,17 @@ export function HomeShowcase({ immortals }: { immortals: Immortal[] }) {
                   {m.photoSrc ? (
                     (Math.abs(idx - i) <= 1 || Math.abs(idx - i) >= immortals.length - 1) && (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={m.photoSrc} alt="" aria-hidden className="hs-photo" decoding="async" />
+                      <img
+                        src={m.photoSrc}
+                        alt=""
+                        aria-hidden
+                        className="hs-photo"
+                        decoding="async"
+                        style={{
+                          objectPosition: m.photoPos ?? "50% 12%",
+                          ...(m.photoZoom ? { transform: `scale(${m.photoZoom})`, transformOrigin: m.photoPos ?? "50% 12%" } : {}),
+                        }}
+                      />
                     )
                   ) : (
                     <span className="hs-mono">{initialsOf(m.name)}</span>

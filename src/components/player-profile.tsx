@@ -13,6 +13,7 @@ import { TrophyCabinet } from "@/components/trophy-cabinet";
 import { Plate } from "@/components/ui/plate";
 import { formatNumber } from "@/lib/utils";
 import { playerPhoto } from "@/lib/player-photos";
+import { photoFraming } from "@/lib/player-photo-framing";
 import { useI18n } from "@/lib/i18n/provider";
 
 const r2 = (n: number) => Math.round(n * 100) / 100;
@@ -29,8 +30,9 @@ const RAYS = Array.from({ length: 48 }, (_, i) => {
  * grayscale + steep contrast, feathered out of the dark field so the figure
  * emerges from the light. No photo → the radiant monogram field stands on its own.
  */
-function Portrait({ photo, initials, caption }: { photo?: string; initials: string; caption: string }) {
+function Portrait({ photo, initials, caption, pos, zoom }: { photo?: string; initials: string; caption: string; pos?: string; zoom?: number }) {
   const [loaded, setLoaded] = useState(false);
+  const objectPosition = pos ?? "50% 14%";
   return (
     <div className="portrait">
       <svg className="portrait-ht" viewBox="0 0 400 520" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden>
@@ -60,6 +62,7 @@ function Portrait({ photo, initials, caption }: { photo?: string; initials: stri
           aria-hidden
           className="portrait-photo"
           data-loaded={loaded}
+          style={{ objectPosition, ...(zoom ? { transform: `scale(${zoom})`, transformOrigin: objectPosition } : {}) }}
           ref={(el) => {
             if (el && el.complete && el.naturalWidth > 0) setLoaded(true);
           }}
@@ -246,7 +249,13 @@ export function PlayerProfile({ id }: { id: string }) {
           <span className="v-edge" style={{ position: "absolute", right: "20px", top: "40px", zIndex: 2 }}>
             PANTHEON · ANNO MMXXVI
           </span>
-          <Portrait photo={playerPhoto(player.id)?.src} initials={initials} caption={player.realName ?? name(player)} />
+          <Portrait
+            photo={playerPhoto(player.id)?.src}
+            pos={photoFraming(player.id)?.pos}
+            zoom={photoFraming(player.id)?.zoom}
+            initials={initials}
+            caption={player.realName ?? name(player)}
+          />
         </div>
       </section>
 
