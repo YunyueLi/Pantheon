@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import { achievementPoints, countType, honorScore, percentile, ranked } from "@/lib/sport/honor";
 import { useSport, useHonorLabel, useName, useLeagueLabel, useBlurb } from "@/lib/sport/provider";
 import { teamIdFromName } from "@/lib/teams";
@@ -12,31 +12,25 @@ import { HonorBreakdown } from "@/components/honor-breakdown";
 import { TrophyCabinet } from "@/components/trophy-cabinet";
 import { Plate } from "@/components/ui/plate";
 import { formatNumber } from "@/lib/utils";
+import { playerPhoto } from "@/lib/player-photos";
 import { useI18n } from "@/lib/i18n/provider";
 
+const r2 = (n: number) => Math.round(n * 100) / 100;
+// Fixed radiant sunburst — rounded coords render byte-identical on server + client.
+const RAYS = Array.from({ length: 48 }, (_, i) => {
+  const a = (i / 48) * Math.PI * 2;
+  return { x: r2(200 + Math.cos(a) * 440), y: r2(210 + Math.sin(a) * 440) };
+});
+
 /**
- * The enshrinement portrait. A halftone duotone field with the player's monogram
- * engraved over it; if a licensed photo exists at /players/<id>.(jpg|png|webp) it
- * fades in with a grayscale-duotone treatment and the halftone reads as a screen.
+ * The enshrinement portrait. A halftone duotone field with a radiant bloom and
+ * the player's monogram engraved over it. When a (freely-licensed) likeness is
+ * supplied it renders as a clean, high-contrast monochrome "monument" portrait —
+ * grayscale + steep contrast, feathered out of the dark field so the figure
+ * emerges from the light. No photo → the radiant monogram field stands on its own.
  */
-function Portrait({ id, photo, initials, caption }: { id: string; photo?: string; initials: string; caption: string }) {
-  const candidates = useMemo(() => {
-    const list: string[] = [];
-    if (photo) list.push(photo);
-    list.push(`/players/${id}.jpg`, `/players/${id}.png`, `/players/${id}.webp`);
-    return list;
-  }, [id, photo]);
-  const [idx, setIdx] = useState(0);
+function Portrait({ photo, initials, caption }: { photo?: string; initials: string; caption: string }) {
   const [loaded, setLoaded] = useState(false);
-  useEffect(() => {
-    setIdx(0);
-    setLoaded(false);
-  }, [id, photo]);
-  const src = candidates[idx];
-  const rays = Array.from({ length: 48 }, (_, i) => {
-    const a = (i / 48) * Math.PI * 2;
-    return <line key={i} x1="200" y1="210" x2={200 + Math.cos(a) * 420} y2={210 + Math.sin(a) * 420} stroke="currentColor" strokeWidth="0.6" />;
-  });
   return (
     <div className="portrait">
       <svg className="portrait-ht" viewBox="0 0 400 520" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden>
@@ -51,20 +45,25 @@ function Portrait({ id, photo, initials, caption }: { id: string; photo?: string
           </radialGradient>
         </defs>
         <rect width="400" height="520" fill="url(#ht-portrait)" opacity="0.4" />
-        <g opacity="0.45">{rays}</g>
+        <g opacity="0.3">
+          {RAYS.map((r, i) => (
+            <line key={i} x1="200" y1="210" x2={r.x} y2={r.y} stroke="currentColor" strokeWidth="0.6" />
+          ))}
+        </g>
         <rect width="400" height="520" fill="url(#vig-portrait)" />
       </svg>
-      {src && (
+      {photo && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={src}
+          src={photo}
           alt=""
           aria-hidden
-          loading="lazy"
           className="portrait-photo"
           data-loaded={loaded}
+          ref={(el) => {
+            if (el && el.complete && el.naturalWidth > 0) setLoaded(true);
+          }}
           onLoad={() => setLoaded(true)}
-          onError={() => setIdx((i) => i + 1)}
         />
       )}
       {!loaded && <span className="portrait-mono mega">{initials}</span>}
@@ -118,7 +117,12 @@ export function PlayerProfile({ id }: { id: string }) {
     .map((type) => ({ type, n: countType(player, type), label: honorLabel(type) }))
     .filter((h) => h.n > 0);
 
-  const initials = player.name.replace(/[^a-zA-Z0-9]/g, "").slice(0, 2).toUpperCase();
+  const initials = (() => {
+    const clean = (s: string) => s.replace(/[^a-zA-Z0-9]/g, "");
+    const parts = player.name.trim().split(/\s+/).filter(Boolean);
+    if (parts.length >= 2) return ((clean(parts[0])[0] ?? "") + (clean(parts[parts.length - 1])[0] ?? "")).toUpperCase();
+    return clean(player.name).slice(0, 2).toUpperCase();
+  })();
   const isGoat = overall.rank === 1;
   const era = `${player.debutYear}–${player.active ? (zh ? "至今" : "NOW") : lastYear}`;
   const verdict = isGoat ? (zh ? "万神殿之首" : "First of the Pantheon") : (zh ? "封神录" : "Enshrined");
@@ -153,8 +157,8 @@ export function PlayerProfile({ id }: { id: string }) {
 .portrait{position:absolute;inset:0;overflow:hidden;color:var(--fg)}
 @media(max-width:880px){.portrait{position:relative;min-height:62vh}}
 .portrait-ht{position:absolute;inset:0}
-.portrait-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;filter:grayscale(1) contrast(1.18) brightness(1.06);mix-blend-mode:luminosity;opacity:0;transition:opacity .5s}
-.portrait-photo[data-loaded="true"]{opacity:.9}
+.portrait-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 14%;filter:grayscale(1) contrast(1.55) brightness(1.04);opacity:0;transition:opacity .6s;-webkit-mask-image:radial-gradient(76% 68% at 50% 39%,#000 46%,transparent 100%);mask-image:radial-gradient(76% 68% at 50% 39%,#000 46%,transparent 100%)}
+.portrait-photo[data-loaded="true"]{opacity:.96}
 .portrait-mono{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(120px,22vw,300px);-webkit-text-stroke:1.5px var(--fg);color:transparent;opacity:.5}
 .portrait-cap{position:absolute;left:22px;bottom:20px;font-size:10px;color:var(--fg-2)}
 
@@ -242,7 +246,7 @@ export function PlayerProfile({ id }: { id: string }) {
           <span className="v-edge" style={{ position: "absolute", right: "20px", top: "40px", zIndex: 2 }}>
             PANTHEON · ANNO MMXXVI
           </span>
-          <Portrait id={player.id} photo={player.photo} initials={initials} caption={player.realName ?? name(player)} />
+          <Portrait photo={playerPhoto(player.id)?.src} initials={initials} caption={player.realName ?? name(player)} />
         </div>
       </section>
 

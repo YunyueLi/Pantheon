@@ -118,11 +118,15 @@ Hermes 的编号分节 → 我们的**罗马数字 Plate（Ⅰ–Ⅶ）**;它的
 
 ## 7. 图像与图标
 
-- **半调双色** —— SVG 点阵 + 放射日芒 + 径向暗角（即 `Portrait` 处理）。真实照片可放进
-  `/public/players/<id>.{jpg,png,webp}`,会以灰度-亮度双色淡入。
-- **字母组合镌刻** —— 球员姓名首字母作巨大极淡的笔画(侧写肖像 + OG 卡)。
+- **肖像**(`Portrait`,选手档案)—— 半调双色场 + 放射日芒 + 径向光晕,雕刻字母压在其上。
+  有**自由授权肖像**的,渲染成**干净的高对比黑白「纪念碑」肖像**(灰度 + 强对比,边缘羽化,
+  人脸从光中浮现);没有的就用那张光效字母场兜底。**干净黑白是标准 —— 不加网点/颗粒。**
+- **选手照片** —— 取自维基共享(多为 CC BY-SA),在 `src/lib/player-photos.ts` 登记,
+  落在 `/public/players/<id>.jpg`,并在 **`/credits`** 页署名。电竞选手少有自由图 → 回退光效场。
+- **字母组合镌刻** —— 姓名首字母作巨大极淡的笔画(多词名取首末首字母,单名取前两字母)。
 - **幽灵字** —— 巨大、极淡、溢出一边;**绝不用柔光渐变「光晕/球」**。
-- **`sport-mark.tsx`** —— 每个项目的原创纪念碑式**线描徽记**(**非**官方注册 logo)。
+- **无项目徽记** —— 导航**只用文字**(项目名)。抽象象形标读着像通用「AI」图标,已于 2026-06-26 移除;
+  质感交给肖像 + 排版(Hermes 也不用象形图)。
 - **`trophy-icon.tsx`** —— 古典**刻线奖杯**(高脚杯 / 大奖杯 / 绶带奖章 / 多面星),按奖牌等级着色。
 - **OG 分享卡**(`scripts/generate-og.ts`,构建期 satori→resvg 生成 PNG):发丝网格 +
   字母镌刻 + `Nº` + 荣誉指数 —— 一页「被撕下的法典」。`public/og/` 被 gitignore,每次
@@ -158,6 +162,7 @@ Hermes 的编号分节 → 我们的**罗马数字 Plate（Ⅰ–Ⅶ）**;它的
 - **投票 / 民调**控件与群众输入（它不为自己的判决做民调）;
 - 自由的**用户旋钮**(「做你自己的排名」)稀释那一份指数 —— 策展的**预设镜头**可以,
   无限滑块玩具不行。
+- 抽象的**项目象形徽记 / 图标库式标记** —— 读着通用;导航改纯文字,身份交给图像(2026-06-26 移除)。
 
 ---
 
@@ -166,7 +171,8 @@ Hermes 的编号分节 → 我们的**罗马数字 Plate（Ⅰ–Ⅶ）**;它的
 - `src/app/globals.css` —— token、`@layer components` primitives、`@media print`。
 - `src/components/theme-provider.tsx` —— 三主题。`reveal.tsx` —— 滚动动效。
 - `src/components/ui/plate.tsx` —— 节标题。`ui/flat-controls.tsx` —— 控件。
-- `src/components/sport-mark.tsx` —— 徽记。`trophy-icon.tsx` —— 奖杯刻线。
+- `src/components/trophy-icon.tsx` —— 奖杯刻线。`player-profile.tsx` 的 `Portrait` —— 纪念碑肖像处理。
+- `src/lib/player-photos.ts` —— 自由授权照片清单,在 `app/credits/page.tsx` 署名。
 - `scripts/generate-og.ts` —— 构建期 OG 卡。
 - 各页面:`leaderboard.tsx`、`player-profile.tsx`、`compare-view.tsx`、
   `methodology.tsx`、`team-profile.tsx`、`football-clubs.tsx` 等。

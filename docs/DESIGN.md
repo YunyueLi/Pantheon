@@ -135,14 +135,21 @@ class — never leaks globally.
 
 ## 7. Imagery & iconography
 
-- **Halftone duotone** — SVG dot-pattern + radiating sunburst + radial vignette
-  (the `Portrait`). Optional real photos drop into `/public/players/<id>.{jpg,png,webp}`
-  and fade in with a grayscale-luminosity duotone.
-- **Monogram engraving** — the player's initials as a giant faint stroke (portrait
-  + OG card).
+- **The portrait** (`Portrait`, player profile) — a halftone duotone field with a
+  radiating sunburst + radial bloom and the player's monogram engraved over it.
+  Where a **freely-licensed likeness** exists it renders as a clean, high-contrast
+  **monochrome "monument" portrait** (grayscale + steep contrast, feathered out of
+  the dark field so the figure emerges from the light); otherwise the radiant
+  monogram field stands alone. Clean B&W is the standard — no halftone dots / grain.
+- **Player photos** — sourced from Wikimedia Commons (mostly CC BY-SA), declared in
+  `src/lib/player-photos.ts`, stored at `/public/players/<id>.jpg`, and attributed on
+  the **`/credits`** page. Esports players rarely have free images → field fallback.
+- **Monogram engraving** — the player's initials as a giant faint stroke (first +
+  last initial for multi-word names, first two letters for mononyms).
 - **Ghost glyphs** — large, faint, bled off an edge; never a soft gradient "orb".
-- **`sport-mark.tsx`** — original monument **line-art** per discipline (NOT official
-  trademarked logos).
+- **No discipline emblems** — the nav is **type-only** (the sport name). Abstract
+  pictographic marks read as generic "AI" iconography; dropped 2026-06-26. Richness
+  lives in the portraits + typography (Hermes uses no pictograms either).
 - **`trophy-icon.tsx`** — classical **engravings** (cup / goblet / medallion+ribbon
   / faceted star), toned by medal rank.
 - **OG share cards** (`scripts/generate-og.ts`, build-time PNG via satori→resvg):
@@ -180,6 +187,8 @@ verdict.
 - **vote / poll** widgets and crowd input (it doesn't poll its own verdicts);
 - free-form **user knobs** ("build your own ranking") that dilute the one index —
   curated preset *lenses* are fine, an infinite slider toy is not.
+- abstract pictographic **discipline emblems / icon-set marks** — they read as
+  generic; the nav is type-only and imagery carries identity (dropped 2026-06-26).
 
 ---
 
@@ -188,7 +197,8 @@ verdict.
 - `src/app/globals.css` — tokens, `@layer components` primitives, `@media print`.
 - `src/components/theme-provider.tsx` — 3 themes. `reveal.tsx` — scroll motion.
 - `src/components/ui/plate.tsx` — section header. `ui/flat-controls.tsx` — controls.
-- `src/components/sport-mark.tsx` — emblems. `trophy-icon.tsx` — trophy engravings.
+- `src/components/trophy-icon.tsx` — trophy engravings. `player-profile.tsx` `Portrait` — monument photo treatment.
+- `src/lib/player-photos.ts` — freely-licensed photo manifest, attributed on `app/credits/page.tsx`.
 - `scripts/generate-og.ts` — build-time OG cards.
 - Per page: `leaderboard.tsx`, `player-profile.tsx`, `compare-view.tsx`,
   `methodology.tsx`, `team-profile.tsx`, `football-clubs.tsx`, etc.

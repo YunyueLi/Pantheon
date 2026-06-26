@@ -123,6 +123,7 @@ const en = {
   footer: {
     tagline: "A visual hall of fame for competitive play. Prototype built on an illustrative dataset.",
     exploreHeading: "Explore",
+    credits: "Credits",
   },
   honorType: {
     worlds_title: "World Champion",
@@ -327,6 +328,7 @@ const zh: Dict = {
   footer: {
     tagline: "竞技荣誉的可视化殿堂。基于示例数据构建的原型。",
     exploreHeading: "探索",
+    credits: "图片来源",
   },
   honorType: {
     worlds_title: "世界冠军",
@@ -587,6 +589,7 @@ const ko: Dict = {
   footer: {
     tagline: "경쟁 스포츠 명예의 시각적 전당. 예시 데이터로 만든 프로토타입.",
     exploreHeading: "둘러보기",
+    credits: "사진 출처",
   },
   honorType: {
     worlds_title: "월드 챔피언",
@@ -748,6 +751,7 @@ const ja: Dict = {
   footer: {
     tagline: "競技の名誉を可視化する殿堂。サンプルデータで作ったプロトタイプ。",
     exploreHeading: "ホーム",
+    credits: "画像クレジット",
   },
   honorType: {
     worlds_title: "世界王者",
@@ -909,6 +913,7 @@ const de: Dict = {
   footer: {
     tagline: "Eine visuelle Ruhmeshalle des Wettkampfsports. Prototyp auf Basis eines Beispieldatensatzes.",
     exploreHeading: "Entdecken",
+    credits: "Bildnachweise",
   },
   honorType: {
     worlds_title: "Weltmeister",
@@ -1076,6 +1081,7 @@ const fr: Dict = {
   footer: {
     tagline: "Un panthéon visuel du sport de compétition. Prototype basé sur un jeu de données illustratif.",
     exploreHeading: "Explorer",
+    credits: "Crédits",
   },
   honorType: {
     worlds_title: "Champion du monde",
@@ -1237,6 +1243,7 @@ const es: Dict = {
   footer: {
     tagline: "Un panteón visual del deporte competitivo. Prototipo basado en un conjunto de datos ilustrativo.",
     exploreHeading: "Explorar",
+    credits: "Créditos",
   },
   honorType: {
     worlds_title: "Campeón del mundo",

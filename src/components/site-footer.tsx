@@ -24,6 +24,9 @@ export function SiteFooter() {
           <Link href="/methodology" className="label text-[11px] text-fg-muted transition-colors hover:text-fg">
             {t("nav.methodology")}
           </Link>
+          <Link href="/credits" className="label text-[11px] text-fg-muted transition-colors hover:text-fg">
+            {t("footer.credits")}
+          </Link>
         </div>
       </div>
     </footer>
