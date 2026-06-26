@@ -98,7 +98,7 @@ export function HomeShowcase({ immortals }: { immortals: Immortal[] }) {
                         <line key={k} x1="200" y1="210" x2={r.x} y2={r.y} stroke="currentColor" strokeWidth="0.6" />
                       ))}
                     </g>
-                    <rect width="400" height="520" fill={`url(#hsvig${idx})`} />
+                    <rect className="field-bloom" width="400" height="520" fill={`url(#hsvig${idx})`} />
                   </svg>
                   {m.photoSrc ? (
                     (Math.abs(idx - i) <= 1 || Math.abs(idx - i) >= immortals.length - 1) && (

@@ -52,7 +52,7 @@ function Portrait({ photo, initials, caption, pos, zoom }: { photo?: string; ini
             <line key={i} x1="200" y1="210" x2={r.x} y2={r.y} stroke="currentColor" strokeWidth="0.6" />
           ))}
         </g>
-        <rect width="400" height="520" fill="url(#vig-portrait)" />
+        <rect className="field-bloom" width="400" height="520" fill="url(#vig-portrait)" />
       </svg>
       {photo && (
         // eslint-disable-next-line @next/next/no-img-element

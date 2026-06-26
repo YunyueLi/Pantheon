@@ -78,6 +78,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
       </head>
       <body className="antialiased">
+        {/* Duotone filter for the .paper theme: maps photo shadows→ink, highlights→cream
+            so portraits read as an on-palette gravure instead of a dark blob on cream.
+            Referenced by .paper .portrait-photo / .hs-photo / .duel-photo in globals.css. */}
+        <svg width="0" height="0" aria-hidden focusable="false" style={{ position: "absolute" }}>
+          <filter id="pantheon-duo" colorInterpolationFilters="sRGB">
+            <feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0 0 0 1 0" />
+            <feComponentTransfer>
+              <feFuncR type="table" tableValues="0.14 0.95" />
+              <feFuncG type="table" tableValues="0.11 0.93" />
+              <feFuncB type="table" tableValues="0.08 0.89" />
+            </feComponentTransfer>
+          </filter>
+        </svg>
         <I18nProvider initialLocale={DEFAULT_LOCALE}>
           <ThemeProvider>
             <ScrollReveal />

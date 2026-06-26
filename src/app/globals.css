@@ -15,6 +15,10 @@
   --fg-2: rgba(255, 255, 255, 0.72);
   --fg-3: rgba(255, 255, 255, 0.54);
 
+  /* Portrait radiant bloom: a LIGHT source behind the figure. On dark/crimson it
+     is the ink colour (light); .paper kills it so it never inverts to a dark blob. */
+  --field-glow: var(--fg);
+
   --medal-gold: #ffe7ad;
   --medal-silver: #ededf0;
   --medal-bronze: #f3b78c;
@@ -88,6 +92,10 @@
   --fg-2: rgba(34, 28, 20, 0.7);
   --fg-3: rgba(34, 28, 20, 0.5);
 
+  /* No radiant bloom on the light field — a light glow is invisible on cream and the
+     ink colour would otherwise smear a dark halo behind the figure. */
+  --field-glow: transparent;
+
   --medal-gold: #9c7b2e;
   --medal-silver: #8c8f95;
   --medal-bronze: #a8703c;
@@ -103,6 +111,21 @@
   --accent: #cc1326;
   --accent-strong: #b00f20;
   --accent-contrast: #ffffff;
+}
+
+/* Portrait bloom layer: the radial-gradient rect inherits currentColor from this
+   class, so the glow follows --field-glow per theme (light on dark/crimson, gone on
+   paper) while the halftone + rays keep the theme ink colour. */
+.field-bloom {
+  color: var(--field-glow);
+}
+
+/* On the light field a stark B&W photo dumps its dark background as a blob on cream.
+   Render portraits as an ink↔cream duotone gravure instead (keeps punch, on-palette). */
+.paper .portrait-photo,
+.paper .hs-photo,
+.paper .duel-photo {
+  filter: url(#pantheon-duo) contrast(1.04);
 }
 
 @layer base {
