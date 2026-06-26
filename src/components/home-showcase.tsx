@@ -21,6 +21,13 @@ function initialsOf(name: string) {
   return clean(name).slice(0, 2).toUpperCase();
 }
 
+// Same radiant sunburst as the profile Portrait, so the carousel matches it.
+const r2 = (v: number) => Math.round(v * 100) / 100;
+const RAYS = Array.from({ length: 48 }, (_, k) => {
+  const a = (k / 48) * Math.PI * 2;
+  return { x: r2(200 + Math.cos(a) * 440), y: r2(210 + Math.sin(a) * 440) };
+});
+
 /**
  * The home showcase: a rotating spotlight of every discipline's all-time #1 (each
  * an epic B&W monument portrait + "enter" link into that sport), followed by the
@@ -72,9 +79,30 @@ export function HomeShowcase({ immortals }: { immortals: Immortal[] }) {
               </div>
               <div className="hs-right">
                 <div className="hs-portrait">
+                  <svg className="hs-field" viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice" aria-hidden>
+                    <defs>
+                      <pattern id={`hsht${idx}`} width="6" height="6" patternUnits="userSpaceOnUse">
+                        <circle cx="3" cy="3" r="1.15" fill="currentColor" />
+                      </pattern>
+                      <radialGradient id={`hsvig${idx}`} cx="50%" cy="40%" r="60%">
+                        <stop offset="0%" stopColor="currentColor" stopOpacity="0.92" />
+                        <stop offset="48%" stopColor="currentColor" stopOpacity="0.12" />
+                        <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+                      </radialGradient>
+                    </defs>
+                    <rect width="400" height="520" fill={`url(#hsht${idx})`} opacity="0.4" />
+                    <g opacity="0.3">
+                      {RAYS.map((r, k) => (
+                        <line key={k} x1="200" y1="210" x2={r.x} y2={r.y} stroke="currentColor" strokeWidth="0.6" />
+                      ))}
+                    </g>
+                    <rect width="400" height="520" fill={`url(#hsvig${idx})`} />
+                  </svg>
                   {m.photoSrc ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={m.photoSrc} alt="" aria-hidden className="hs-photo" />
+                    (Math.abs(idx - i) <= 1 || Math.abs(idx - i) >= immortals.length - 1) && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={m.photoSrc} alt="" aria-hidden className="hs-photo" decoding="async" />
+                    )
                   ) : (
                     <span className="hs-mono">{initialsOf(m.name)}</span>
                   )}
@@ -137,7 +165,8 @@ const CSS = `
 .hs-enter{display:inline-block;margin-top:40px;font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--fg-2);transition:color .15s}
 .hs-slide:hover .hs-enter{color:var(--accent)}
 .hs-right{position:relative;border-left:1px solid var(--border);overflow:hidden}
-.hs-portrait{position:absolute;inset:0;background:radial-gradient(60% 52% at 50% 38%,color-mix(in srgb,var(--fg) 12%,transparent),transparent 72%)}
+.hs-portrait{position:absolute;inset:0}
+.hs-field{position:absolute;inset:0;width:100%;height:100%}
 .hs-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%;filter:grayscale(1) contrast(1.5) brightness(1.04);-webkit-mask-image:radial-gradient(78% 72% at 50% 40%,#000 46%,transparent 100%);mask-image:radial-gradient(78% 72% at 50% 40%,#000 46%,transparent 100%)}
 .hs-mono{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-display);font-weight:900;font-size:clamp(120px,20vw,280px);-webkit-text-stroke:1.5px var(--fg);color:transparent;opacity:.5}
 .hs-dots{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;display:flex;gap:10px}

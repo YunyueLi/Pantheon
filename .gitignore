@@ -40,3 +40,4 @@ next-env.d.ts
 
 scripts/.roster.tmp.json
 scripts/.roster-remaining.json
+scripts/.roster-fix.json
