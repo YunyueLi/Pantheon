@@ -111,6 +111,9 @@
   }
   html {
     -webkit-text-size-adjust: 100%;
+    /* Kill the top rubber-band overscroll that dragged the sticky header down a
+       few px — the bar now stays pinned. */
+    overscroll-behavior-y: none;
   }
   body {
     background-color: var(--bg);
