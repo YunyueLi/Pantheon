@@ -7,7 +7,9 @@
 export type PhotoFraming = { pos?: string; zoom?: number };
 
 export const PHOTO_FRAMING: Record<string, PhotoFraming> = {
-  "ma-long": { pos: "50% 34%", zoom: 1.45 },
+  // Source re-cropped to a face-centred portrait (470x640), so no zoom needed —
+  // pos just nudges the face onto the radial mask's bright centre (~50% 40%).
+  "ma-long": { pos: "50% 38%" },
 };
 
 export function photoFraming(id: string): PhotoFraming | undefined {
