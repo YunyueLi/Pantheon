@@ -36,6 +36,7 @@ export default function CreditsPage() {
 .credits .row .by{font-family:var(--font-display);font-size:13px;color:var(--fg-2)}
 .credits .row a{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--fg-2);white-space:nowrap;transition:color .15s}
 .credits .row a:hover{color:var(--accent)}
+.credits .row .lic{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--fg-2);white-space:nowrap}
 .credits .empty{font-family:var(--font-display);color:var(--fg-2);padding-block:40px}
 @media(max-width:680px){.credits .row{grid-template-columns:1fr auto;gap:6px 14px}.credits .row .by{grid-column:1/-1;order:3}}
 `,
@@ -60,9 +61,13 @@ export default function CreditsPage() {
                 {e.sport && <small>{e.sport}</small>}
               </span>
               <span className="by">{e.author}</span>
-              <a href={e.licenseUrl} target="_blank" rel="noopener noreferrer">
-                {e.license} ↗
-              </a>
+              {e.licenseUrl ? (
+                <a href={e.licenseUrl} target="_blank" rel="noopener noreferrer">
+                  {e.license} ↗
+                </a>
+              ) : (
+                <span className="lic">{e.license}</span>
+              )}
               <a href={e.source} target="_blank" rel="noopener noreferrer">
                 Source ↗
               </a>
