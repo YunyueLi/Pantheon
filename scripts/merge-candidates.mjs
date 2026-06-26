@@ -21,24 +21,36 @@ let man = fs.readFileSync(MAN, "utf8");
 const updated = [], added = [], failed = [];
 
 for (const r of results) {
-  const c = r.candidates[0];
   const dest = path.join(PUB, `${r.id}.jpg`);
-  try {
-    execFileSync("curl", ["-sL", "--fail", "--max-time", "45", "-A", UA, "-o", dest, c.url], { stdio: "ignore" });
-    execFileSync("sips", ["-Z", "1000", "-s", "formatOptions", "82", dest], { stdio: "ignore" });
-    if (fs.readFileSync(dest).length < 3000) throw new Error("too small");
-    const line = `  "${r.id}": { src: "/players/${r.id}.jpg", author: "${esc(c.author)}", license: "${esc(c.license)}", licenseUrl: "${esc(c.licenseUrl)}", source: "${esc(c.sourcePage)}" },`;
-    const re = new RegExp(`^  "${r.id}": \\{.*$`, "m");
-    if (re.test(man)) {
-      man = man.replace(re, line);
-      updated.push(r.id);
-    } else {
-      man = man.replace(/\n};\n\nexport function playerPhoto/, `\n${line}\n};\n\nexport function playerPhoto`);
-      added.push(r.id);
+  const tmp = `${dest}.tmp`;
+  let chosen = null;
+  // Try candidates in rank order until one downloads; write via temp so a failure
+  // never deletes a pre-existing good file.
+  for (const c of r.candidates) {
+    try {
+      execFileSync("curl", ["-sL", "--fail", "--max-time", "45", "-A", UA, "-o", tmp, c.url], { stdio: "ignore" });
+      execFileSync("sips", ["-Z", "1000", "-s", "formatOptions", "82", tmp], { stdio: "ignore" });
+      if (fs.readFileSync(tmp).length < 3000) throw new Error("too small");
+      fs.renameSync(tmp, dest);
+      chosen = c;
+      break;
+    } catch {
+      fs.rmSync(tmp, { force: true });
     }
-  } catch (err) {
-    fs.rmSync(dest, { force: true });
-    failed.push(`${r.id}:${String(err.message || err).slice(0, 30)}`);
+  }
+  if (!chosen) {
+    failed.push(r.id);
+    continue;
+  }
+  const c = chosen;
+  const line = `  "${r.id}": { src: "/players/${r.id}.jpg", author: "${esc(c.author)}", license: "${esc(c.license)}", licenseUrl: "${esc(c.licenseUrl)}", source: "${esc(c.sourcePage)}" },`;
+  const re = new RegExp(`^  "${r.id}": \\{.*$`, "m");
+  if (re.test(man)) {
+    man = man.replace(re, line);
+    updated.push(r.id);
+  } else {
+    man = man.replace(/\n};\n\nexport function playerPhoto/, `\n${line}\n};\n\nexport function playerPhoto`);
+    added.push(r.id);
   }
 }
 
