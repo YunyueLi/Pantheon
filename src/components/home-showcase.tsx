@@ -108,6 +108,7 @@ export function HomeShowcase({ immortals }: { immortals: Immortal[] }) {
                         alt=""
                         aria-hidden
                         className="hs-photo"
+                        loading="lazy"
                         decoding="async"
                         style={{
                           objectPosition: m.photoPos ?? "50% 12%",

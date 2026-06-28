@@ -61,6 +61,8 @@ function Portrait({ photo, initials, caption, pos, zoom }: { photo?: string; ini
           alt=""
           aria-hidden
           className="portrait-photo"
+          decoding="async"
+          fetchPriority="high"
           data-loaded={loaded}
           style={{ objectPosition, ...(zoom ? { transform: `scale(${zoom})`, transformOrigin: objectPosition } : {}) }}
           ref={(el) => {

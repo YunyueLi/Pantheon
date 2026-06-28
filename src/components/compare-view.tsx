@@ -19,7 +19,8 @@ import { useI18n } from "@/lib/i18n/provider";
 // The combatant's portrait behind one side of the duel — the same monument field as
 // the profile (halftone + radiant bloom), the photo feathered toward the face and a
 // scrim rising from the page colour so the name/index stay legible over it.
-function DuelFace({ photo, pos, side }: { photo: string; pos?: string; side: "a" | "b" }) {
+function DuelFace({ photo, pos, zoom, side }: { photo: string; pos?: string; zoom?: number; side: "a" | "b" }) {
+  const objectPosition = pos ?? "50% 20%";
   return (
     <div className="duel-portrait" aria-hidden>
       <svg className="duel-field" viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice">
@@ -37,7 +38,15 @@ function DuelFace({ photo, pos, side }: { photo: string; pos?: string; side: "a"
         <rect className="field-bloom" width="400" height="520" fill={`url(#dvig-${side})`} />
       </svg>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="duel-photo" src={photo} alt="" aria-hidden decoding="async" style={{ objectPosition: pos ?? "50% 20%" }} />
+      <img
+        className="duel-photo"
+        src={photo}
+        alt=""
+        aria-hidden
+        decoding="async"
+        fetchPriority="high"
+        style={{ objectPosition, ...(zoom ? { transform: `scale(${zoom})`, transformOrigin: objectPosition } : {}) }}
+      />
       <div className="duel-scrim" />
     </div>
   );
@@ -198,7 +207,7 @@ export function CompareView() {
         <span className="ghost-glyph duel-vs">VS</span>
         <div className="duel-seam" />
         <div className="duel-side a">
-          {aPhoto && <DuelFace photo={aPhoto} pos={photoFraming(a.id)?.pos} side="a" />}
+          {aPhoto && <DuelFace photo={aPhoto} pos={photoFraming(a.id)?.pos} zoom={photoFraming(a.id)?.zoom} side="a" />}
           <div className="duel-content">
             <div className="side-meta">{subOf(a)}</div>
             <div className="side-name">{name(a)}</div>
@@ -212,7 +221,7 @@ export function CompareView() {
           </div>
         </div>
         <div className="duel-side b right">
-          {bPhoto && <DuelFace photo={bPhoto} pos={photoFraming(b.id)?.pos} side="b" />}
+          {bPhoto && <DuelFace photo={bPhoto} pos={photoFraming(b.id)?.pos} zoom={photoFraming(b.id)?.zoom} side="b" />}
           <div className="duel-content">
             <div className="side-meta">{subOf(b)}</div>
             <div className="side-name">{name(b)}</div>
