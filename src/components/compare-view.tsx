@@ -20,7 +20,10 @@ import { useI18n } from "@/lib/i18n/provider";
 // the profile (halftone + radiant bloom), the photo feathered toward the face and a
 // scrim rising from the page colour so the name/index stay legible over it.
 function DuelFace({ photo, pos, zoom, side }: { photo: string; pos?: string; zoom?: number; side: "a" | "b" }) {
-  const objectPosition = pos ?? "50% 20%";
+  // Faces sit ~30-45% down a head-and-shoulders crop. object-position Y aligns the
+  // image's Y% line to the box's Y% line, so anchoring at ~42% keeps the face in the
+  // upper-middle of the (often wide, short) duel panel — not the hairline.
+  const objectPosition = pos ?? "50% 42%";
   return (
     <div className="duel-portrait" aria-hidden>
       <svg className="duel-field" viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice">
@@ -139,7 +142,7 @@ export function CompareView() {
 /* combatant portrait behind each side */
 .duel-portrait{position:absolute;inset:0;z-index:0;color:var(--fg);pointer-events:none}
 .duel-field{position:absolute;inset:0;width:100%;height:100%}
-.duel-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.5) brightness(1.02);opacity:.9;-webkit-mask-image:radial-gradient(76% 66% at 50% 30%,#000 42%,transparent 100%);mask-image:radial-gradient(76% 66% at 50% 30%,#000 42%,transparent 100%)}
+.duel-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.5) brightness(1.02);opacity:.9;-webkit-mask-image:radial-gradient(82% 74% at 50% 42%,#000 48%,transparent 100%);mask-image:radial-gradient(82% 74% at 50% 42%,#000 48%,transparent 100%)}
 .duel-scrim{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 16%,color-mix(in srgb,var(--bg) 52%,transparent) 42%,transparent 72%)}
 .duel-content{position:relative;z-index:2;display:flex;flex-direction:column}
 .duel-side.right .duel-content{align-items:flex-end;text-align:right}
