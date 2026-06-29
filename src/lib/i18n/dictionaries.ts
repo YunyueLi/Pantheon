@@ -1,7 +1,7 @@
 import type { Locale } from "./config";
 
 const en = {
-  nav: { explore: "Explore", leaderboard: "Leaderboard", teams: "Teams", compare: "Compare", methodology: "Methodology", lol: "LoL", football: "Football", basketball: "Basketball", clubs: "Clubs", f1: "F1", "table-tennis": "Table Tennis", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
+  nav: { explore: "Explore", leaderboard: "Leaderboard", teams: "Teams", compare: "Compare", methodology: "Methodology", lol: "LoL", football: "Football", basketball: "Basketball", clubs: "Clubs", f1: "F1", tennis: "Tennis", "table-tennis": "Table Tennis", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "Search players", placeholder: "Search players, teams…", empty: "No players found" },
   theme: { gold: "Gold", indigo: "Indigo" },
   common: {
@@ -143,11 +143,11 @@ const en = {
     worlds_runnerup: "Worlds Finalist",
     regional_runnerup: "Regional Finalist",
   },
-  bucket: { team: "Team titles", individual: "Individual awards", placement: "Deep runs" },
+  bucket: { team: "Team titles", individual: "Individual awards", placement: "Placement" },
   bucketDesc: {
     team: "Championships, weighted by event tier",
     individual: "MVPs & All-Pro selections, scaled by vote share",
-    placement: "Finals appearances that fell short of the title",
+    placement: "Finishing and ranking positions — poles, podiums, finals reached, and year-end standings.",
   },
   axis: {
     International: "International",
@@ -187,10 +187,14 @@ const en = {
     Finals: "Grand-final appearances at the world championship.",
     Masters: "VCT Masters — the mid-season international LAN titles.",
     MVPs: "Champions & Masters MVP awards — peak brilliance on the biggest stage.",
+    Slams: "Grand Slam singles titles — the sport's ultimate currency, plus the calendar- and career-Slam capstones.",
+    YearEndNo1: "Seasons finished as world No. 1 — the purest measure of year-long dominance.",
+    TourFinals: "Year-end Tour Finals titles — the elite season-closing championship.",
+    OlympicGold: "Olympic singles gold — the rarest prize, contested once every four years.",
   },
   role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Goalkeeper", DEF: "Defender", MID: "Midfielder", FWD: "Forward", Manager: "Manager", PG: "Point Guard", SG: "Shooting Guard", SF: "Small Forward", PF: "Power Forward", C: "Center", M: "Men's", W: "Women's" },
   regionCountry: { LCK: "Korea", LPL: "China", LEC: "EMEA", LCS: "N. America", PCS: "Pacific", VCS: "Vietnam", LJL: "Japan", CBLOL: "Brazil", LLA: "Latin America" },
-  preset: { balanced: "Balanced", titles: "Titles purist", individual: "Individual brilliance", silverware: "Silverware" },
+  preset: { balanced: "Balanced", titles: "Titles purist", individual: "Individual brilliance", silverware: "Silverware", dominance: "Dominance" },
 };
 
 // honorType and axis carry dynamic, per-sport keys (LoL + football), so they are
@@ -207,7 +211,7 @@ export type Dict = Omit<typeof en, "honorType" | "axis" | "axisDesc"> & {
 };
 
 const zh: Dict = {
-  nav: { explore: "探索", leaderboard: "排行榜", teams: "战队", compare: "对比", methodology: "算法说明", lol: "英雄联盟", football: "足球", basketball: "篮球", clubs: "俱乐部", f1: "F1", "table-tennis": "乒乓球", go: "围棋", dota2: "Dota 2", valorant: "无畏契约" },
+  nav: { explore: "探索", leaderboard: "排行榜", teams: "战队", compare: "对比", methodology: "算法说明", lol: "英雄联盟", football: "足球", basketball: "篮球", clubs: "俱乐部", f1: "F1", tennis: "网球", "table-tennis": "乒乓球", go: "围棋", dota2: "Dota 2", valorant: "无畏契约" },
   search: { label: "搜索选手", placeholder: "搜索选手、战队…", empty: "未找到选手" },
   theme: { gold: "金色", indigo: "靛蓝" },
   common: {
@@ -420,13 +424,13 @@ const zh: Dict = {
     ti_title: "国际邀请赛冠军", ti_runner_up: "TI 四强", valve_major_title: "V社锦标赛冠军", premier_title: "顶级锦标赛冠军", best_player_award: "最佳选手",
     champions_title: "全球总决赛冠军", champions_mvp: "总决赛MVP", masters_title: "大师赛冠军", masters_mvp: "大师赛MVP", vct_regional: "赛区联赛冠军", champions_finalist: "总决赛亚军",
   },
-  bucket: { team: "团队冠军", individual: "个人奖项", placement: "决赛之旅" },
+  bucket: { team: "团队冠军", individual: "个人奖项", placement: "名次" },
   bucketDesc: {
     team: "各项冠军，按赛事级别加权",
     individual: "MVP 与最佳阵容，按得票率折算",
-    placement: "止步于决赛、未能夺冠的旅程",
+    placement: "名次与排位——杆位、领奖台、闯入决赛、年终排名。",
   },
-  axis: { International: "国际赛", Domestic: "国内赛", Individual: "个人", Peak: "巅峰", Longevity: "长青", Country: "国家队", Club: "俱乐部", Titles: "冠军", Honors: "入选阵容", Placement: "决赛之旅", Wins: "胜场", Poles: "杆位", Podiums: "领奖台", Singles: "单打", Team: "团体", Doubles: "双打", Tour: "巡回赛", World: "世界大赛", TI: "国际邀请赛", Majors: "Major", Premier: "顶级赛事", Awards: "个人奖", Champions: "全球总决赛", Masters: "大师赛", MVPs: "MVP", Regional: "赛区", Japan: "日本", Korea: "韩国", China: "中国" },
+  axis: { International: "国际赛", Domestic: "国内赛", Individual: "个人", Peak: "巅峰", Longevity: "长青", Country: "国家队", Club: "俱乐部", Titles: "冠军", Honors: "入选阵容", Placement: "决赛之旅", Wins: "胜场", Poles: "杆位", Podiums: "领奖台", Singles: "单打", Team: "团体", Doubles: "双打", Tour: "巡回赛", World: "世界大赛", TI: "国际邀请赛", Majors: "Major", Premier: "顶级赛事", Awards: "个人奖", Champions: "全球总决赛", Masters: "大师赛", MVPs: "MVP", Regional: "赛区", Japan: "日本", Korea: "韩国", China: "中国", Slams: "大满贯", YearEndNo1: "年终第一", TourFinals: "年终总决赛", OlympicGold: "奥运金牌" },
   league: { PL: "英超", LALIGA: "西甲", SERIEA: "意甲", BUNDESLIGA: "德甲", LIGUE1: "法甲", PRIMEIRA: "葡超", EREDIVISIE: "荷甲", SOUTHAM: "南美", SOVIET: "苏联联赛", JSL: "苏超", INTL: "国际" },
   axisDesc: {
     International: "国际赛冠军——世界级与洲际冠军及其 MVP。",
@@ -459,15 +463,19 @@ const zh: Dict = {
     Finals: "世界冠军赛的决赛之旅。",
     Masters: "VCT 大师赛——赛季中期的国际 LAN 冠军。",
     MVPs: "总决赛与大师赛 MVP——大赛舞台上的个人巅峰。",
+    Slams: "大满贯单打冠军——网球的终极硬通货,外加全年与生涯全满贯加冕。",
+    YearEndNo1: "以年终世界第一收官的赛季数——最纯粹的全年统治力标尺。",
+    TourFinals: "年终总决赛冠军——赛季收官的精英冠军赛。",
+    OlympicGold: "奥运单打金牌——四年一度、最稀有的荣誉。",
   },
   role: { Top: "上单", Jungle: "打野", Mid: "中单", Bot: "下路", Support: "辅助", GK: "门将", DEF: "后卫", MID: "中场", FWD: "前锋", Manager: "主教练", PG: "控球后卫", SG: "得分后卫", SF: "小前锋", PF: "大前锋", C: "中锋", M: "男子", W: "女子" },
   roleAbbr: { Top: "上单", Jungle: "打野", Mid: "中单", Bot: "下路", Support: "辅助", GK: "门将", DEF: "后卫", MID: "中场", FWD: "前锋", Manager: "教练", PG: "控卫", SG: "分卫", SF: "小前", PF: "大前", C: "中锋", M: "男子", W: "女子", carry: "一号位", mid: "中单", offlane: "劣单", "soft-support": "软辅", "hard-support": "硬辅", duelist: "决斗", controller: "控场", initiator: "先锋", sentinel: "哨位", flex: "自由人", igl: "指挥" },
   regionCountry: { LCK: "韩国", LPL: "中国", LEC: "欧洲", LCS: "北美", PCS: "太平洋", VCS: "越南", LJL: "日本", CBLOL: "巴西", LLA: "拉丁美洲" },
-  preset: { balanced: "均衡", titles: "唯冠军论", individual: "个人光环", silverware: "奖杯优先" },
+  preset: { balanced: "均衡", titles: "唯冠军论", individual: "个人光环", silverware: "奖杯优先", dominance: "统治力" },
 };
 
 const ko: Dict = {
-  nav: { explore: "둘러보기", leaderboard: "리더보드", teams: "팀", compare: "비교", methodology: "산정 방식", lol: "LoL", football: "축구", basketball: "농구", clubs: "클럽", f1: "F1", "table-tennis": "탁구", go: "바둑", dota2: "Dota 2", valorant: "발로란트" },
+  nav: { explore: "둘러보기", leaderboard: "리더보드", teams: "팀", compare: "비교", methodology: "산정 방식", lol: "LoL", football: "축구", basketball: "농구", clubs: "클럽", f1: "F1", tennis: "테니스", "table-tennis": "탁구", go: "바둑", dota2: "Dota 2", valorant: "발로란트" },
   search: { label: "선수 검색", placeholder: "선수·팀 검색…", empty: "선수를 찾을 수 없습니다" },
   theme: { gold: "골드", indigo: "인디고" },
   common: {
@@ -609,11 +617,11 @@ const ko: Dict = {
     worlds_runnerup: "월즈 준우승",
     regional_runnerup: "지역 준우승",
   },
-  bucket: { team: "팀 우승", individual: "개인 수상", placement: "결승 진출" },
+  bucket: { team: "팀 우승", individual: "개인 수상", placement: "순위" },
   bucketDesc: {
     team: "이벤트 등급으로 가중된 우승",
     individual: "MVP와 올프로 선정, 득표율로 환산",
-    placement: "우승에 닿지 못한 결승 진출",
+    placement: "성적과 순위 — 폴, 포디움, 결승 진출, 시즌 최종 순위.",
   },
   axis: { International: "국제전", Domestic: "국내", Individual: "개인", Peak: "전성기", Longevity: "롱런" },
   axisDesc: {
@@ -625,11 +633,11 @@ const ko: Dict = {
   },
   role: { Top: "탑", Jungle: "정글", Mid: "미드", Bot: "바텀", Support: "서포터", GK: "골키퍼", DEF: "수비수", MID: "미드필더", FWD: "공격수", Manager: "감독", PG: "포인트 가드", SG: "슈팅 가드", SF: "스몰 포워드", PF: "파워 포워드", C: "센터", M: "남자", W: "여자" },
   regionCountry: { LCK: "한국", LPL: "중국", LEC: "유럽", LCS: "북미", PCS: "퍼시픽", VCS: "베트남", LJL: "일본", CBLOL: "브라질", LLA: "라틴 아메리카" },
-  preset: { balanced: "균형", titles: "우승 중심", individual: "개인 기량", silverware: "트로피 중심" },
+  preset: { balanced: "균형", titles: "우승 중심", individual: "개인 기량", silverware: "트로피 중심", dominance: "지배력" },
 };
 
 const ja: Dict = {
-  nav: { explore: "ホーム", leaderboard: "ランキング", teams: "チーム", compare: "比較", methodology: "算出方法", lol: "LoL", football: "サッカー", basketball: "バスケ", clubs: "クラブ", f1: "F1", "table-tennis": "卓球", go: "囲碁", dota2: "Dota 2", valorant: "VALORANT" },
+  nav: { explore: "ホーム", leaderboard: "ランキング", teams: "チーム", compare: "比較", methodology: "算出方法", lol: "LoL", football: "サッカー", basketball: "バスケ", clubs: "クラブ", f1: "F1", tennis: "テニス", "table-tennis": "卓球", go: "囲碁", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "選手を検索", placeholder: "選手・チームを検索…", empty: "選手が見つかりません" },
   theme: { gold: "ゴールド", indigo: "インディゴ" },
   common: {
@@ -771,11 +779,11 @@ const ja: Dict = {
     worlds_runnerup: "ワールドズ準優勝",
     regional_runnerup: "地域準優勝",
   },
-  bucket: { team: "チーム優勝", individual: "個人タイトル", placement: "決勝進出" },
+  bucket: { team: "チーム優勝", individual: "個人タイトル", placement: "順位" },
   bucketDesc: {
     team: "各優勝。大会の格で重み付け",
     individual: "MVP とオールプロ選出。得票率で換算",
-    placement: "優勝に届かなかった決勝進出",
+    placement: "成績と順位——ポール、表彰台、決勝進出、年間最終順位。",
   },
   axis: { International: "国際", Domestic: "国内", Individual: "個人", Peak: "全盛期", Longevity: "継続性" },
   axisDesc: {
@@ -787,11 +795,11 @@ const ja: Dict = {
   },
   role: { Top: "トップ", Jungle: "ジャングル", Mid: "ミッド", Bot: "ボット", Support: "サポート", GK: "ゴールキーパー", DEF: "ディフェンダー", MID: "ミッドフィールダー", FWD: "フォワード", Manager: "監督", PG: "ポイントガード", SG: "シューティングガード", SF: "スモールフォワード", PF: "パワーフォワード", C: "センター", M: "男子", W: "女子" },
   regionCountry: { LCK: "韓国", LPL: "中国", LEC: "EMEA", LCS: "北米", PCS: "太平洋", VCS: "ベトナム", LJL: "日本", CBLOL: "ブラジル", LLA: "ラテンアメリカ" },
-  preset: { balanced: "バランス", titles: "優勝重視", individual: "個人技重視", silverware: "タイトル重視" },
+  preset: { balanced: "バランス", titles: "優勝重視", individual: "個人技重視", silverware: "タイトル重視", dominance: "支配力" },
 };
 
 const de: Dict = {
-  nav: { explore: "Entdecken", leaderboard: "Rangliste", teams: "Teams", compare: "Vergleich", methodology: "Methodik", lol: "LoL", football: "Fußball", basketball: "Basketball", clubs: "Vereine", f1: "F1", "table-tennis": "Tischtennis", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
+  nav: { explore: "Entdecken", leaderboard: "Rangliste", teams: "Teams", compare: "Vergleich", methodology: "Methodik", lol: "LoL", football: "Fußball", basketball: "Basketball", clubs: "Vereine", f1: "F1", tennis: "Tennis", "table-tennis": "Tischtennis", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "Spieler suchen", placeholder: "Spieler, Teams suchen…", empty: "Keine Spieler gefunden" },
   theme: { gold: "Gold", indigo: "Indigo" },
   common: {
@@ -933,11 +941,11 @@ const de: Dict = {
     worlds_runnerup: "Worlds-Finalist",
     regional_runnerup: "Regionaler Finalist",
   },
-  bucket: { team: "Team-Titel", individual: "Einzelauszeichnungen", placement: "Finalläufe" },
+  bucket: { team: "Team-Titel", individual: "Einzelauszeichnungen", placement: "Platzierung" },
   bucketDesc: {
     team: "Titel, gewichtet nach Turnierstufe",
     individual: "MVPs & All-Pro-Wahlen, skaliert nach Stimmenanteil",
-    placement: "Finalteilnahmen, die den Titel verpassten",
+    placement: "Platzierungen und Ränge — Poles, Podien, erreichte Finals und Jahresend-Ranglisten.",
   },
   axis: {
     International: "International",
@@ -955,11 +963,11 @@ const de: Dict = {
   },
   role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Torwart", DEF: "Verteidiger", MID: "Mittelfeld", FWD: "Stürmer", Manager: "Trainer", PG: "Point Guard", SG: "Shooting Guard", SF: "Small Forward", PF: "Power Forward", C: "Center", M: "Herren", W: "Damen" },
   regionCountry: { LCK: "Korea", LPL: "China", LEC: "EMEA", LCS: "Nordamerika", PCS: "Pazifik", VCS: "Vietnam", LJL: "Japan", CBLOL: "Brasilien", LLA: "Lateinamerika" },
-  preset: { balanced: "Ausgewogen", titles: "Titel-Purist", individual: "Individuelle Klasse", silverware: "Titelsammlung" },
+  preset: { balanced: "Ausgewogen", titles: "Titel-Purist", individual: "Individuelle Klasse", silverware: "Titelsammlung", dominance: "Dominanz" },
 };
 
 const fr: Dict = {
-  nav: { explore: "Explorer", leaderboard: "Classement", teams: "Équipes", compare: "Comparer", methodology: "Méthodologie", lol: "LoL", football: "Football", basketball: "Basket", clubs: "Clubs", f1: "F1", "table-tennis": "Tennis de table", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
+  nav: { explore: "Explorer", leaderboard: "Classement", teams: "Équipes", compare: "Comparer", methodology: "Méthodologie", lol: "LoL", football: "Football", basketball: "Basket", clubs: "Clubs", f1: "F1", tennis: "Tennis", "table-tennis": "Tennis de table", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "Rechercher des joueurs", placeholder: "Rechercher joueurs, équipes…", empty: "Aucun joueur trouvé" },
   theme: { gold: "Or", indigo: "Indigo" },
   common: {
@@ -1101,11 +1109,11 @@ const fr: Dict = {
     worlds_runnerup: "Finaliste des Worlds",
     regional_runnerup: "Finaliste régional",
   },
-  bucket: { team: "Titres d'équipe", individual: "Distinctions individuelles", placement: "Parcours en finale" },
+  bucket: { team: "Titres d'équipe", individual: "Distinctions individuelles", placement: "Classement" },
   bucketDesc: {
     team: "Titres, pondérés par niveau de tournoi",
     individual: "MVP & sélections All-Pro, selon la part des votes",
-    placement: "Finales atteintes sans décrocher le titre",
+    placement: "Places et classements — poles, podiums, finales atteintes et classements de fin d'année.",
   },
   axis: { International: "International", Domestic: "National", Individual: "Individuel", Peak: "Apogée", Longevity: "Longévité" },
   axisDesc: {
@@ -1117,11 +1125,11 @@ const fr: Dict = {
   },
   role: { Top: "Top", Jungle: "Jungle", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Gardien", DEF: "Défenseur", MID: "Milieu", FWD: "Attaquant", Manager: "Entraîneur", PG: "Meneur", SG: "Arrière", SF: "Ailier", PF: "Ailier fort", C: "Pivot", M: "Hommes", W: "Femmes" },
   regionCountry: { LCK: "Corée", LPL: "Chine", LEC: "EMEA", LCS: "Am. du Nord", PCS: "Pacifique", VCS: "Vietnam", LJL: "Japon", CBLOL: "Brésil", LLA: "Amérique latine" },
-  preset: { balanced: "Équilibré", titles: "Puriste des titres", individual: "Brio individuel", silverware: "Palmarès" },
+  preset: { balanced: "Équilibré", titles: "Puriste des titres", individual: "Brio individuel", silverware: "Palmarès", dominance: "Domination" },
 };
 
 const es: Dict = {
-  nav: { explore: "Explorar", leaderboard: "Clasificación", teams: "Equipos", compare: "Comparar", methodology: "Metodología", lol: "LoL", football: "Fútbol", basketball: "Baloncesto", clubs: "Clubes", f1: "F1", "table-tennis": "Tenis de mesa", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
+  nav: { explore: "Explorar", leaderboard: "Clasificación", teams: "Equipos", compare: "Comparar", methodology: "Metodología", lol: "LoL", football: "Fútbol", basketball: "Baloncesto", clubs: "Clubes", f1: "F1", tennis: "Tenis", "table-tennis": "Tenis de mesa", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "Buscar jugadores", placeholder: "Buscar jugadores, equipos…", empty: "No se encontraron jugadores" },
   theme: { gold: "Oro", indigo: "Índigo" },
   common: {
@@ -1263,11 +1271,11 @@ const es: Dict = {
     worlds_runnerup: "Finalista de Worlds",
     regional_runnerup: "Finalista regional",
   },
-  bucket: { team: "Títulos de equipo", individual: "Premios individuales", placement: "Llegadas a la final" },
+  bucket: { team: "Títulos de equipo", individual: "Premios individuales", placement: "Posición" },
   bucketDesc: {
     team: "Títulos, ponderados por nivel de torneo",
     individual: "MVP y selecciones All-Pro, escalados por porcentaje de votos",
-    placement: "Finales alcanzadas sin lograr el título",
+    placement: "Posiciones y clasificaciones — poles, podios, finales alcanzadas y clasificaciones de fin de año.",
   },
   axis: { International: "Internacional", Domestic: "Nacional", Individual: "Individual", Peak: "Apogeo", Longevity: "Longevidad" },
   axisDesc: {
@@ -1279,7 +1287,7 @@ const es: Dict = {
   },
   role: { Top: "Top", Jungle: "Jungla", Mid: "Mid", Bot: "Bot", Support: "Support", GK: "Portero", DEF: "Defensa", MID: "Centrocampista", FWD: "Delantero", Manager: "Entrenador", PG: "Base", SG: "Escolta", SF: "Alero", PF: "Ala-pívot", C: "Pívot", M: "Masculino", W: "Femenino" },
   regionCountry: { LCK: "Corea", LPL: "China", LEC: "EMEA", LCS: "Norteamérica", PCS: "Pacífico", VCS: "Vietnam", LJL: "Japón", CBLOL: "Brasil", LLA: "Latinoamérica" },
-  preset: { balanced: "Equilibrado", titles: "Purista de títulos", individual: "Brillo individual", silverware: "Trofeos" },
+  preset: { balanced: "Equilibrado", titles: "Purista de títulos", individual: "Brillo individual", silverware: "Trofeos", dominance: "Dominio" },
 };
 
 export const dictionaries: Record<Locale, Dict> = { en, zh, ko, ja, de, fr, es };

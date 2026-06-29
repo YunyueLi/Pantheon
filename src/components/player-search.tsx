@@ -19,7 +19,7 @@ export function PlayerSearch() {
   const router = useRouter();
   const path = usePathname();
   const sportId =
-    ["football", "basketball", "f1", "table-tennis", "go", "dota2", "valorant"].find((s) =>
+    ["football", "basketball", "f1", "tennis", "table-tennis", "go", "dota2", "valorant"].find((s) =>
       path.startsWith(`/${s}`)
     ) ?? "lol";
   const config = getSport(sportId)!;

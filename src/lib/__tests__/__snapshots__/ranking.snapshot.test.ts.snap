@@ -140,6 +140,26 @@ exports[`top ranking: table-tennis > top 15 by balanced Honor Index 1`] = `
 ]
 `;
 
+exports[`top ranking: tennis > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Novak Djokovic — 11940",
+  "2. Steffi Graf — 11210",
+  "3. Serena Williams — 10820",
+  "4. Rafael Nadal — 9970",
+  "5. Margaret Court — 9970",
+  "6. Roger Federer — 9560",
+  "7. Martina Navratilova — 9300",
+  "8. Chris Evert — 8580",
+  "9. Helen Wills — 7750",
+  "10. Pete Sampras — 7130",
+  "11. Rod Laver — 5020",
+  "12. Billie Jean King — 5010",
+  "13. Björn Borg — 4940",
+  "14. Monica Seles — 4410",
+  "15. Ivan Lendl — 4370",
+]
+`;
+
 exports[`top ranking: valorant > top 15 by balanced Honor Index 1`] = `
 [
   "1. aspas — 700",

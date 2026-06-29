@@ -8,13 +8,14 @@ import { TABLE_TENNIS } from "./table-tennis";
 import { GO } from "./go";
 import { DOTA2 } from "./dota2";
 import { VALORANT } from "./valorant";
+import { TENNIS } from "./tennis";
 
 /** Apply the era-strength → Stature engine to every sport, uniformly. */
 function withStature(cfg: SportConfig): SportConfig {
   return { ...cfg, players: withEraStature(cfg.players, cfg.model) };
 }
 
-export const SPORTS: SportConfig[] = [LOL, FOOTBALL, BASKETBALL, F1, TABLE_TENNIS, GO, DOTA2, VALORANT].map(
+export const SPORTS: SportConfig[] = [LOL, FOOTBALL, BASKETBALL, F1, TENNIS, TABLE_TENNIS, GO, DOTA2, VALORANT].map(
   withStature
 );
 

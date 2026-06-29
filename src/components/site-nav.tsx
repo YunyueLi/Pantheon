@@ -42,7 +42,7 @@ function sectionLinks(sport: string) {
   ];
 }
 
-const SPORT_PREFIXES = ["football", "basketball", "f1", "table-tennis", "go", "dota2", "valorant"];
+const SPORT_PREFIXES = ["football", "basketball", "f1", "tennis", "table-tennis", "go", "dota2", "valorant"];
 
 export function SiteNav() {
   const path = usePathname();

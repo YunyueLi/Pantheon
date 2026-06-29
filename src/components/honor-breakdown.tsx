@@ -51,7 +51,7 @@ export function HonorBreakdown({ player }: { player: Player }) {
         </div>
       </div>
       <ul className="flex-1 space-y-2.5">
-        {data.map((d) => {
+        {data.filter((d) => d.value > 0).map((d) => {
           const pct = total > 0 ? Math.round((d.value / total) * 100) : 0;
           return (
             <li key={d.key} className="flex items-center justify-between gap-3">
