@@ -6,6 +6,7 @@ import { ThemeControls } from "@/components/theme-controls";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { PlayerSearch } from "@/components/player-search";
 import { SportSwitcher } from "@/components/sport-switcher";
+import { listSports } from "@/lib/sport/registry";
 import { useI18n } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 
@@ -42,12 +43,15 @@ function sectionLinks(sport: string) {
   ];
 }
 
-const SPORT_PREFIXES = ["football", "basketball", "f1", "tennis", "table-tennis", "go", "dota2", "valorant"];
-
 export function SiteNav() {
   const path = usePathname();
   const { t } = useI18n();
-  const sport = SPORT_PREFIXES.find((s) => path.startsWith(`/${s}`)) ?? "lol";
+  // Segment-safe match so a new id can't be shadowed by a prefix of another
+  // (e.g. `/golf` must not resolve to `go`, `/mlbb` must not resolve to `mlb`).
+  const sport =
+    listSports()
+      .map((s) => s.id)
+      .find((id) => id !== "lol" && (path === `/${id}` || path.startsWith(`/${id}/`))) ?? "lol";
   const links = sectionLinks(sport);
   // Methodology is the "how it's computed" colophon — it sits on the right rail with
   // the utility controls, set apart from the browse sections (rank / teams / compare).

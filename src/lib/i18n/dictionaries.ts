@@ -1,7 +1,7 @@
 import type { Locale } from "./config";
 
 const en = {
-  nav: { explore: "Explore", leaderboard: "Leaderboard", teams: "Teams", compare: "Compare", methodology: "Methodology", lol: "LoL", football: "Football", basketball: "Basketball", clubs: "Clubs", f1: "F1", tennis: "Tennis", "table-tennis": "Table Tennis", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
+  nav: { explore: "Explore", leaderboard: "Leaderboard", teams: "Teams", compare: "Compare", methodology: "Methodology", lol: "LoL", football: "Football", basketball: "Basketball", clubs: "Clubs", f1: "F1", tennis: "Tennis", "table-tennis": "Table Tennis", golf: "Golf", snooker: "Snooker", chess: "Chess", ufc: "UFC", mlb: "MLB", cricket: "Cricket", csgo: "CS:GO", hok: "Honor of Kings", mlbb: "Mobile Legends", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "Search players", placeholder: "Search players, teams…", empty: "No players found" },
   theme: { gold: "Gold", indigo: "Indigo" },
   common: {
@@ -211,7 +211,7 @@ export type Dict = Omit<typeof en, "honorType" | "axis" | "axisDesc"> & {
 };
 
 const zh: Dict = {
-  nav: { explore: "探索", leaderboard: "排行榜", teams: "战队", compare: "对比", methodology: "算法说明", lol: "英雄联盟", football: "足球", basketball: "篮球", clubs: "俱乐部", f1: "F1", tennis: "网球", "table-tennis": "乒乓球", go: "围棋", dota2: "Dota 2", valorant: "无畏契约" },
+  nav: { explore: "探索", leaderboard: "排行榜", teams: "战队", compare: "对比", methodology: "算法说明", lol: "英雄联盟", football: "足球", basketball: "篮球", clubs: "俱乐部", f1: "F1", tennis: "网球", "table-tennis": "乒乓球", golf: "高尔夫", snooker: "斯诺克", chess: "国际象棋", ufc: "UFC", mlb: "棒球", cricket: "板球", csgo: "CS:GO", hok: "王者荣耀", mlbb: "Mobile Legends", go: "围棋", dota2: "Dota 2", valorant: "无畏契约" },
   search: { label: "搜索选手", placeholder: "搜索选手、战队…", empty: "未找到选手" },
   theme: { gold: "金色", indigo: "靛蓝" },
   common: {
@@ -430,7 +430,7 @@ const zh: Dict = {
     individual: "MVP 与最佳阵容，按得票率折算",
     placement: "名次与排位——杆位、领奖台、闯入决赛、年终排名。",
   },
-  axis: { International: "国际赛", Domestic: "国内赛", Individual: "个人", Peak: "巅峰", Longevity: "长青", Country: "国家队", Club: "俱乐部", Titles: "冠军", Honors: "入选阵容", Placement: "决赛之旅", Wins: "胜场", Poles: "杆位", Podiums: "领奖台", Singles: "单打", Team: "团体", Doubles: "双打", Tour: "巡回赛", World: "世界大赛", TI: "国际邀请赛", Majors: "Major", Premier: "顶级赛事", Awards: "个人奖", Champions: "全球总决赛", Masters: "大师赛", MVPs: "MVP", Regional: "赛区", Japan: "日本", Korea: "韩国", China: "中国", Slams: "大满贯", YearEndNo1: "年终第一", TourFinals: "年终总决赛", OlympicGold: "奥运金牌" },
+  axis: { International: "国际赛", Domestic: "国内赛", Individual: "个人", Peak: "巅峰", Longevity: "长青", Country: "国家队", Club: "俱乐部", Titles: "冠军", Honors: "入选阵容", Placement: "决赛之旅", Wins: "胜场", Poles: "杆位", Podiums: "领奖台", Singles: "单打", Team: "团体", Doubles: "双打", Tour: "巡回赛", World: "世界大赛", TI: "国际邀请赛", Majors: "Major", Premier: "顶级赛事", Awards: "个人奖", Champions: "全球总决赛", Masters: "大师赛", MVPs: "MVP", Regional: "赛区", Japan: "日本", Korea: "韩国", China: "中国", Slams: "大满贯", YearEndNo1: "年终第一", TourFinals: "年终总决赛", OlympicGold: "奥运金牌", CSMajors: "Major冠军", HLTVNo1: "HLTV第一", MajorMVP: "Major MVP", LANTitles: "LAN冠军", GolfMajors: "大满贯", GolfPOY: "年度最佳球员", TourWins: "巡回赛冠军", ChessWC: "世界冠军", ChessNo1: "年终第一", SnkWorld: "世锦赛", SnkTC: "三大赛", SnkRanking: "排名赛冠军", UFCBelts: "金腰带", TitleDefenses: "卫冕次数", MLBAwards: "MVP／赛扬", WorldSeries: "世界大赛", AllStar: "全明星", MLBStatTitles: "单项王", WisdenLCW: "Wisden年度第一", ICCAward: "ICC年度球员", CricWorldCup: "世界杯", WisdenCoY: "Wisden年度", HOKWorld: "世冠杯", HOKKpl: "KPL冠军", HOKFmvp: "FMVP", MLBBWorld: "世界冠军", MLBBLeague: "MPL／MSC", MLBBFmvp: "FMVP" },
   league: { PL: "英超", LALIGA: "西甲", SERIEA: "意甲", BUNDESLIGA: "德甲", LIGUE1: "法甲", PRIMEIRA: "葡超", EREDIVISIE: "荷甲", SOUTHAM: "南美", SOVIET: "苏联联赛", JSL: "苏超", INTL: "国际" },
   axisDesc: {
     International: "国际赛冠军——世界级与洲际冠军及其 MVP。",
@@ -475,7 +475,7 @@ const zh: Dict = {
 };
 
 const ko: Dict = {
-  nav: { explore: "둘러보기", leaderboard: "리더보드", teams: "팀", compare: "비교", methodology: "산정 방식", lol: "LoL", football: "축구", basketball: "농구", clubs: "클럽", f1: "F1", tennis: "테니스", "table-tennis": "탁구", go: "바둑", dota2: "Dota 2", valorant: "발로란트" },
+  nav: { explore: "둘러보기", leaderboard: "리더보드", teams: "팀", compare: "비교", methodology: "산정 방식", lol: "LoL", football: "축구", basketball: "농구", clubs: "클럽", f1: "F1", tennis: "테니스", "table-tennis": "탁구", golf: "골프", snooker: "스누커", chess: "체스", ufc: "UFC", mlb: "MLB", cricket: "크리켓", csgo: "CS:GO", hok: "Honor of Kings", mlbb: "Mobile Legends", go: "바둑", dota2: "Dota 2", valorant: "발로란트" },
   search: { label: "선수 검색", placeholder: "선수·팀 검색…", empty: "선수를 찾을 수 없습니다" },
   theme: { gold: "골드", indigo: "인디고" },
   common: {
@@ -637,7 +637,7 @@ const ko: Dict = {
 };
 
 const ja: Dict = {
-  nav: { explore: "ホーム", leaderboard: "ランキング", teams: "チーム", compare: "比較", methodology: "算出方法", lol: "LoL", football: "サッカー", basketball: "バスケ", clubs: "クラブ", f1: "F1", tennis: "テニス", "table-tennis": "卓球", go: "囲碁", dota2: "Dota 2", valorant: "VALORANT" },
+  nav: { explore: "ホーム", leaderboard: "ランキング", teams: "チーム", compare: "比較", methodology: "算出方法", lol: "LoL", football: "サッカー", basketball: "バスケ", clubs: "クラブ", f1: "F1", tennis: "テニス", "table-tennis": "卓球", golf: "ゴルフ", snooker: "スヌーカー", chess: "チェス", ufc: "UFC", mlb: "MLB", cricket: "クリケット", csgo: "CS:GO", hok: "Honor of Kings", mlbb: "Mobile Legends", go: "囲碁", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "選手を検索", placeholder: "選手・チームを検索…", empty: "選手が見つかりません" },
   theme: { gold: "ゴールド", indigo: "インディゴ" },
   common: {
@@ -799,7 +799,7 @@ const ja: Dict = {
 };
 
 const de: Dict = {
-  nav: { explore: "Entdecken", leaderboard: "Rangliste", teams: "Teams", compare: "Vergleich", methodology: "Methodik", lol: "LoL", football: "Fußball", basketball: "Basketball", clubs: "Vereine", f1: "F1", tennis: "Tennis", "table-tennis": "Tischtennis", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
+  nav: { explore: "Entdecken", leaderboard: "Rangliste", teams: "Teams", compare: "Vergleich", methodology: "Methodik", lol: "LoL", football: "Fußball", basketball: "Basketball", clubs: "Vereine", f1: "F1", tennis: "Tennis", "table-tennis": "Tischtennis", golf: "Golf", snooker: "Snooker", chess: "Schach", ufc: "UFC", mlb: "MLB", cricket: "Cricket", csgo: "CS:GO", hok: "Honor of Kings", mlbb: "Mobile Legends", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "Spieler suchen", placeholder: "Spieler, Teams suchen…", empty: "Keine Spieler gefunden" },
   theme: { gold: "Gold", indigo: "Indigo" },
   common: {
@@ -967,7 +967,7 @@ const de: Dict = {
 };
 
 const fr: Dict = {
-  nav: { explore: "Explorer", leaderboard: "Classement", teams: "Équipes", compare: "Comparer", methodology: "Méthodologie", lol: "LoL", football: "Football", basketball: "Basket", clubs: "Clubs", f1: "F1", tennis: "Tennis", "table-tennis": "Tennis de table", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
+  nav: { explore: "Explorer", leaderboard: "Classement", teams: "Équipes", compare: "Comparer", methodology: "Méthodologie", lol: "LoL", football: "Football", basketball: "Basket", clubs: "Clubs", f1: "F1", tennis: "Tennis", "table-tennis": "Tennis de table", golf: "Golf", snooker: "Snooker", chess: "Échecs", ufc: "UFC", mlb: "MLB", cricket: "Cricket", csgo: "CS:GO", hok: "Honor of Kings", mlbb: "Mobile Legends", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "Rechercher des joueurs", placeholder: "Rechercher joueurs, équipes…", empty: "Aucun joueur trouvé" },
   theme: { gold: "Or", indigo: "Indigo" },
   common: {
@@ -1129,7 +1129,7 @@ const fr: Dict = {
 };
 
 const es: Dict = {
-  nav: { explore: "Explorar", leaderboard: "Clasificación", teams: "Equipos", compare: "Comparar", methodology: "Metodología", lol: "LoL", football: "Fútbol", basketball: "Baloncesto", clubs: "Clubes", f1: "F1", tennis: "Tenis", "table-tennis": "Tenis de mesa", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
+  nav: { explore: "Explorar", leaderboard: "Clasificación", teams: "Equipos", compare: "Comparar", methodology: "Metodología", lol: "LoL", football: "Fútbol", basketball: "Baloncesto", clubs: "Clubes", f1: "F1", tennis: "Tenis", "table-tennis": "Tenis de mesa", golf: "Golf", snooker: "Snooker", chess: "Ajedrez", ufc: "UFC", mlb: "MLB", cricket: "Críquet", csgo: "CS:GO", hok: "Honor of Kings", mlbb: "Mobile Legends", go: "Go", dota2: "Dota 2", valorant: "VALORANT" },
   search: { label: "Buscar jugadores", placeholder: "Buscar jugadores, equipos…", empty: "No se encontraron jugadores" },
   theme: { gold: "Oro", indigo: "Índigo" },
   common: {

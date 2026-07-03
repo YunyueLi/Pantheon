@@ -20,6 +20,66 @@ exports[`top ranking: basketball > top 15 by balanced Honor Index 1`] = `
 ]
 `;
 
+exports[`top ranking: chess > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Garry Kasparov — 3435",
+  "2. Magnus Carlsen — 2645",
+  "3. Anatoly Karpov — 1605",
+  "4. Emanuel Lasker — 1500",
+  "5. Viswanathan Anand — 1405",
+  "6. Mikhail Botvinnik — 1250",
+  "7. Alexander Alekhine — 1000",
+  "8. Wilhelm Steinitz — 1000",
+  "9. Vladimir Kramnik — 750",
+  "10. Bobby Fischer — 745",
+  "11. Tigran Petrosian — 545",
+  "12. Boris Spassky — 340",
+  "13. Vasily Smyslov — 340",
+  "14. Mikhail Tal — 295",
+  "15. José Raúl Capablanca — 250",
+]
+`;
+
+exports[`top ranking: cricket > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Don Bradman — 1214",
+  "2. Garfield Sobers — 974",
+  "3. Virat Kohli — 664",
+  "4. Ricky Ponting — 469",
+  "5. Viv Richards — 464",
+  "6. Shane Warne — 419",
+  "7. Sachin Tendulkar — 399",
+  "8. Kumar Sangakkara — 399",
+  "9. Jack Hobbs — 388",
+  "10. Muttiah Muralitharan — 299",
+  "11. Steve Smith — 294",
+  "12. Malcolm Marshall — 277",
+  "13. Glenn McGrath — 269",
+  "14. Brian Lara — 254",
+  "15. Jacques Kallis — 234",
+]
+`;
+
+exports[`top ranking: csgo > top 15 by balanced Honor Index 1`] = `
+[
+  "1. ZywOo — 1508",
+  "2. coldzera — 888",
+  "3. s1mple — 880",
+  "4. device — 812",
+  "5. dupreeh — 810",
+  "6. Magisk — 718",
+  "7. Xyp9x — 648",
+  "8. gla1ve — 648",
+  "9. olofmeister — 618",
+  "10. GeT_RiGhT — 598",
+  "11. ropz — 486",
+  "12. FalleN — 336",
+  "13. fer — 336",
+  "14. NBK- — 324",
+  "15. kennyS — 244",
+]
+`;
+
 exports[`top ranking: dota2 > top 15 by balanced Honor Index 1`] = `
 [
   "1. N0tail — 1400",
@@ -100,6 +160,45 @@ exports[`top ranking: go > top 15 by balanced Honor Index 1`] = `
 ]
 `;
 
+exports[`top ranking: golf > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Jack Nicklaus — 5333",
+  "2. Tiger Woods — 4967",
+  "3. Patty Berg — 4110",
+  "4. Mickey Wright — 4082",
+  "5. Annika Sörenstam — 3492",
+  "6. Louise Suggs — 3236",
+  "7. Walter Hagen — 3014",
+  "8. Ben Hogan — 2974",
+  "9. Babe Zaharias — 2746",
+  "10. Tom Watson — 2564",
+  "11. Gary Player — 2514",
+  "12. Betsy Rawls — 2330",
+  "13. Sam Snead — 2297",
+  "14. Karrie Webb — 2226",
+  "15. Gene Sarazen — 2098",
+]
+`;
+
+exports[`top ranking: hok > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Cat — 950",
+  "2. Alan — 875",
+  "3. Fly — 820",
+  "4. ZhongYi — 725",
+  "5. YiNuo — 690",
+  "6. ChangSheng — 650",
+  "7. HuaHai — 540",
+  "8. XiaoPang — 525",
+  "9. QingRong — 390",
+  "10. TanRan — 390",
+  "11. NuanYang — 340",
+  "12. ZiYang — 315",
+  "13. JiuCheng — 315",
+  "14. LaoShuai — 130",
+]
+`;
+
 exports[`top ranking: lol > top 15 by balanced Honor Index 1`] = `
 [
   "1. Faker — 9702",
@@ -117,6 +216,66 @@ exports[`top ranking: lol > top 15 by balanced Honor Index 1`] = `
   "13. Caps — 2322",
   "14. CoreJJ — 1882",
   "15. Meiko — 1860",
+]
+`;
+
+exports[`top ranking: mlb > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Babe Ruth — 1682",
+  "2. Ted Williams — 1664",
+  "3. Barry Bonds — 1654",
+  "4. Roger Clemens — 1646",
+  "5. Sandy Koufax — 1376",
+  "6. Ty Cobb — 1360",
+  "7. Walter Johnson — 1350",
+  "8. Mickey Mantle — 1300",
+  "9. Stan Musial — 1284",
+  "10. Lou Gehrig — 1202",
+  "11. Randy Johnson — 1190",
+  "12. Joe DiMaggio — 1068",
+  "13. Willie Mays — 924",
+  "14. Honus Wagner — 850",
+  "15. Alex Rodriguez — 844",
+]
+`;
+
+exports[`top ranking: mlbb > top 15 by balanced Honor Index 1`] = `
+[
+  "1. KarlTzy — 793",
+  "2. Sanford — 670",
+  "3. FlapTzy — 546",
+  "4. CW — 541",
+  "5. Kiboy — 541",
+  "6. Sanz — 541",
+  "7. OHEB — 520",
+  "8. Kairi — 493",
+  "9. Kelra — 478",
+  "10. Bennyqt — 321",
+  "11. Ribo — 301",
+  "12. Wise — 294",
+  "13. OhMyV33nus — 294",
+  "14. Oura — 273",
+  "15. Lusty — 246",
+]
+`;
+
+exports[`top ranking: snooker > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Ronnie O'Sullivan — 3496",
+  "2. Stephen Hendry — 3001",
+  "3. Steve Davis — 2508",
+  "4. Mark Selby — 1729",
+  "5. John Higgins — 1711",
+  "6. Ray Reardon — 1599",
+  "7. Mark Williams — 1326",
+  "8. Neil Robertson — 925",
+  "9. Judd Trump — 880",
+  "10. John Spencer — 840",
+  "11. Alex Higgins — 770",
+  "12. Shaun Murphy — 628",
+  "13. Cliff Thorburn — 529",
+  "14. Terry Griffiths — 430",
+  "15. Peter Ebdon — 412",
 ]
 `;
 
@@ -157,6 +316,26 @@ exports[`top ranking: tennis > top 15 by balanced Honor Index 1`] = `
   "13. Björn Borg — 4940",
   "14. Monica Seles — 4410",
   "15. Ivan Lendl — 4370",
+]
+`;
+
+exports[`top ranking: ufc > top 15 by balanced Honor Index 1`] = `
+[
+  "1. Jon Jones — 1380",
+  "2. Georges St-Pierre — 1140",
+  "3. Amanda Nunes — 1060",
+  "4. Demetrious Johnson — 1030",
+  "5. Anderson Silva — 950",
+  "6. Valentina Shevchenko — 870",
+  "7. Daniel Cormier — 740",
+  "8. Islam Makhachev — 740",
+  "9. José Aldo — 710",
+  "10. Randy Couture — 660",
+  "11. Ronda Rousey — 630",
+  "12. Henry Cejudo — 580",
+  "13. Kamaru Usman — 550",
+  "14. Israel Adesanya — 550",
+  "15. Alexander Volkanovski — 550",
 ]
 `;
 

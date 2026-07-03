@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Search } from "lucide-react";
-import { getSport } from "@/lib/sport/registry";
+import { getSport, listSports } from "@/lib/sport/registry";
 import { ranked } from "@/lib/sport/honor";
 import { localizeTeam } from "@/lib/sport/football/clubs";
 import type { Player } from "@/lib/sport/types";
@@ -19,9 +19,9 @@ export function PlayerSearch() {
   const router = useRouter();
   const path = usePathname();
   const sportId =
-    ["football", "basketball", "f1", "tennis", "table-tennis", "go", "dota2", "valorant"].find((s) =>
-      path.startsWith(`/${s}`)
-    ) ?? "lol";
+    listSports()
+      .map((s) => s.id)
+      .find((id) => id !== "lol" && (path === `/${id}` || path.startsWith(`/${id}/`))) ?? "lol";
   const config = getSport(sportId)!;
   const players = config.players;
   const base = config.basePath;
