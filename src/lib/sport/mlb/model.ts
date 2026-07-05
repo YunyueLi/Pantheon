@@ -82,6 +82,8 @@ export const MLB_MODEL = {
 export const MLB_LEAGUES: LeagueMeta[] = [
   { id: "USA", label: "United States", country: "United States", flag: "🇺🇸" },
   { id: "DOM", label: "Dominican Republic", country: "Dominican Republic", flag: "🇩🇴" },
+  { id: "VEN", label: "Venezuela", country: "Venezuela", flag: "🇻🇪" },
+  { id: "PUR", label: "Puerto Rico", country: "Puerto Rico", flag: "🇵🇷" },
   { id: "JPN", label: "Japan", country: "Japan", flag: "🇯🇵" },
 ];
 

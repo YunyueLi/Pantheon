@@ -11,6 +11,11 @@ const ZH_NAMES: Record<string, string> = {
   "jack-hobbs": "杰克·霍布斯", "kumar-sangakkara": "库马尔·桑加卡拉", "rahul-dravid": "拉胡尔·德拉维德",
   "ab-de-villiers": "AB·德维利尔斯", "steve-smith": "史蒂夫·史密斯", "joe-root": "乔·鲁特",
   "kane-williamson": "凯恩·威廉姆森", "adam-gilchrist": "亚当·吉尔克里斯特", "malcolm-marshall": "马尔科姆·马歇尔",
+  "kapil-dev": "卡皮尔·德夫", "ms-dhoni": "马亨德拉·辛格·多尼", "dennis-lillee": "丹尼斯·利利",
+  "curtly-ambrose": "柯特利·安布罗斯", "allan-border": "艾伦·博德", "steve-waugh": "史蒂夫·沃",
+  "anil-kumble": "阿尼尔·库姆布莱", "james-anderson": "詹姆斯·安德森", "wally-hammond": "沃利·哈蒙德",
+  "len-hutton": "伦·赫顿", "clive-lloyd": "克莱夫·劳埃德", "sydney-barnes": "悉尼·巴恩斯",
+  "dale-steyn": "戴尔·斯泰恩", "ben-stokes": "本·斯托克斯",
 };
 
 // Base stature (0-100): consensus all-time standing, before era adjustment.
@@ -20,6 +25,9 @@ const STATURE: Record<string, number> = {
   "sunil-gavaskar": 89, "imran-khan": 90, "richard-hadlee": 87, "wasim-akram": 90, "glenn-mcgrath": 88,
   "jack-hobbs": 90, "kumar-sangakkara": 89, "rahul-dravid": 88, "ab-de-villiers": 86, "steve-smith": 88,
   "joe-root": 86, "kane-williamson": 85, "adam-gilchrist": 87, "malcolm-marshall": 91,
+  "wally-hammond": 89, "len-hutton": 88, "kapil-dev": 88, "ms-dhoni": 88, "dennis-lillee": 88,
+  "allan-border": 87, "curtly-ambrose": 87, "steve-waugh": 87, "sydney-barnes": 87, "ben-stokes": 87,
+  "dale-steyn": 87, "clive-lloyd": 86, "james-anderson": 86, "anil-kumble": 85,
 };
 
 const players: Player[] = CRICKET_PLAYERS.map((p) => ({

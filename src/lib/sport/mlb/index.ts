@@ -12,6 +12,13 @@ const ZH_NAMES: Record<string, string> = {
   "shohei-ohtani": "大谷翔平", "alex-rodriguez": "亚历克斯·罗德里格斯", "walter-johnson": "沃尔特·约翰逊",
   "cy-young": "赛·扬", "roger-clemens": "罗杰·克莱门斯", "greg-maddux": "格雷格·马达克斯",
   "randy-johnson": "兰迪·约翰逊", "pedro-martinez": "佩德罗·马丁内斯", "sandy-koufax": "桑迪·库法克斯",
+  "rogers-hornsby": "罗杰斯·霍恩斯比", "jimmie-foxx": "吉米·福克斯", "frank-robinson": "弗兰克·罗宾逊",
+  "mike-schmidt": "迈克·施密特", "johnny-bench": "约翰尼·本奇", "yogi-berra": "尤吉·贝拉",
+  "joe-morgan": "乔·摩根", "jackie-robinson": "杰基·罗宾逊", "roberto-clemente": "罗伯托·克莱门特",
+  "cal-ripken-jr": "小卡尔·瑞普肯", "miguel-cabrera": "米格尔·卡布雷拉", "nap-lajoie": "纳普·拉茹瓦",
+  "tris-speaker": "特里斯·斯皮克", "christy-mathewson": "克里斯蒂·马修森", "warren-spahn": "沃伦·斯帕恩",
+  "bob-gibson": "鲍勃·吉布森", "tom-seaver": "汤姆·西弗", "lefty-grove": "莱夫蒂·格罗夫",
+  "grover-cleveland-alexander": "格罗弗·克利夫兰·亚历山大", "steve-carlton": "史蒂夫·卡尔顿", "nolan-ryan": "诺兰·瑞安",
 };
 
 // Stature / influence (0-100): all-time standing and cultural footprint, from
@@ -26,6 +33,11 @@ const STATURE: Record<string, number> = {
   "cy-young": 92, "mickey-mantle": 92, "shohei-ohtani": 92, "sandy-koufax": 90, "joe-dimaggio": 90,
   "roger-clemens": 90, "mike-trout": 90, "albert-pujols": 90, "ken-griffey-jr": 89, "randy-johnson": 88,
   "greg-maddux": 88, "pedro-martinez": 88, "rickey-henderson": 88, "alex-rodriguez": 88,
+  "rogers-hornsby": 91, "christy-mathewson": 90, "lefty-grove": 90, "grover-cleveland-alexander": 89,
+  "bob-gibson": 89, "tom-seaver": 89, "jackie-robinson": 88, "nolan-ryan": 88, "mike-schmidt": 88,
+  "tris-speaker": 87, "warren-spahn": 87, "steve-carlton": 87, "roberto-clemente": 87, "johnny-bench": 86,
+  "frank-robinson": 85, "cal-ripken-jr": 85, "miguel-cabrera": 84, "joe-morgan": 84, "jimmie-foxx": 84,
+  "yogi-berra": 82, "nap-lajoie": 82,
 };
 
 const players: Player[] = MLB_PLAYERS.map((p) => ({

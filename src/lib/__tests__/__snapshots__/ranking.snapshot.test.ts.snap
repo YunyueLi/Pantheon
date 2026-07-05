@@ -23,20 +23,20 @@ exports[`top ranking: basketball > top 15 by balanced Honor Index 1`] = `
 exports[`top ranking: chess > top 15 by balanced Honor Index 1`] = `
 [
   "1. Garry Kasparov — 3435",
-  "2. Magnus Carlsen — 2645",
+  "2. Magnus Carlsen — 2735",
   "3. Anatoly Karpov — 1605",
   "4. Emanuel Lasker — 1500",
-  "5. Viswanathan Anand — 1405",
-  "6. Mikhail Botvinnik — 1250",
+  "5. Mikhail Botvinnik — 1250",
+  "6. Viswanathan Anand — 1045",
   "7. Alexander Alekhine — 1000",
   "8. Wilhelm Steinitz — 1000",
-  "9. Vladimir Kramnik — 750",
+  "9. Vladimir Kramnik — 930",
   "10. Bobby Fischer — 745",
   "11. Tigran Petrosian — 545",
   "12. Boris Spassky — 340",
   "13. Vasily Smyslov — 340",
   "14. Mikhail Tal — 295",
-  "15. José Raúl Capablanca — 250",
+  "15. Gukesh Dommaraju — 295",
 ]
 `;
 
@@ -45,18 +45,18 @@ exports[`top ranking: cricket > top 15 by balanced Honor Index 1`] = `
   "1. Don Bradman — 1214",
   "2. Garfield Sobers — 974",
   "3. Virat Kohli — 664",
-  "4. Ricky Ponting — 469",
-  "5. Viv Richards — 464",
-  "6. Shane Warne — 419",
-  "7. Sachin Tendulkar — 399",
-  "8. Kumar Sangakkara — 399",
-  "9. Jack Hobbs — 388",
-  "10. Muttiah Muralitharan — 299",
-  "11. Steve Smith — 294",
-  "12. Malcolm Marshall — 277",
-  "13. Glenn McGrath — 269",
-  "14. Brian Lara — 254",
-  "15. Jacques Kallis — 234",
+  "4. Ben Stokes — 564",
+  "5. Ricky Ponting — 469",
+  "6. Viv Richards — 464",
+  "7. Shane Warne — 419",
+  "8. Sachin Tendulkar — 399",
+  "9. Kumar Sangakkara — 399",
+  "10. Jack Hobbs — 388",
+  "11. Muttiah Muralitharan — 299",
+  "12. Steve Smith — 294",
+  "13. Malcolm Marshall — 277",
+  "14. Glenn McGrath — 269",
+  "15. Brian Lara — 254",
 ]
 `;
 
@@ -172,11 +172,11 @@ exports[`top ranking: golf > top 15 by balanced Honor Index 1`] = `
   "8. Ben Hogan — 2974",
   "9. Babe Zaharias — 2746",
   "10. Tom Watson — 2564",
-  "11. Gary Player — 2514",
-  "12. Betsy Rawls — 2330",
-  "13. Sam Snead — 2297",
-  "14. Karrie Webb — 2226",
-  "15. Gene Sarazen — 2098",
+  "11. Gary Player — 2520",
+  "12. Kathy Whitworth — 2413",
+  "13. Betsy Rawls — 2330",
+  "14. Sam Snead — 2297",
+  "15. Karrie Webb — 2226",
 ]
 `;
 
@@ -221,21 +221,21 @@ exports[`top ranking: lol > top 15 by balanced Honor Index 1`] = `
 
 exports[`top ranking: mlb > top 15 by balanced Honor Index 1`] = `
 [
-  "1. Babe Ruth — 1682",
+  "1. Babe Ruth — 1712",
   "2. Ted Williams — 1664",
   "3. Barry Bonds — 1654",
   "4. Roger Clemens — 1646",
-  "5. Sandy Koufax — 1376",
-  "6. Ty Cobb — 1360",
-  "7. Walter Johnson — 1350",
-  "8. Mickey Mantle — 1300",
-  "9. Stan Musial — 1284",
-  "10. Lou Gehrig — 1202",
+  "5. Rogers Hornsby — 1440",
+  "6. Sandy Koufax — 1376",
+  "7. Ty Cobb — 1360",
+  "8. Walter Johnson — 1350",
+  "9. Mickey Mantle — 1300",
+  "10. Stan Musial — 1284",
   "11. Randy Johnson — 1190",
-  "12. Joe DiMaggio — 1068",
-  "13. Willie Mays — 924",
-  "14. Honus Wagner — 850",
-  "15. Alex Rodriguez — 844",
+  "12. Jimmie Foxx — 1154",
+  "13. Lou Gehrig — 1142",
+  "14. Mike Schmidt — 1102",
+  "15. Lefty Grove — 1086",
 ]
 `;
 

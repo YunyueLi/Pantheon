@@ -11,6 +11,8 @@ const ZH_NAMES: Record<string, string> = {
   "wilhelm-steinitz": "威廉·斯坦尼茨", "paul-morphy": "保罗·莫菲", "viktor-korchnoi": "维克托·科尔奇诺伊",
   "fabiano-caruana": "法比亚诺·卡鲁阿纳", "ding-liren": "丁立人", "hikaru-nakamura": "中村光",
   "judit-polgar": "尤迪特·波尔加",
+  "veselin-topalov": "韦塞林·托帕洛夫", "ian-nepomniachtchi": "伊恩·涅波姆尼亚奇",
+  "gukesh-dommaraju": "古克什·多马拉朱", "david-bronstein": "大卫·布龙施泰因",
 };
 
 // Base stature (0-100): consensus all-time standing, before era adjustment.
@@ -21,6 +23,7 @@ const STATURE: Record<string, number> = {
   "boris-spassky": 85, "vasily-smyslov": 84, "paul-morphy": 88, "wilhelm-steinitz": 85,
   "judit-polgar": 83, "max-euwe": 78, "viktor-korchnoi": 82, "fabiano-caruana": 80,
   "ding-liren": 78, "hikaru-nakamura": 80,
+  "veselin-topalov": 85, "david-bronstein": 84, "gukesh-dommaraju": 80, "ian-nepomniachtchi": 79,
 };
 
 const players: Player[] = CHESS_PLAYERS.map((p) => ({

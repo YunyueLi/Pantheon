@@ -53,6 +53,9 @@ export const GOLF_LEAGUES: LeagueMeta[] = [
   { id: "SWE", label: "Sweden", country: "Sweden", flag: "🇸🇪" },
   { id: "KOR", label: "South Korea", country: "South Korea", flag: "🇰🇷" },
   { id: "TPE", label: "Chinese Taipei", country: "Chinese Taipei", flag: "🇹🇼" },
+  { id: "ENG", label: "England", country: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
+  { id: "FIJ", label: "Fiji", country: "Fiji", flag: "🇫🇯" },
+  { id: "ZIM", label: "Zimbabwe", country: "Zimbabwe", flag: "🇿🇼" },
 ];
 
 export const GOLF_POSITIONS: PositionMeta[] = [
