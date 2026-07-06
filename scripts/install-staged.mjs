@@ -3,6 +3,7 @@
 //   node scripts/install-staged.mjs [reject-id,reject-id,...]
 import fs from "node:fs";
 import path from "node:path";
+import sharp from "sharp";
 
 const STAGE = "/tmp/photo-staging";
 const meta = JSON.parse(fs.readFileSync(path.join(STAGE, "_meta.json"), "utf8"));
@@ -19,8 +20,12 @@ for (const m of meta) {
   if (reject.has(m.id)) { skipped.push(m.id); continue; }
   const src = path.join(STAGE, `${m.id}.jpg`);
   if (!fs.existsSync(src)) { skipped.push(m.id); continue; }
-  fs.copyFileSync(src, path.join(PUB, `${m.id}.jpg`));
-  const line = `  "${m.id}": { src: "/players/${m.id}.jpg", author: "${esc(m.author)}", license: "${esc(m.license)}", licenseUrl: "${esc(m.licenseUrl)}", source: "${esc(m.filePage)}" },`;
+  // Convert to a resized WebP (max 800px long edge, q80) — matches optimize-photos.mjs.
+  await sharp(src)
+    .resize(800, 800, { fit: "inside", withoutEnlargement: true })
+    .webp({ quality: 80 })
+    .toFile(path.join(PUB, `${m.id}.webp`));
+  const line = `  "${m.id}": { src: "/players/${m.id}.webp", author: "${esc(m.author)}", license: "${esc(m.license)}", licenseUrl: "${esc(m.licenseUrl)}", source: "${esc(m.filePage)}" },`;
   const re = new RegExp(`^  "${m.id}": \\{.*$`, "m");
   if (re.test(man)) { man = man.replace(re, line); updated.push(m.id); }
   else { man = man.replace(/\n};\n\nexport function playerPhoto/, `\n${line}\n};\n\nexport function playerPhoto`); added.push(m.id); }

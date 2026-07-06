@@ -68,7 +68,7 @@ export type Player = {
   active: boolean;
   debutYear: number;
   blurb?: string;
-  /** Optional licensed headshot, e.g. "/players/faker.jpg" placed in /public. Falls back to a unified generated avatar. */
+  /** Optional licensed headshot, e.g. "/players/faker.webp" placed in /public. Falls back to a unified generated avatar. */
   photo?: string;
   achievements: Achievement[];
 };

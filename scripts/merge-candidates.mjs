@@ -5,6 +5,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import sharp from "sharp";
 
 const OUT = process.argv[2];
 const raw = fs.readFileSync(OUT, "utf8");
@@ -21,20 +22,27 @@ let man = fs.readFileSync(MAN, "utf8");
 const updated = [], added = [], failed = [];
 
 for (const r of results) {
-  const dest = path.join(PUB, `${r.id}.jpg`);
+  const dest = path.join(PUB, `${r.id}.webp`);
+  const dl = `${dest}.download`;
   const tmp = `${dest}.tmp`;
   let chosen = null;
-  // Try candidates in rank order until one downloads; write via temp so a failure
-  // never deletes a pre-existing good file.
+  // Try candidates in rank order until one downloads; convert + write via temp,
+  // then atomically rename, so a failure never deletes a pre-existing good file.
+  // Resized WebP (max 800px long edge, q80) — matches optimize-photos.mjs.
   for (const c of r.candidates) {
     try {
-      execFileSync("curl", ["-sL", "--fail", "--max-time", "45", "-A", UA, "-o", tmp, c.url], { stdio: "ignore" });
-      execFileSync("sips", ["-Z", "1000", "-s", "formatOptions", "82", tmp], { stdio: "ignore" });
-      if (fs.readFileSync(tmp).length < 3000) throw new Error("too small");
+      execFileSync("curl", ["-sL", "--fail", "--max-time", "45", "-A", UA, "-o", dl, c.url], { stdio: "ignore" });
+      if (fs.readFileSync(dl).length < 3000) throw new Error("too small");
+      await sharp(dl)
+        .resize(800, 800, { fit: "inside", withoutEnlargement: true })
+        .webp({ quality: 80 })
+        .toFile(tmp);
+      fs.rmSync(dl, { force: true });
       fs.renameSync(tmp, dest);
       chosen = c;
       break;
     } catch {
+      fs.rmSync(dl, { force: true });
       fs.rmSync(tmp, { force: true });
     }
   }
@@ -43,7 +51,7 @@ for (const r of results) {
     continue;
   }
   const c = chosen;
-  const line = `  "${r.id}": { src: "/players/${r.id}.jpg", author: "${esc(c.author)}", license: "${esc(c.license)}", licenseUrl: "${esc(c.licenseUrl)}", source: "${esc(c.sourcePage)}" },`;
+  const line = `  "${r.id}": { src: "/players/${r.id}.webp", author: "${esc(c.author)}", license: "${esc(c.license)}", licenseUrl: "${esc(c.licenseUrl)}", source: "${esc(c.sourcePage)}" },`;
   const re = new RegExp(`^  "${r.id}": \\{.*$`, "m");
   if (re.test(man)) {
     man = man.replace(re, line);
