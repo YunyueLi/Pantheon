@@ -63,7 +63,7 @@ export function SiteNav() {
         {/* Left — sport context + section links */}
         <div className="flex items-center gap-5">
           <SportSwitcher />
-          <nav className="hidden items-center gap-5 md:flex">
+          <nav className="hidden items-center gap-5 lg:flex">
             {browseLinks.map((l) => {
               const active = path.startsWith(l.href);
               return (
@@ -97,13 +97,13 @@ export function SiteNav() {
               <Link
                 href={methodology.href}
                 className={cn(
-                  "label hidden text-[11px] transition-colors md:inline",
+                  "label hidden text-[11px] transition-colors lg:inline",
                   path.startsWith(methodology.href) ? "text-fg" : "text-fg-subtle hover:text-fg"
                 )}
               >
                 {t(methodology.key)}
               </Link>
-              <span aria-hidden className="mr-1 hidden h-4 w-px bg-border md:block" />
+              <span aria-hidden className="mr-1 hidden h-4 w-px bg-border lg:block" />
             </>
           )}
           <PlayerSearch />
@@ -121,8 +121,9 @@ export function SiteNav() {
         </div>
       </div>
 
-      {/* Mobile section nav: wraps instead of overflowing, since the desktop row is hidden < md. */}
-      <nav className="flex flex-wrap items-center gap-x-1 gap-y-1 border-t border-border px-4 py-2 md:hidden">
+      {/* Compact section nav (< lg): wraps to its own row instead of overflowing, since the
+          desktop links are hidden below lg to clear the absolutely-centered wordmark. */}
+      <nav className="flex flex-wrap items-center gap-x-1 gap-y-1 border-t border-border px-4 py-2 lg:hidden">
         {links.map((l) => {
           const active = path.startsWith(l.href);
           return (

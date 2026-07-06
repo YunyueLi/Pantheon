@@ -112,6 +112,19 @@ function Chart({
                 onMouseLeave={() => setHover(null)}
               >
                 <rect x={bx} y={0} width={band} height={ih} fill="transparent" />
+                {/* Quiet season: a baseline tick so a sparse career still reads as a
+                    populated timeline (a comb of seasons with peaks) rather than a void. */}
+                {d.points === 0 && (
+                  <rect
+                    x={bx + band / 2 - 1}
+                    y={ih - 11}
+                    width={2}
+                    height={11}
+                    rx={1}
+                    fill="var(--fg-3)"
+                    opacity={dim ? 0.22 : 0.5}
+                  />
+                )}
                 {d.points > 0 && (
                   <rect
                     x={bx + inset}
