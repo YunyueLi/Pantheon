@@ -34,7 +34,7 @@ export const HOK: SportConfig = {
   headlineTypes: ["world_champ", "kpl_title", "kpl_fmvp"],
   model: HOK_MODEL as HonorModel,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   statureSources: ["KPL community consensus / player renown", "Liquipedia (Honor of Kings)"],
   dataSources: ["Liquipedia (Honor of Kings)", "KPL official records"],
 };

@@ -45,7 +45,7 @@ export const CRICKET: SportConfig = {
   headlineTypes: ["wisden_leading", "icc_award", "wc_title"],
   model: CRICKET_MODEL as HonorModel,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   statureSources: ["ESPNcricinfo all-time rankings", "Wisden Cricketers of the Century", "ICC Hall of Fame"],
   dataSources: ["Wisden", "ESPNcricinfo", "Wikipedia"],
 };

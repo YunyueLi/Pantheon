@@ -28,6 +28,6 @@ export const VALORANT: SportConfig = {
   headlineTypes: ["champions_title", "masters_title", "champions_mvp"],
   model: VALORANT_MODEL as HonorModel,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   dataSources: ["Liquipedia (CC BY-SA)", "VCT official records", "Wikidata"],
 };

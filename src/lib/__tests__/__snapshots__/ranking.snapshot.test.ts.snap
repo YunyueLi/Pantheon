@@ -15,7 +15,7 @@ exports[`top ranking: basketball > top 15 by balanced Honor Index 1`] = `
   "11. John Havlicek — 6146",
   "12. Bob Cousy — 6046",
   "13. Stephen Curry — 5837",
-  "14. Kevin Durant — 5725",
+  "14. Kevin Durant — 5800",
   "15. Sam Jones — 5235",
 ]
 `;
@@ -62,7 +62,7 @@ exports[`top ranking: cricket > top 15 by balanced Honor Index 1`] = `
 
 exports[`top ranking: csgo > top 15 by balanced Honor Index 1`] = `
 [
-  "1. ZywOo — 1508",
+  "1. ZywOo — 1520",
   "2. coldzera — 888",
   "3. s1mple — 880",
   "4. device — 812",
@@ -72,11 +72,11 @@ exports[`top ranking: csgo > top 15 by balanced Honor Index 1`] = `
   "8. gla1ve — 648",
   "9. olofmeister — 618",
   "10. GeT_RiGhT — 598",
-  "11. ropz — 486",
+  "11. ropz — 498",
   "12. FalleN — 336",
   "13. fer — 336",
   "14. NBK- — 324",
-  "15. kennyS — 244",
+  "15. m0NESY — 256",
 ]
 `;
 
@@ -102,9 +102,9 @@ exports[`top ranking: dota2 > top 15 by balanced Honor Index 1`] = `
 
 exports[`top ranking: f1 > top 15 by balanced Honor Index 1`] = `
 [
-  "1. Lewis Hamilton — 6340",
+  "1. Lewis Hamilton — 6369",
   "2. Michael Schumacher — 5787",
-  "3. Max Verstappen — 3538",
+  "3. Max Verstappen — 3749",
   "4. Sebastian Vettel — 3530",
   "5. Alain Prost — 3310",
   "6. Juan Manuel Fangio — 3215",
@@ -147,16 +147,16 @@ exports[`top ranking: go > top 15 by balanced Honor Index 1`] = `
   "3. Lee Sedol — 1522",
   "4. Gu Li — 1001",
   "5. Ke Jie — 857",
-  "6. Shin Jin-seo — 800",
+  "6. Shin Jin-seo — 808",
   "7. Yoo Changhyuk — 744",
-  "8. Park Jung-hwan — 644",
+  "8. Park Jung-hwan — 689",
   "9. Ma Xiaochun — 576",
   "10. Cho Chikun — 528",
   "11. Iyama Yuta — 496",
   "12. Chang Hao — 460",
   "13. Kobayashi Koichi — 388",
   "14. Kong Jie — 388",
-  "15. Ding Hao — 364",
+  "15. Ding Hao — 372",
 ]
 `;
 
@@ -212,8 +212,8 @@ exports[`top ranking: lol > top 15 by balanced Honor Index 1`] = `
   "9. Zeus — 3058",
   "10. Canyon — 3022",
   "11. BeryL — 2488",
-  "12. Chovy — 2368",
-  "13. Caps — 2322",
+  "12. Caps — 2452",
+  "13. Chovy — 2368",
   "14. CoreJJ — 1882",
   "15. Meiko — 1860",
 ]
@@ -269,7 +269,7 @@ exports[`top ranking: snooker > top 15 by balanced Honor Index 1`] = `
   "6. Ray Reardon — 1599",
   "7. Mark Williams — 1326",
   "8. Neil Robertson — 925",
-  "9. Judd Trump — 880",
+  "9. Judd Trump — 889",
   "10. John Spencer — 840",
   "11. Alex Higgins — 770",
   "12. Shaun Murphy — 628",
@@ -287,11 +287,11 @@ exports[`top ranking: table-tennis > top 15 by balanced Honor Index 1`] = `
   "4. Fan Zhendong — 2365",
   "5. Deng Yaping — 2278",
   "6. Ding Ning — 2218",
-  "7. Zhang Jike — 1763",
-  "8. Ma Lin — 1672",
-  "9. Liu Shiwen — 1648",
-  "10. Li Xiaoxia — 1600",
-  "11. Sun Yingsha — 1589",
+  "7. Sun Yingsha — 1791",
+  "8. Zhang Jike — 1763",
+  "9. Ma Lin — 1672",
+  "10. Liu Shiwen — 1648",
+  "11. Li Xiaoxia — 1600",
   "12. Chen Meng — 1545",
   "13. Wang Liqin — 1488",
   "14. Kong Linghui — 1423",
@@ -331,11 +331,11 @@ exports[`top ranking: ufc > top 15 by balanced Honor Index 1`] = `
   "8. Islam Makhachev — 740",
   "9. José Aldo — 710",
   "10. Randy Couture — 660",
-  "11. Ronda Rousey — 630",
-  "12. Henry Cejudo — 580",
-  "13. Kamaru Usman — 550",
-  "14. Israel Adesanya — 550",
-  "15. Alexander Volkanovski — 550",
+  "11. Alexander Volkanovski — 630",
+  "12. Ronda Rousey — 630",
+  "13. Henry Cejudo — 580",
+  "14. Kamaru Usman — 550",
+  "15. Israel Adesanya — 550",
 ]
 `;
 

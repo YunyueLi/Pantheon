@@ -3,7 +3,7 @@ import type { Achievement, Player } from "../types";
 /**
  * Chess roster — 22 all-time greats ranked in ONE open pool. All counts verified
  * against Wikipedia (World Chess Championship, List of FIDE chess world number
- * ones, Candidates Tournament) and FIDE records; FROZEN at the end of 2025.
+ * ones, Candidates Tournament) and FIDE records; current through 2026-07-06.
  *
  * Each World Championship match win/defense is a dated entry at its match year
  * (so the timeline and peak lenses are truthful); each year-end world No. 1 and
@@ -60,4 +60,5 @@ export const CHESS_PLAYERS: Player[] = [
   mk({ id: "ian-nepomniachtchi", name: "Ian Nepomniachtchi", nation: "Russia", league: "RUS", active: true, debut: 2010, cand: [2021, 2022], blurb: "A rare two-time Candidates winner who earned the world-championship matches of 2021 and 2023; a lightning-fast attacking talent." }),
   mk({ id: "gukesh-dommaraju", name: "Gukesh Dommaraju", nation: "India", league: "IND", active: true, debut: 2019, wc: [2024], cand: [2024], blurb: "The 2024 world champion — at eighteen the youngest in history — who won the Candidates and dethroned Ding Liren." }),
   mk({ id: "david-bronstein", name: "David Bronstein", nation: "Russia", league: "RUS", active: false, debut: 1945, cand: [1950], blurb: "Winner of the 1950 Candidates who drew the 1951 world title match with Botvinnik; the era's great romantic and a father of modern attacking play." }),
+  mk({ id: "javokhir-sindarov", name: "Javokhir Sindarov", nation: "Uzbekistan", league: "UZB", active: true, debut: 2018, cand: [2026], blurb: "Winner of the 2026 Candidates with a record 10/14 to earn the world-title match against Gukesh; a Tashkent prodigy who made grandmaster at twelve and won the 2025 World Cup." }),
 ];

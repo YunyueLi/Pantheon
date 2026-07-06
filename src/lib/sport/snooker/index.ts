@@ -35,7 +35,7 @@ export const SNOOKER: SportConfig = {
   headlineTypes: ["world_title", "triple_crown", "ranking_title"],
   model: SNOOKER_MODEL as HonorModel,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   statureSources: ["World Snooker Tour records", "Wikipedia"],
   dataSources: ["World Snooker Tour records", "Wikipedia"],
 };

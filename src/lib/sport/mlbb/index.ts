@@ -33,7 +33,7 @@ export const MLBB: SportConfig = {
   headlineTypes: ["m_world", "mpl_title", "finals_mvp"],
   model: MLBB_MODEL as HonorModel,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   statureSources: ["Liquipedia (Mobile Legends)", "ONE Esports all-time rankings"],
   dataSources: ["Liquipedia (Mobile Legends)"],
 };

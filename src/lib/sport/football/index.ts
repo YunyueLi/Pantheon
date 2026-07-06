@@ -65,6 +65,6 @@ export const FOOTBALL: SportConfig = {
   headlineTypes: ["world_cup", "champions_league", "ballon_dor"],
   model: FOOTBALL_MODEL,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   dataSources: ["FIFA & UEFA records", "France Football — Ballon d'Or palmarès", "RSSSF", "Wikidata"],
 };

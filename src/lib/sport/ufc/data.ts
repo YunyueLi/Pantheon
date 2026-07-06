@@ -5,7 +5,7 @@ import type { Achievement, Player } from "../types";
  * across every weight class and both genders (the four women — Nunes,
  * Shevchenko, Rousey — sit in the same board as the men, because the P4P GOAT
  * debate does). Every figure is WEB-VERIFIED against each fighter's Wikipedia
- * infobox plus UFC / secondary sources, and FROZEN at Dec 31, 2025.
+ * infobox plus UFC / secondary sources, current through 2026-07-06.
  *
  * ENCODING (see model.ts for the counting rules):
  *   • `ufc_title`     — one dated entry per UNDISPUTED belt WON, at its real win
@@ -56,7 +56,7 @@ export const UFC_PLAYERS: Player[] = [
   mk({ id: "daniel-cormier", name: "Daniel Cormier", nation: "United States", league: "USA", g: "M", active: false, debut: 2013, titles: [2015, 2018], def: [{ year: 2015, count: 3 }, { year: 2018, count: 1 }], dbl: 2018, blurb: "Simultaneous light heavyweight and heavyweight champion, the first to defend belts in two divisions; an Olympic-level wrestler and all-time great." }),
   mk({ id: "stipe-miocic", name: "Stipe Miocic", nation: "United States", league: "USA", g: "M", active: false, debut: 2011, titles: [2016], def: [{ year: 2016, count: 3 }, { year: 2019, count: 1 }], blurb: "Two-time heavyweight champion whose three straight defenses set the division record; widely rated the greatest UFC heavyweight." }),
   mk({ id: "max-holloway", name: "Max Holloway", nation: "United States", league: "USA", g: "M", active: true, debut: 2012, titles: [2017], def: [{ year: 2017, count: 3 }], blurb: "Featherweight champion with three defenses and a record for significant strikes landed; the relentless 'Blessed' and holder of the BMF belt." }),
-  mk({ id: "alexander-volkanovski", name: "Alexander Volkanovski", nation: "Australia", league: "AUS", g: "M", active: true, debut: 2016, titles: [2019], def: [{ year: 2019, count: 5 }], blurb: "Two-reign featherweight champion with five defenses in his first title run; a pressure-fighting standout who twice challenged at lightweight." }),
+  mk({ id: "alexander-volkanovski", name: "Alexander Volkanovski", nation: "Australia", league: "AUS", g: "M", active: true, debut: 2016, titles: [2019], def: [{ year: 2019, count: 5 }, { year: 2025, count: 1 }], blurb: "Two-reign featherweight champion — five defenses in his first title run and another in his second; a pressure-fighting standout who twice challenged at lightweight." }),
   mk({ id: "conor-mcgregor", name: "Conor McGregor", nation: "Ireland", league: "IRL", g: "M", active: true, debut: 2013, titles: [2015, 2016], def: [], dbl: 2016, blurb: "The first fighter to hold two UFC belts at once — featherweight and lightweight — and the sport's biggest-ever draw; conquest over longevity." }),
   mk({ id: "jose-aldo", name: "José Aldo", nation: "Brazil", league: "BRA", g: "M", active: false, debut: 2010, titles: [2011], def: [{ year: 2011, count: 7 }], blurb: "Inaugural UFC featherweight champion with a division-record seven defenses; a devastating leg-kicker who ruled the weight for years." }),
   mk({ id: "henry-cejudo", name: "Henry Cejudo", nation: "United States", league: "USA", g: "M", active: false, debut: 2014, titles: [2018, 2019], def: [{ year: 2018, count: 1 }, { year: 2019, count: 1 }], dbl: 2019, blurb: "Simultaneous flyweight and bantamweight champion and an Olympic wrestling gold medalist; 'Triple C' fused elite wrestling with fight IQ." }),

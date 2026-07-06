@@ -93,6 +93,6 @@ export const LOL: SportConfig = {
   statureSources: ["ESPN all-time rankings", "Sheep Esports", "Dot Esports", "All-Star fan vote"],
   model,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   dataSources: ["Leaguepedia (CC BY-SA)", "Riot Games esports records", "Wikidata"],
 };

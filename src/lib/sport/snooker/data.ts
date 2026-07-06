@@ -8,7 +8,7 @@ import type { Achievement, Player } from "../types";
  * per-season pattern tennis / F1 use — so the timeline and peak lenses are truthful
  * rather than a single fabricated spike. Each player's ranking-title TOTAL is exactly
  * their verified figure. All counts web-verified against Wikipedia / World Snooker
- * Tour and FROZEN at the end of 2025.
+ * Tour and current through 2026-07-06.
  *
  * Scope note: snooker's pre-modern challenge era (Joe Davis's 15 uncontested titles,
  * 1927-46) is deliberately excluded — those tiny-field championships aren't
@@ -75,7 +75,7 @@ export const SNOOKER_PLAYERS: Player[] = [
   mk({ id: "mark-williams", name: "Mark Williams", nation: "Wales", league: "WAL", active: true, debut: 1992, world: [2000, 2003, 2018], uk: [1999, 2002], masters: [1998, 2003], ranking: 24, rankSpan: [1996, 2024], blurb: "Three world titles 18 years apart and the finest long potter of his generation; a Welsh great still winning in his fifties." }),
   mk({ id: "john-spencer", name: "John Spencer", nation: "England", league: "ENG", active: false, debut: 1966, world: [1969, 1971, 1977], masters: [1975], ranking: 0, blurb: "The first world champion of snooker's modern era and the inaugural Masters winner; a fluent, attacking pioneer." }),
   mk({ id: "alex-higgins", name: "Alex Higgins", nation: "Northern Ireland", league: "NIR", active: false, debut: 1971, world: [1972, 1982], uk: [1983], masters: [1978, 1981], ranking: 0, blurb: "Two world titles and boundless charisma; 'Hurricane' Higgins was the mercurial showman who took snooker to the masses." }),
-  mk({ id: "judd-trump", name: "Judd Trump", nation: "England", league: "ENG", active: true, debut: 2005, world: [2019], uk: [2011, 2024], masters: [2019, 2023], ranking: 30, rankSpan: [2011, 2025], blurb: "World champion and 31-time ranking-title winner; the flamboyant break-builder who has redefined attacking scoring." }),
+  mk({ id: "judd-trump", name: "Judd Trump", nation: "England", league: "ENG", active: true, debut: 2005, world: [2019], uk: [2011, 2024], masters: [2019, 2023], ranking: 31, rankSpan: [2011, 2026], blurb: "World champion and 31-time ranking-title winner; the flamboyant break-builder who has redefined attacking scoring." }),
   mk({ id: "neil-robertson", name: "Neil Robertson", nation: "Australia", league: "AUS", active: true, debut: 1998, world: [2010], uk: [2013, 2015, 2020], masters: [2012, 2022], ranking: 25, rankSpan: [2006, 2024], blurb: "The only overseas player to complete the Triple Crown; Australia's finest and a prolific modern ranking-title winner." }),
   mk({ id: "cliff-thorburn", name: "Cliff Thorburn", nation: "Canada", league: "CAN", active: false, debut: 1973, world: [1980], masters: [1983, 1985, 1986], ranking: 1, rankSpan: [1985, 1985], blurb: "The first overseas world champion and maker of the Crucible's first 147; a tenacious Canadian grinder dubbed 'The Grinder'." }),
   mk({ id: "dennis-taylor", name: "Dennis Taylor", nation: "Northern Ireland", league: "NIR", active: false, debut: 1972, world: [1985], masters: [1987], ranking: 1, rankSpan: [1984, 1984], blurb: "Champion of the fabled 1985 black-ball final watched by 18.5 million; a beloved figure in his upturned glasses." }),

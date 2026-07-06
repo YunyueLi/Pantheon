@@ -40,7 +40,7 @@ export const UFC: SportConfig = {
   headlineTypes: ["ufc_title", "title_defense", "double_champ"],
   model: UFC_MODEL as HonorModel,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   statureSources: ["UFC pound-for-pound rankings", "ESPN / MMA all-time rankings"],
   dataSources: ["UFC official records", "Wikipedia"],
 };

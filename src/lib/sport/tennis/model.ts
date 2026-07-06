@@ -64,6 +64,7 @@ export const TENNIS_LEAGUES: LeagueMeta[] = [
   { id: "RUS", label: "Russia", country: "Russia", flag: "🇷🇺" },
   { id: "JPN", label: "Japan", country: "Japan", flag: "🇯🇵" },
   { id: "BLR", label: "Belarus", country: "Belarus", flag: "🇧🇾" },
+  { id: "KAZ", label: "Kazakhstan", country: "Kazakhstan", flag: "🇰🇿" },
 ];
 
 export const TENNIS_POSITIONS: PositionMeta[] = [

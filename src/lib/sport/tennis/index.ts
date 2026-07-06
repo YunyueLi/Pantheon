@@ -17,6 +17,7 @@ const ZH_NAMES: Record<string, string> = {
   "maria-sharapova": "玛丽亚·莎拉波娃", "martina-hingis": "玛蒂娜·辛吉斯", "lindsay-davenport": "林赛·达文波特",
   "naomi-osaka": "大坂直美", "aryna-sabalenka": "阿丽娜·萨巴伦卡", "ashleigh-barty": "阿什利·巴蒂",
   "kim-clijsters": "金·克里斯特尔斯", "coco-gauff": "可可·高芙",
+  "alexander-zverev": "亚历山大·兹维列夫", "elena-rybakina": "埃琳娜·雷巴金娜",
 };
 
 // Base stature (0-100): consensus all-time standing, before era adjustment.
@@ -30,6 +31,7 @@ const STATURE: Record<string, number> = {
   "billie-jean-king": 90, "helen-wills": 88, "iga-swiatek": 87, "maria-sharapova": 86, "justine-henin": 85,
   "venus-williams": 85, "monica-seles": 84, "naomi-osaka": 82, "aryna-sabalenka": 82, "martina-hingis": 80,
   "kim-clijsters": 79, "ashleigh-barty": 79, "coco-gauff": 80, "evonne-goolagong": 78, "lindsay-davenport": 76,
+  "alexander-zverev": 75, "elena-rybakina": 77,
 };
 
 const players: Player[] = TENNIS_PLAYERS.map((p) => ({
@@ -49,7 +51,7 @@ export const TENNIS: SportConfig = {
   headlineTypes: ["slam", "ye_no1", "finals"],
   model: TENNIS_MODEL as HonorModel,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   statureSources: ["International Tennis Hall of Fame", "ATP / WTA all-time rankings"],
   dataSources: ["ATP / WTA official records", "International Tennis Hall of Fame", "Wikipedia / Wikidata"],
 };

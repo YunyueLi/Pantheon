@@ -82,6 +82,7 @@ export const CHESS_LEAGUES: LeagueMeta[] = [
   { id: "AUT", label: "Austria", country: "Austria", flag: "🇦🇹" },
   { id: "HUN", label: "Hungary", country: "Hungary", flag: "🇭🇺" },
   { id: "BUL", label: "Bulgaria", country: "Bulgaria", flag: "🇧🇬" },
+  { id: "UZB", label: "Uzbekistan", country: "Uzbekistan", flag: "🇺🇿" },
 ];
 
 export const CHESS_POSITIONS: PositionMeta[] = [];

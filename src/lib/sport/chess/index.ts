@@ -13,6 +13,7 @@ const ZH_NAMES: Record<string, string> = {
   "judit-polgar": "尤迪特·波尔加",
   "veselin-topalov": "韦塞林·托帕洛夫", "ian-nepomniachtchi": "伊恩·涅波姆尼亚奇",
   "gukesh-dommaraju": "古克什·多马拉朱", "david-bronstein": "大卫·布龙施泰因",
+  "javokhir-sindarov": "贾沃基尔·辛达罗夫",
 };
 
 // Base stature (0-100): consensus all-time standing, before era adjustment.
@@ -24,6 +25,7 @@ const STATURE: Record<string, number> = {
   "judit-polgar": 83, "max-euwe": 78, "viktor-korchnoi": 82, "fabiano-caruana": 80,
   "ding-liren": 78, "hikaru-nakamura": 80,
   "veselin-topalov": 85, "david-bronstein": 84, "gukesh-dommaraju": 80, "ian-nepomniachtchi": 79,
+  "javokhir-sindarov": 78,
 };
 
 const players: Player[] = CHESS_PLAYERS.map((p) => ({
@@ -41,7 +43,7 @@ export const CHESS: SportConfig = {
   headlineTypes: ["wc_title", "world_no1", "candidates"],
   model: CHESS_MODEL as HonorModel,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   statureSources: ["World Chess Hall of Fame", "Comparison of top chess players (Wikipedia)"],
   dataSources: ["FIDE records", "Wikipedia"],
 };

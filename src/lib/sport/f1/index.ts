@@ -58,6 +58,6 @@ export const F1: SportConfig = {
   headlineTypes: ["wdc", "race_win", "podium"],
   model: F1_MODEL as HonorModel,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   dataSources: ["FIA / Formula 1 official records", "Wikidata"],
 };

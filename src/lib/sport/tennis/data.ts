@@ -6,7 +6,7 @@ import type { Achievement, Player } from "../types";
  * 3 for Djokovic) so the timeline and peak lenses are truthful; year-end No. 1,
  * Tour Finals, Olympic golds and the two Grand-Slam capstones are dated entries.
  * Slam totals, year-end No. 1 counts and Olympic golds verified against ATP/WTA
- * and Wikipedia records; all figures FROZEN at the end of the 2025 season. Year-end
+ * and Wikipedia records; all figures current through 2026-07-06 (2026 AO + French Open added). Year-end
  * World No. 1 exists only from 1973 (ATP) / 1975 (WTA), so pre-ranking-era greats
  * (Laver, Rosewall, Wills, Court) carry none — by design, not omission.
  */
@@ -48,7 +48,7 @@ export const TENNIS_PLAYERS: Player[] = [
   mk({ id: "ken-rosewall", name: "Ken Rosewall", nation: "Australia", league: "AUS", g: "M", active: false, debut: 1953, slam: { 1953: 2, 1955: 1, 1956: 1, 1968: 1, 1970: 1, 1971: 1, 1972: 1 }, blurb: "Eight majors 19 years apart, with prime seasons lost to professional exile; the most enduring backhand in the game." }),
   mk({ id: "boris-becker", name: "Boris Becker", nation: "Germany", league: "GER", g: "M", active: false, debut: 1984, slam: { 1985: 1, 1986: 1, 1989: 2, 1991: 1, 1996: 1 }, fin: [1988, 1992, 1995], blurb: "Six majors and the youngest Wimbledon men's champion at 17; a diving, fearless force on the fast courts." }),
   mk({ id: "stefan-edberg", name: "Stefan Edberg", nation: "Sweden", league: "SWE", g: "M", active: false, debut: 1983, slam: { 1985: 1, 1987: 1, 1988: 1, 1990: 1, 1991: 1, 1992: 1 }, no1: [1990, 1991], blurb: "Six majors and the most elegant serve-and-volley of his age; finished two seasons as world No. 1." }),
-  mk({ id: "carlos-alcaraz", name: "Carlos Alcaraz", nation: "Spain", league: "ESP", g: "M", active: true, debut: 2020, slam: { 2022: 1, 2023: 1, 2024: 2, 2025: 2 }, no1: [2022, 2025], blurb: "Six majors on three surfaces before turning 23, and the youngest man to reach No. 1; the headline act of his era." }),
+  mk({ id: "carlos-alcaraz", name: "Carlos Alcaraz", nation: "Spain", league: "ESP", g: "M", active: true, debut: 2020, slam: { 2022: 1, 2023: 1, 2024: 2, 2025: 2, 2026: 1 }, car: 2026, no1: [2022, 2025], blurb: "Seven majors and, at the 2026 Australian Open, the youngest man ever to complete the Career Grand Slam; the headline act of his era." }),
   mk({ id: "jannik-sinner", name: "Jannik Sinner", nation: "Italy", league: "ITA", g: "M", active: true, debut: 2019, slam: { 2024: 2, 2025: 2 }, no1: [2024], fin: [2024, 2025], blurb: "Four majors and back-to-back Tour Finals; Italy's first world No. 1 and Alcaraz's defining rival." }),
   mk({ id: "jim-courier", name: "Jim Courier", nation: "United States", league: "USA", g: "M", active: false, debut: 1988, slam: { 1991: 1, 1992: 2, 1993: 1 }, no1: [1992], blurb: "Four majors in two years and the first to reach the final of all four; a relentless baseline ball-striker." }),
   mk({ id: "andy-murray", name: "Andy Murray", nation: "United Kingdom", league: "GBR", g: "M", active: false, debut: 2005, slam: { 2012: 1, 2013: 1, 2016: 1 }, no1: [2016], oly: [2012, 2016], blurb: "Three majors and the only player with two Olympic singles golds; ended a 77-year British Wimbledon wait." }),
@@ -76,4 +76,6 @@ export const TENNIS_PLAYERS: Player[] = [
   mk({ id: "ashleigh-barty", name: "Ashleigh Barty", nation: "Australia", league: "AUS", g: "W", active: false, debut: 2010, slam: { 2019: 1, 2021: 1, 2022: 1 }, no1: [2019, 2020, 2021], fin: [2019], blurb: "Three majors on three surfaces and three years atop the rankings, then retired at 25 as world No. 1." }),
   mk({ id: "kim-clijsters", name: "Kim Clijsters", nation: "Belgium", league: "BEL", g: "W", active: false, debut: 1997, slam: { 2005: 1, 2009: 1, 2010: 1, 2011: 1 }, fin: [2002, 2003, 2010], blurb: "Four majors, including three after a comeback as a mother; a beloved all-court athlete and former world No. 1." }),
   mk({ id: "coco-gauff", name: "Coco Gauff", nation: "United States", league: "USA", g: "W", active: true, debut: 2019, slam: { 2023: 1, 2025: 1 }, fin: [2024], blurb: "Two majors on hard court and clay before turning 22, plus the Tour Finals; the face of American tennis's next era." }),
+  mk({ id: "alexander-zverev", name: "Alexander Zverev", nation: "Germany", league: "GER", g: "M", active: true, debut: 2013, slam: { 2026: 1 }, fin: [2018, 2021], oly: [2021], blurb: "A maiden major at the 2026 French Open to go with two Tour Finals titles and Olympic singles gold; the first German man to win in Paris since 1937." }),
+  mk({ id: "elena-rybakina", name: "Elena Rybakina", nation: "Kazakhstan", league: "KAZ", g: "W", active: true, debut: 2014, slam: { 2022: 1, 2026: 1 }, fin: [2025], blurb: "Two majors — Wimbledon and the Australian Open — plus the 2025 WTA Finals; a serve-first power baseliner and the first from her nation to win the year-end championship." }),
 ];

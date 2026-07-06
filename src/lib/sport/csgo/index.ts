@@ -35,7 +35,7 @@ export const CSGO: SportConfig = {
   headlineTypes: ["major", "hltv_top1", "major_mvp"],
   model: CSGO_MODEL as HonorModel,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   statureSources: ["HLTV Top 20 Players of the Year", "HLTV / Liquipedia all-time coverage"],
   dataSources: ["HLTV", "Liquipedia", "Wikipedia"],
 };

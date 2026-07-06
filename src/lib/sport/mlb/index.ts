@@ -55,7 +55,7 @@ export const MLB: SportConfig = {
   headlineTypes: ["mvp", "stat_title", "ws_title"],
   model: MLB_MODEL as HonorModel,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   statureSources: ["Baseball-Reference JAWS / all-time rankings", "National Baseball Hall of Fame"],
   dataSources: ["Baseball-Reference", "MLB records", "Wikipedia"],
 };

@@ -52,7 +52,7 @@ export const GOLF: SportConfig = {
   headlineTypes: ["major", "poy", "tour_win"],
   model: GOLF_MODEL as HonorModel,
   players,
-  dataUpdated: "2026-06",
+  dataUpdated: "2026-07",
   statureSources: ["World Golf Hall of Fame", "PGA / LPGA Tour all-time rankings"],
   dataSources: ["PGA/LPGA Tour records", "Wikipedia"],
 };

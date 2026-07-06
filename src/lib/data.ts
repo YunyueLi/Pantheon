@@ -487,7 +487,7 @@ const CURATED_PLAYERS: Player[] = [
     blurb: "The West's best — an MSI title and two Worlds finals appearances.",
     achievements: [
       ...rep("msi_title", [2019], "G2 Esports"),
-      ...rep("regional_title", [2018, 2019, 2020, 2022, 2023, 2024, 2025, 2019, 2026], "Fnatic / G2"),
+      ...rep("regional_title", [2018, 2019, 2020, 2022, 2023, 2024, 2025, 2019, 2026, 2026], "Fnatic / G2"),
       ...rep("worlds_runnerup", [2018, 2019], "Fnatic / G2"),
       mvp("season_mvp", 2018, 0.7, "Fnatic"),
       mvp("season_mvp", 2022, 0.66, "G2"),
@@ -2206,7 +2206,7 @@ const CURATED_PLAYERS: Player[] = [
     debutYear: 2017,
     blurb: "G2's long-tenured top-lane cornerstone.",
     achievements: [
-      ...rep("regional_title", [2022, 2023, 2024, 2024, 2025], "G2 Esports"),
+      ...rep("regional_title", [2022, 2023, 2024, 2024, 2025, 2026, 2026], "G2 Esports"),
     ],
   },
   {
