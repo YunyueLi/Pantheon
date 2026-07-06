@@ -105,6 +105,11 @@ export function PlayerProfile({ id }: { id: string }) {
   const roleTotal = players.filter((p) => p.position === player.position).length;
   const regionTotal = players.filter((p) => p.league === player.league).length;
   const pct = percentile(player, players.filter((p) => p.position === player.position), model);
+  // Percentiles read as noise for tiny disciplines (e.g. a 14-player pool); show the
+  // rank fraction alone below this pool size.
+  const MIN_POOL_FOR_PERCENTILE = 20;
+  const pctPool = hasRole ? roleTotal : players.length;
+  const showPercentile = pctPool >= MIN_POOL_FOR_PERCENTILE;
 
   const countryKey = `regionCountry.${player.league}`;
   const countryVal = t(countryKey);
@@ -287,11 +292,13 @@ export function PlayerProfile({ id }: { id: string }) {
             <div className="sub">/ 100</div>
           </div>
         )}
-        <div className="stand-note">
-          {hasRole
-            ? t("player.topPct", { p: Math.max(1, 100 - pct), role: roleLabel(player.position) })
-            : t("player.topPctNoRole", { p: Math.max(1, 100 - pct) })}
-        </div>
+        {showPercentile && (
+          <div className="stand-note">
+            {hasRole
+              ? t("player.topPct", { p: Math.max(1, 100 - pct), role: roleLabel(player.position) })
+              : t("player.topPctNoRole", { p: Math.max(1, 100 - pct) })}
+          </div>
+        )}
       </section>
 
       {/* VERDICT — the bio as a pull-quote */}

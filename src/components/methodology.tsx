@@ -247,31 +247,36 @@ export function Methodology() {
       {/* TARIFF — base values */}
       <section className="sec pad" data-reveal>
         <Plate n="Ⅳ" title={t("methodology.weightsTitle")} />
-        <table className="tariff">
-          <thead>
-            <tr>
-              <th>{t("methodology.colAchievement")}</th>
-              <th>{t("methodology.colBucket")}</th>
-              <th>{t("methodology.colTier")}</th>
-              <th className="r">{t("methodology.colBase")}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map(([type, meta]) => (
-              <tr key={type}>
-                <td className="hon">{honorLabel(type)}</td>
-                <td className="bk">
-                  <span className="cx-dot" style={{ background: BUCKET_COLOR[meta.bucket], width: 8, height: 8 }} />
-                  {t(`bucket.${meta.bucket}`)}
-                </td>
-                <td>
-                  <span className="tier">{meta.tier}</span>
-                </td>
-                <td className="base">{meta.base}</td>
+        <div style={{ overflowX: "auto" }}>
+          <table className="tariff">
+            <caption className="sr-only">
+              {zh ? "各荣誉档位的基础分对照表" : "Honor tariff by achievement bucket"}
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">{t("methodology.colAchievement")}</th>
+                <th scope="col">{t("methodology.colBucket")}</th>
+                <th scope="col">{t("methodology.colTier")}</th>
+                <th scope="col" className="r">{t("methodology.colBase")}</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {rows.map(([type, meta]) => (
+                <tr key={type}>
+                  <td className="hon">{honorLabel(type)}</td>
+                  <td className="bk">
+                    <span className="cx-dot" style={{ background: BUCKET_COLOR[meta.bucket], width: 8, height: 8 }} />
+                    {t(`bucket.${meta.bucket}`)}
+                  </td>
+                  <td>
+                    <span className="tier">{meta.tier}</span>
+                  </td>
+                  <td className="base">{meta.base}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
       {/* PRESETS */}

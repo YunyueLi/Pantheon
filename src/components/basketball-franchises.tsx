@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import {
   franchiseHonor, franchisePlayers, getFranchise, rankedFranchises,
   type Conference, type Franchise,
@@ -111,11 +112,12 @@ export function BasketballFranchisesList() {
             href={`/basketball/clubs/${franchise.id}`}
             className="row"
             data-reveal
+            aria-label={`${fName(franchise)}, № ${rank}, ${franchise.titles} ${L.titles}`}
             style={{ transitionDelay: rank <= 12 ? `${(rank - 1) * 30}ms` : "0ms" }}
           >
             <span className="rk">{String(rank).padStart(2, "0")}</span>
             <div style={{ minWidth: 0 }}>
-              <span className="nm">{fName(franchise)}</span>
+              <span className="nm" title={fName(franchise)}>{fName(franchise)}</span>
               <div className="meta">
                 <span className="reg">{confName(franchise)}</span>
                 <span className="chips">
@@ -153,7 +155,7 @@ export function BasketballFranchiseProfile({ id }: { id: string }) {
   const name = (e: { id: string; name: string; i18n?: Record<string, string> }) =>
     mergedById.get(e.id)?.i18n?.[locale] ?? e.i18n?.[locale] ?? e.name;
   const franchise = getFranchise(id);
-  if (!franchise) return null;
+  if (!franchise) notFound();
   const honor = franchiseHonor(franchise);
   const players = franchisePlayers(franchise);
   const rank = rankedFranchises().findIndex((x) => x.franchise.id === id) + 1;
@@ -162,7 +164,7 @@ export function BasketballFranchiseProfile({ id }: { id: string }) {
   return (
     <div className="crest">
       <div className="pad">
-        <Link href="/basketball/clubs" className="back">← {t("common.back")}</Link>
+        <Link href="/basketball/clubs" className="back"><span aria-hidden>←</span> {t("common.back")}</Link>
       </div>
 
       <section className="hero pad">

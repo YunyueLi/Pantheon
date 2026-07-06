@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { AchievementType } from "@/lib/types";
 import { ROLE_META } from "@/lib/types";
 import { getTeam, teamHonor, teamPlayers, rankedTeams } from "@/lib/teams";
@@ -11,7 +12,7 @@ import { useI18n } from "@/lib/i18n/provider";
 export function TeamProfile({ id }: { id: string }) {
   const { t } = useI18n();
   const team = getTeam(id);
-  if (!team) return null;
+  if (!team) notFound();
 
   const honor = teamHonor(team);
   const players = teamPlayers(team);
@@ -29,7 +30,7 @@ export function TeamProfile({ id }: { id: string }) {
   return (
     <div className="crest">
       <div className="pad">
-        <Link href="/lol/teams" className="back">← {t("common.back")}</Link>
+        <Link href="/lol/teams" className="back"><span aria-hidden>←</span> {t("common.back")}</Link>
       </div>
 
       <section className="hero pad">
@@ -76,12 +77,24 @@ export function TeamProfile({ id }: { id: string }) {
         <section className="sec pad" style={{ paddingTop: "8px" }} data-reveal>
           <Plate n="Ⅰ" title={t("home.teamRoster")} note={String(players.length)} />
           <div className="roster">
-            {players.map((p) => (
-              <Link key={p.id} href={`/lol/players/${p.id}`} className="rcell">
-                <span className="pn">{p.name}</span>
-                <span className="role">{!p.active ? t("common.retired") : ROLE_META[p.role].abbr}</span>
-              </Link>
-            ))}
+            {players.map((p) => {
+              const roleText = !p.active
+                ? t("common.retired")
+                : t(`role.${p.role}`) !== `role.${p.role}`
+                  ? t(`role.${p.role}`)
+                  : ROLE_META[p.role].abbr;
+              return (
+                <Link
+                  key={p.id}
+                  href={`/lol/players/${p.id}`}
+                  className="rcell"
+                  aria-label={`${p.name}, ${roleText}`}
+                >
+                  <span className="pn">{p.name}</span>
+                  <span className="role">{!p.active ? t("common.retired") : ROLE_META[p.role].abbr}</span>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}

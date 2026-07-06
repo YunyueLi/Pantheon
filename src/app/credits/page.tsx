@@ -52,7 +52,7 @@ export default function CreditsPage() {
       </header>
       <section className="pad">
         {entries.length === 0 ? (
-          <p className="empty">—</p>
+          <p className="empty">{locale === "zh" ? "暂无肖像致谢。" : "No portraits credited yet."}</p>
         ) : (
           entries.map((e) => (
             <div className="row" key={e.id}>
@@ -62,14 +62,24 @@ export default function CreditsPage() {
               </span>
               <span className="by">{e.author}</span>
               {e.licenseUrl ? (
-                <a href={e.licenseUrl} target="_blank" rel="noopener noreferrer">
-                  {e.license} ↗
+                <a
+                  href={e.licenseUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${e.name} ${e.license} license`}
+                >
+                  {e.license} <span aria-hidden>↗</span>
                 </a>
               ) : (
                 <span className="lic">{e.license}</span>
               )}
-              <a href={e.source} target="_blank" rel="noopener noreferrer">
-                Source ↗
+              <a
+                href={e.source}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${e.name} source`}
+              >
+                Source <span aria-hidden>↗</span>
               </a>
             </div>
           ))

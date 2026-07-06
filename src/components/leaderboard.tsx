@@ -15,6 +15,7 @@ type Row = { player: Player; score: number };
 
 export function Leaderboard() {
   const { t, locale } = useI18n();
+  const zh = locale === "zh";
   const { config, positionMeta } = useSport();
   const { players, model, leagues, positions, headlineTypes, basePath } = config;
   const name = useName();
@@ -171,7 +172,26 @@ export function Leaderboard() {
       <div className="filters pad">
         {hasCoaches && <FlatToggle options={kindOpts} value={kind} onChange={setKind} />}
         <FlatSelect label={t("leaderboard.colRegion")} value={region} onChange={setRegion} options={regionOpts} />
-        {kind !== "coach" && hasPositions && (
+        {kind !== "coach" && hasPositions && splitGender && (
+          <div className="fsel" role="group" aria-label={roleColLabel}>
+            <span className="fsel-cap label">{roleColLabel}</span>
+            <div className="ftog">
+              {roleOpts.map((o) => (
+                <button
+                  key={o.value}
+                  type="button"
+                  onClick={() => setRole(o.value)}
+                  data-on={o.value === role}
+                  aria-pressed={o.value === role}
+                  className="ftog-b label"
+                >
+                  {o.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        {kind !== "coach" && hasPositions && !splitGender && (
           <FlatSelect label={roleColLabel} value={role} onChange={setRole} options={roleOpts} />
         )}
         <FlatSelect label={t("leaderboard.era")} value={era} onChange={setEra} options={eraOpts} />
@@ -198,7 +218,7 @@ export function Leaderboard() {
             >
               <span className="rk">{String(rank).padStart(2, "0")}</span>
               <div style={{ minWidth: 0 }}>
-                <span className="nm">{name(p)}</span>
+                <span className="nm" title={name(p)}>{name(p)}</span>
                 <div className="meta">
                   <span>{leagueLabel(p.league)}</span>
                   {hasPositions && p.position && <span>{posAbbr(p.position)}</span>}
@@ -216,7 +236,9 @@ export function Leaderboard() {
             </Link>
           );
         })}
-        {data.length === 0 && <p className="empty">—</p>}
+        {data.length === 0 && (
+          <p className="empty">{zh ? "没有符合筛选条件的选手" : "No players match these filters"}</p>
+        )}
       </div>
     </div>
   );
