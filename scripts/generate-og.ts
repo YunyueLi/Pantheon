@@ -103,7 +103,7 @@ function defaultCard(total: number): Node {
       h("div", { display: "flex", fontSize: "118px", fontWeight: 900, lineHeight: 0.88, letterSpacing: "-0.02em", textTransform: "uppercase" }, "Every trophy,"),
       h("div", { display: "flex", fontSize: "118px", fontWeight: 900, lineHeight: 0.88, letterSpacing: "-0.02em", textTransform: "uppercase" }, "one hall of fame."),
     ]),
-    h("div", { display: "flex", position: "relative", borderTop: `1px solid ${HAIR}`, paddingTop: "24px", fontSize: "25px", fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: MUT }, `8 disciplines · ${total} immortals · one transparent index`),
+    h("div", { display: "flex", position: "relative", borderTop: `1px solid ${HAIR}`, paddingTop: "24px", fontSize: "25px", fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: MUT }, `${SPORTS.length} disciplines · ${total} immortals · one transparent index`),
   ]);
 }
 

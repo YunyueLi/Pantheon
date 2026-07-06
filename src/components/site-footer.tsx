@@ -18,10 +18,10 @@ export function SiteFooter() {
           <Link href="/lol/leaderboard" className="label text-[11px] text-fg-muted transition-colors hover:text-fg">
             {t("nav.leaderboard")}
           </Link>
-          <Link href="/compare" className="label text-[11px] text-fg-muted transition-colors hover:text-fg">
+          <Link href="/lol/compare/" className="label text-[11px] text-fg-muted transition-colors hover:text-fg">
             {t("nav.compare")}
           </Link>
-          <Link href="/methodology" className="label text-[11px] text-fg-muted transition-colors hover:text-fg">
+          <Link href="/lol/methodology/" className="label text-[11px] text-fg-muted transition-colors hover:text-fg">
             {t("nav.methodology")}
           </Link>
           <Link href="/credits" className="label text-[11px] text-fg-muted transition-colors hover:text-fg">

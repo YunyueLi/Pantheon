@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Playfair_Display, IBM_Plex_Mono, Noto_Serif_SC } from "next/font/google";
 import "./globals.css";
@@ -64,6 +64,18 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "Pantheon — Competitive Honors", description: SITE_DESC, images: ["/og/default.png"] },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#cc1326",
+};
+
+const WEBSITE_JSONLD = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Pantheon",
+  alternateName: "万神殿",
+  url: SITE_URL,
+});
+
 const themeScript = `(function(){var d=document.documentElement;d.classList.add('js');try{var m=localStorage.getItem('pantheon-mode');if(m==='paper'){d.classList.add('paper');}else if(m==='crimson'||m==='light'){}else{d.classList.add('dark');}}catch(_){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -75,6 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: WEBSITE_JSONLD }} />
         <Analytics />
       </head>
       <body className="antialiased">
