@@ -4,8 +4,11 @@ import type { Achievement, Player } from "../types";
  * Go roster — 54 of the greatest players across Korea, China, Japan and the
  * pre-title golden age. International titles are broken out BY TOURNAMENT and
  * recorded at their REAL YEAR; domestic majors are recorded per year by country.
- * Verified against English Wikipedia's per-tournament champions tables and capped
- * June 2025 (Shin Jin-seo's Sept-2025 9th world title excluded).
+ * Verified against English Wikipedia's per-tournament champions tables and reputable
+ * Go results sources; current through 2026-07-06 (H2-2025 and 2026 world finals
+ * included — e.g. Shin Jin-seo's 9th world title at the 2025 World's Top Player
+ * Championship; the two 2026 LG Cup entries are the 30th edition, won by Shin
+ * Min-jun in Jan 2026, and the 31st, won by Wang Xinghao in Jun 2026).
  *
  * The `world_title` / `domestic_title` entries are base-0 display aggregates that
  * power the headline tiles only; the per-tournament and per-year entries below do
@@ -99,8 +102,8 @@ export const GO_PLAYERS: Player[] = [
     blurb: "Hard-hitting Korean pro whose career peak was the 2014 Samsung Cup world title." }),
   mk({ id: "park-junghwan", name: "Park Jung-hwan", nation: "South Korea", league: "KOR", active: true, debut: 2006, world: [["fujitsu", 2011], ["lg", 2015], ["mlily", 2018], ["chunlan", 2019], ["samsung", 2021], ["other", 2026]], dom: { 2007: 1, 2009: 2, 2010: 1, 2011: 2, 2012: 2, 2013: 2, 2014: 2, 2016: 1, 2017: 1, 2018: 2, 2019: 2 },
     blurb: "Long-time Korean No. 1 and a six-time world champion — his sixth the inaugural 2026 World Kiseong — Shin Jin-seo's chief domestic rival." }),
-  mk({ id: "shin-jinseo", name: "Shin Jin-seo", nation: "South Korea", league: "KOR", active: true, debut: 2012, world: [["lg", 2020], ["chunlan", 2021], ["lg", 2022], ["samsung", 2022], ["ing", 2023], ["lg", 2024], ["quzhou_lanke", 2024], ["nanyang", 2025]], dom: { 2026: 1 },
-    blurb: "The 'Shin God,' a generationally dominant world No. 1 with eight world titles by June 2025." }),
+  mk({ id: "shin-jinseo", name: "Shin Jin-seo", nation: "South Korea", league: "KOR", active: true, debut: 2012, world: [["lg", 2020], ["chunlan", 2021], ["lg", 2022], ["samsung", 2022], ["ing", 2023], ["lg", 2024], ["quzhou_lanke", 2024], ["nanyang", 2025], ["other", 2025]], dom: { 2026: 1 },
+    blurb: "The 'Shin God,' a generationally dominant world No. 1 with nine world titles — the ninth at the 2025 World's Top Player Championship." }),
   mk({ id: "shin-minjun", name: "Shin Min-jun", nation: "South Korea", league: "KOR", active: true, debut: 2012, world: [["lg", 2021], ["lg", 2026]], dom: {},
     blurb: "Solid Korean top-tenner who beat Ke Jie to win the 2021 LG Cup, his maiden world title." }),
   mk({ id: "byun-sang-il", name: "Byun Sang-il", nation: "South Korea", league: "KOR", active: true, debut: 2013, world: [["chunlan", 2023], ["lg", 2025]], dom: { 2026: 1 },
