@@ -1,9 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { ParentSize } from "@visx/responsive";
-import { scaleBand, scaleLinear } from "@visx/scale";
-import { Group } from "@visx/group";
+import { useEffect, useRef, useState } from "react";
 import { timeline } from "@/lib/sport/honor";
 import type { Achievement, HonorModel, Player } from "@/lib/sport/types";
 import { useSport, useHonorLabel } from "@/lib/sport/provider";
@@ -34,10 +31,27 @@ export function HonorTimeline({ player }: { player: Player }) {
   const { config } = useSport();
   const marquee = config.headlineTypes[0];
   const data = buildYears(player, config.model, marquee);
+
+  // Measure the full-width container with a ResizeObserver (mirrors compare-radar).
+  // The timeline is full-width, so a 0 initial width self-corrects on first paint —
+  // but we still start non-zero to avoid a flash of collapsed geometry.
+  const ref = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(640);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0]?.contentRect.width ?? 0;
+      if (w > 0) setWidth(w);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   if (data.length === 0) return null;
   return (
-    <div className="h-[210px] w-full">
-      <ParentSize>{({ width }) => <Chart width={width} height={210} data={data} marquee={marquee} />}</ParentSize>
+    <div ref={ref} className="h-[210px] w-full">
+      <Chart width={width} height={210} data={data} marquee={marquee} />
     </div>
   );
 }
@@ -59,27 +73,37 @@ function Chart({
   const ih = Math.max(0, height - margin.top - margin.bottom);
   const [hover, setHover] = useState<number | null>(null);
 
-  const x = scaleBand<number>({ domain: data.map((d) => d.year), range: [0, iw], padding: 0.34 });
+  // Manual band scale (index → x), equivalent to visx scaleBand with padding 0.34.
+  // d3: step = range / (n + padding) when inner == outer; band = step * (1 - inner);
+  // x(i) = paddingOuter*step + i*step.
+  const n = data.length;
+  const padding = 0.34;
+  const step = iw / (n + padding);
+  const band = step * (1 - padding);
+  const bandX = (i: number) => step * padding + i * step;
+
+  // Manual linear scale (value → px), equivalent to scaleLinear([0,maxP],[ih,0]).
   const maxP = Math.max(1, ...data.map((d) => d.points));
-  const y = scaleLinear<number>({ domain: [0, maxP], range: [ih, 0] });
+  const yScale = (v: number) => ih - (v / maxP) * ih;
+
   // Cap the visual bar width (a 1–2 year career would otherwise render one huge
   // slab) and centre each bar within its band.
-  const band = x.bandwidth();
   const bw = Math.min(band, 54);
   const inset = (band - bw) / 2;
   const showEvery = data.length > 11 ? 2 : 1;
 
   const hovered = hover != null ? data.find((d) => d.year === hover) : null;
-  const tipLeft = hover != null ? margin.left + (x(hover) ?? 0) + bw / 2 : 0;
+  const hoveredIdx = hover != null ? data.findIndex((d) => d.year === hover) : -1;
+  const tipLeft = hoveredIdx >= 0 ? margin.left + bandX(hoveredIdx) + bw / 2 : 0;
 
   return (
     <div className="relative">
       <svg width={width} height={height}>
-        <Group left={margin.left} top={margin.top}>
+        <g transform={`translate(${margin.left},${margin.top})`}>
           <line x1={0} x2={iw} y1={ih} y2={ih} stroke="var(--border)" strokeWidth={1} />
           {data.map((d, i) => {
-            const bx = x(d.year) ?? 0;
-            const barH = d.points > 0 ? ih - y(d.points) : 0;
+            const bx = bandX(i);
+            const barH = d.points > 0 ? ih - yScale(d.points) : 0;
             const dim = hover != null && hover !== d.year;
             return (
               <g
@@ -91,7 +115,7 @@ function Chart({
                 {d.points > 0 && (
                   <rect
                     x={bx + inset}
-                    y={y(d.points)}
+                    y={yScale(d.points)}
                     width={bw}
                     height={barH}
                     rx={3}
@@ -101,7 +125,7 @@ function Chart({
                   />
                 )}
                 {d.hasMarquee && d.points > 0 && (
-                  <circle cx={bx + band / 2} cy={y(d.points) - 7} r={2.5} fill="var(--accent)" />
+                  <circle cx={bx + band / 2} cy={yScale(d.points) - 7} r={2.5} fill="var(--accent)" />
                 )}
                 {i % showEvery === 0 && (
                   <text
@@ -118,7 +142,7 @@ function Chart({
               </g>
             );
           })}
-        </Group>
+        </g>
       </svg>
       {hovered && hovered.items.length > 0 && (
         <div
