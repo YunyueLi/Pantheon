@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { listSports } from "@/lib/sport/registry";
+import { listSports, getDefaultSport } from "@/lib/sport/registry";
 import { ranked } from "@/lib/sport/honor";
 import { formatNumber } from "@/lib/utils";
 import { playerPhoto } from "@/lib/player-photos";
@@ -15,6 +15,7 @@ export default function Home() {
   const { t, locale } = useI18n();
   const name = (e: { name: string; i18n?: Record<string, string> }) => e.i18n?.[locale] ?? e.name;
   const sports = listSports();
+  const home = getDefaultSport();
   const total = sports.reduce((acc, s) => acc + s.players.length, 0);
 
   const immortals: Immortal[] = sports
@@ -77,7 +78,7 @@ export default function Home() {
         </div>
         <div className="herofoot">
           <span className="kick">{t("home.heroDesc")}</span>
-          <Link href={`${sports[0].basePath}/leaderboard`} className="kick" style={{ whiteSpace: "nowrap" }}>
+          <Link href={`${home.basePath}/leaderboard`} className="kick" style={{ whiteSpace: "nowrap" }}>
             {t("home.exploreCta")} →
           </Link>
         </div>
@@ -91,7 +92,7 @@ export default function Home() {
         <div className="cols" />
         <h2 data-reveal>{t("home.ctaTitle")}</h2>
         <div style={{ marginTop: "34px", display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap", position: "relative" }}>
-          <Link href={`${sports[0].basePath}/leaderboard`} className="btn">{t("home.exploreCta")} →</Link>
+          <Link href={`${home.basePath}/leaderboard`} className="btn">{t("home.exploreCta")} →</Link>
           <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="btn" style={{ borderColor: "var(--border)", color: "var(--fg-2)" }}>
             {t("home.github")} ↗
           </a>
