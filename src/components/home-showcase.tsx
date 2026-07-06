@@ -30,6 +30,8 @@ const RAYS = Array.from({ length: 48 }, (_, k) => {
   return { x: r2(200 + Math.cos(a) * 440), y: r2(210 + Math.sin(a) * 440) };
 });
 
+const DWELL = 5200; // ms each featured slide holds before auto-advancing
+
 /**
  * The home showcase: a rotating spotlight of every discipline's all-time #1 (each
  * an epic B&W monument portrait + "enter" link into that sport), followed by the
@@ -39,16 +41,30 @@ const RAYS = Array.from({ length: 48 }, (_, k) => {
 export function HomeShowcase({ immortals }: { immortals: Immortal[] }) {
   const { t } = useI18n();
   const [i, setI] = useState(0);
-  const paused = useRef(false);
+  const [paused, setPaused] = useState(false);
+  const [reduce, setReduce] = useState(false);
+  const railRef = useRef<HTMLDivElement>(null);
   const n = immortals.length;
 
   useEffect(() => {
-    if (typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
-    const id = setInterval(() => {
-      if (!paused.current) setI((x) => (x + 1) % n);
-    }, 5200);
-    return () => clearInterval(id);
-  }, [n]);
+    setReduce(!!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
+  // Auto-advance. The timer resets on every slide change, so a manual pick still
+  // gets a full dwell, and it stops entirely while paused (hover) or reduced-motion —
+  // which is why the active tick's progress fill only renders when actually counting.
+  useEffect(() => {
+    if (paused || reduce || n <= 1) return;
+    const id = setTimeout(() => setI((x) => (x + 1) % n), DWELL);
+    return () => clearTimeout(id);
+  }, [i, n, paused, reduce]);
+
+  const go = (next: number) => {
+    const to = ((next % n) + n) % n;
+    setI(to);
+    const btn = railRef.current?.children[to];
+    if (btn instanceof HTMLElement) btn.focus();
+  };
 
   return (
     <>
@@ -57,8 +73,8 @@ export function HomeShowcase({ immortals }: { immortals: Immortal[] }) {
       {/* Rotating spotlight — every discipline's #1 */}
       <section
         className="hs-feature"
-        onMouseEnter={() => (paused.current = true)}
-        onMouseLeave={() => (paused.current = false)}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
       >
         <div className="hs-stage">
           {immortals.map((m, idx) => (
@@ -124,18 +140,37 @@ export function HomeShowcase({ immortals }: { immortals: Immortal[] }) {
             </Link>
           ))}
         </div>
-        <div className="hs-dots" role="tablist" aria-label="Featured immortals">
+        <div
+          ref={railRef}
+          className="hs-rail"
+          data-playing={!paused && !reduce}
+          role="tablist"
+          aria-label="Featured immortals"
+          onKeyDown={(e) => {
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); go(i + 1); }
+            else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); go(i - 1); }
+            else if (e.key === "Home") { e.preventDefault(); go(0); }
+            else if (e.key === "End") { e.preventDefault(); go(n - 1); }
+          }}
+        >
           {immortals.map((m, idx) => (
             <button
               key={m.id}
               type="button"
-              className="hs-dot"
+              className="hs-tick"
               data-active={idx === i}
               role="tab"
               aria-selected={idx === i}
-              aria-label={m.name}
+              aria-label={`${m.sportLabel} — ${m.name}`}
+              tabIndex={idx === i ? 0 : -1}
               onClick={() => setI(idx)}
-            />
+            >
+              <span className="hs-tick__bar" />
+              {idx === i && !paused && !reduce && (
+                <span className="hs-tick__fill" style={{ animationDuration: `${DWELL}ms` }} />
+              )}
+              <span className="hs-tick__tip" aria-hidden>{m.name}</span>
+            </button>
           ))}
         </div>
       </section>
@@ -182,9 +217,18 @@ const CSS = `
 .hs-field{position:absolute;inset:0;width:100%;height:100%}
 .hs-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%;filter:grayscale(1) contrast(1.5) brightness(1.04);-webkit-mask-image:radial-gradient(78% 72% at 50% 40%,#000 46%,transparent 100%);mask-image:radial-gradient(78% 72% at 50% 40%,#000 46%,transparent 100%)}
 .hs-mono{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-display);font-weight:900;font-size:clamp(120px,20vw,280px);-webkit-text-stroke:1.5px var(--fg);color:transparent;opacity:.5}
-.hs-dots{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;display:flex;gap:10px}
-.hs-dot{width:9px;height:9px;border:1px solid var(--border-strong);background:transparent;cursor:pointer;transition:background-color .2s,border-color .2s;padding:0}
-.hs-dot[data-active="true"]{background:var(--accent);border-color:var(--accent)}
+.hs-rail{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:2;display:flex;align-items:flex-end;gap:0}
+.hs-tick{position:relative;display:flex;align-items:flex-end;justify-content:center;width:16px;height:36px;padding:0;border:0;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.hs-tick__bar{width:2px;height:10px;background:var(--border-strong);opacity:.5;transition:height .28s cubic-bezier(.2,.7,.2,1),opacity .2s,background-color .2s}
+.hs-tick:hover .hs-tick__bar{opacity:.95;height:16px}
+.hs-tick[data-active="true"] .hs-tick__bar{height:22px;background:var(--accent);opacity:1}
+.hs-rail[data-playing="true"] .hs-tick[data-active="true"] .hs-tick__bar{opacity:.28}
+.hs-tick__fill{position:absolute;bottom:0;left:50%;width:2px;height:22px;background:var(--accent);transform:translateX(-50%) scaleY(0);transform-origin:bottom;animation-name:hs-fill;animation-timing-function:linear;animation-fill-mode:forwards}
+@keyframes hs-fill{to{transform:translateX(-50%) scaleY(1)}}
+.hs-tick__tip{position:absolute;bottom:29px;left:50%;transform:translateX(-50%) translateY(3px);white-space:nowrap;font-family:var(--font-ui);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg);background:var(--raised);border:1px solid var(--border);padding:4px 8px;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;box-shadow:0 6px 18px -6px rgba(0,0,0,.55)}
+.hs-tick:hover .hs-tick__tip,.hs-tick:focus-visible .hs-tick__tip{opacity:1;transform:translateX(-50%) translateY(0)}
+.hs-tick:focus-visible{outline:none}
+.hs-tick:focus-visible .hs-tick__bar{opacity:1;height:15px;background:var(--accent)}
 @media(max-width:860px){
 .hs-slide{grid-template-columns:1fr}
 .hs-right{display:none}
