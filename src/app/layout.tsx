@@ -78,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
       </head>
       <body className="antialiased">
+        <a href="#main" className="skip-link">Skip to content</a>
         {/* Duotone filter for the .paper theme: maps photo shadows→ink, highlights→cream
             so portraits read as an on-palette gravure instead of a dark blob on cream.
             Referenced by .paper .portrait-photo / .hs-photo / .duel-photo in globals.css. */}
@@ -95,7 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ThemeProvider>
             <ScrollReveal />
             <SiteNav />
-            <main className="min-h-[calc(100vh-3.5rem)]">{children}</main>
+            <main id="main" className="min-h-[calc(100vh-3.5rem)]">{children}</main>
             <SiteFooter />
           </ThemeProvider>
         </I18nProvider>

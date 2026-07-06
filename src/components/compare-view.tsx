@@ -68,8 +68,10 @@ export function CompareView() {
   const rankedRows = useMemo(() => ranked(players, model), [players, model]);
   const [aId, setAId] = useState(() => (has(sp.get("a") ?? "") ? (sp.get("a") as string) : rankedRows[0]?.player.id));
   const [bId, setBId] = useState(() => (has(sp.get("b") ?? "") ? (sp.get("b") as string) : rankedRows[1]?.player.id));
-  const a = players.find((p) => p.id === aId)!;
-  const b = players.find((p) => p.id === bId)!;
+  // Fall back safely if a sport ever has fewer than two ranked players (b→a) so the
+  // duel renders instead of throwing on an undefined combatant.
+  const a = players.find((p) => p.id === aId) ?? players[0];
+  const b = players.find((p) => p.id === bId) ?? players.find((p) => p.id !== a?.id) ?? a;
   const aPhoto = playerPhoto(a.id)?.src;
   const bPhoto = playerPhoto(b.id)?.src;
 

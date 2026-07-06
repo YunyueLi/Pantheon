@@ -21,6 +21,10 @@ export function ScrollReveal() {
       return r.bottom > 0 && r.top < window.innerHeight * 0.92;
     };
 
+    // Reveal anything already on-screen immediately, before rAF/IO, so above-the-fold
+    // content (e.g. the hero headline) never sits hidden waiting on hydration.
+    for (const el of els) if (inView(el)) reveal(el);
+
     let io: IntersectionObserver | null = null;
     const raf = requestAnimationFrame(() => {
       if (typeof IntersectionObserver !== "undefined") {

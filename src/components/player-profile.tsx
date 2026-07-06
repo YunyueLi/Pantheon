@@ -201,7 +201,7 @@ export function PlayerProfile({ id }: { id: string }) {
 .recordtbl .tier{font-family:var(--font-display);font-size:10px;letter-spacing:.12em;color:var(--fg-3);border:1px solid var(--border);padding:2px 7px}
 
 .enshrine .cta{position:relative;text-align:center;padding:88px 24px;border-top:1px solid var(--border)}
-.enshrine .cta h3{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(30px,5vw,60px);line-height:.92;letter-spacing:-.02em}
+.enshrine .cta h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(30px,5vw,60px);line-height:.92;letter-spacing:-.02em}
 .enshrine .btn{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.2em;font-size:12px;border:1px solid var(--border-strong);padding:15px 28px;display:inline-block;margin-top:30px;transition:background-color .15s,color .15s}
 .enshrine .btn:hover{background:var(--accent);color:var(--accent-contrast)}
 `,
@@ -361,7 +361,8 @@ export function PlayerProfile({ id }: { id: string }) {
       <section className="sec" data-reveal>
         <div className="pad">
           <Plate n="Ⅳ" title={t("player.allHonors")} note={t("common.entries", { n: honors.length })} />
-          <table className="recordtbl" style={{ marginTop: "20px" }}>
+          <div style={{ marginTop: "20px", overflowX: "auto" }}>
+          <table className="recordtbl">
             <thead>
               <tr>
                 <th>{t("player.colYear")}</th>
@@ -393,13 +394,14 @@ export function PlayerProfile({ id }: { id: string }) {
               })}
             </tbody>
           </table>
+          </div>
         </div>
       </section>
 
       {/* CTA */}
       <section className="cta">
         <div className="col-grid" />
-        <h3 style={{ position: "relative" }}>{zh ? "与诸神对决" : "Set against the gods"}</h3>
+        <h2 style={{ position: "relative" }}>{zh ? "与诸神对决" : "Set against the gods"}</h2>
         <Link href={`${basePath}/compare?a=${player.id}`} className="btn">
           {t("player.compare")} →
         </Link>

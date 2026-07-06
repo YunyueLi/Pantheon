@@ -22,12 +22,14 @@ export function Pills<T extends string>({
         return (
           <button
             key={o.value}
+            type="button"
+            aria-pressed={active}
             onClick={() => onChange(o.value)}
             className={cn(
               "rounded-full border font-medium transition-colors",
               size === "sm" ? "px-2.5 py-0.5 text-xs" : "px-3 py-1 text-[13px]",
               active
-                ? "border-transparent bg-accent-soft text-accent"
+                ? "border-accent bg-accent-soft text-fg"
                 : "border-border text-fg-subtle hover:bg-surface-2 hover:text-fg"
             )}
           >

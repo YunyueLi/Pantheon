@@ -144,7 +144,7 @@ export function HomeShowcase({ immortals }: { immortals: Immortal[] }) {
           ref={railRef}
           className="hs-rail"
           data-playing={!paused && !reduce}
-          role="tablist"
+          role="group"
           aria-label="Featured immortals"
           onKeyDown={(e) => {
             if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); go(i + 1); }
@@ -159,8 +159,7 @@ export function HomeShowcase({ immortals }: { immortals: Immortal[] }) {
               type="button"
               className="hs-tick"
               data-active={idx === i}
-              role="tab"
-              aria-selected={idx === i}
+              aria-current={idx === i ? "true" : undefined}
               aria-label={`${m.sportLabel} — ${m.name}`}
               tabIndex={idx === i ? 0 : -1}
               onClick={() => setI(idx)}

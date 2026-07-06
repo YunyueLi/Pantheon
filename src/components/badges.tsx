@@ -15,6 +15,8 @@ export function RegionBadge({ region, className }: { region: string; className?:
 }
 
 export function RoleBadge({ role, className }: { role: Role; className?: string }) {
+  const meta = ROLE_META[role];
+  if (!meta) return null;
   return (
     <span
       className={cn(
@@ -22,7 +24,7 @@ export function RoleBadge({ role, className }: { role: Role; className?: string 
         className
       )}
     >
-      {ROLE_META[role].abbr}
+      {meta.abbr}
     </span>
   );
 }

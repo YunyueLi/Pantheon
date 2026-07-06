@@ -12,8 +12,10 @@
   --border: rgba(255, 255, 255, 0.26);
   --border-strong: rgba(255, 255, 255, 0.52);
   --fg: #ffffff;
-  --fg-2: rgba(255, 255, 255, 0.72);
-  --fg-3: rgba(255, 255, 255, 0.54);
+  /* Bumped for WCAG AA on the saturated crimson field (was .72/.54 = 3.47/2.44).
+     Text hierarchy is now carried by size/weight/case rather than opacity alone. */
+  --fg-2: rgba(255, 255, 255, 0.86);
+  --fg-3: rgba(255, 255, 255, 0.8);
 
   /* Portrait radiant bloom: a LIGHT source behind the figure. On dark/crimson it
      is the ink colour (light); .paper kills it so it never inverts to a dark blob. */
@@ -59,7 +61,7 @@
   --border-strong: rgba(243, 239, 230, 0.42);
   --fg: #f3efe6;
   --fg-2: rgba(243, 239, 230, 0.68);
-  --fg-3: rgba(243, 239, 230, 0.46);
+  --fg-3: rgba(243, 239, 230, 0.56);
 
   --medal-gold: #e8c879;
   --medal-silver: #c8cad0;
@@ -90,13 +92,13 @@
   --border-strong: rgba(40, 30, 18, 0.42);
   --fg: #221c14;
   --fg-2: rgba(34, 28, 20, 0.7);
-  --fg-3: rgba(34, 28, 20, 0.5);
+  --fg-3: rgba(34, 28, 20, 0.62);
 
   /* No radiant bloom on the light field — a light glow is invisible on cream and the
      ink colour would otherwise smear a dark halo behind the figure. */
   --field-glow: transparent;
 
-  --medal-gold: #9c7b2e;
+  --medal-gold: #7a5c1c;
   --medal-silver: #8c8f95;
   --medal-bronze: #a8703c;
 
@@ -148,7 +150,14 @@
     text-rendering: optimizeLegibility;
   }
   ::selection {
-    background: var(--accent-soft);
+    background: var(--fg);
+    color: var(--bg);
+  }
+  /* Global keyboard focus ring. Was missing site-wide — only .fsel-btn had one —
+     so keyboard users saw no focus on nav, rows, links, toggles, CTAs, etc. */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
   /* refined scrollbar */
   * {
@@ -186,6 +195,37 @@
     font-family: var(--font-ui);
     text-transform: uppercase;
     letter-spacing: 0.16em;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  /* Skip-to-content: visually hidden until keyboard-focused, then slides in. */
+  .skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 100;
+    transform: translateY(-160%);
+    background: var(--bg);
+    color: var(--fg);
+    border: 1px solid var(--border-strong);
+    padding: 10px 16px;
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    transition: transform 0.18s;
+  }
+  .skip-link:focus {
+    transform: translateY(0);
   }
 }
 
@@ -761,6 +801,12 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .radar-reveal {
+    animation: none !important;
+  }
+  /* Radix dialog/dropdown open animations (search, picker, sport-switcher) were
+     ungated — honor the user's reduced-motion preference. */
+  .animate-fade-up,
+  .animate-fade-in {
     animation: none !important;
   }
 }

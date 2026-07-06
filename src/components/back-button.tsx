@@ -27,7 +27,7 @@ export function BackButton({ fallback }: { fallback: string }) {
       onClick={onClick}
       className="mb-5 inline-flex items-center gap-1.5 text-sm text-fg-subtle transition-colors hover:text-fg"
     >
-      <ArrowLeft className="h-3.5 w-3.5" /> {t("common.back")}
+      <ArrowLeft className="h-3.5 w-3.5" aria-hidden /> {t("common.back")}
     </button>
   );
 }
